@@ -1,0 +1,31 @@
+﻿@model ProyectoColegio.Models.Sisben
+
+@{
+    ViewData["Title"] = "RegistroSisben";
+}
+
+<h1>RegistroSisben</h1>
+
+<h4>Sisben</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="RegistroSisben">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <input type="submit" id="Disparador" value="RegistroSisben" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @*<script src="~/Archivos_Json/PuntajeSisben"></script>
+    <script src="~/Archivos_Python/InsercionSisben"></script>*@
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+

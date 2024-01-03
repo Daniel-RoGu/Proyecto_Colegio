@@ -6,4 +6,21 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Include="wwwroot\Archivos_Python\InsercionDiscapacidades.py" />
+    <None Include="wwwroot\Archivos_Python\InsercionEPS.py" />
+    <None Include="wwwroot\Archivos_Python\InsercionEstratos.py" />
+    <None Include="wwwroot\Archivos_Python\InsercionGeneros.py" />
+    <None Include="wwwroot\Archivos_Python\InsercionSisben.py" />
+    <None Include="wwwroot\Archivos_Python\InsercionTpDocumento.py" />
+    <None Include="wwwroot\Archivos_Python\InsercionTpSangre.py" />
+    <None Include="wwwroot\Archivos_Python\TratamientoExcel.py" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="IronPython" Version="3.4.1" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.16" />
+    <PackageReference Include="pythonnet" Version="3.0.3" />
+  </ItemGroup>
+
 </Project>
