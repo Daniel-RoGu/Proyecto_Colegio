@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "2NHtfAuZRA19txvQNwv5eRsZRL2kXh1IENl6/Be9mtaGx/GMulw1HzLQev6jWXy1JLbFTA4RZy0PC0tQ8fsvzw==",
+  "dgSpecHash": "NFFscnXybfkXtsBwtNHy7/ZiRCKXf/6F77mIfgargQYvx9rh+9R11CeBfG9y0CUU/1BFFOTWBZvHUsLo38NjUQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\Daniel\\Desktop\\Trabajo_Colegio\\Proyecto_Colegio\\App\\ProyectoColegio\\ProyectoColegio.csproj",
   "expectedPackageFiles": [
@@ -93,7 +93,7 @@
     "C:\\Users\\Daniel\\.nuget\\packages\\microsoft.win32.systemevents\\6.0.0\\microsoft.win32.systemevents.6.0.0.nupkg.sha512",
     "C:\\Users\\Daniel\\.nuget\\packages\\mono.unix\\7.1.0-final.1.21458.1\\mono.unix.7.1.0-final.1.21458.1.nupkg.sha512",
     "C:\\Users\\Daniel\\.nuget\\packages\\netstandard.library\\1.6.1\\netstandard.library.1.6.1.nupkg.sha512",
-    "C:\\Users\\Daniel\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512",
+    "C:\\Users\\Daniel\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512",
     "C:\\Users\\Daniel\\.nuget\\packages\\nuget.common\\6.6.1\\nuget.common.6.6.1.nupkg.sha512",
     "C:\\Users\\Daniel\\.nuget\\packages\\nuget.configuration\\6.6.1\\nuget.configuration.6.6.1.nupkg.sha512",
     "C:\\Users\\Daniel\\.nuget\\packages\\nuget.dependencyresolver.core\\6.6.1\\nuget.dependencyresolver.core.6.6.1.nupkg.sha512",
