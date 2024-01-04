@@ -908,3 +908,10 @@ C:\Users\Daniel\Desktop\Trabajo_Colegio\Proyecto_Colegio\App\ProyectoColegio\bin
 C:\Users\Daniel\Desktop\Trabajo_Colegio\Proyecto_Colegio\App\ProyectoColegio\bin\Debug\net6.0\lib\xmlrpc\client.py
 C:\Users\Daniel\Desktop\Trabajo_Colegio\Proyecto_Colegio\App\ProyectoColegio\bin\Debug\net6.0\lib\xmlrpc\server.py
 C:\Users\Daniel\Desktop\Trabajo_Colegio\Proyecto_Colegio\App\ProyectoColegio\bin\Debug\net6.0\lib\zipfile.py
+C:\Users\Daniel\Desktop\Trabajo_Colegio\Proyecto_Colegio\App\ProyectoColegio\bin\Debug\net6.0\Archivos_Json\Discapacidad.json
+C:\Users\Daniel\Desktop\Trabajo_Colegio\Proyecto_Colegio\App\ProyectoColegio\bin\Debug\net6.0\Archivos_Json\EPS.json
+C:\Users\Daniel\Desktop\Trabajo_Colegio\Proyecto_Colegio\App\ProyectoColegio\bin\Debug\net6.0\Archivos_Json\Estrato.json
+C:\Users\Daniel\Desktop\Trabajo_Colegio\Proyecto_Colegio\App\ProyectoColegio\bin\Debug\net6.0\Archivos_Json\Genero.json
+C:\Users\Daniel\Desktop\Trabajo_Colegio\Proyecto_Colegio\App\ProyectoColegio\bin\Debug\net6.0\Archivos_Json\TipoDeDocumento.json
+C:\Users\Daniel\Desktop\Trabajo_Colegio\Proyecto_Colegio\App\ProyectoColegio\bin\Debug\net6.0\Archivos_Json\TipoDeSangre.json
+C:\Users\Daniel\Desktop\Trabajo_Colegio\Proyecto_Colegio\App\ProyectoColegio\bin\Debug\net6.0\Archivos_Json\PuntajeSisben.json

@@ -7,14 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="wwwroot\Archivos_Python\InsercionDiscapacidades.py" />
-    <None Include="wwwroot\Archivos_Python\InsercionEPS.py" />
-    <None Include="wwwroot\Archivos_Python\InsercionEstratos.py" />
-    <None Include="wwwroot\Archivos_Python\InsercionGeneros.py" />
-    <None Include="wwwroot\Archivos_Python\InsercionSisben.py" />
-    <None Include="wwwroot\Archivos_Python\InsercionTpDocumento.py" />
-    <None Include="wwwroot\Archivos_Python\InsercionTpSangre.py" />
-    <None Include="wwwroot\Archivos_Python\TratamientoExcel.py" />
+    <Content Include="Archivos_Python\InsercionDiscapacidades.py" />
+    <Content Include="Archivos_Python\InsercionEPS.py" />
+    <Content Include="Archivos_Python\InsercionEstratos.py" />
+    <Content Include="Archivos_Python\InsercionGeneros.py" />
+    <Content Include="InsercionSisben.py" />
+    <Content Include="Archivos_Python\InsercionTpDocumento.py" />
+    <Content Include="Archivos_Python\InsercionTpSangre.py" />
+    <Content Include="Archivos_Python\TratamientoExcel.py" />
   </ItemGroup>
 
   <ItemGroup>

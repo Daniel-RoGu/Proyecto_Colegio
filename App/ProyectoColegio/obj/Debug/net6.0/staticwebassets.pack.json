@@ -5,66 +5,6 @@
       "PackagePath": "staticwebassets\\ProyectoColegio.bundle.scp.css"
     },
     {
-      "Id": "C:\\Users\\Daniel\\Desktop\\Trabajo_Colegio\\Proyecto_Colegio\\App\\ProyectoColegio\\wwwroot\\Archivos_Json\\Discapacidad.json",
-      "PackagePath": "staticwebassets\\Archivos_Json\\Discapacidad.json"
-    },
-    {
-      "Id": "C:\\Users\\Daniel\\Desktop\\Trabajo_Colegio\\Proyecto_Colegio\\App\\ProyectoColegio\\wwwroot\\Archivos_Json\\EPS.json",
-      "PackagePath": "staticwebassets\\Archivos_Json\\EPS.json"
-    },
-    {
-      "Id": "C:\\Users\\Daniel\\Desktop\\Trabajo_Colegio\\Proyecto_Colegio\\App\\ProyectoColegio\\wwwroot\\Archivos_Json\\Estrato.json",
-      "PackagePath": "staticwebassets\\Archivos_Json\\Estrato.json"
-    },
-    {
-      "Id": "C:\\Users\\Daniel\\Desktop\\Trabajo_Colegio\\Proyecto_Colegio\\App\\ProyectoColegio\\wwwroot\\Archivos_Json\\Genero.json",
-      "PackagePath": "staticwebassets\\Archivos_Json\\Genero.json"
-    },
-    {
-      "Id": "C:\\Users\\Daniel\\Desktop\\Trabajo_Colegio\\Proyecto_Colegio\\App\\ProyectoColegio\\wwwroot\\Archivos_Json\\PuntajeSisben.json",
-      "PackagePath": "staticwebassets\\Archivos_Json\\PuntajeSisben.json"
-    },
-    {
-      "Id": "C:\\Users\\Daniel\\Desktop\\Trabajo_Colegio\\Proyecto_Colegio\\App\\ProyectoColegio\\wwwroot\\Archivos_Json\\TipoDeDocumento.json",
-      "PackagePath": "staticwebassets\\Archivos_Json\\TipoDeDocumento.json"
-    },
-    {
-      "Id": "C:\\Users\\Daniel\\Desktop\\Trabajo_Colegio\\Proyecto_Colegio\\App\\ProyectoColegio\\wwwroot\\Archivos_Json\\TipoDeSangre.json",
-      "PackagePath": "staticwebassets\\Archivos_Json\\TipoDeSangre.json"
-    },
-    {
-      "Id": "C:\\Users\\Daniel\\Desktop\\Trabajo_Colegio\\Proyecto_Colegio\\App\\ProyectoColegio\\wwwroot\\Archivos_Python\\InsercionDiscapacidades.py",
-      "PackagePath": "staticwebassets\\Archivos_Python\\InsercionDiscapacidades.py"
-    },
-    {
-      "Id": "C:\\Users\\Daniel\\Desktop\\Trabajo_Colegio\\Proyecto_Colegio\\App\\ProyectoColegio\\wwwroot\\Archivos_Python\\InsercionEPS.py",
-      "PackagePath": "staticwebassets\\Archivos_Python\\InsercionEPS.py"
-    },
-    {
-      "Id": "C:\\Users\\Daniel\\Desktop\\Trabajo_Colegio\\Proyecto_Colegio\\App\\ProyectoColegio\\wwwroot\\Archivos_Python\\InsercionEstratos.py",
-      "PackagePath": "staticwebassets\\Archivos_Python\\InsercionEstratos.py"
-    },
-    {
-      "Id": "C:\\Users\\Daniel\\Desktop\\Trabajo_Colegio\\Proyecto_Colegio\\App\\ProyectoColegio\\wwwroot\\Archivos_Python\\InsercionGeneros.py",
-      "PackagePath": "staticwebassets\\Archivos_Python\\InsercionGeneros.py"
-    },
-    {
-      "Id": "C:\\Users\\Daniel\\Desktop\\Trabajo_Colegio\\Proyecto_Colegio\\App\\ProyectoColegio\\wwwroot\\Archivos_Python\\InsercionSisben.py",
-      "PackagePath": "staticwebassets\\Archivos_Python\\InsercionSisben.py"
-    },
-    {
-      "Id": "C:\\Users\\Daniel\\Desktop\\Trabajo_Colegio\\Proyecto_Colegio\\App\\ProyectoColegio\\wwwroot\\Archivos_Python\\InsercionTpDocumento.py",
-      "PackagePath": "staticwebassets\\Archivos_Python\\InsercionTpDocumento.py"
-    },
-    {
-      "Id": "C:\\Users\\Daniel\\Desktop\\Trabajo_Colegio\\Proyecto_Colegio\\App\\ProyectoColegio\\wwwroot\\Archivos_Python\\InsercionTpSangre.py",
-      "PackagePath": "staticwebassets\\Archivos_Python\\InsercionTpSangre.py"
-    },
-    {
-      "Id": "C:\\Users\\Daniel\\Desktop\\Trabajo_Colegio\\Proyecto_Colegio\\App\\ProyectoColegio\\wwwroot\\Archivos_Python\\TratamientoExcel.py",
-      "PackagePath": "staticwebassets\\Archivos_Python\\TratamientoExcel.py"
-    },
-    {
       "Id": "C:\\Users\\Daniel\\Desktop\\Trabajo_Colegio\\Proyecto_Colegio\\App\\ProyectoColegio\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
     },
