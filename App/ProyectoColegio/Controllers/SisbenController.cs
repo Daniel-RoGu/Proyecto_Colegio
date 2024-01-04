@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MySql.Data.MySqlClient;
 using ProyectoColegio.Data;
 using ProyectoColegio.Models;
 using System;
 using Microsoft.Scripting.Hosting;
+using static IronPython.Modules._ast;
 
 namespace ProyectoColegio.Controllers
 {
@@ -43,15 +45,20 @@ namespace ProyectoColegio.Controllers
         {
             List<string> datos;
 
+            // Ruta relativa del archivo en wwwroot
+            var filePath = Path.Combine("Archivos_Python", "InsercionSisben.py");
+
             // Crear el motor y el alcance
             ScriptEngine engine = IronPython.Hosting.Python.CreateEngine();
             ScriptRuntime runtime = engine.Runtime;
             ScriptScope scope = runtime.CreateScope();
 
             // Ejecutar el script y obtener el resultado
-            ScriptSource script = engine.CreateScriptSourceFromFile("~/Archivos_Python/InsercionSisben.py");
+            //ScriptSource script = engine.CreateScriptSourceFromFile(@"/Archivos_Python/InsercionSisben.py");
+            ScriptSource script = engine.CreateScriptSourceFromFile(filePath);
+
             var compiled = script.Compile();
-            object result = compiled.Execute(scope);
+            datos = compiled.Execute(scope);
 
             // Utilizar un try-catch para manejar posibles excepciones
             try

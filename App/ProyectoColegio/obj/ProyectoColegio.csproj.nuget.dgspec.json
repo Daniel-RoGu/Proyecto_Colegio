@@ -48,13 +48,25 @@
               "target": "Package",
               "version": "[3.4.1, )"
             },
+            "IronPython.StdLib": {
+              "target": "Package",
+              "version": "[3.4.1, )"
+            },
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
               "version": "[6.0.16, )"
             },
+            "MySql.Data": {
+              "target": "Package",
+              "version": "[8.2.0, )"
+            },
             "Newtonsoft.Json": {
               "target": "Package",
               "version": "[13.0.3, )"
+            },
+            "SimpleJson": {
+              "target": "Package",
+              "version": "[0.38.0, )"
             },
             "pythonnet": {
               "target": "Package",

@@ -1,5 +1,6 @@
 import json
 #import mysql.connector
+#import simplejson as json
 
 grupo = []
 
