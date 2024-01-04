@@ -27,7 +27,7 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=index}/{id?}");
+    pattern: "{controller=Sisben}/{action=RegistrarSisben}/{id?}");
 
 app.Run();
 app.UseSession();

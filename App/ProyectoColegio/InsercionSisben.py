@@ -20,7 +20,7 @@ def resultado():
         data = json.load(file)
         obtener_datos(data['puntaje_sisben'])
     
-    # Devolver los datos como JSON
+    # Devolver los datos como una cadena JSON
     return json.dumps(grupo)
 
 def encontrar_ruta_json_en_proyecto(nombre_archivo):
@@ -32,7 +32,9 @@ def encontrar_ruta_json_en_proyecto(nombre_archivo):
     else:
         return None
 
+# Devolver el resultado del script al final
 resultado()
+
 
 
 
