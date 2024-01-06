@@ -18,7 +18,8 @@ def resultado():
 
     with open(ruta_json, encoding='utf-8') as file:
         data = json.load(file)
-        obtener_datos(data['puntaje_sisben'])
+    
+    obtener_datos(data['puntaje_sisben'])
     
     # Devolver los datos como una cadena JSON
     return json.dumps(grupo)
@@ -32,8 +33,10 @@ def encontrar_ruta_json_en_proyecto(nombre_archivo):
     else:
         return None
 
-# Devolver el resultado del script al final
-resultado()
+# Verificar si el script se está ejecutando directamente y no siendo importado
+if __name__ == "__main__":
+    resultado()
+
 
 
 

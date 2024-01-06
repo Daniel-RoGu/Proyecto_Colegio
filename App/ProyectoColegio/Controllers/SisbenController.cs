@@ -1,13 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MySql.Data.MySqlClient;
+using Newtonsoft.Json;
 using ProyectoColegio.Data;
 using ProyectoColegio.Models;
-using System;
-using Microsoft.Scripting.Hosting;
-using static IronPython.Modules._ast;
-using System.IO;
-using Newtonsoft.Json;
-using NuGet.ProjectModel;
 
 namespace ProyectoColegio.Controllers
 {
@@ -15,16 +10,19 @@ namespace ProyectoColegio.Controllers
     {
         private readonly Contexto _contexto;
         List<string> datos = null;
-        
+
+
 
         public SisbenController(Contexto contexto)
         {
             _contexto = contexto;
         }
 
+        /*
         [STAThread]
-        public void LeerSisben()
+        public List<string> LeerSisben()
         {
+            List<string> datos = null;
 
             // Crear el motor y el alcance
             ScriptEngine engine = IronPython.Hosting.Python.CreateEngine();
@@ -57,31 +55,21 @@ namespace ProyectoColegio.Controllers
                 runtime.Shutdown();
             }
 
-        }
-        /*
-        [HttpPost]
-        public IActionResult RegistrarSisben()
-        {
-
-            foreach (string dato in datos)
-            {
-                using (MySqlConnection conexion = new MySqlConnection(_contexto.Conexion))
-                {
-                    conexion.Open();
-                    MySqlCommand Command = new MySqlCommand("registrarSisben", conexion);
-                    Command.CommandType = System.Data.CommandType.StoredProcedure;
-                    Command.Parameters.AddWithValue("nomSisben", dato);
-                    Command.ExecuteNonQuery();
-                }
-            }
-
-            //return RedirectToAction("Mostrar");
-
-            return View();
+            return datos;
         }
         */
 
-       
+        public List<string> LeerSisben()
+        {
+            List<string> datos = null;
+            LecturaJson lecturaJson = new LecturaJson();
+
+            datos = lecturaJson.Resultado();
+
+            return datos;
+        }
+
+
         public IActionResult RegistrarSisben()
         { 
             return View();
@@ -91,30 +79,29 @@ namespace ProyectoColegio.Controllers
         [HttpPost]
         public IActionResult RegistrarSisben(Sisben sisben)
         {
-            // Crear el motor y el alcance
-            ScriptEngine engine = IronPython.Hosting.Python.CreateEngine();
-            ScriptRuntime runtime = engine.Runtime;
-            ScriptScope scope = runtime.CreateScope();
+            //LeerSisben();
 
-            // Ejecutar el script y obtener el resultado
-            ScriptSource script = engine.CreateScriptSourceFromFile("InsercionSisben.py");
-            string datosJson = script.Execute<string>(scope);
-
-            // Convertir el JSON de vuelta a una lista de strings
-            List<string> datos = JsonConvert.DeserializeObject<List<string>>(datosJson);
-            TempData["MensajeConsola"] = "Paso los datos";
-
-            foreach (string dato in datos)
+            try
             {
-                using (MySqlConnection conexion = new MySqlConnection(_contexto.Conexion))
+                
+                foreach (string dato in LeerSisben())
                 {
-                    conexion.Open();
-                    MySqlCommand Command = new MySqlCommand("registrarSisben", conexion);
-                    Command.CommandType = System.Data.CommandType.StoredProcedure;
-                    Command.Parameters.AddWithValue("nomSisben", dato);
-                    Command.ExecuteNonQuery();
+                    using (MySqlConnection conexion = new MySqlConnection(_contexto.Conexion))
+                    {
+                        conexion.Open();
+                        MySqlCommand Command = new MySqlCommand("registrarSisben", conexion);
+                        Command.CommandType = System.Data.CommandType.StoredProcedure;
+                        Command.Parameters.AddWithValue("nomSisben", dato);
+                        Command.ExecuteNonQuery();
+                    }
+                    Console.WriteLine(dato);
                 }
             }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error al ejecutar el script: {ex.Message}");
+            }           
+            
 
             return RedirectToAction("Index", "Home");
         }
