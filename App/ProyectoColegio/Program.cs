@@ -27,7 +27,7 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=EPS}/{action=RegistrarEPS}/{id?}");
+    pattern: "{controller=TipoSangre}/{action=RegistrarTipoSangre}/{id?}");
 
 app.Run();
 app.UseSession();
