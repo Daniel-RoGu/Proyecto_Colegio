@@ -16,6 +16,10 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = C:\Users\Daniel\Desktop\Trabajo_Colegio\Proyecto_Colegio\App\ProyectoColegio
 build_property._RazorSourceGeneratorDebug = 
 
+[C:/Users/Daniel/Desktop/Trabajo_Colegio/Proyecto_Colegio/App/ProyectoColegio/Views/EPS/RegistrarEPS.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRVBTXFJlZ2lzdHJhckVQUy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/Daniel/Desktop/Trabajo_Colegio/Proyecto_Colegio/App/ProyectoColegio/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 

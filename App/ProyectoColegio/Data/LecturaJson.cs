@@ -9,49 +9,25 @@ namespace ProyectoColegio.Data
 {
     public class LecturaJson
     {
-        private List<string> grupo = new List<string>();
+        private List<string> grupo = new List<string>();      
 
-        /*
-        public List<string> Resultado()
-        {
-            // Abrir el archivo JSON
-            StreamReader reader = new StreamReader("Archivos_Json/PuntajeSisben.json");
-
-            // Convertir el archivo JSON a un objeto
-            string datos =reader.ReadToEnd();
-
-            // Convertir el string a una lista
-            grupo = datos.Split(',').ToList();
-            Console.WriteLine(grupo.Count);
-
-            // Imprimir la lista
-            foreach (string dato in grupo)
-            {
-                Console.WriteLine(dato);
-            }
-
-            // Cerrar el archivo JSON
-            reader.Close();
-            return grupo;
-        }
-        */
-
-        public List<string> Resultado()
+        
+        public List<string> Resultado(string ruta)
         {
 
             try
             {
                 // Leer el contenido del archivo JSON
-                string jsonContent = File.ReadAllText("Archivos_Json/PuntajeSisben.json");
+                string jsonContent = File.ReadAllText(ruta);
 
-                // Deserializar el JSON en un objeto PuntajeSisben
-                PuntajeSisben puntajeSisben = JsonConvert.DeserializeObject<PuntajeSisben>(jsonContent);
+                // Deserializar el JSON en un objeto DatosArchivo
+                DatosArchivo puntajeSisben = JsonConvert.DeserializeObject<DatosArchivo>(jsonContent);
 
                 // Verificar si se obtuvo un objeto válido
-                if (puntajeSisben != null && puntajeSisben.Puntaje_Sisben != null)
+                if (puntajeSisben != null && puntajeSisben.Datos != null)
                 {
-                    // Llenar la lista 'grupo' con los atributos del objeto 'puntaje_sisben'
-                    grupo = puntajeSisben.Puntaje_Sisben;
+                    // Llenar la lista 'grupo' con los atributos del objeto 'Datos'
+                    grupo = puntajeSisben.Datos;
 
                     // Imprimir la lista
                     Console.WriteLine(grupo.Count);
@@ -73,11 +49,12 @@ namespace ProyectoColegio.Data
             return grupo;
         }
 
-        public class PuntajeSisben
+        public class DatosArchivo
         {
-            public List<string> Puntaje_Sisben { get; set; }
+            public List<string> Datos { get; set; }
         }
-
+       
+       
     }
 
 }

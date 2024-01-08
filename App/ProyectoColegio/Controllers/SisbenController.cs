@@ -10,7 +10,7 @@ namespace ProyectoColegio.Controllers
     {
         private readonly Contexto _contexto;
         List<string> datos = null;
-
+        Sisben sisben = new Sisben();
 
 
         public SisbenController(Contexto contexto)
@@ -61,12 +61,14 @@ namespace ProyectoColegio.Controllers
 
         public List<string> LeerSisben()
         {
-            List<string> datos = null;
+            //List<string> datos = null;
             LecturaJson lecturaJson = new LecturaJson();
 
-            datos = lecturaJson.Resultado();
+            //datos = lecturaJson.Resultado("Archivos_Json/PuntajeSisben.json");
+            sisben.setPuntaje_Sisben(lecturaJson.Resultado("Archivos_Json/PuntajeSisben.json"));
 
-            return datos;
+            //return datos;
+            return (sisben.getPuntaje_Sisben());
         }
 
 

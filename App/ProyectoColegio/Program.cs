@@ -27,7 +27,7 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Sisben}/{action=RegistrarSisben}/{id?}");
+    pattern: "{controller=EPS}/{action=RegistrarEPS}/{id?}");
 
 app.Run();
 app.UseSession();
