@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "263E5J8fRfuT/Q09lCnwRxk8G6zHsgUv5VC+qcK3brRXYAjoFzlkLyX0iuDoZbae5Wvg6/KzwYHmQ3vxVIc+kg==",
+  "dgSpecHash": "3vqfxOujqVkCuSrseNkKntIf1hQNT1SfigShBy4DD4Y9bHHOcruD0VrkHdKrESrpOWbPIaxr69UYb1veyXMf2Q==",
   "success": true,
   "projectFilePath": "C:\\Users\\Daniel\\Desktop\\Trabajo_Colegio\\Proyecto_Colegio\\App\\ProyectoColegio\\ProyectoColegio.csproj",
   "expectedPackageFiles": [
@@ -88,6 +88,7 @@
     "C:\\Users\\Daniel\\.nuget\\packages\\microsoft.net.stringtools\\17.3.2\\microsoft.net.stringtools.17.3.2.nupkg.sha512",
     "C:\\Users\\Daniel\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
     "C:\\Users\\Daniel\\.nuget\\packages\\microsoft.netcore.targets\\1.1.0\\microsoft.netcore.targets.1.1.0.nupkg.sha512",
+    "C:\\Users\\Daniel\\.nuget\\packages\\microsoft.office.interop.excel\\15.0.4795.1001\\microsoft.office.interop.excel.15.0.4795.1001.nupkg.sha512",
     "C:\\Users\\Daniel\\.nuget\\packages\\microsoft.visualstudio.debugger.contracts\\17.2.0\\microsoft.visualstudio.debugger.contracts.17.2.0.nupkg.sha512",
     "C:\\Users\\Daniel\\.nuget\\packages\\microsoft.visualstudio.web.codegeneration\\6.0.16\\microsoft.visualstudio.web.codegeneration.6.0.16.nupkg.sha512",
     "C:\\Users\\Daniel\\.nuget\\packages\\microsoft.visualstudio.web.codegeneration.core\\6.0.16\\microsoft.visualstudio.web.codegeneration.core.6.0.16.nupkg.sha512",

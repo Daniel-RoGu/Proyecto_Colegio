@@ -14,19 +14,19 @@ namespace ProyectoColegio.Data
             _contexto = contexto;
         }
 
-        public void TratamientoListasDatos(List<string> datos, string nombreProcedimiento, List<string> parametrosProcedimiento)
+        public void TratamientoListasDatos(object[] datos, string nombreProcedimiento, List<string> parametrosProcedimiento)
         {
             try
             {
 
-                foreach (string dato in datos)
+                foreach (var dato in datos)
                 {
                     using (MySqlConnection conexion = new MySqlConnection(_contexto.Conexion))
                     {
                         conexion.Open();
                         MySqlCommand Command = new MySqlCommand(nombreProcedimiento, conexion);
                         Command.CommandType = System.Data.CommandType.StoredProcedure;
-                        foreach (string item in parametrosProcedimiento)
+                        foreach (var item in parametrosProcedimiento)
                         {
                             Command.Parameters.AddWithValue(item, dato);
                             Command.ExecuteNonQuery();
