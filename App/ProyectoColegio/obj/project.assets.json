@@ -5178,6 +5178,22 @@
           }
         }
       },
+      "Microsoft.Extensions.Configuration.Abstractions/2.2.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Extensions.Primitives": "2.2.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/Microsoft.Extensions.Configuration.Abstractions.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/Microsoft.Extensions.Configuration.Abstractions.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "Microsoft.Extensions.DependencyInjection/6.0.0": {
         "type": "package",
         "dependencies": {
@@ -5212,6 +5228,71 @@
         },
         "build": {
           "buildTransitive/netcoreapp3.1/_._": {}
+        }
+      },
+      "Microsoft.Extensions.FileProviders.Abstractions/2.2.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Extensions.Primitives": "2.2.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/Microsoft.Extensions.FileProviders.Abstractions.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/Microsoft.Extensions.FileProviders.Abstractions.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "Microsoft.Extensions.Hosting.Abstractions/2.2.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Extensions.Configuration.Abstractions": "2.2.0",
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "2.2.0",
+          "Microsoft.Extensions.FileProviders.Abstractions": "2.2.0",
+          "Microsoft.Extensions.Logging.Abstractions": "2.2.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/Microsoft.Extensions.Hosting.Abstractions.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/Microsoft.Extensions.Hosting.Abstractions.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "Microsoft.Extensions.Logging.Abstractions/2.2.0": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/Microsoft.Extensions.Logging.Abstractions.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/Microsoft.Extensions.Logging.Abstractions.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "Microsoft.Extensions.Primitives/2.2.0": {
+        "type": "package",
+        "dependencies": {
+          "System.Memory": "4.5.1",
+          "System.Runtime.CompilerServices.Unsafe": "4.5.1"
+        },
+        "compile": {
+          "lib/netstandard2.0/Microsoft.Extensions.Primitives.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/Microsoft.Extensions.Primitives.dll": {
+            "related": ".xml"
+          }
         }
       },
       "Microsoft.Net.Compilers.Toolset/4.8.0": {
@@ -5444,6 +5525,9 @@
             "rid": "win"
           }
         }
+      },
+      "Modernizr/2.8.3": {
+        "type": "package"
       },
       "Mono.Unix/7.1.0-final.1.21458.1": {
         "type": "package",
@@ -7488,6 +7572,31 @@
         },
         "runtime": {
           "lib/netstandard1.3/System.Xml.XDocument.dll": {}
+        }
+      },
+      "V8.Net/1.1.8": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Extensions.Hosting.Abstractions": "2.2.0",
+          "System.Runtime.InteropServices.RuntimeInformation": "4.3.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/V8.Net.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/V8.Net.dll": {}
+        },
+        "contentFiles": {
+          "contentFiles/any/netstandard2.0/V8_Net_Proxy_x64.dll": {
+            "buildAction": "Content",
+            "codeLanguage": "any",
+            "copyToOutput": false
+          },
+          "contentFiles/any/netstandard2.0/V8_Net_Proxy_x86.dll": {
+            "buildAction": "Content",
+            "codeLanguage": "any",
+            "copyToOutput": false
+          }
         }
       },
       "ZstdSharp.Port/0.7.1": {
@@ -10417,6 +10526,19 @@
         "microsoft.dotnet.scaffolding.shared.nuspec"
       ]
     },
+    "Microsoft.Extensions.Configuration.Abstractions/2.2.0": {
+      "sha512": "65MrmXCziWaQFrI0UHkQbesrX5wTwf9XPjY5yFm/VkgJKFJ5gqvXRoXjIZcf2wLi5ZlwGz/oMYfyURVCWbM5iw==",
+      "type": "package",
+      "path": "microsoft.extensions.configuration.abstractions/2.2.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/netstandard2.0/Microsoft.Extensions.Configuration.Abstractions.dll",
+        "lib/netstandard2.0/Microsoft.Extensions.Configuration.Abstractions.xml",
+        "microsoft.extensions.configuration.abstractions.2.2.0.nupkg.sha512",
+        "microsoft.extensions.configuration.abstractions.nuspec"
+      ]
+    },
     "Microsoft.Extensions.DependencyInjection/6.0.0": {
       "sha512": "k6PWQMuoBDGGHOQTtyois2u4AwyVcIwL2LaSLlTZQm2CYcJ1pxbt6jfAnpWmzENA/wfrYRI/X9DTLoUkE4AsLw==",
       "type": "package",
@@ -10465,6 +10587,58 @@
         "microsoft.extensions.dependencyinjection.abstractions.6.0.0.nupkg.sha512",
         "microsoft.extensions.dependencyinjection.abstractions.nuspec",
         "useSharedDesignerContext.txt"
+      ]
+    },
+    "Microsoft.Extensions.FileProviders.Abstractions/2.2.0": {
+      "sha512": "EcnaSsPTqx2MGnHrmWOD0ugbuuqVT8iICqSqPzi45V5/MA1LjUNb0kwgcxBGqizV1R+WeBK7/Gw25Jzkyk9bIw==",
+      "type": "package",
+      "path": "microsoft.extensions.fileproviders.abstractions/2.2.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/netstandard2.0/Microsoft.Extensions.FileProviders.Abstractions.dll",
+        "lib/netstandard2.0/Microsoft.Extensions.FileProviders.Abstractions.xml",
+        "microsoft.extensions.fileproviders.abstractions.2.2.0.nupkg.sha512",
+        "microsoft.extensions.fileproviders.abstractions.nuspec"
+      ]
+    },
+    "Microsoft.Extensions.Hosting.Abstractions/2.2.0": {
+      "sha512": "+k4AEn68HOJat5gj1TWa6X28WlirNQO9sPIIeQbia+91n03esEtMSSoekSTpMjUzjqtJWQN3McVx0GvSPFHF/Q==",
+      "type": "package",
+      "path": "microsoft.extensions.hosting.abstractions/2.2.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/netstandard2.0/Microsoft.Extensions.Hosting.Abstractions.dll",
+        "lib/netstandard2.0/Microsoft.Extensions.Hosting.Abstractions.xml",
+        "microsoft.extensions.hosting.abstractions.2.2.0.nupkg.sha512",
+        "microsoft.extensions.hosting.abstractions.nuspec"
+      ]
+    },
+    "Microsoft.Extensions.Logging.Abstractions/2.2.0": {
+      "sha512": "B2WqEox8o+4KUOpL7rZPyh6qYjik8tHi2tN8Z9jZkHzED8ElYgZa/h6K+xliB435SqUcWT290Fr2aa8BtZjn8A==",
+      "type": "package",
+      "path": "microsoft.extensions.logging.abstractions/2.2.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/netstandard2.0/Microsoft.Extensions.Logging.Abstractions.dll",
+        "lib/netstandard2.0/Microsoft.Extensions.Logging.Abstractions.xml",
+        "microsoft.extensions.logging.abstractions.2.2.0.nupkg.sha512",
+        "microsoft.extensions.logging.abstractions.nuspec"
+      ]
+    },
+    "Microsoft.Extensions.Primitives/2.2.0": {
+      "sha512": "azyQtqbm4fSaDzZHD/J+V6oWMFaf2tWP4WEGIYePLCMw3+b2RQdj9ybgbQyjCshcitQKQ4lEDOZjmSlTTrHxUg==",
+      "type": "package",
+      "path": "microsoft.extensions.primitives/2.2.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/netstandard2.0/Microsoft.Extensions.Primitives.dll",
+        "lib/netstandard2.0/Microsoft.Extensions.Primitives.xml",
+        "microsoft.extensions.primitives.2.2.0.nupkg.sha512",
+        "microsoft.extensions.primitives.nuspec"
       ]
     },
     "Microsoft.Net.Compilers.Toolset/4.8.0": {
@@ -11381,6 +11555,22 @@
         "runtimes/win/lib/netcoreapp3.1/Microsoft.Win32.SystemEvents.dll",
         "runtimes/win/lib/netcoreapp3.1/Microsoft.Win32.SystemEvents.xml",
         "useSharedDesignerContext.txt"
+      ]
+    },
+    "Modernizr/2.8.3": {
+      "sha512": "OiV7LzwGvejI0lxQAx7HaAA+H6xC3FL6Pgv23Qo5O+5fKp5bt2zj0qz7ZmF+jtWmm9dcQkoTInO7eTFH1JtXEQ==",
+      "type": "package",
+      "path": "modernizr/2.8.3",
+      "hasTools": true,
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Content/Scripts/modernizr-2.8.3.js",
+        "Tools/common.ps1",
+        "Tools/install.ps1",
+        "Tools/uninstall.ps1",
+        "modernizr.2.8.3.nupkg.sha512",
+        "modernizr.nuspec"
       ]
     },
     "Mono.Unix/7.1.0-final.1.21458.1": {
@@ -15826,6 +16016,27 @@
         "system.xml.xdocument.nuspec"
       ]
     },
+    "V8.Net/1.1.8": {
+      "sha512": "9EzNI0OK++gfAzSXWxNGkx1ecUOgUXRHrEgMishoZX/Px3uLPT6ixLIiAV1+DXoKoPMhP99nDOZ2G1zTKHW2KQ==",
+      "type": "package",
+      "path": "v8.net/1.1.8",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "content/V8_Net_Proxy_x64.dll",
+        "content/V8_Net_Proxy_x86.dll",
+        "contentFiles/any/net461/V8_Net_Proxy_x64.dll",
+        "contentFiles/any/net461/V8_Net_Proxy_x86.dll",
+        "contentFiles/any/netstandard2.0/V8_Net_Proxy_x64.dll",
+        "contentFiles/any/netstandard2.0/V8_Net_Proxy_x86.dll",
+        "lib/net461/V8.Net-Standard.xml",
+        "lib/net461/V8.Net.dll",
+        "lib/netstandard2.0/V8.Net-Standard.xml",
+        "lib/netstandard2.0/V8.Net.dll",
+        "v8.net.1.1.8.nupkg.sha512",
+        "v8.net.nuspec"
+      ]
+    },
     "ZstdSharp.Port/0.7.1": {
       "sha512": "Idgg+mJEyAujqDPzA3APy9dNoyw0YQcNA65GgYjktDRtJ+nvx/hv+J+m6Eax3JJMGEYGy04oc5YNP6ZvQ3Y1vQ==",
       "type": "package",
@@ -15853,33 +16064,35 @@
       "Microsoft.Net.Compilers.Toolset >= 4.8.0",
       "Microsoft.Office.Interop.Excel >= 15.0.4795.1001",
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 6.0.16",
+      "Modernizr >= 2.8.3",
       "MySql.Data >= 8.2.0",
       "Newtonsoft.Json >= 13.0.3",
       "SimpleJson >= 0.38.0",
       "System.Dynamic.Runtime >= 4.3.0",
       "System.IO >= 4.3.0",
       "System.Text.Encodings.Web >= 8.0.0",
+      "V8.Net >= 1.1.8",
       "pythonnet >= 3.0.3"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\alexa\\.nuget\\packages\\": {},
+    "C:\\Users\\Daniel\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Proyectos\\Proyecto_Colegio\\App\\ProyectoColegio\\ProyectoColegio.csproj",
+      "projectUniqueName": "C:\\Users\\Daniel\\Desktop\\Trabajo_Colegio\\Proyecto_Colegio\\App\\ProyectoColegio\\ProyectoColegio.csproj",
       "projectName": "ProyectoColegio",
-      "projectPath": "C:\\Proyectos\\Proyecto_Colegio\\App\\ProyectoColegio\\ProyectoColegio.csproj",
-      "packagesPath": "C:\\Users\\alexa\\.nuget\\packages\\",
-      "outputPath": "C:\\Proyectos\\Proyecto_Colegio\\App\\ProyectoColegio\\obj\\",
+      "projectPath": "C:\\Users\\Daniel\\Desktop\\Trabajo_Colegio\\Proyecto_Colegio\\App\\ProyectoColegio\\ProyectoColegio.csproj",
+      "packagesPath": "C:\\Users\\Daniel\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Daniel\\Desktop\\Trabajo_Colegio\\Proyecto_Colegio\\App\\ProyectoColegio\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\alexa\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Daniel\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -15932,6 +16145,10 @@
             "target": "Package",
             "version": "[6.0.16, )"
           },
+          "Modernizr": {
+            "target": "Package",
+            "version": "[2.8.3, )"
+          },
           "MySql.Data": {
             "target": "Package",
             "version": "[8.2.0, )"
@@ -15955,6 +16172,10 @@
           "System.Text.Encodings.Web": {
             "target": "Package",
             "version": "[8.0.0, )"
+          },
+          "V8.Net": {
+            "target": "Package",
+            "version": "[1.1.8, )"
           },
           "pythonnet": {
             "target": "Package",
@@ -15980,7 +16201,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
       }
     }
   }
