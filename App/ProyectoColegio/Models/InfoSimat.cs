@@ -1,41 +1,112 @@
-﻿namespace ProyectoColegio.Models
+﻿using CsvHelper.Configuration.Attributes;
+
+namespace ProyectoColegio.Models
 {
     public class InfoSimat
     {
+        [Name("ANO")]
         private int? _annoElectivo;
+
+        [Name("ETC")]
         private String? _departamento;
+
+        [Name("ESTADO")]
         private String? _estadoMatricula;
+
+        [Name("JERARQUIA")]
         private String? _municipio;
+
+        [Name("INSTITUCION")]
         private String? _institucion;
+
+        [Name("CALENDARIO")]
         private String? _calendario;
+
+        [Name("SECTOR")]
         private String? _sector;
+
+        [Name("SEDE")]
         private String? _sede;
+
+        [Name("ZONA_SEDE")]
         private String? _zonaSede;
+
+        [Name("JORNADA")]
         private String? _jornada;
+
+        [Name("GRADO_COD")]
         private int? _grado;
+
+        [Name("GRUPO")]
         private int? _grupo;
+
+        [Name("MODELO")]
         private String? _modalidad;
+
+        [Name("FECHAINI")]
         private String? _fechaInicio;
+
+        [Name("FECHAFIN")]
         private String? _fechaFin;
+
+        [Name("NUI")]
         private String? _NUI;
+
+        [Name("ESTRATO")]
         private String? _estrato;
+
+        [Name("SISBEN IV")]
         private String? _sisben;
+
+        [Name("PER_ID")]
         private int? _PERID;
+
+        [Name("DOC")]
         private int? _numeroIdentificacion;
+
+        [Name("TIPODOC")]
         private String? _tipoIdentificacion;
+
+        [Name("APELLIDO1")]
         private String? _apellido1;
+
+        [Name("APELLIDO2")]
         private String? _apellido2;
+
+        [Name("NOMBRE1")]
         private String? _nombre1;
+
+        [Name("NOMBRE2")]
         private String? _nombre2;
+
+        [Name("GENERO")]
         private String? _genero;
+
+        [Name("FECHA_NACIMIENTO")]
         private String? _fechaNacimiento;
+
+        [Name("BARRIO")]
         private String? _barrio;
+
+        [Name("EPS")]
         private String? _eps;
+
+        [Name("TIPO DE SANGRE")]
         private String? _tipoSangre;
+
+        [Name("INTERNADO")]
         private String? _internado;
+
+        [Name("APOYO_ACADEMICO_ESPECIAL")]
         private String? _apoyoAcademicoEspecial;
+
+        [Name("DISCAPACIDAD")]
         private String? _discapacidad;
+
+        [Name("PAIS_ORIGEN")]
         private String? _paisOrigen;
+
+        [Name("CORREO")]
         private String? _correo;
 
         public int? AnnoElectivo

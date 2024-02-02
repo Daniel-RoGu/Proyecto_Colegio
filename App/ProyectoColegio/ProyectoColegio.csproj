@@ -18,6 +18,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="CsvHelper" Version="30.1.0" />
+    <PackageReference Include="CsvHelper.Excel.Core" Version="27.2.1" />
     <PackageReference Include="IronPython" Version="3.4.1" />
     <PackageReference Include="IronPython.StdLib" Version="3.4.1" />
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
