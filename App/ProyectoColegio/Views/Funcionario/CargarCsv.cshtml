@@ -14,21 +14,22 @@
         var patch = "";
     }
     <div style="margin-top: 200px">
-        @*<form action="/Funcionario/CargarCsv" method="post" enctype="multipart/form-data">
+        <form action="/Funcionario/CargarCsv" method="post" enctype="multipart/form-data">
             <label for="inputFile">Seleccionar Archivo CSV:</label>
             <input type="file" id="inputFile" name="file" accept=".csv">
             <br>
             <input type="submit" value="Cargar CSV">
-        </form>*@
-
+        </form>
+        @*
         <form action="/Funcionario/CargarCsv"  method="post" enctype="multipart/form-data" onsubmit="return obtenerRuta()">
             <label for="inputFile">Seleccionar Archivo CSV:</label>
             <input type="file" id="inputFile" name="file" accept=".csv">
             <br>
             <input type="submit" value="Cargar CSV">
         </form>
+        *@
     </div>    
-    <script>
+    @*<script>
         function obtenerRuta() {
             var inputFile = document.getElementById('inputFile');
             var ruta = inputFile.value; // Esto contendrá la ruta del archivo seleccionado por el usuario
@@ -36,6 +37,6 @@
             return ruta;
             //return false; // Esto evita que el formulario se envíe realmente, ya que solo estamos interesados en la ruta del archivo
         }
-    </script>
+    </script>*@
 </body>
 </html>

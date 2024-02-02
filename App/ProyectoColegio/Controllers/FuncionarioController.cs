@@ -42,9 +42,24 @@ namespace ProyectoColegio.Controllers
         }
 
         [HttpPost]
-        public IActionResult CargarCsv(string rutaArchivo)
+        public IActionResult CargarCsv(IFormFile file)
         {
-            rutaArchivo = @"C:\Users\Daniel\Desktop\TrabajoColegio\Guia.csv";
+
+            //string rutaArchivo = @"C:\Users\Daniel\Desktop\TrabajoColegio\Guia.csv";
+            var tempFilePath = "";
+
+            if (file != null && file.Length > 0)
+            {
+                // Crear un archivo temporal
+                tempFilePath = Path.GetTempFileName();
+
+                // Guardar el contenido del archivo en el archivo temporal
+                using (var stream = new FileStream(tempFilePath, FileMode.Create))
+                {
+                    file.CopyTo(stream);
+                }
+
+            }
 
             // Lista para almacenar los datos
             List<InfoCsv> info = new List<InfoCsv>();
@@ -56,7 +71,7 @@ namespace ProyectoColegio.Controllers
             };
 
             // Leer el archivo CSV usando CsvHelper
-            using (var reader = new StreamReader(rutaArchivo))
+            using (var reader = new StreamReader(tempFilePath))
             //using (var csv = new CsvReader(reader, new CsvHelper.Configuration.CsvConfiguration(System.Globalization.CultureInfo.InvariantCulture)))
             using (var csv = new CsvReader(reader, csvConfig))
             {
@@ -66,6 +81,9 @@ namespace ProyectoColegio.Controllers
                 // Agrega los registros a la lista
                 info.AddRange(records);
             }
+
+            // Eliminar el archivo temporal después de procesarlo si es necesario
+            System.IO.File.Delete(tempFilePath);
 
             // Procesa la lista
             UsarCsv(info);
