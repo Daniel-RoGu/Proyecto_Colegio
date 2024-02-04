@@ -182,7 +182,7 @@ namespace ProyectoColegio.Controllers
             [Name("ESTRATO")]
             public String? ESTRATO { get; set; }
 
-            [Name("SISBEN_IV")]
+            [Name("SISBEN IV")]
             public String? SISBEN_IV { get; set; }
 
             [Name("PER_ID")]
@@ -218,7 +218,7 @@ namespace ProyectoColegio.Controllers
             [Name("EPS")]
             public String? EPS { get; set; }
 
-            [Name("TIPO_DE_SANGRE")]
+            [Name("TIPO DE SANGRE")]
             public String? TIPO_DE_SANGRE { get; set; }
 
             [Name("MATRICULACONTRATADA")]
