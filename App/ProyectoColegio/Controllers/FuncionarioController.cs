@@ -98,7 +98,9 @@ namespace ProyectoColegio.Controllers
                     using (MySqlConnection conexion = new MySqlConnection(_contexto.Conexion))
                     {
                         conexion.Open();
-                        MySqlCommand Command = new MySqlCommand("registrarEstudiante", conexion);
+                        MySqlCommand Command = new MySqlCommand("registrarTipoSangre", conexion);
+                        Command.Parameters.AddWithValue("documento", dato.DOC);
+                        Command = new MySqlCommand("registrarEstudiante", conexion);
                         Command.CommandType = System.Data.CommandType.StoredProcedure;
                         Command.Parameters.AddWithValue("documento", dato.DOC);
                         Command.Parameters.AddWithValue("documento", dato.DOC);

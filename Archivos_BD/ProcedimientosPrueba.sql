@@ -171,7 +171,6 @@ create procedure `registrarEstudiante`(
     nombreGenero varchar(45),
     nombreEps varchar(45),
     nombreEstrato varchar(45),
-    nombreRol varchar(45),
     codigoStudent varchar(100),
     ciudadNacimientoEs varchar(100),
     ciudadResidenciaEs varchar(100),
@@ -182,7 +181,7 @@ create procedure `registrarEstudiante`(
 ) 
 begin
 	call registrarUsuario(documento, nomUsuario, nom2Usuario, apellidoUsuario, apellido2Usuario, edad, telCelular, telFijo, correoUss, direccionUss, barrioUss, 
-						  fechaNacimientoUss, tipoSangre, tipoDocumento, nombreDiscapacidad, nombreSisben, nombreGenero, nombreEps, nombreEstrato, nombreRol);
+						  fechaNacimientoUss, tipoSangre, tipoDocumento, nombreDiscapacidad, nombreSisben, nombreGenero, nombreEps, nombreEstrato, "Estudiante");
 	insert into Estudiante (codigoEstudiante, ciudadNacimiento, ciudadResidencia, ciudadExpedicionDocumento, paisOrigen,
                            asistenciaAcademicaEspecial, desplazadoEstado, Usuario_identificacion)
 				value(codigoStudent, ciudadNacimientoEs, ciudadResidenciaEs, ciudadExpedicionDocumentoEs, paisOrigenEs,
