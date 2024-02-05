@@ -21,20 +21,15 @@ namespace ProyectoColegio.Controllers
     public class FuncionarioController : Controller
     {
         Funcionario funcionario = new Funcionario();
-        //InfoSimat infoCsv = new InfoSimat();
-        private readonly Contexto _contexto;
-        //private readonly IWebHostEnvironment _webHostEnvironment;
+        //private readonly Contexto _contexto;
+        ManejoProcedimientos manejoProcedimientos = new ManejoProcedimientos();
 
+        /*
         public FuncionarioController(Contexto contexto)
         {
             _contexto = contexto;
         }
-
-        //public FuncionarioController(IWebHostEnvironment webHostEnvironment)
-        //{
-        //    _webHostEnvironment = webHostEnvironment;
-        //}
-
+        */
 
         public IActionResult CargarCsv()
         {        
@@ -94,6 +89,7 @@ namespace ProyectoColegio.Controllers
         public void UsarCsv(List<InfoCsv> datos)
         {
 
+            /*
             try
             {
 
@@ -114,6 +110,23 @@ namespace ProyectoColegio.Controllers
             {
                 Console.WriteLine($"Error al ejecutar el script: {ex.Message}");
             }
+            */
+           
+            
+            List<object> listaObjetos = new List<object>();
+            object datoPrueba = new object();
+            
+            foreach (var dato in datos)
+            {
+                /*
+                listaObjetos.Add(dato);
+                manejoProcedimientos.LlenarListaDatos(listaObjetos);
+                */
+                datoPrueba = dato.NOMBRE1;
+                listaObjetos.Add(datoPrueba);
+                manejoProcedimientos.LlenarListaDatos(listaObjetos);
+            }
+            manejoProcedimientos.TratamientoListasDatos(manejoProcedimientos.RetornarListaDatos(), "registrarTipoSangre", manejoProcedimientos.ListaParametros(manejoProcedimientos.Parametro("registrarTipoSangre")));
 
         }       
 
