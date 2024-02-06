@@ -63,10 +63,11 @@ namespace ProyectoColegio.Controllers
             {
                 Delimiter = ";",
                 HasHeaderRecord = true,
+                Encoding = Encoding.UTF8, // Ajusta la codificación según la del archivo CSV
             };
 
             // Leer el archivo CSV usando CsvHelper
-            using (var reader = new StreamReader(tempFilePath))
+            using (var reader = new StreamReader(tempFilePath, Encoding.UTF8)) 
             //using (var csv = new CsvReader(reader, new CsvHelper.Configuration.CsvConfiguration(System.Globalization.CultureInfo.InvariantCulture)))
             using (var csv = new CsvReader(reader, csvConfig))
             {
@@ -83,110 +84,55 @@ namespace ProyectoColegio.Controllers
             // Procesa la lista
             UsarCsv(info);
 
-            return View();
+            return RedirectToAction("Index", "Home");
         }
 
         public void UsarCsv(List<InfoCsv> datos)
-        {
-
-
+        {           
             try
             {
-
                 foreach (InfoCsv dato in datos)
                 {
-                    using (MySqlConnection conexion = new MySqlConnection(_contexto.Conexion))
+                    
+                    Dictionary<string, object> parametros = new Dictionary<string, object>
                     {
-                        conexion.Open();
-                        MySqlCommand Command = new MySqlCommand("registrarTipoSangre", conexion);
-                        Command.Parameters.AddWithValue("documento", dato.DOC);
-                        Command = new MySqlCommand("registrarEstudiante", conexion);
-                        Command.CommandType = System.Data.CommandType.StoredProcedure;
-                        Command.Parameters.AddWithValue("documento", dato.DOC);
-                        Command.Parameters.AddWithValue("documento", dato.DOC);
-                        Command.Parameters.AddWithValue("nomUsuario", dato.NOMBRE1);
-                        Command.Parameters.AddWithValue("nom2Usuario", dato.NOMBRE2);
-                        Command.Parameters.AddWithValue("apellidoUsuario", dato.APELLIDO1);
-                        Command.Parameters.AddWithValue("apellido2Usuario", dato.APELLIDO2);
-                        Command.Parameters.AddWithValue("edad", dato.APELLIDO2);
-                        Command.Parameters.AddWithValue("telCelular", dato.APELLIDO2);
-                        Command.Parameters.AddWithValue("telFijo", dato.APELLIDO2);
-                        Command.Parameters.AddWithValue("correoUss", dato.APELLIDO2);
-                        Command.Parameters.AddWithValue("direccionUss", dato.APELLIDO2);
-                        Command.Parameters.AddWithValue("barrioUss", dato.APELLIDO2);
-                        Command.Parameters.AddWithValue("fechaNacimientoUss", dato.APELLIDO2);
-                        Command.Parameters.AddWithValue("tipoSangre", dato.APELLIDO2);
-                        Command.Parameters.AddWithValue("tipoDocumento", dato.APELLIDO2);
-                        Command.Parameters.AddWithValue("nombreDiscapacidad", dato.APELLIDO2);
-                        Command.Parameters.AddWithValue("nombreSisben", dato.APELLIDO2);
-                        Command.Parameters.AddWithValue("nombreGenero", dato.APELLIDO2);
-                        Command.Parameters.AddWithValue("nombreEps", dato.APELLIDO2);
-                        Command.Parameters.AddWithValue("nombreEstrato", dato.APELLIDO2);
-                        Command.Parameters.AddWithValue("nombreRol", dato.APELLIDO2);
-                        Command.Parameters.AddWithValue("identificacionAcudienteEs", dato.APELLIDO2);
-                        Command.Parameters.AddWithValue("nombreAcudienteEs", dato.APELLIDO2);
-                        Command.Parameters.AddWithValue("apellidoAcudienteEs", dato.APELLIDO2);
-                        Command.Parameters.AddWithValue("generoAcudienteEs", dato.APELLIDO2);
-                        Command.Parameters.AddWithValue("correoAcudienteEs", dato.APELLIDO2);
-                        Command.Parameters.AddWithValue("celularAcudienteEs", dato.APELLIDO2);
-                        Command.Parameters.AddWithValue("parentescoAcudienteEs", dato.APELLIDO2);
-                        Command.Parameters.AddWithValue("responsabilidadEconomicaAcudienteEs", dato.APELLIDO2);
-                        Command.Parameters.AddWithValue("codigoStudent", dato.APELLIDO2);
-                        Command.Parameters.AddWithValue("ciudadNacimientoEs", dato.APELLIDO2);
-                        Command.Parameters.AddWithValue("ciudadResidenciaEs", dato.APELLIDO2);
-                        Command.Parameters.AddWithValue("ciudadExpedicionDocumentoEs", dato.APELLIDO2);
-                        Command.Parameters.AddWithValue("paisOrigenEs", dato.APELLIDO2);
-                        Command.Parameters.AddWithValue("asistenciaAcademicaEspecialEs", dato.APELLIDO2);
-                        Command.Parameters.AddWithValue("desplazadoEstadoEs", dato.APELLIDO2);
-                        Command.ExecuteNonQuery();
-                    }
-                    Console.WriteLine(dato);
-                }
+                        { "documento", dato.DOC },
+                        { "nomUsuario", dato.NOMBRE1 },
+                        { "nom2Usuario", dato.NOMBRE2 },
+                        { "apellidoUsuario", dato.APELLIDO1 },
+                        { "apellido2Usuario", dato.APELLIDO2 },
+                        { "edad", ManejoBaseDatos.CalcularEdad(dato.FECHA_NACIMIENTO) },
+                        { "telCelular", null },
+                        { "telFijo", null },
+                        { "correoUss", dato.CORREO },
+                        { "direccionUss", null },
+                        { "barrioUss", dato.BARRIO },
+                        { "fechaNacimientoUss", dato.FECHA_NACIMIENTO },
+                        { "tipoSangre", dato.TIPO_DE_SANGRE },
+                        { "tipoDocumento", dato.TIPODOC },
+                        { "nombreDiscapacidad", dato.DISCAPACIDAD },
+                        { "nombreSisben", dato.SISBEN_IV },
+                        { "nombreGenero", dato.GENERO },
+                        { "nombreEps", dato.EPS },
+                        { "nombreEstrato", dato.ESTRATO },
+                        { "codigoStudent", dato.PER_ID },
+                        { "ciudadNacimientoEs", null },
+                        { "ciudadResidenciaEs", null },
+                        { "ciudadExpedicionDocumentoEs", null },
+                        { "paisOrigenEs", dato.PAIS_ORIGEN },
+                        { "asistenciaAcademicaEspecialEs", dato.APOYO_ACADEMICO_ESPECIAL },
+                        { "desplazadoEstadoEs", null },
+                    };
+                    ManejoBaseDatos.EjecutarProcedimientoMultiParametro("registrarEstudiante", parametros, _contexto.Conexion);
+                   
+                }   
+  
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"Error al ejecutar el script: {ex.Message}");
             }
-
-            /*
-            try
-            {
-
-                foreach (InfoCsv dato in datos)
-                {
-                    using (MySqlConnection conexion = new MySqlConnection(_contexto.Conexion))
-                    {
-                        conexion.Open();
-                        MySqlCommand Command = new MySqlCommand("registrarTipoSangre", conexion);
-                        Command.CommandType = System.Data.CommandType.StoredProcedure;
-                        Command.Parameters.AddWithValue("nomTpSangre", dato.NOMBRE1);
-                        Command.ExecuteNonQuery();
-                    }
-                    Console.WriteLine(dato);
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error al ejecutar el script: {ex.Message}");
-            }
-            */
-
-
-            //List<object> listaObjetos = new List<object>();
-            //object datoPrueba = new object();
-
-            //foreach (var dato in datos)
-            //{
-            //    /*
-            //    listaObjetos.Add(dato);
-            //    manejoProcedimientos.LlenarListaDatos(listaObjetos);
-            //    */
-            //    datoPrueba = dato.NOMBRE1;
-            //    listaObjetos.Add(datoPrueba);
-            //    manejoProcedimientos.LlenarListaDatos(listaObjetos);
-            //}
-            //manejoProcedimientos.TratamientoListasDatos(manejoProcedimientos.RetornarListaDatos(), "registrarTipoSangre", manejoProcedimientos.ListaParametros(manejoProcedimientos.Parametro("registrarTipoSangre")));
-
+         
         }
 
         public class InfoCsv
