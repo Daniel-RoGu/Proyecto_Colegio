@@ -1,0 +1,39 @@
+﻿@model ProyectoColegio.Models.InfoSimat
+
+@{
+    ViewData["Title"] = "mostrarCsv";
+    var datos = ViewBag.ListaObjetos;
+}
+
+<h1>mostrarCsv</h1>
+
+<div>
+    <h4>InfoSimat</h4>
+    <hr />
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Nombre Estudiante</th>
+                <th>Segundo Nombre</th>
+                <th>Primer Apellido</th>
+                <th>Segundo Apellido</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in datos)
+            {
+                <tr>
+                    <td>@item.NOMBRE1</td>
+                    <td>@item.NOMBRE2</td>
+                    <td>@item.APELLIDO1</td>
+                    <td>@item.APELLIDO2</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<div>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    <a asp-action="Index">Back to List</a>
+</div>
+

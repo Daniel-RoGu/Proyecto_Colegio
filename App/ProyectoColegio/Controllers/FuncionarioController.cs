@@ -15,6 +15,7 @@ using Microsoft.VisualBasic.FileIO;
 using System.Text;
 using CsvHelper.Configuration;
 using System.Globalization;
+using DocumentFormat.OpenXml.EMMA;
 
 namespace ProyectoColegio.Controllers
 {
@@ -23,13 +24,21 @@ namespace ProyectoColegio.Controllers
         Funcionario funcionario = new Funcionario();
         private readonly Contexto _contexto;
         ManejoProcedimientos manejoProcedimientos = new ManejoProcedimientos();
+        List<InfoCsv> infoGlobal = new List<InfoCsv>();
 
-        
         public FuncionarioController(Contexto contexto)
         {
             _contexto = contexto;
         }
-        
+        public List<InfoCsv> getINFOGLOBAL()
+        {
+            return infoGlobal;
+        }
+
+        public void setINFOGLOBAL(List<InfoCsv> datos) {
+            infoGlobal = datos;
+        }
+
 
         public IActionResult CargarCsv()
         {
@@ -83,8 +92,9 @@ namespace ProyectoColegio.Controllers
 
             // Procesa la lista
             UsarCsv(info);
+            setINFOGLOBAL(info);
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("mostrarCsv", "Funcionario");
         }
 
         public void UsarCsv(List<InfoCsv> datos)
@@ -132,7 +142,12 @@ namespace ProyectoColegio.Controllers
             {
                 Console.WriteLine($"Error al ejecutar el script: {ex.Message}");
             }
-         
+        }
+
+        public IActionResult mostrarCsv()
+        {
+            ViewBag.ListaObjetos = getINFOGLOBAL();
+            return View();
         }
 
         public class InfoCsv
