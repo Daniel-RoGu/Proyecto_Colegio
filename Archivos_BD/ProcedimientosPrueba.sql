@@ -1,5 +1,8 @@
 use bdColegio;
 
+/*modificador de tabla para usar formato de texto utf8mb4*/
+ALTER TABLE Usuario CONVERT TO CHARACTER SET utf8mb4;
+
 /*--------------------------Registrar TipoSangre-------------------------*/
 DELIMITER $$
 DROP PROCEDURE IF EXISTS `registrarTipoSangre` $$

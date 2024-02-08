@@ -767,23 +767,23 @@ ALTER TABLE NotasEstudiante AUTO_INCREMENT = 278200;
 DROP TABLE IF EXISTS `Acudiente` ;
 
 CREATE TABLE IF NOT EXISTS `Acudiente` (
-  `identificacionAcudiente` BIGINT NOT NULL,
-  `nombreAcudiente` VARCHAR(400) NOT NULL,
-  `apellidoAcudiente` VARCHAR(400) NOT NULL,
-  `correoAcudiente` VARCHAR(400) NULL,
-  `celularAcudiente` VARCHAR(400) NULL,
+  `identificacionFamiliar` BIGINT NOT NULL,
+  `nombreFamiliar` VARCHAR(400) NOT NULL,
+  `apellidoFamiliar` VARCHAR(400) NOT NULL,
+  `correoFamiliar` VARCHAR(400) NULL,
+  `celularFamiliar` VARCHAR(400) NULL,
   `parentescoEstudiante` VARCHAR(400) NOT NULL,
   `responsabilidadEconomicaEstudiante` VARCHAR(450) NOT NULL,
   `estadoAcudiente` VARCHAR(400) NOT NULL,
   `Genero_idGenero` INT NOT NULL,
   `Estudiante_idEstudiante` INT NOT NULL,
-  PRIMARY KEY (`identificacionAcudiente`),
-  CONSTRAINT `fk_Acudiente_Genero1`
+  PRIMARY KEY (`identificacionFamiliar`),
+  CONSTRAINT `fk_Familiar_Genero1`
     FOREIGN KEY (`Genero_idGenero`)
     REFERENCES `Genero` (`idGenero`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Acudiente_Estudiante1`
+  CONSTRAINT `fk_Familiar_Estudiante1`
     FOREIGN KEY (`Estudiante_idEstudiante`)
     REFERENCES `Estudiante` (`idEstudiante`)
     ON DELETE NO ACTION

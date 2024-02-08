@@ -16,6 +16,7 @@ using System.Text;
 using CsvHelper.Configuration;
 using System.Globalization;
 using DocumentFormat.OpenXml.EMMA;
+using Newtonsoft.Json;
 
 namespace ProyectoColegio.Controllers
 {
@@ -23,22 +24,15 @@ namespace ProyectoColegio.Controllers
     {
         Funcionario funcionario = new Funcionario();
         private readonly Contexto _contexto;
+        int cont = 0;
         ManejoProcedimientos manejoProcedimientos = new ManejoProcedimientos();
-        List<InfoCsv> infoGlobal = new List<InfoCsv>();
-
+        
         public FuncionarioController(Contexto contexto)
         {
             _contexto = contexto;
         }
-        public List<InfoCsv> getINFOGLOBAL()
-        {
-            return infoGlobal;
-        }
 
-        public void setINFOGLOBAL(List<InfoCsv> datos) {
-            infoGlobal = datos;
-        }
-
+        VariablesGlobales variablesGlobales = new VariablesGlobales();
 
         public IActionResult CargarCsv()
         {
@@ -49,7 +43,6 @@ namespace ProyectoColegio.Controllers
         public IActionResult CargarCsv(IFormFile file)
         {
 
-            //string rutaArchivo = @"C:\Users\Daniel\Desktop\TrabajoColegio\Guia.csv";
             var tempFilePath = "";
 
             if (file != null && file.Length > 0)
@@ -66,42 +59,59 @@ namespace ProyectoColegio.Controllers
             }
 
             // Lista para almacenar los datos
-            List<InfoCsv> info = new List<InfoCsv>();
+            List<InfoSimat> info = new List<InfoSimat>();
 
             var csvConfig = new CsvConfiguration(CultureInfo.InvariantCulture)
             {
                 Delimiter = ";",
                 HasHeaderRecord = true,
-                Encoding = Encoding.UTF8, // Ajusta la codificación según la del archivo CSV
+                //Encoding = Encoding.UTF8, // Ajusta la codificación según la del archivo CSV
+                Encoding = Encoding.GetEncoding("iso-8859-1")
             };
 
             // Leer el archivo CSV usando CsvHelper
-            using (var reader = new StreamReader(tempFilePath, Encoding.UTF8)) 
-            //using (var csv = new CsvReader(reader, new CsvHelper.Configuration.CsvConfiguration(System.Globalization.CultureInfo.InvariantCulture)))
+            //using (var reader = new StreamReader(tempFilePath, Encoding.UTF8)) 
+            using (var reader = new StreamReader(tempFilePath, Encoding.GetEncoding("iso-8859-1"))) 
             using (var csv = new CsvReader(reader, csvConfig))
             {
                 // Lee todos los registros a la vez
-                var records = csv.GetRecords<InfoCsv>().ToList();
+                var records = csv.GetRecords<InfoSimat>().ToList();
 
                 // Agrega los registros a la lista
                 info.AddRange(records);
             }
+
+            //TempData["InfoData"] = JsonConvert.SerializeObject(info);
 
             // Eliminar el archivo temporal después de procesarlo si es necesario
             System.IO.File.Delete(tempFilePath);
 
             // Procesa la lista
             UsarCsv(info);
-            setINFOGLOBAL(info);
+            /*
+            if (variablesGlobales.InfoGlobal != null)
+            {
+                return RedirectToAction("mostrarCsv", "Funcionario");
+            }
+            */
+            return RedirectToAction("Index", "Home");
 
-            return RedirectToAction("mostrarCsv", "Funcionario");
         }
 
-        public void UsarCsv(List<InfoCsv> datos)
+
+        [HttpGet]
+        public IActionResult mostrarCsv()
+        {
+            //List<InfoSimat> info = ViewBag.InfoData as List<InfoSimat>;
+            
+            return View(variablesGlobales.InfoGlobal);
+        }
+
+        public void UsarCsv(List<InfoSimat> datos)
         {           
             try
             {
-                foreach (InfoCsv dato in datos)
+                foreach (InfoSimat dato in datos)
                 {
                     
                     Dictionary<string, object> parametros = new Dictionary<string, object>
@@ -134,153 +144,16 @@ namespace ProyectoColegio.Controllers
                         { "desplazadoEstadoEs", null },
                     };
                     ManejoBaseDatos.EjecutarProcedimientoMultiParametro("registrarEstudiante", parametros, _contexto.Conexion);
-                   
-                }   
-  
+
+                    variablesGlobales.InfoGlobal.Add(dato);
+                }
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"Error al ejecutar el script: {ex.Message}");
             }
         }
-
-        public IActionResult mostrarCsv()
-        {
-            ViewBag.ListaObjetos = getINFOGLOBAL();
-            return View();
-        }
-
-        public class InfoCsv
-        {
-            [Name("ANO")]
-            public int? ANO { get; set; }
-
-            [Name("ETC")]
-            public String? ETC { get; set; }
-
-            [Name("ESTADO")]
-            public String? ESTADO { get; set; }
-
-            [Name("JERARQUIA")]
-            public String? JERARQUIA { get; set; }
-
-            [Name("INSTITUCION")]
-            public String? INSTITUCION { get; set; }
-
-            [Name("DANE")]
-            public String? DANE { get; set; }
-
-            [Name("CALENDARIO")]
-            public String? CALENDARIO { get; set; }
-
-            [Name("SECTOR")]
-            public String? SECTOR { get; set; }
-
-            [Name("SEDE")]
-            public String? SEDE { get; set; }
-
-            [Name("CODIGO_DANE_SEDE")]
-            public String? CODIGO_DANE_SEDE { get; set; }
-
-            [Name("CONSECUTIVO")]
-            public String? CONSECUTIVO { get; set; }
-
-            [Name("ZONA_SEDE")]
-            public String? ZONA_SEDE { get; set; }
-
-            [Name("JORNADA")]
-            public String? JORNADA { get; set; }
-
-            [Name("GRADO_COD")]
-            public int? GRADO_COD { get; set; }
-
-            [Name("GRUPO")]
-            public int? GRUPO { get; set; }
-
-            [Name("MODELO")]
-            public String? MODELO { get; set; }
-
-            [Name("MOTIVO")]
-            public String? MOTIVO { get; set; }
-
-            [Name("FECHAINI")]
-            public String? FECHAINI { get; set; }
-
-            [Name("FECHAFIN")]
-            public String? FECHAFIN { get; set; }
-
-            [Name("NUI")]
-            public String? NUI { get; set; }
-
-            [Name("ESTRATO")]
-            public String? ESTRATO { get; set; }
-
-            [Name("SISBEN IV")]
-            public String? SISBEN_IV { get; set; }
-
-            [Name("PER_ID")]
-            public int? PER_ID { get; set; }
-
-            [Name("DOC")]
-            public string? DOC { get; set; }
-
-            [Name("TIPODOC")]
-            public String? TIPODOC { get; set; }
-
-            [Name("APELLIDO1")]
-            public String? APELLIDO1 { get; set; }
-
-            [Name("APELLIDO2")]
-            public String? APELLIDO2 { get; set; }
-
-            [Name("NOMBRE1")]
-            public String? NOMBRE1 { get; set; }
-
-            [Name("NOMBRE2")]
-            public String? NOMBRE2 { get; set; }
-
-            [Name("GENERO")]
-            public String? GENERO { get; set; }
-
-            [Name("FECHA_NACIMIENTO")]
-            public String? FECHA_NACIMIENTO { get; set; }
-
-            [Name("BARRIO")]
-            public String? BARRIO { get; set; }
-
-            [Name("EPS")]
-            public String? EPS { get; set; }
-
-            [Name("TIPO DE SANGRE")]
-            public String? TIPO_DE_SANGRE { get; set; }
-
-            [Name("MATRICULACONTRATADA")]
-            public String? MATRICULACONTRATADA { get; set; }
-
-            [Name("FUENTE_RECURSOS")]
-            public String? FUENTE_RECURSOS { get; set; }
-
-            [Name("INTERNADO")]
-            public String? INTERNADO { get; set; }
-
-            [Name("NUM_CONTRATO")]
-            public String? NUM_CONTRATO { get; set; }
-
-            [Name("APOYO_ACADEMICO_ESPECIAL")]
-            public String? APOYO_ACADEMICO_ESPECIAL { get; set; }
-
-            [Name("SRPA")]
-            public String? SRPA { get; set; }
-
-            [Name("DISCAPACIDAD")]
-            public String? DISCAPACIDAD { get; set; }
-
-            [Name("PAIS_ORIGEN")]
-            public String? PAIS_ORIGEN { get; set; }
-
-            [Name("CORREO")]
-            public String? CORREO { get; set; }
-        }
-
+                
     }
+
 }
