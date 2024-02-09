@@ -22,9 +22,8 @@ namespace ProyectoColegio.Controllers
 {
     public class FuncionarioController : Controller
     {
-        Funcionario funcionario = new Funcionario();
+        //Funcionario funcionario = new Funcionario();
         private readonly Contexto _contexto;
-        int cont = 0;
         ManejoProcedimientos manejoProcedimientos = new ManejoProcedimientos();
         
         public FuncionarioController(Contexto contexto)
@@ -32,7 +31,7 @@ namespace ProyectoColegio.Controllers
             _contexto = contexto;
         }
 
-        VariablesGlobales variablesGlobales = new VariablesGlobales();
+        //VariablesGlobales variablesGlobales = new VariablesGlobales();
 
         public IActionResult CargarCsv()
         {
@@ -65,12 +64,10 @@ namespace ProyectoColegio.Controllers
             {
                 Delimiter = ";",
                 HasHeaderRecord = true,
-                //Encoding = Encoding.UTF8, // Ajusta la codificación según la del archivo CSV
                 Encoding = Encoding.GetEncoding("iso-8859-1")
             };
 
             // Leer el archivo CSV usando CsvHelper
-            //using (var reader = new StreamReader(tempFilePath, Encoding.UTF8)) 
             using (var reader = new StreamReader(tempFilePath, Encoding.GetEncoding("iso-8859-1"))) 
             using (var csv = new CsvReader(reader, csvConfig))
             {
@@ -81,20 +78,14 @@ namespace ProyectoColegio.Controllers
                 info.AddRange(records);
             }
 
-            //TempData["InfoData"] = JsonConvert.SerializeObject(info);
-
             // Eliminar el archivo temporal después de procesarlo si es necesario
             System.IO.File.Delete(tempFilePath);
 
             // Procesa la lista
             UsarCsv(info);
-            /*
-            if (variablesGlobales.InfoGlobal != null)
-            {
-                return RedirectToAction("mostrarCsv", "Funcionario");
-            }
-            */
-            return RedirectToAction("Index", "Home");
+            
+            //return RedirectToAction("Index", "Home");
+            return RedirectToAction("CargarCsv", "Funcionario");
 
         }
 
@@ -102,10 +93,56 @@ namespace ProyectoColegio.Controllers
         [HttpGet]
         public IActionResult mostrarCsv()
         {
-            //List<InfoSimat> info = ViewBag.InfoData as List<InfoSimat>;
             
-            return View(variablesGlobales.InfoGlobal);
+            List<Estudiante> Estudiantes = new List<Estudiante>();
+            Estudiante Student = new Estudiante();
+            
+            try
+            {
+                foreach (var item in mostrarInfoSimat())
+                {
+                    Student.Usuario.NombreUsuario = item.NombreUsuario;
+                    Student.Usuario.SegundoNombreUsuario = item.SegundoNombreUsuario;
+                    Student.Usuario.ApellidoUsuario = item.ApellidoUsuario;
+                    Student.Usuario.SegundoApellidoUsuario = item.SegundoApellidoUsuario;
+                    Student.Usuario.Edad = item.Edad;
+                    Student.Usuario.TelefonoCelular = item.TelefonoCelular;
+                    Student.Usuario.TelefonoFijo = item.TelefonoFijo;
+                    Student.Usuario.Correo = item.Correo;
+                    Student.Usuario.Direccion = item.Direccion;
+                    Student.Usuario.Barrio = item.Barrio;
+                    Student.Usuario.FechaNacimiento = item.FechaNacimiento;
+
+                    Dictionary<string, Type> CodigoEs = new Dictionary<string, Type>
+                    {
+                            { "CodEstudiante", typeof(int) },
+                    };
+                    List<int> codigoEs = ManejoBaseDatos.ConsultarProcedimientoDinamico<int>("obtenerCodigoEstudiantes", CodigoEs, _contexto.Conexion);
+                    foreach (var item1 in codigoEs)
+                    {
+                        Student.CodigoEstudiante = item1;
+                    }
+
+                    Student.Usuario.TipoSangre = item.TipoSangre;
+                    Student.Usuario.TipoDocumento = item.TipoDocumento;
+                    Student.Usuario.Discapacidad = item.Discapacidad;
+                    Student.Usuario.Sisben = item.Sisben;
+                    Student.Usuario.Genero = item.Genero;
+                    Student.Usuario.EPS = item.EPS;
+                    Student.Usuario.Estrato = item.Estrato;
+
+                    Estudiantes.Add(Student);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }   
+            
+            return View(Estudiantes);
+            //return View();
         }
+
 
         public void UsarCsv(List<InfoSimat> datos)
         {           
@@ -145,7 +182,7 @@ namespace ProyectoColegio.Controllers
                     };
                     ManejoBaseDatos.EjecutarProcedimientoMultiParametro("registrarEstudiante", parametros, _contexto.Conexion);
 
-                    variablesGlobales.InfoGlobal.Add(dato);
+                    //variablesGlobales.InfoGlobal.Add(dato);
                 }
             }
             catch (Exception ex)
@@ -153,6 +190,47 @@ namespace ProyectoColegio.Controllers
                 Console.WriteLine($"Error al ejecutar el script: {ex.Message}");
             }
         }
+        
+        
+        public List<Usuario> mostrarInfoSimat()
+        {
+            Dictionary<string, Type> atributosEstudiante = new Dictionary<string, Type>
+            {
+                { "documento", typeof(long) },
+                { "nomUsuario", typeof(string) },
+                { "nom2Usuario", typeof(string) },
+                { "apellidoUsuario", typeof(string) },
+                { "apellido2Usuario", typeof(string) },
+                { "edad", typeof(int) },
+                { "telCelular", typeof(string) },
+                { "telFijo", typeof(string) },
+                { "correoUss", typeof(string) },
+                { "direccionUss", typeof(string)  },
+                { "barrioUss", typeof(string)  },
+                { "fechaNacimientoUss", typeof(string) },
+                { "estadoUss", typeof(string) },
+                { "tipoSangre", typeof(string)  },
+                { "tipoDocumento", typeof(string)  },
+                { "nombreDiscapacidad", typeof(string)  },
+                { "nombreSisben", typeof(string)  },
+                { "nombreGenero", typeof(string)  },
+                { "nombreEps", typeof(string)  },
+                { "nombreEstrato", typeof(string)  },
+                //{ "codigoStudent", typeof(string) },
+                //{ "ciudadNacimientoEs", typeof(string)  },
+                //{ "ciudadResidenciaEs", typeof(string)  },
+                ////{ "ciudadExpedicionDocumentoEs", typeof(string)  },
+                ////{ "paisOrigenEs", typeof(string)  },
+                //{ "asistenciaAcademicaEspecialEs", typeof(string)  },
+                //{ "desplazadoEstadoEs", typeof(string)  },
+            };
+
+            List<Usuario> listadoEstudiantes = ManejoBaseDatos.ConsultarProcedimientoDinamico<Usuario>("MostrarEstudiantes", atributosEstudiante, _contexto.Conexion);           
+            return listadoEstudiantes; 
+            
+        }
+         
+        
                 
     }
 

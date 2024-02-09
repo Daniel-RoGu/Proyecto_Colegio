@@ -28,3 +28,18 @@ select ObtenerIdTipoSangre("O+");
 
 select count(*) from estudiante;
 select count(*) from usuario;
+
+select * from sisben;
+select * from estrato;
+select * from eps;
+select * from discapacidad;
+select * from tipodocumento;
+select * from tiposangre;
+select * from genero;
+
+call mostrarEstudiantes();
+/*select ObtenerNombreTipoDocumento(());*/
+
+call obtenerCodigoEstudiantes('1118377419');
+select ObtenerNombreSisben(616);
+select ObtenerNombreTipoDocumento();

@@ -7,6 +7,7 @@ namespace ProyectoColegio.Data
 {
     public static class ManejoBaseDatos
     {
+
         //Permite llamar procedimientos que reciben un solo dato como parametro
         public static void EjecutarProcedimientoAlmacenado(string nombreProcedimiento, string parametroNombre, object parametroValor, string cadenaConexion)
         {
@@ -33,6 +34,7 @@ namespace ProyectoColegio.Data
                 Console.WriteLine($"Error al ejecutar el procedimiento almacenado: {ex.Message}");
             }
         }
+
 
         //Permite llamar procedimientos que reciben multiples datos como parametro
         public static void EjecutarProcedimientoMultiParametro(string nombreProcedimiento, Dictionary<string, object> parametros, string cadenaConexion)
@@ -63,6 +65,54 @@ namespace ProyectoColegio.Data
                 Console.WriteLine($"Error al ejecutar el procedimiento almacenado: {ex.Message}");
             }
         }
+
+
+        public static List<T> ConsultarProcedimientoDinamico<T>(string nombreProcedimiento, Dictionary<string, Type> atributos, string cadenaConexion) where T : new()
+        {
+            List<T> listaObjetos = new List<T>();
+
+            try
+            {
+                using (MySqlConnection conexion = new MySqlConnection(cadenaConexion))
+                {
+                    conexion.Open();
+                    MySqlCommand comando = new MySqlCommand(nombreProcedimiento, conexion);
+                    comando.CommandType = CommandType.StoredProcedure;
+
+                    using (MySqlDataReader lector = comando.ExecuteReader())
+                    {
+                        while (lector.Read())
+                        {
+                            T objeto = new T();
+
+                            foreach (var atributo in atributos)
+                            {
+                                string nombreColumna = atributo.Key;
+
+                                // Verificar si la columna existe en el resultado del lector
+                                if (lector.HasColumn(nombreColumna))
+                                {
+                                    object valor = lector[nombreColumna];
+
+                                    // Asignar directamente el valor al atributo correspondiente del objeto
+                                    typeof(T).GetProperty(nombreColumna)?.SetValue(objeto, Convert.ChangeType(valor, atributo.Value));
+                                }
+                            }
+
+                            listaObjetos.Add(objeto);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error al ejecutar el procedimiento almacenado: {ex.Message}");
+            }
+
+            return listaObjetos;
+        }
+
+
 
         public static int CalcularEdad(string fechaNacimiento)
         {
