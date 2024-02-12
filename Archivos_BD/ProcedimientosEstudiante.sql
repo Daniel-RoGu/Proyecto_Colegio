@@ -52,14 +52,16 @@ begin
     inner join Estudiante on Estudiante.Usuario_identificacion = Us.identificacion;
 END$$
 
-/*--------------------------Obtener codogo Estudiantes-------------------------*/
+/*--------------------------Obtener codigo Estudiantes-------------------------*/
 
 DELIMITER $$
 DROP PROCEDURE IF EXISTS `obtenerCodigoEstudiantes` $$
 create procedure `obtenerCodigoEstudiantes`(identificacionUs long) 
 begin
-	(select ObtenerCodigoEstudiante(identificacionUs));
+	(select ObtenerCodigoEstudiante(identificacionUs) as CodigoEstudiante);
 END$$
+
+/*GRANT EXECUTE ON PROCEDURE bdColegio.obtenerCodigoEstudiantes TO 'root'@'localhost';*/
 
 /*--------------------------Registrar Familiar-------------------------*/
 DELIMITER $$

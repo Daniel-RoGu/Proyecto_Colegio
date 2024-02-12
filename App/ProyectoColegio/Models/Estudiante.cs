@@ -2,7 +2,7 @@
 {
     public class Estudiante
     {
-        private int codigoEstudiante {  get; set; }
+        private long codigoEstudiante {  get; set; }
         private string ciudadNacimiento {  get; set; }
         private string ciudadResidencia {  get; set; }
         private string ciudadExpedicionDocumento { get; set; }
@@ -12,7 +12,13 @@
         private long identificacion { get; set; }
         private Usuario usuario { get; set; }
 
-        public int CodigoEstudiante
+        // Constructor
+        public Estudiante()
+        {
+            Usuario = new Usuario(); 
+        }
+
+        public long CodigoEstudiante
         {
             get { return codigoEstudiante; }
             set { codigoEstudiante = value; }

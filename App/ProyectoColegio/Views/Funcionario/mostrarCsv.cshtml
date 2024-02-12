@@ -1,7 +1,9 @@
-﻿@model List<Estudiante>  
+﻿@*@model List<Estudiante>  *@
+@*@model IEnumerable<ProyectoColegio.Models.Estudiante>*@
 
 @{
     ViewData["Title"] = "Lista de Usuarios";
+    var Model = ViewBag.ListaEstudiante;
 }
 
 

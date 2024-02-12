@@ -17,6 +17,7 @@ using CsvHelper.Configuration;
 using System.Globalization;
 using DocumentFormat.OpenXml.EMMA;
 using Newtonsoft.Json;
+using Org.BouncyCastle.Asn1.Cms;
 
 namespace ProyectoColegio.Controllers
 {
@@ -92,19 +93,19 @@ namespace ProyectoColegio.Controllers
 
         [HttpGet]
         public IActionResult mostrarCsv()
-        {
-            
+        {           
             List<Estudiante> Estudiantes = new List<Estudiante>();
             Estudiante Student = new Estudiante();
             
             try
             {
-                foreach (var item in mostrarInfoSimat())
+                foreach (Usuario item in mostrarInfoSimat())
                 {
+                    Student.Identificacion = item.Identificacion;
                     Student.Usuario.NombreUsuario = item.NombreUsuario;
                     Student.Usuario.SegundoNombreUsuario = item.SegundoNombreUsuario;
                     Student.Usuario.ApellidoUsuario = item.ApellidoUsuario;
-                    Student.Usuario.SegundoApellidoUsuario = item.SegundoApellidoUsuario;
+                    Student.Usuario.SegundoApellidoUsuario = item.SegundoNombreUsuario;
                     Student.Usuario.Edad = item.Edad;
                     Student.Usuario.TelefonoCelular = item.TelefonoCelular;
                     Student.Usuario.TelefonoFijo = item.TelefonoFijo;
@@ -112,17 +113,10 @@ namespace ProyectoColegio.Controllers
                     Student.Usuario.Direccion = item.Direccion;
                     Student.Usuario.Barrio = item.Barrio;
                     Student.Usuario.FechaNacimiento = item.FechaNacimiento;
-
-                    Dictionary<string, Type> CodigoEs = new Dictionary<string, Type>
+                    foreach (Object obj in ObtenerCodigoEstudiante(item.Identificacion))
                     {
-                            { "CodEstudiante", typeof(int) },
-                    };
-                    List<int> codigoEs = ManejoBaseDatos.ConsultarProcedimientoDinamico<int>("obtenerCodigoEstudiantes", CodigoEs, _contexto.Conexion);
-                    foreach (var item1 in codigoEs)
-                    {
-                        Student.CodigoEstudiante = item1;
-                    }
-
+                        Student.CodigoEstudiante = Convert.ToInt64(obj);
+                    }                    
                     Student.Usuario.TipoSangre = item.TipoSangre;
                     Student.Usuario.TipoDocumento = item.TipoDocumento;
                     Student.Usuario.Discapacidad = item.Discapacidad;
@@ -137,10 +131,12 @@ namespace ProyectoColegio.Controllers
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-            }   
-            
-            return View(Estudiantes);
-            //return View();
+            }
+
+            ViewBag.ListaEstudiante = Estudiantes;
+            Console.WriteLine(Estudiantes);
+            //return View("mostrarCsv", Estudiantes);
+            return View();
         }
 
 
@@ -155,34 +151,32 @@ namespace ProyectoColegio.Controllers
                     {
                         { "documento", dato.DOC },
                         { "nomUsuario", dato.NOMBRE1 },
-                        { "nom2Usuario", dato.NOMBRE2 },
+                        { "nom2Usuario", dato.NOMBRE2 ?? "Sin_Registro"},
                         { "apellidoUsuario", dato.APELLIDO1 },
                         { "apellido2Usuario", dato.APELLIDO2 },
                         { "edad", ManejoBaseDatos.CalcularEdad(dato.FECHA_NACIMIENTO) },
-                        { "telCelular", null },
-                        { "telFijo", null },
-                        { "correoUss", dato.CORREO },
-                        { "direccionUss", null },
-                        { "barrioUss", dato.BARRIO },
+                        { "telCelular", "Sin_Registro" },
+                        { "telFijo", "Sin_Registro" },
+                        { "correoUss", dato.CORREO ?? "Sin_Registro"},
+                        { "direccionUss", "Sin_Registro" },
+                        { "barrioUss", dato.BARRIO ?? "Sin_Registro"},
                         { "fechaNacimientoUss", dato.FECHA_NACIMIENTO },
-                        { "tipoSangre", dato.TIPO_DE_SANGRE },
-                        { "tipoDocumento", dato.TIPODOC },
-                        { "nombreDiscapacidad", dato.DISCAPACIDAD },
-                        { "nombreSisben", dato.SISBEN_IV },
-                        { "nombreGenero", dato.GENERO },
-                        { "nombreEps", dato.EPS },
-                        { "nombreEstrato", dato.ESTRATO },
+                        { "tipoSangre", dato.TIPO_DE_SANGRE ?? "Sin_Registro"},
+                        { "tipoDocumento", dato.TIPODOC ?? "Sin_Registro"},
+                        { "nombreDiscapacidad", dato.DISCAPACIDAD ?? "Sin_Registro"},
+                        { "nombreSisben", dato.SISBEN_IV ?? "Sin_Registro"},
+                        { "nombreGenero", dato.GENERO ?? "Sin_Registro"},
+                        { "nombreEps", dato.EPS ?? "Sin_Registro"},
+                        { "nombreEstrato", dato.ESTRATO ?? "Sin_Registro"},
                         { "codigoStudent", dato.PER_ID },
-                        { "ciudadNacimientoEs", null },
-                        { "ciudadResidenciaEs", null },
-                        { "ciudadExpedicionDocumentoEs", null },
-                        { "paisOrigenEs", dato.PAIS_ORIGEN },
-                        { "asistenciaAcademicaEspecialEs", dato.APOYO_ACADEMICO_ESPECIAL },
-                        { "desplazadoEstadoEs", null },
+                        { "ciudadNacimientoEs", "Sin_Registro" },
+                        { "ciudadResidenciaEs", "Sin_Registro" },
+                        { "ciudadExpedicionDocumentoEs", "Sin_Registro" },
+                        { "paisOrigenEs", dato.PAIS_ORIGEN ?? "Sin_Registro"},
+                        { "asistenciaAcademicaEspecialEs", dato.APOYO_ACADEMICO_ESPECIAL ?? "Sin_Registro"},
+                        { "desplazadoEstadoEs", "Sin_Registro" },
                     };
                     ManejoBaseDatos.EjecutarProcedimientoMultiParametro("registrarEstudiante", parametros, _contexto.Conexion);
-
-                    //variablesGlobales.InfoGlobal.Add(dato);
                 }
             }
             catch (Exception ex)
@@ -194,6 +188,8 @@ namespace ProyectoColegio.Controllers
         
         public List<Usuario> mostrarInfoSimat()
         {
+            List<Usuario> usuarios = new List<Usuario>();
+
             Dictionary<string, Type> atributosEstudiante = new Dictionary<string, Type>
             {
                 { "documento", typeof(long) },
@@ -224,14 +220,82 @@ namespace ProyectoColegio.Controllers
                 //{ "asistenciaAcademicaEspecialEs", typeof(string)  },
                 //{ "desplazadoEstadoEs", typeof(string)  },
             };
-
-            List<Usuario> listadoEstudiantes = ManejoBaseDatos.ConsultarProcedimientoDinamico<Usuario>("MostrarEstudiantes", atributosEstudiante, _contexto.Conexion);           
-            return listadoEstudiantes; 
+                   
+            var resultados = ManejoBaseDatos.ConsultarProcedimientoDinamico("MostrarEstudiantes", atributosEstudiante, _contexto.Conexion);
             
-        }
-         
-        
+            //numero de atributos del diccionario
+            int cantidadAtributos = atributosEstudiante.Count;
+
+            //Esta contando el grupo de registros totales de resultado
+            foreach (List<Object> item in resultados)
+            {
+                Usuario usuario = new Usuario();
+                int cont = 0;
+
+                //i < resultados.Count por que es el conjunto de datos que obtenidos desde la base de datos
+                //cont =+cantidadAtributos "20" por que es el numero de atributos que configura el objeto usuario (numero registrado en el diccionario "atributosEstudiante") 
+                for (int i=0; i < resultados.Count; i++)
+                {
+                    usuario.Identificacion = (Convert.ToInt64(item[cont]));
+                    usuario.NombreUsuario = Convert.ToString(item[cont + 1]);
+                    usuario.SegundoNombreUsuario = Convert.ToString(item[cont + 2]);
+                    usuario.ApellidoUsuario = Convert.ToString(item[cont + 3]);
+                    usuario.SegundoApellidoUsuario = Convert.ToString(item[cont + 4]);
+                    usuario.Edad = Convert.ToInt16(item[cont + 5]);
+                    usuario.TelefonoCelular = Convert.ToString(item[cont + 6]);
+                    usuario.TelefonoFijo = Convert.ToString(item[cont + 7]);
+                    usuario.Correo = Convert.ToString(item[cont + 8]);
+                    usuario.Direccion = Convert.ToString(item[cont + 9]);
+                    usuario.Barrio = Convert.ToString(item[cont + 10]);
+                    usuario.FechaNacimiento = Convert.ToString(item[cont + 11]);
+                    usuario.EstadoUsuario = Convert.ToString(item[cont + 12]);
+                    usuario.TipoSangre = Convert.ToString(item[cont + 13]);
+                    usuario.TipoDocumento = Convert.ToString(item[cont + 14]);
+                    usuario.Discapacidad = Convert.ToString(item[cont + 15]);
+                    usuario.Sisben = Convert.ToString(item[cont + 16]);
+                    usuario.Genero = Convert.ToString(item[cont + 17]);
+                    usuario.EPS = Convert.ToString(item[cont + 18]);
+                    usuario.Estrato = Convert.ToString(item[cont + 19]);
+
+                    usuarios.Add(usuario);
+                    cont+=cantidadAtributos;
+                }
+
+                Console.WriteLine(usuarios);
                 
+            }
+
+            return usuarios; 
+        }
+
+        public List<Object> ObtenerCodigoEstudiante(long identificacion)
+        {
+            /*Dictionary<string, object> parametros = new Dictionary<string, object>
+            {
+                // Definir aqui parametros y valores
+                { "identificacionUs", identificacion },
+                // ...
+            };*/
+
+            Dictionary<string, Type> atributos = new Dictionary<string, Type>
+            {
+                // Definir aqui atributos y tipos esperados
+                { "CodigoEstudiante", typeof(long) },
+                // ...
+            };
+
+            //inecesario la creaccion del diccionario, pero es un ejemplo optimo para identificar el porque del valor
+            int numeroAtributos = atributos.Count;
+                                    
+            // Definir los parámetros necesarios para el procedimiento almacenado
+            string nombreProcedimiento = "obtenerCodigoEstudiantes";
+            string nombreParametro = "identificacionUs";
+
+            // Llamar al método
+            List<Object> resultados = ManejoBaseDatos.EjecutarProcedimientoConParametroYConsulta(nombreProcedimiento, nombreParametro, identificacion, numeroAtributos, _contexto.Conexion);           
+            return resultados;
+        }
+
     }
 
 }

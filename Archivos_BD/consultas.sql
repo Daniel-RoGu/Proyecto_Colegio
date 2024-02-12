@@ -1,4 +1,7 @@
 use bdcolegio;
+GRANT EXECUTE ON PROCEDURE bdColegio.obtenerCodigoEstudiantes TO 'root'@'localhost';
+GRANT EXECUTE ON FUNCTION bdColegio.ObtenerCodigoEstudiante TO 'root'@'localhost';
+FLUSH PRIVILEGES;
 
 call registrarTipoSangre("O+");
 call registrarTipoDocumento("TI");
@@ -40,6 +43,7 @@ select * from genero;
 call mostrarEstudiantes();
 /*select ObtenerNombreTipoDocumento(());*/
 
-call obtenerCodigoEstudiantes('1118377419');
+call obtenerCodigoEstudiantes('1029565035');
 select ObtenerNombreSisben(616);
 select ObtenerNombreTipoDocumento();
+

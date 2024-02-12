@@ -263,10 +263,10 @@ DELIMITER ;
 /*------buscar codigo de Estudiante-----*/
 DELIMITER //
 CREATE FUNCTION ObtenerCodigoEstudiante(identificacion long)
-RETURNS int 
+RETURNS long
 READS SQL DATA
 BEGIN
-    DECLARE resultado int;
+    DECLARE resultado long;
     SET resultado = (SELECT Estudiante.codigoEstudiante FROM Estudiante WHERE Estudiante.Usuario_identificacion = identificacion LIMIT 1);
     RETURN resultado;
 END;
