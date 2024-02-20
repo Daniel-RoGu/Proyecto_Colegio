@@ -513,6 +513,14 @@ namespace ProyectoColegio.Controllers
             return RedirectToAction("CargarCsv", "Funcionario");
         }
 
+        public IActionResult GestionAsignaturas()
+        {
+            ViewBag.Asignaturas = variablesGlobales.Asignaturas(_contexto.Conexion);
+            ViewBag.Docentes = variablesGlobales.Docentes(_contexto.Conexion);
+            ViewBag.GruposGrado = variablesGlobales.GruposGrado(_contexto.Conexion);
+            return View();
+        }
+
         public List<Object> ObtenerCodigoEstudiante(long identificacion)
         {
             /*Dictionary<string, object> parametros = new Dictionary<string, object>
