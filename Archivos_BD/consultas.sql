@@ -131,6 +131,8 @@ call existeAsignaturaGradoGrupo("Español", 1202);
 call existeAsignaturaGradoGrupo("Matemáticas", 1202);
 call existeCompetencia("Lectura critica", "Español");
 call existeCompetencia("Lectura critica", "Matemáticas");
+call existeUsuarioLogin("12357951", "12357951");
+call existeUsuarioLogin("12357951", "12357958");
 
 select count(*) from gradogrupo;                          
 select count(*) from estudiantesgradogrupo;                          
