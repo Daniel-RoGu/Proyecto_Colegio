@@ -45,12 +45,21 @@ namespace ProyectoColegio.Controllers
 
                 rotacionInfoUsuario(existe, model.Password);
                 // En el primer controlador
-                TempData["identificacion"] = model.Password;            
+                TempData["identificacion"] = model.Password;
+                TempData["rol"] = ObtenerRolUsuario(model.Password);
 
                 if (existe)
                 {
                     //Identificar el rol del usuario y redireccionar
-                    return RedirectToAction("CargarCsv", "Funcionario");
+                    if (ObtenerRolUsuario(model.Password) == "Docente")
+                    {
+                        return RedirectToAction("Principal", "Docente");
+                    }
+                    else
+                    {
+                        return RedirectToAction("CargarCsv", "Funcionario");
+                    }
+ 
                 }
                 else
                 {
@@ -69,6 +78,23 @@ namespace ProyectoColegio.Controllers
             ViewBag.estado = estado;
             TempData["estado"] = estado;
             //ViewBag.identificacion = identificacion;
+        }
+
+        public string ObtenerRolUsuario(string identificacion)
+        {
+            string rol = "";
+
+            // Definir los parámetros necesarios para el procedimiento almacenado
+            string nombreProcedimiento = "obtenerRolUsuario";
+            string nombreParametro = "identificacion";
+
+            // Llamar al método
+            List<Object> resultados = ManejoBaseDatos.EjecutarProcedimientoConParametroYConsulta(nombreProcedimiento, nombreParametro, identificacion, 1, _contexto.Conexion);
+            foreach (Object obj in resultados)
+            {
+                rol = Convert.ToString(obj);
+            }
+            return rol;
         }
 
     }

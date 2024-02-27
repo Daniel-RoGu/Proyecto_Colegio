@@ -133,35 +133,6 @@ namespace ProyectoColegio.Data
         }
 
        
-        public static int CalcularEdad(string fechaNacimiento)
-        {
-            DateTime fechaNac;
-
-            // Definir varios formatos de fecha posibles
-            string[] formatosFecha = { "dd/MM/yyyy", "d/MM/yyyy", "dd/M/yyyy", "d/M/yyyy" };
-
-            // Intentar convertir la fecha utilizando los formatos especificados
-            if (DateTime.TryParseExact(fechaNacimiento, formatosFecha, null, System.Globalization.DateTimeStyles.None, out fechaNac))
-            {
-                DateTime fechaActual = DateTime.Now;
-                int edad = fechaActual.Year - fechaNac.Year;
-
-                // Verificar si aún no ha cumplido años en el año actual
-                if (fechaNac > fechaActual.AddYears(-edad))
-                {
-                    edad--;
-                }
-
-                return edad;
-            }
-            else
-            {
-                // Manejar el caso en que la fecha de nacimiento no sea válida
-                throw new ArgumentException("Formato de fecha de nacimiento no válido. Debe ser 'dd/MM/yyyy' o 'd/MM/yyyy'.");
-            }
-        }
-
-
         public static List<Object> EjecutarProcedimientoConParametroYConsulta(string nombreProcedimiento, string nombreParametro, object valorParametro, int numeroAtributos, string cadenaConexion)
         {
             List<Object> listaObjetos = new List<Object>();
@@ -194,6 +165,53 @@ namespace ProyectoColegio.Data
             return listaObjetos;
         }
 
+        //public static List<Object> EjecutarProcedimientoConMultiParametroYConsulta(string nombreProcedimiento, Dictionary<string, object> parametros, int numeroAtributos, string cadenaConexion)
+        //{
+        //    List<Object> listaObjetos = new List<Object>();
+
+        //    try
+        //    {
+        //        MySqlConnection conexion = new MySqlConnection(cadenaConexion);
+        //        conexion.Open();
+
+        //        // Construye la consulta con los parámetros
+        //        string sqlConsulta = $"CALL bdColegio.{nombreProcedimiento}(";
+
+        //        foreach (var parametro in parametros)
+        //        {
+        //            sqlConsulta += $"@{parametro.Key}, ";
+        //        }
+
+        //        sqlConsulta = sqlConsulta.TrimEnd(' ', ',') + ")";
+
+        //        MySqlCommand conexionCommand = new MySqlCommand(sqlConsulta, conexion);
+
+        //        // Agrega los parámetros al comando
+        //        foreach (var parametro in parametros)
+        //        {
+        //            conexionCommand.Parameters.AddWithValue($"@{parametro.Key}", parametro.Value);
+        //        }
+
+        //        MySqlDataReader mySqlDataReader = conexionCommand.ExecuteReader();
+
+        //        while (mySqlDataReader.Read())
+        //        {
+        //            for (int i = 0; i < numeroAtributos; i++)
+        //            {
+        //                listaObjetos.Add(mySqlDataReader.GetString(i));
+        //            }
+        //        }
+
+        //        conexion.Close();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Console.WriteLine($"Error al ejecutar el procedimiento almacenado: {ex.Message}");
+        //    }
+
+        //    return listaObjetos;
+        //}
+        
         public static List<Object> EjecutarProcedimientoConMultiParametroYConsulta(string nombreProcedimiento, Dictionary<string, object> parametros, int numeroAtributos, string cadenaConexion)
         {
             List<Object> listaObjetos = new List<Object>();
@@ -225,9 +243,19 @@ namespace ProyectoColegio.Data
 
                 while (mySqlDataReader.Read())
                 {
+
+                    List<Object> listaDatos = new List<Object>();
+                        
                     for (int i = 0; i < numeroAtributos; i++)
                     {
-                        listaObjetos.Add(mySqlDataReader.GetString(i));
+                        listaDatos.Add(mySqlDataReader.GetString(i));
+                    }
+
+                    listaObjetos.Add(listaDatos);
+
+                    if (numeroAtributos == 1)
+                    {
+                        return listaObjetos = listaDatos;
                     }
                 }
 
@@ -242,7 +270,36 @@ namespace ProyectoColegio.Data
         }
 
 
+        public static int CalcularEdad(string fechaNacimiento)
+        {
+            DateTime fechaNac;
+
+            // Definir varios formatos de fecha posibles
+            string[] formatosFecha = { "dd/MM/yyyy", "d/MM/yyyy", "dd/M/yyyy", "d/M/yyyy" };
+
+            // Intentar convertir la fecha utilizando los formatos especificados
+            if (DateTime.TryParseExact(fechaNacimiento, formatosFecha, null, System.Globalization.DateTimeStyles.None, out fechaNac))
+            {
+                DateTime fechaActual = DateTime.Now;
+                int edad = fechaActual.Year - fechaNac.Year;
+
+                // Verificar si aún no ha cumplido años en el año actual
+                if (fechaNac > fechaActual.AddYears(-edad))
+                {
+                    edad--;
+                }
+
+                return edad;
+            }
+            else
+            {
+                // Manejar el caso en que la fecha de nacimiento no sea válida
+                throw new ArgumentException("Formato de fecha de nacimiento no válido. Debe ser 'dd/MM/yyyy' o 'd/MM/yyyy'.");
+            }
+        }
+
     }
+
 
     public class Dato
     {

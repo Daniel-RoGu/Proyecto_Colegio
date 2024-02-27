@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "3onwsBEl0MTqBIkejqEcaAIJlV9wTLIMy0tE/NDoci4=",
+  "Hash": "leoLxa6sopUKM5kJDWDQanIV7PGeeOf31rlAILnmSZs=",
   "Source": "ProyectoColegio",
   "BasePath": "_content/ProyectoColegio",
   "Mode": "Default",
@@ -170,6 +170,23 @@
       "OriginalItemSpec": "wwwroot\\favicon.ico"
     },
     {
+      "Identity": "C:\\Users\\Daniel\\Desktop\\TrabajoColegio\\App\\ProyectoColegio\\wwwroot\\js\\FlujoDeDatos.js",
+      "SourceId": "ProyectoColegio",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Daniel\\Desktop\\TrabajoColegio\\App\\ProyectoColegio\\wwwroot\\",
+      "BasePath": "_content/ProyectoColegio",
+      "RelativePath": "js/FlujoDeDatos.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\FlujoDeDatos.js"
+    },
+    {
       "Identity": "C:\\Users\\Daniel\\Desktop\\TrabajoColegio\\App\\ProyectoColegio\\wwwroot\\js\\site.js",
       "SourceId": "ProyectoColegio",
       "SourceType": "Discovered",
@@ -202,23 +219,6 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\TratamientoCsv.js"
-    },
-    {
-      "Identity": "C:\\Users\\Daniel\\Desktop\\TrabajoColegio\\App\\ProyectoColegio\\wwwroot\\js\\ValidacionLogin.js",
-      "SourceId": "ProyectoColegio",
-      "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Daniel\\Desktop\\TrabajoColegio\\App\\ProyectoColegio\\wwwroot\\",
-      "BasePath": "_content/ProyectoColegio",
-      "RelativePath": "js/ValidacionLogin.js",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\js\\ValidacionLogin.js"
     },
     {
       "Identity": "C:\\Users\\Daniel\\Desktop\\TrabajoColegio\\App\\ProyectoColegio\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css",

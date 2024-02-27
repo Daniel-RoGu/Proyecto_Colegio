@@ -19,6 +19,7 @@ using DocumentFormat.OpenXml.EMMA;
 using Newtonsoft.Json;
 using Org.BouncyCastle.Asn1.Cms;
 using DocumentFormat.OpenXml.Wordprocessing;
+using Microsoft.Office.Interop.Excel;
 
 namespace ProyectoColegio.Controllers
 {
@@ -42,6 +43,8 @@ namespace ProyectoColegio.Controllers
             // En el segundo controlador
             var identificacion = TempData["identificacion"];
             ViewBag.idetificacionUs = identificacion;
+            var rol = TempData["rol"];
+            ViewBag.rol = rol;
 
             //muestra el contenido desde base de datos
             mostrarCsv();
@@ -185,12 +188,13 @@ namespace ProyectoColegio.Controllers
                     Datos.Add(Dato);
                    
                 }
+
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }
-
+                                    
             ViewBag.ListaEstudiante = Datos;
             //return View("CargarCsv", "Funcionario");
         }
@@ -507,8 +511,7 @@ namespace ProyectoColegio.Controllers
                      };
 
                     ManejoBaseDatos.EjecutarProcedimientoMultiParametro("registrarDocente", parametros, _contexto.Conexion);
-                    VerificacionRegistrosDocenteGrado(docente.Usuario.Identificacion, docente.NombreSede);
-
+                    
                 }
             }
             catch (Exception ex)
@@ -525,6 +528,71 @@ namespace ProyectoColegio.Controllers
             ViewBag.Docentes = variablesGlobales.Docentes(_contexto.Conexion);
             ViewBag.GruposGrado = variablesGlobales.GruposGrado(_contexto.Conexion);
             return View();
+        }
+
+        //El metodo se ejecutando desde una peticion AJAX llamada desde la vista en el script ValidacionLogin.js
+        [HttpPost]
+        public IActionResult GestionAsignaturas(string asignaturaSeleccionada, string docenteSeleccionado, string grupoSeleccionado)
+        {
+
+            string vista = "GestionAsignaturas";
+
+            if (!string.IsNullOrEmpty(asignaturaSeleccionada) && !string.IsNullOrEmpty(docenteSeleccionado) && !string.IsNullOrEmpty(grupoSeleccionado))
+            {
+                ViewBag.AsignaturaSeleccionada = asignaturaSeleccionada;
+                ViewBag.DocenteSeleccionado = docenteSeleccionado;
+                ViewBag.GrupoSeleccionado = grupoSeleccionado;
+
+                if (consultasValidacionesBD.ExisteDocenteAsignaturaGradoGrupo(docenteSeleccionado, asignaturaSeleccionada, grupoSeleccionado, _contexto.Conexion))
+                {
+                    //No se hace nada porque el docente ya esta asignado
+                }
+                else
+                {
+                    VerificacionRegistrosDocenteGrado(docenteSeleccionado, grupoSeleccionado);
+                    VerificacionRegistrosDocenteAsignatura(docenteSeleccionado, asignaturaSeleccionada);
+                    VerificacionRegistrosAsignaturaGradoGrupo(asignaturaSeleccionada, grupoSeleccionado);
+
+                    //return RedirectToAction("CargarCsv", "Funcionario");
+                    vista = "CargarCsv";
+                }
+
+            }
+
+            //no redirecciona a la vista indicada por que el boton que se relaciona al metodo no lo esta ejecutando y esta redireccionando a otra vista
+            return RedirectToAction(vista, "Funcionario");
+
+        }
+
+        [HttpPost]
+        public IActionResult gestionCompetencias(string nombreCompetencia, string objetivoCompetencia, string detalleComepetencia, string asignaturaSeleccionada)
+        {
+            if (consultasValidacionesBD.ExisteCompetenciaAsignatura(asignaturaSeleccionada, nombreCompetencia, _contexto.Conexion))
+            {
+                //No se hace nada porque el docente ya esta asignado
+            }
+            else
+            {
+                try
+                {
+                    Dictionary<string, object> parametros = new Dictionary<string, object>
+                    {                        
+                        { "nomCompetencia", nombreCompetencia },
+                        { "objCompetencia", objetivoCompetencia },
+                        { "competenciaDetalle", detalleComepetencia },
+                        { "nomAsignatura", asignaturaSeleccionada },
+                    };
+
+                    ManejoBaseDatos.EjecutarProcedimientoMultiParametro("registrarCompetenciasAsignatura", parametros, _contexto.Conexion);
+
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Error al ejecutar el script: {ex.Message}");
+                }
+            }
+
+            return RedirectToAction("GestionAsignaturas", "Funcionario");
         }
 
         public List<Object> ObtenerCodigoEstudiante(long identificacion)
@@ -730,9 +798,9 @@ namespace ProyectoColegio.Controllers
         }
 
          
-        public void VerificacionRegistrosDocenteGrado(long identificacionDocente, string nomGrado)
+        public void VerificacionRegistrosDocenteGrado(string nombreDocente, string nomGrupo)
         {
-            if (identificacionDocente == null || nomGrado == "" || consultasValidacionesBD.ExisteDocenteGrado(identificacionDocente, nomGrado, _contexto.Conexion) == true)
+            if (nombreDocente == "" || nomGrupo == "" || consultasValidacionesBD.ExisteDocenteGrado(nombreDocente, nomGrupo, _contexto.Conexion) == true)
             {
                 return;
             }
@@ -742,11 +810,64 @@ namespace ProyectoColegio.Controllers
                 {
                     Dictionary<string, object> parametros = new Dictionary<string, object>
                     {                        
-                        { "identificacionDocente", identificacionDocente },
-                        { "nomGrado", nomGrado },
+                        { "nombreDocente", nombreDocente },
+                        { "nomGrupo", nomGrupo },
                     };
 
                     ManejoBaseDatos.EjecutarProcedimientoMultiParametro("registrarDocenteGrado", parametros, _contexto.Conexion);
+
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Error al ejecutar el script: {ex.Message}");
+                }
+            }
+        }
+           
+        public void VerificacionRegistrosDocenteAsignatura(string nombreDocente, string asignatura)
+        {
+            if (nombreDocente == "" || asignatura == "" || consultasValidacionesBD.ExisteDocenteAsignatura(nombreDocente, asignatura, _contexto.Conexion) == true)
+            {
+                return;
+            }
+            else
+            {
+                try
+                {
+                    Dictionary<string, object> parametros = new Dictionary<string, object>
+                    {                        
+                        { "nombreDocente", nombreDocente },
+                        { "asignatura", asignatura },
+                    };
+
+                    ManejoBaseDatos.EjecutarProcedimientoMultiParametro("registrarDocenteAsignatura", parametros, _contexto.Conexion);
+
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Error al ejecutar el script: {ex.Message}");
+                }
+            }
+        }
+
+           
+        public void VerificacionRegistrosAsignaturaGradoGrupo(string nomAsignatura, string grupoGrado)
+        {
+            if (nomAsignatura == "" || grupoGrado == "" || consultasValidacionesBD.ExisteAsignaturaGradoGrupo(nomAsignatura, grupoGrado, _contexto.Conexion) == true)
+            {
+                return;
+            }
+            else
+            {
+                try
+                {
+                    Dictionary<string, object> parametros = new Dictionary<string, object>
+                    {                        
+                        { "nomAsignatura", nomAsignatura },
+                        { "grupoGrado", grupoGrado },
+                    };
+
+                    ManejoBaseDatos.EjecutarProcedimientoMultiParametro("registrarAsignaturaGradoGrupo", parametros, _contexto.Conexion);
 
                 }
                 catch (Exception ex)

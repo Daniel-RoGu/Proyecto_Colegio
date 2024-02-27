@@ -251,112 +251,6 @@ begin
 	select e.nombreEstrato as Estrato from Estrato as e;
 END$$
 
-/*--------------------------Validar existencia Sede-------------------------*/
-
-DELIMITER $$
-DROP PROCEDURE IF EXISTS `existeSede` $$
-create procedure `existeSede`(nomSede varchar(400)) 
-begin
-    SELECT COUNT(*) > 0 AS existe_valor
-	FROM Sede as s
-	WHERE s.nombreSede = nomSede;
-END$$
-
-/*--------------------------Validar existencia Grado-------------------------*/
-
-DELIMITER $$
-DROP PROCEDURE IF EXISTS `existeGrado` $$
-create procedure `existeGrado`(nomGrado varchar(400)) 
-begin
-    SELECT COUNT(*) > 0 AS existe_valor
-	FROM Grados as g
-	WHERE g.nombreGrado = nomGrado;
-END$$
-
-/*--------------------------Validar existencia Grupo Grado-------------------------*/
-
-DELIMITER $$
-DROP PROCEDURE IF EXISTS `existeGrupoGrado` $$
-create procedure `existeGrupoGrado`(nomGradoGrupo varchar(400)) 
-begin
-    SELECT COUNT(*) > 0 AS existe_valor
-	FROM GradoGrupo as gg
-	WHERE gg.grupoGrado = nomGradoGrupo;
-END$$
-
-
-/*--------------------------Validar existencia Sede Grado-------------------------*/
-
-DELIMITER $$
-DROP PROCEDURE IF EXISTS `existeSedeGrado` $$
-create procedure `existeSedeGrado`(nomSede varchar(400), nomGrado varchar(400)) 
-begin
-    SELECT COUNT(*) > 0 AS existe_valor
-	FROM SedeGrados as sg
-	WHERE sg.fkidSede = (select ObtenerIdSede(nomSede)) and sg.fkidGrado = (select ObtenerIdGrado(nomGrado));
-END$$
-
-/*--------------------------Validar existencia Estudiante Grupo Grado-------------------------*/
-
-DELIMITER $$
-DROP PROCEDURE IF EXISTS `existeEstudianteGrupoGrado` $$
-create procedure `existeEstudianteGrupoGrado`(identificacionEst varchar(400), grupoGrado varchar(400)) 
-begin
-    SELECT COUNT(*) > 0 AS existe_valor
-	FROM EstudiantesGradoGrupo as egg
-	WHERE egg.fkidEstudiante = (select ObtenerIdEstudiante(CAST(identificacionEst AS SIGNED))) and egg.fkidGradoGrupo = (select ObtenerIdGradoGrupo(grupoGrado));
-END$$
-
-
-/*--------------------------Validar existencia Matricula-------------------------*/
-
-DELIMITER $$
-DROP PROCEDURE IF EXISTS `existeMatricula` $$
-create procedure `existeMatricula`(identificacionEst varchar(400), identificacionFuncionario varchar(400), nomSede varchar(400)) 
-begin
-    SELECT COUNT(*) > 0 AS existe_valor
-	FROM Matricula as m
-	WHERE m.fkidEstudiante = (select ObtenerIdEstudiante(CAST(identificacionEst AS SIGNED))) and 
-		  m.fkidFuncionario = (select ObtenerIdFuncionario((SELECT CAST(identificacionFuncionario AS SIGNED)))) and
-          m.fkidSede = (select ObtenerIdSede(nomSede));
-END$$
-
-/*--------------------------Validar existencia Modalidad-------------------------*/
-
-DELIMITER $$
-DROP PROCEDURE IF EXISTS `existeModalidad` $$
-create procedure `existeModalidad`(nomModalidad varchar(400)) 
-begin
-    SELECT COUNT(*) > 0 AS existe_valor
-	FROM modalida_educativa as m
-	WHERE m.nombreModalidad = nomModalidad;
-END$$
-
-/*--------------------------Validar existencia Competencias-------------------------*/
-
-DELIMITER $$
-DROP PROCEDURE IF EXISTS `existeCompetencia` $$
-create procedure `existeCompetencia`(nomCompetencia varchar(400), nomAsignatura varchar(400)) 
-begin
-    SELECT COUNT(*) > 0 AS existe_valor
-	FROM Competencias as c
-	WHERE c.nombreCompetencia = nomCompetencia
-		  and c.fkidAsignatura = (select ObtenerIdAsignatura(nomAsignatura));
-END$$
-
-/*--------------------------Validar existencia Asignatura en Grupo Grado-------------------------*/
-
-DELIMITER $$
-DROP PROCEDURE IF EXISTS `existeAsignaturaGradoGrupo` $$
-create procedure `existeAsignaturaGradoGrupo`(nomAsignatura varchar(400), grupoGrado varchar(400)) 
-begin
-    SELECT COUNT(*) > 0 AS existe_valor
-	FROM asignaturaGradoGrupo as agg
-	WHERE agg.fkidGradoGrupo = (select ObtenerIdGradoGrupo(grupoGrado))
-		  and agg.fkidAsignatura = (select ObtenerIdAsignatura(nomAsignatura));
-END$$
-
-
 /*--------------------------Obtener Asignaturas-------------------------*/
 DELIMITER $$
 DROP PROCEDURE IF EXISTS `obtenerAsignaturas` $$
@@ -374,5 +268,8 @@ create procedure `obtenerGruposGrado`(
 begin
 	select gg.grupoGrado as Grupo from GradoGrupo as gg;
 END$$
+
+
+
 
 

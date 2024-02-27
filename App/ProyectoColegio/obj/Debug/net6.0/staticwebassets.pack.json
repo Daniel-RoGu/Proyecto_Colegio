@@ -33,12 +33,12 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
-      "Id": "C:\\Users\\Daniel\\Desktop\\TrabajoColegio\\App\\ProyectoColegio\\wwwroot\\js\\TratamientoCsv.js",
-      "PackagePath": "staticwebassets\\js\\TratamientoCsv.js"
+      "Id": "C:\\Users\\Daniel\\Desktop\\TrabajoColegio\\App\\ProyectoColegio\\wwwroot\\js\\FlujoDeDatos.js",
+      "PackagePath": "staticwebassets\\js\\FlujoDeDatos.js"
     },
     {
-      "Id": "C:\\Users\\Daniel\\Desktop\\TrabajoColegio\\App\\ProyectoColegio\\wwwroot\\js\\ValidacionLogin.js",
-      "PackagePath": "staticwebassets\\js\\ValidacionLogin.js"
+      "Id": "C:\\Users\\Daniel\\Desktop\\TrabajoColegio\\App\\ProyectoColegio\\wwwroot\\js\\TratamientoCsv.js",
+      "PackagePath": "staticwebassets\\js\\TratamientoCsv.js"
     },
     {
       "Id": "C:\\Users\\Daniel\\Desktop\\TrabajoColegio\\App\\ProyectoColegio\\wwwroot\\js\\site.js",
