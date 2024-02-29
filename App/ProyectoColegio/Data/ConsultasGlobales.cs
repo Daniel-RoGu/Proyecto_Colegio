@@ -5,7 +5,7 @@ namespace ProyectoColegio.Data
     public class ConsultasGlobales
     {
 
-        public List<Usuario> mostrarInfoSimat(string Conexion, string nomGrupo)
+        public List<Usuario> mostrarInfoSimat(string Conexion, string nomSede, string nomGrupo)
         {           
             int parametrosEstudiantesGrupo = 0;
             //List<object> resultados = new List<object>();
@@ -37,45 +37,31 @@ namespace ProyectoColegio.Data
             parametrosEstudiantesGrupo = atributosEstudiante.Count();
             var resultados = new List<object>();
 
-            if (string.IsNullOrEmpty(nomGrupo))
+            if (string.IsNullOrEmpty(nomSede))
             {
                 resultados = ManejoBaseDatos.ConsultarProcedimientoDinamico("MostrarEstudiantes", atributosEstudiante, Conexion);
             }
-            else
-            { 
-                
+            else if (string.IsNullOrEmpty(nomGrupo))
+            {                 
                 Dictionary<string, object> parametros = new Dictionary<string, object>
                 {
+                    { "nomSede", nomSede },
+                };
+
+                resultados = ManejoBaseDatos.EjecutarProcedimientoConMultiParametroYConsulta("obtenerEstudiantesSede", parametros, parametrosEstudiantesGrupo, Conexion);                              
+            }
+            else
+            {
+                Dictionary<string, object> parametros = new Dictionary<string, object>
+                {
+                    { "nomSede", nomSede },
                     { "nomGrupo", nomGrupo },
                 };
 
-                resultados = ManejoBaseDatos.EjecutarProcedimientoConMultiParametroYConsulta("obtenerEstudiantesGrupo", parametros, parametrosEstudiantesGrupo, Conexion);
-                
-                //var resultadosObjeto = new List<string>();
-                //Console.WriteLine(resultadosGrupo);
-                //if (resultadosGrupo.Count > parametrosEstudiantesGrupo)
-                //{
-                //    for(int i=0; i<=resultadosGrupo.Count; i++)
-                //    {
-                //        if (i > 0 && i % parametrosEstudiantesGrupo == 0)
-                //        {
-                //            resultados.Add(resultadosObjeto);
-                //            resultadosObjeto.Clear();                           
-                //        }else if (i < resultadosGrupo.Count)
-                //        {
-                //            resultadosObjeto.Add(Convert.ToString(resultadosGrupo[i]));
-                //        }
-                        
-                //    }
-                //}
-                //else
-                //{
-                //    resultados.Add(resultadosGrupo);
-                //}               
-                //usuarios.Clear();
-                Console.WriteLine(resultados);
+                resultados = ManejoBaseDatos.EjecutarProcedimientoConMultiParametroYConsulta("obtenerEstudiantesSedeGrupo", parametros, parametrosEstudiantesGrupo, Conexion);
             }
-           
+
+            Console.WriteLine(resultados);
             return OrganizarResultados(resultados);
         }
 
@@ -116,14 +102,14 @@ namespace ProyectoColegio.Data
 
         }
 
-        public List<Object> mostrarCsv(string Conexion, string nomGrupo)
+        public List<Object> mostrarCsv(string Conexion, string nomSede, string nomGrupo)
         {
             List<Estudiante> Estudiantes = new List<Estudiante>();
             List<Object> Datos = new List<Object>();
 
             try
             {
-                foreach (Usuario item in mostrarInfoSimat(Conexion, nomGrupo))
+                foreach (Usuario item in mostrarInfoSimat(Conexion, nomSede,nomGrupo))
                 {
                     List<String> Dato = new List<String>();
 
@@ -131,7 +117,7 @@ namespace ProyectoColegio.Data
                     Dato.Add(item.NombreUsuario);
                     Dato.Add(item.SegundoNombreUsuario);
                     Dato.Add(item.ApellidoUsuario);
-                    Dato.Add(item.SegundoNombreUsuario);
+                    Dato.Add(item.SegundoApellidoUsuario);
                     Dato.Add(Convert.ToString(item.Edad));
                     Dato.Add(item.TelefonoCelular);
                     Dato.Add(item.TelefonoFijo);

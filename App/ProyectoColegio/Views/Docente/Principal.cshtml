@@ -1,6 +1,7 @@
 ﻿@{
     var idUs = ViewBag.idetificacionUs;
     var asignaturas = ViewBag.Asignaturas;
+    var sedes = ViewBag.Sedes;
     var grupos = ViewBag.GruposGrado;
 }
 <!DOCTYPE html>
@@ -42,10 +43,13 @@
                     <div class="form-group">
                         <select class="form-select" name="Grupos" id="grupoSelectDocente" aria-label="Default select example" onchange="habilitarBoton()">
                             <option value="">Grupos</option>
-                                    @foreach (var item in grupos)
-                                    {
+                            @if (grupos != null)
+                            {
+                                @foreach (var item in grupos)
+                                {
                                     <option value="@item">@item</option>
-                                    }
+                                }
+                            }
                         </select>
                     </div>
                 </td>
@@ -90,19 +94,10 @@
                 <th>Opciones</th>
             </tr>
 
-            @if (ViewBag.ListaEstudiante != null)
+            @if (ViewBag.ListaEstudianteGrupo != null)
             {
                 List<Object> Datos = new List<Object>();
-
-                if (ViewBag.ListaEstudianteGrupo != null)
-                {
-                    Datos = ViewBag.ListaEstudianteGrupo;
-                }
-                else
-                {
-                    Datos = ViewBag.ListaEstudiante;
-                }
-                
+                Datos = ViewBag.ListaEstudianteGrupo;               
 
                 foreach (List<String> usuario in Datos)
                 {                    
@@ -137,7 +132,7 @@
             else
             {
                 <div id="mensajeNoEstudiantes" class="alert alert-warning">
-                    Aún no ha presionado el botón "Mostrar Estudiantes" para visualizar el contenido del CSV.
+                    Debe seleccionar un grupo para poder visualizar los estudiantes
                 </div>
             }
 

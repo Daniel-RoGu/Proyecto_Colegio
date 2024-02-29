@@ -46,6 +46,7 @@ namespace ProyectoColegio.Controllers
                 rotacionInfoUsuario(existe, model.Password);
                 // En el primer controlador
                 TempData["identificacion"] = model.Password;
+                DatosCompartidos.MiDato = model.Password;
                 TempData["rol"] = ObtenerRolUsuario(model.Password);
 
                 if (existe)
@@ -55,9 +56,14 @@ namespace ProyectoColegio.Controllers
                     {
                         return RedirectToAction("Principal", "Docente");
                     }
-                    else
+                    else if(ObtenerRolUsuario(model.Password) == "Coordinador")
                     {
                         return RedirectToAction("CargarCsv", "Funcionario");
+                    }
+                    else
+                    {
+                        //Vista principal de estudiante o considerar si es necesario manejar otro usuario
+                        return RedirectToAction("Inicio", "Login");
                     }
  
                 }

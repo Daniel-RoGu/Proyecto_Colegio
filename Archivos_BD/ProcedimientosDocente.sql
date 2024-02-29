@@ -119,3 +119,14 @@ begin
     
 END$$
 
+/*--------------------------Obtener Sede Docente-------------------------*/
+DELIMITER $$
+DROP PROCEDURE IF EXISTS `obtenerSedeDocente` $$
+CREATE PROCEDURE `obtenerSedeDocente`(identificacion varchar(400)) 
+BEGIN
+    SELECT s.nombreSede AS Sede
+    FROM Docente 
+    INNER JOIN Sede as s ON Docente.fkidSede = s.idSede
+    where Docente.idDocente = (select ObtenerIdDocente(CAST(identificacion AS SIGNED)));
+END$$
+
