@@ -9,21 +9,23 @@
     <script src="~/js/VistaEstudiante.js" defer></script>
     <script>
         $(document).ready(function () {
+            // Función para mostrar la tabla
+            function mostrarTabla() {
+                $("#contenidoEstudiantes").show();
+                $("#mensajeNoEstudiantes").hide(); // Oculta el mensaje si está visible
+            }
+
             // Oculta la tabla inicialmente
             $("#contenidoEstudiantes").hide();
 
             // Maneja el clic en el botón
             $("#mostrarEstudiantes").click(function () {
-                // Muestra la tabla al hacer clic en el botón
-                $("#contenidoEstudiantes").show();
-                $("#mensajeNoEstudiantes").hide(); // Oculta el mensaje si está visible
+                mostrarTabla();
             });
             
             // Maneja el clic en el botón
             $("#btnOpcionFiltrar").click(function () {
-                // Muestra la tabla al hacer clic en el botón
-                $("#contenidoEstudiantes").show();
-                $("#mensajeNoEstudiantes").hide(); // Oculta el mensaje si está visible
+                mostrarTabla();
             });
         });
     </script>
@@ -32,15 +34,22 @@
     @{
         var sedes = ViewBag.Sedes;
         var grupos = ViewBag.GruposGrado;
+        var gradoEst = ViewBag.GradoEst;
+        var grupoEst = ViewBag.GrupoEst;
+        var identificacionEst = ViewBag.IdentificacionEstudiante;
     }
     <div class="contenedor-principal">
         <div class="contenedor-botones">
             <button id="mostrarEstudiantes" class="boton-principal">Mostrar Estudiantes</button>
             <button id="buscar-estudiante" class="boton-principal">Buscar Estudiante</button>
+            <button id="gestion-periodo" onclick="window.location.href='/Funcionario/GestionPeriodoAcademico'" class="boton-principal">Gestion Periodo Academico</button>
         </div>
         <div class="contenedor-buscar-estudiante">
-            <input type="buscar" class="buscar-numero" placeholder="Digite El Número De Identificación">
-            <button id="boton-buscar-dos" class="boton-buscar">Buscar</button>
+            @using (Html.BeginForm("buscarEstudiante", "Funcionario", FormMethod.Post))
+            {
+                <input type="buscar" class="buscar-numero" name="identificacion" placeholder="Digite El Número De Identificación">
+                <button id="boton-buscar-dos" class="boton-buscar" type="submit">Buscar</button>
+            }
         </div>
         <div class="contenedor-filtrar">
             <@using (Html.BeginForm("obtenerEstudiantesGrupoSede", "Funcionario", FormMethod.Post))
@@ -79,7 +88,27 @@
             }
         </div>
         <div class="contenedor-tabla">
-            <h1>Lista de Estudiantes</h1>
+
+            @if (ViewBag.SedeSeleccionada != null)
+            {
+                var sede = ViewBag.SedeSeleccionada;              
+
+                if (ViewBag.GrupoSeleccionado != null)
+                {
+                    var grupo = ViewBag.GrupoSeleccionado;
+                    <h1>Lista de Estudiantes sede: @sede grupo: @grupo</h1>
+                }
+                else
+                {
+                    <h1>Lista de Estudiantes sede: @sede</h1>
+                }
+                
+            }
+            else
+            {
+                <h1>Lista de Estudiantes</h1>
+            }
+            
             <table id="tabla-estudiantes">
                 <tr>
                     <th>Documento</th>
@@ -95,7 +124,16 @@
                     <th>EPS</th>
                     <th>Estrato</th>
                     <th>Codigo Estudiante</th>
-                    <th>Opciones</th>
+                    <th>Foto</th>
+                    @if(gradoEst != null && grupoEst != null && identificacionEst != null){
+                        <th>Grado</th>
+                        <th>Grupo</th>
+                    }
+                    else
+                    {
+                        <th>Opciones</th>
+                    }
+                    
                 </tr>
                 @if (ViewBag.ListaEstudiante != null)
                 {
@@ -106,29 +144,85 @@
                         Datos = ViewBag.ListaEstudianteGrupo;
                     }
 
-                    foreach (List<String> usuario in Datos)
+                    if (identificacionEst != null)
                     {
-                        <tr>
-                            <td>@usuario[0]</td>
-                            <td>@usuario[1]</td>
-                            <td>@usuario[2]</td>
-                            <td>@usuario[3]</td>
-                            <td>@usuario[4]</td>                          
-                            <td>@usuario[12]</td>
-                            <td>@usuario[13]</td>
-                            <td>@usuario[14]</td>
-                            <td>@usuario[15]</td>
-                            <td>@usuario[16]</td>
-                            <td>@usuario[17]</td>
-                            <td>@usuario[18]</td>
-                            <td>@usuario[19]</td>
-                            <td>
-                                @Html.ActionLink("registrarFamiliar", "registrarFamiliar", new { identificacion = long.Parse(usuario[0]) }, new { @class = "btn btn-success" })
-                                @Html.ActionLink("registrarObservacion", "registrarObservacion", new { identificacionEst = long.Parse(usuario[0]) }, new { @class = "btn btn-warning" })
-                                @*<button class="btn btn-warning" onclick="window.location.href='/Funcionario/registrarObservacion'">Registrar Observacion</button>*@
-                            </td>
-                        </tr>
+                        foreach (List<String> usuario in Datos)
+                        {
+                            @if (identificacionEst == usuario[0])
+                            {
+                                @if (gradoEst != null && grupoEst != null)
+                                {
+                                    <tr>
+                                        <td>@usuario[0]</td>
+                                        <td>@usuario[1]</td>
+                                        <td>@usuario[2]</td>
+                                        <td>@usuario[3]</td>
+                                        <td>@usuario[4]</td>
+                                        <td>@usuario[12]</td>
+                                        <td>@usuario[13]</td>
+                                        <td>@usuario[14]</td>
+                                        <td>@usuario[15]</td>
+                                        <td>@usuario[16]</td>
+                                        <td>@usuario[17]</td>
+                                        <td>@usuario[18]</td>
+                                        <td>@usuario[19]</td>
+                                        <td>
+                                            @using (Html.BeginForm("SubirImagen", "Controlador", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                                            {
+                                                <div class="form-group">
+                                                    <label for="imagen">Seleccione una imagen:</label>
+                                                    <input type="file" class="form-control-file" id="imagen" name="imagen" accept="image/*">
+                                                </div>
+
+                                                <button type="submit" class="btn btn-primary">Subir Imagen</button>
+                                            }
+                                        </td>
+                                        <td>@gradoEst</td>
+                                        <td>@grupoEst</td>                                        
+                                    </tr>
+                                }
+                            }
+                        }
                     }
+                    else
+                    {
+                        foreach (List<String> usuario in Datos)
+                        {
+                            <tr>
+                                <td>@usuario[0]</td>
+                                <td>@usuario[1]</td>
+                                <td>@usuario[2]</td>
+                                <td>@usuario[3]</td>
+                                <td>@usuario[4]</td>
+                                <td>@usuario[12]</td>
+                                <td>@usuario[13]</td>
+                                <td>@usuario[14]</td>
+                                <td>@usuario[15]</td>
+                                <td>@usuario[16]</td>
+                                <td>@usuario[17]</td>
+                                <td>@usuario[18]</td>
+                                <td>@usuario[19]</td>
+                                <td>
+                                    @using (Html.BeginForm("SubirImagen", "Controlador", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                                    {
+                                        <div class="form-group">
+                                            <label for="imagen">Seleccione una imagen:</label>
+                                            <input type="file" class="form-control-file" id="imagen" name="imagen" accept="image/*">
+                                        </div>
+
+                                        <button type="submit" class="btn btn-primary">Subir Imagen</button>
+                                    }
+                                </td>
+                                <td>
+                                    @Html.ActionLink("registrarFamiliar", "registrarFamiliar", new { identificacion = long.Parse(usuario[0]) }, new { @class = "btn btn-success" })
+                                    @Html.ActionLink("registrarObservacion", "registrarObservacion", new { identificacionEst = long.Parse(usuario[0]) }, new { @class = "btn btn-warning" })
+
+                                    @*<button class="btn btn-warning" onclick="window.location.href='/Funcionario/registrarObservacion'">Registrar Observacion</button>*@
+                                </td>
+                            </tr>
+                        }
+                    }
+                    
                 }
                 else
                 {
@@ -139,6 +233,7 @@
 
             </table>
         </div>
+
         <div class="contendor-input">
 
         </div>

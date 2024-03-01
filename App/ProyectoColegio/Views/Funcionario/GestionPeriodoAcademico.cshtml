@@ -1,0 +1,97 @@
+﻿
+@{
+    List<string> rangosHorarios = new List<string>
+    {
+        "06:00 AM",
+        "07:00 AM",
+        "08:00 AM",
+        "09:00 AM",
+        "10:00 AM",
+        "11:00 AM",
+        "12:00 PM",
+        "01:00 PM",
+        "02:00 PM",
+        "03:00 PM",
+        "04:00 PM",
+        "05:00 PM",
+        "06:00 PM"
+    };
+
+    var listaDocenteSede = ViewBag.ListaDocentesSede;
+    var sedes = ViewBag.Sedes;
+    var grupos = ViewBag.GruposGrado;
+    var asignaturas = ViewBag.Asignaturas;
+
+    //TAMBIEN SE DEBE TENER UNA LISTA DE GRUPOS PARA ORGANIZAR HORARIOS DEL GRUPO
+    //TAMBIEN DEBO MANEJAR UNA LISTA DE ASIGNATURAS PARA ESTABLECER HORARIO POR GRUPO
+}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestion de periodos academicos</title>
+</head>
+<body>
+
+    <h2>Registro de Datos</h2>
+
+    <form action="/procesar_registro" method="post">
+        <label class="control-label">Periodo academico</label>
+        <input value="" class="form-control" placeholder="periodo 1º" readonly />
+        <br>
+        <label for="fecha">Fecha Inicio (YYYY-MM-DD): </label>
+        <input type="text" id="fecha" name="fecha" pattern="\d{4}-\d{2}-\d{2}" title="Ingrese una fecha en formato YYYY-MM-DD" required>
+        <br>
+        <label for="fecha">Fecha Fin (YYYY-MM-DD): </label>
+        <input type="text" id="fecha" name="fecha" pattern="\d{4}-\d{2}-\d{2}" title="Ingrese una fecha en formato YYYY-MM-DD" required>
+        <br>
+        <input type="submit" value="Registrar">
+    </form>
+    <br>
+    <br>
+    <h2>Registro de Datos</h2>
+
+    <form action="/procesar_registro" method="post">
+        <table>
+            <tr>
+                <th>Hora</th>
+                <th>Lunes</th>
+                <th>Martes</th>
+                <th>Miercoles</th>
+                <th>Jueves</th>
+                <th>Viernes</th>
+            </tr>
+            
+            @for (int i = 0; i < rangosHorarios.Count; i++)
+            {
+                <tr>
+                    <td>@rangosHorarios[i]</td>
+
+                    @for (int j=0; j<5; j++) //j<5 por que  el numero de columnas de la tabla corresponde a 6
+                    {
+                        <td>
+                            <div class="form-group">
+                                <select class="form-select" name="asignaturas" id="asignaturas" aria-label="Default select example">
+                                    <option value="">Asignaturas</option>
+                                    @if (asignaturas != null)
+                                    {
+                                        foreach (var item in asignaturas)
+                                        {
+                                            <option value="@item">@item</option>
+                                        }
+                                    }
+                                </select>
+                            </div>
+                        </td>
+                    }
+                </tr>
+            }
+            
+        </table>
+        
+    </form>
+
+</body>
+</html>
+

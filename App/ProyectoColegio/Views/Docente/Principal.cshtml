@@ -76,7 +76,7 @@
                 <th>Segundo Nombre</th>
                 <th>Primer Apellido</th>
                 <th>Segundo Apellido</th>
-                <th>Edad</th>
+                @*<th>Edad</th>
                 <th>Telefono Celular</th>
                 <th>Telefono Fijo</th>
                 <th>Correo Usuario</th>
@@ -90,8 +90,9 @@
                 <th>Genero</th>
                 <th>EPS</th>
                 <th>Estrato</th>
-                <th>Codigo Estudiante</th>
-                <th>Opciones</th>
+                <th>Codigo Estudiante</th>*@
+                <th>Numero de fallas</th>
+                <th>Nota Definitiva</th>
             </tr>
 
             @if (ViewBag.ListaEstudianteGrupo != null)
@@ -107,7 +108,7 @@
                         <td>@usuario[2]</td>
                         <td>@usuario[3]</td>
                         <td>@usuario[4]</td>
-                        <td>@usuario[5]</td>
+                        @*<td>@usuario[5]</td>
                         <td>@usuario[6]</td>
                         <td>@usuario[7]</td>
                         <td>@usuario[8]</td>
@@ -121,10 +122,16 @@
                         <td>@usuario[16]</td>
                         <td>@usuario[17]</td>
                         <td>@usuario[18]</td>
-                        <td>@usuario[19]</td>
+                        <td>@usuario[19]</td>*@
                         <td>
-                            @Html.ActionLink("GestionarAsistencia", "GestionarAsistencia", new {identificacion=long.Parse(usuario[0])}, new {@class = "btn btn-success"})
-                            @Html.ActionLink("GestionarNotas", "GestionarNotas", new {identificacionEst=long.Parse(usuario[0])}, new {@class = "btn btn-warning"})
+                            @*@Html.ActionLink("GestionarAsistencia", "GestionarAsistencia", new {identificacion=long.Parse(usuario[0])}, new {@class = "btn btn-success"})
+                            @Html.ActionLink("GestionarNotas", "GestionarNotas", new {identificacionEst=long.Parse(usuario[0])}, new {@class = "btn btn-warning"})*@
+                            <label class="control-label">Numero de fallas</label>
+                            <input value="" class="form-control" placeholder="0" readonly />
+                        </td>
+                        <td>
+                            <label class="control-label">Nota definitiva</label>
+                            <input value="" class="form-control" placeholder="0.0" readonly />
                         </td>
                     </tr>
                 }

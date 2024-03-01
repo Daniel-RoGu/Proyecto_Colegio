@@ -26,7 +26,7 @@ namespace ProyectoColegio.Controllers
             var rol = TempData["rol"];
             ViewBag.rol = rol;
 
-            ViewBag.ListaEstudiante = consultasGlobales.mostrarCsv(_contexto.Conexion, null, null);
+            //ViewBag.ListaEstudiante = consultasGlobales.mostrarCsv(_contexto.Conexion, null, null);
 
             var sede = TempData["sede"];
             var grupo = TempData["grupo"];
@@ -83,9 +83,53 @@ namespace ProyectoColegio.Controllers
             string nombreParametro = "identificacion";
 
             // Llamar al método
-            var resultados = ManejoBaseDatos.EjecutarProcedimientoConParametroYConsulta(nombreProcedimiento, nombreParametro, identificacion, numeroAtributos, Conexion);
+            var resultados = ManejoBaseDatos.EjecutarProcedimientoConParametroYConsulta(nombreProcedimiento, nombreParametro, identificacion, numeroAtributos, _contexto.Conexion);
+            string sede = "";
+            foreach (var item in resultados)
+            {
+                sede = Convert.ToString(item);
+            }
             
-            return Convert.ToString(resultados);
+            return sede;
         }
+
+        [HttpPost]
+        public void GestionNotasAsistencia(string asignatura, string nota, string nFallas)
+        {
+            if (asignatura != null)
+            {
+                TempData["Asignatura"] = asignatura;
+                
+                if (nota != null)
+                {
+                    TempData["Nota"] = nota;
+                }
+                if (nFallas != null)
+                {
+                    TempData["NumeroFallas"] = nFallas;
+                }
+            }           
+            
+        }
+
+        public void registrarNotaEstudiante()
+        {
+            string asignatura = Convert.ToString(TempData["Asignatura"]);
+            string nota = Convert.ToString(TempData["Nota"]);
+
+            //llamar metodo de registro en bd
+
+        }
+
+        public void registrarAsistenciasEstudiante()
+        {
+            string asignatura = Convert.ToString(TempData["Asignatura"]);
+            string nFallas = Convert.ToString(TempData["NumeroFallas"]);
+
+            //llamar metodo de registro en bd
+
+        }
+
+
     }
 }

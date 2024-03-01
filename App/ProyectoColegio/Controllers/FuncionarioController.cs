@@ -49,6 +49,10 @@ namespace ProyectoColegio.Controllers
             var sede = TempData["sede"];
             var grupo = TempData["grupo"];
 
+            var gradoEst = TempData["GradoEstudiante"];
+            var grupoEst = TempData["GrupoEstudiante"];
+            var idEst = TempData["IdentificacionEst"];
+
             if (variablesGlobales.Sedes(_contexto.Conexion) != null && variablesGlobales.GruposGrado(_contexto.Conexion) != null)
             {
                 ViewBag.GruposGrado = variablesGlobales.GruposGrado(_contexto.Conexion);
@@ -56,17 +60,26 @@ namespace ProyectoColegio.Controllers
 
                 //muestra todos los estudiantes de la institucion
                 mostrarCsv();
-            }           
+            }
+
+            if (gradoEst != null && grupoEst != null)
+            {
+                ViewBag.GradoEst = gradoEst;
+                ViewBag.GrupoEst = grupoEst;
+                ViewBag.IdentificacionEstudiante = idEst;
+            }
                         
             if (sede != null)
             {
                 //muestra los estudiantes por sede
                 ViewBag.ListaEstudianteGrupo = consultasGlobales.mostrarCsv(_contexto.Conexion, Convert.ToString(sede), null);
+                ViewBag.SedeSeleccionada = sede;
 
                 if (grupo != null)
                 {
                     //muestra los estudiantes por grupo de sede
                     ViewBag.ListaEstudianteGrupo = consultasGlobales.mostrarCsv(_contexto.Conexion, Convert.ToString(sede), Convert.ToString(grupo));
+                    ViewBag.GrupoSeleccionado = grupo;
                 }
 
                 Console.WriteLine(sede);
@@ -145,7 +158,7 @@ namespace ProyectoColegio.Controllers
                     Dato.Add(item.NombreUsuario);
                     Dato.Add(item.SegundoNombreUsuario);
                     Dato.Add(item.ApellidoUsuario);
-                    Dato.Add(item.SegundoNombreUsuario);
+                    Dato.Add(item.SegundoApellidoUsuario);
                     Dato.Add(Convert.ToString(item.Edad));
                     Dato.Add(item.TelefonoCelular);
                     Dato.Add(item.TelefonoFijo);
@@ -534,6 +547,41 @@ namespace ProyectoColegio.Controllers
             }
 
             return RedirectToAction("CargarCsv", "Funcionario");
+        }
+
+        [HttpPost]
+        public IActionResult buscarEstudiante(string identificacion)
+        {            
+            Dictionary<string, Type> atributos = new Dictionary<string, Type>
+            {
+                // Definir aqui atributos y tipos esperados
+                { "Grado", typeof(string) },
+                { "Grupo", typeof(string) },
+            };
+
+            //inecesario la creaccion del diccionario, pero es un ejemplo optimo para identificar el porque del valor
+            int numeroAtributos = atributos.Count;
+
+            // Definir los parámetros necesarios para el procedimiento almacenado
+            string nombreProcedimiento = "obtenerGradoYGrupoEstudiante";
+            string nombreParametro = "identificacionEst";
+
+            // Llamar al método
+            List<Object> resultados = ManejoBaseDatos.EjecutarProcedimientoConParametroYConsulta(nombreProcedimiento, nombreParametro, identificacion, numeroAtributos, _contexto.Conexion);
+            
+            TempData["GradoEstudiante"] = resultados[0];
+            TempData["GrupoEstudiante"] = resultados[1];
+            TempData["IdentificacionEst"] = identificacion;
+            
+            return RedirectToAction("CargarCsv", "Funcionario");
+        }
+
+        public IActionResult GestionPeriodoAcademico()
+        {
+            ViewBag.Asignaturas = variablesGlobales.Asignaturas(_contexto.Conexion);
+            ViewBag.Docentes = variablesGlobales.Docentes(_contexto.Conexion);
+            ViewBag.GruposGrado = variablesGlobales.GruposGrado(_contexto.Conexion);
+            return View();
         }
 
         public IActionResult GestionAsignaturas()

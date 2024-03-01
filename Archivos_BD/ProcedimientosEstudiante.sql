@@ -115,4 +115,17 @@ begin
 	WHERE est.idEstudiante = (SELECT CAST(codigoEst AS SIGNED)) and est.Usuario_identificacion = Us.identificacion;
 END$$
 
+/*--------------------------Buscar Grado y Grupo Estudiante-------------------------*/
+
+DELIMITER $$
+DROP PROCEDURE IF EXISTS `obtenerGradoYGrupoEstudiante` $$
+create procedure `obtenerGradoYGrupoEstudiante`(identificacionEst Varchar(400)) 
+begin
+    SELECT g.nombreGrado as Grado, gg.grupoGrado as Grupo
+	FROM Estudiante as e
+    inner join estudiantesGradoGrupo as egg on fkidEstudiante = e.idEstudiante
+    inner join gradoGrupo as gg on egg.fkidGradoGrupo = gg.idGradoGrupo
+    inner join Grados as g on gg.fkidGrado = g.idGrado
+	WHERE e.Usuario_identificacion = (SELECT CAST(identificacionEst AS SIGNED));
+END$$
 

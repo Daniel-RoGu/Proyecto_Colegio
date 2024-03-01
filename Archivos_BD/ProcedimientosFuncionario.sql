@@ -178,6 +178,19 @@ begin
 				value(nomCompetencia, objCompetencia, competenciaDetalle, "Disponible", (select ObtenerIdAsignatura(nomAsignatura)) );
 END$$
 
+/*--------------------------Registrar Periodo Academico-------------------------*/
+DELIMITER $$
+DROP PROCEDURE IF EXISTS `registrarPeriodoAcademico` $$
+create procedure `registrarPeriodoAcademico`(
+    nomPeriodo varchar(400),
+    inicia varchar(400),
+    termina varchar(400)
+) 
+begin
+	insert into periodoAcademico (periodoAcademico, fechaInicio, fechaFin, estadoPeriodo)
+				value(nomPeriodo, inicia, termina, "Disponible");
+END$$
+
 /*--------------------------Obtener Sedes-------------------------*/
 DELIMITER $$
 DROP PROCEDURE IF EXISTS `ObtenerSedes` $$

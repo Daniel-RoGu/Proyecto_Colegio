@@ -137,6 +137,8 @@ call obtenerSedeDocente("12987852");
 call registrarDocenteGrado("Ana Riquianus Mamus", "101");
 call registrarDocenteGrado("Edector Cumbai Cutui", "1202");
 call registrarDocenteGrado("Jhulius Rommanus Magnus", "1202");
+call registrarAsignatura("Español");
+call registrarAsignatura("Matemáticas");
 call registrarDocenteAsignatura("Edector Cumbai Cutui", "Español");
 call registrarAsignaturaGradoGrupo("Español", 1202);
 call registrarCompetenciasAsignatura("Lectura critica", "Dominar la lectura critica", "El estudiante debe ser bueno en LC", "Español");
@@ -176,6 +178,7 @@ call obtenerEstudiantesSedeGrupo("EL VATICANO", "101");
 call obtenerEstudiantesSede("Central");
 call obtenerEstudiantesSede("EL VATICANO");
 call obtenerSedeDocente("EL VATICANO");
+call obtenerGradoYGrupoEstudiante("1118377419");
 
 select CONCAT(COALESCE(u.primerNombreUsuario, ''), ' ', COALESCE(u.segundoNombreUsuario, ''), 
 			  COALESCE(u.primerApellidoUsuario, ''), ' ', COALESCE(u.segundoApellidoUsuario, '')) as NombresCompletos
