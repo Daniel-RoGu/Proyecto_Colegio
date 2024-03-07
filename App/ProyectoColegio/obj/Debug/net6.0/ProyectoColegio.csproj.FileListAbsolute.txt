@@ -2769,3 +2769,10 @@ C:\Proyectos\Proyecto_Colegio\App\ProyectoColegio\bin\Debug\net6.0\V8.Net.dll
 C:\Users\Daniel\Desktop\TrabajoColegio\App\ProyectoColegio\bin\Debug\net6.0\Archivos_Json\Asignaturas.json
 C:\Users\Daniel\Desktop\TrabajoColegio\App\ProyectoColegio\bin\Debug\net6.0\Archivos_Json\Notas.json
 C:\Users\Daniel\Desktop\TrabajoColegio\App\ProyectoColegio\bin\Debug\net6.0\Archivos_Json\Sedes.json
+C:\Users\Daniel\Desktop\TrabajoColegio\App\ProyectoColegio\bin\Debug\net6.0\System.Web.Mvc.dll
+C:\Users\Daniel\Desktop\TrabajoColegio\App\ProyectoColegio\bin\Debug\net6.0\System.Web.Razor.dll
+C:\Users\Daniel\Desktop\TrabajoColegio\App\ProyectoColegio\bin\Debug\net6.0\System.Web.Helpers.dll
+C:\Users\Daniel\Desktop\TrabajoColegio\App\ProyectoColegio\bin\Debug\net6.0\System.Web.WebPages.Deployment.dll
+C:\Users\Daniel\Desktop\TrabajoColegio\App\ProyectoColegio\bin\Debug\net6.0\System.Web.WebPages.Razor.dll
+C:\Users\Daniel\Desktop\TrabajoColegio\App\ProyectoColegio\bin\Debug\net6.0\System.Web.WebPages.dll
+C:\Users\Daniel\Desktop\TrabajoColegio\App\ProyectoColegio\bin\Debug\net6.0\Microsoft.Web.Infrastructure.dll
