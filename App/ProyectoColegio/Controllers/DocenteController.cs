@@ -15,7 +15,7 @@ namespace ProyectoColegio.Controllers
 
         public DocenteController(Contexto contexto)
         {
-            _contexto = contexto;
+            _contexto = contexto; 
         }
 
         //[HttpPost]
