@@ -37,9 +37,135 @@ namespace ProyectoColegio.Controllers
             _contexto = contexto;
         }
 
+        public JsonResult ListarSedes()
+        {
+            List<object> sedes = variablesGlobales.Sedes(_contexto.Conexion);
+
+            return Json(sedes);
+        }
+
+        public JsonResult ListarGrados()
+        {
+            List<object> grados = variablesGlobales.Grados(_contexto.Conexion);
+
+            return Json(grados);
+        }
+        
+        public JsonResult ListarGrupos()
+        {
+            List<object> grupos = variablesGlobales.GruposGrado(_contexto.Conexion);
+
+            return Json(grupos);
+        }
+
+        public JsonResult ListarGruposGradoSede(string sede)
+        {
+            List<object> grupos = variablesGlobales.GruposGradoSede(sede, _contexto.Conexion);
+
+           return Json(grupos);
+        }
+        
+        public JsonResult ListarGradoSede(string sede)
+        {
+            List<object> grado = variablesGlobales.GradoSede(sede, _contexto.Conexion);
+
+           return Json(grado);
+        }
+        
+        public JsonResult ListarTiposDeSangre()
+        {
+            List<object> tiposSangre = variablesGlobales.TiposSangre(_contexto.Conexion);
+
+            return Json(tiposSangre);
+        }
+        
+        public JsonResult ListarTiposDeDocumento()
+        {
+            List<object> tiposDocumento = variablesGlobales.TiposDocumento(_contexto.Conexion);
+
+            return Json(tiposDocumento);
+        }
+         
+        public JsonResult ListarDiscapacidades()
+        {
+            List<object> tiposDiscapacidades = variablesGlobales.Discapacidades(_contexto.Conexion);
+
+            return Json(tiposDiscapacidades);
+        }
+         
+        public JsonResult ListarSisben()
+        {
+            List<object> tiposSisben = variablesGlobales.Sisbens(_contexto.Conexion);
+
+            return Json(tiposSisben);
+        }
+         
+        public JsonResult ListarGeneros()
+        {
+            List<object> tiposGenero = variablesGlobales.Generos(_contexto.Conexion);
+
+            return Json(tiposGenero);
+        }
+         
+        public JsonResult ListarEPS()
+        {
+            List<object> tiposEPS = variablesGlobales.EPSs(_contexto.Conexion);
+
+            return Json(tiposEPS);
+        }
+         
+        public JsonResult ListarEstratos()
+        {
+            List<object> tiposEstrato = variablesGlobales.Estratos(_contexto.Conexion);
+
+            return Json(tiposEstrato);
+        }
+         
+        public JsonResult ListarAsignaturas()
+        {
+            List<object> tiposAsignaturas = variablesGlobales.Asignaturas(_contexto.Conexion);
+
+            return Json(tiposAsignaturas);
+        }
+         
+        public JsonResult ListarDocentes()
+        {
+            List<object> tiposDocentes = variablesGlobales.Docentes(_contexto.Conexion);
+
+            return Json(tiposDocentes);
+        }
+
+        public JsonResult ListarDocentesSede(string sede)
+        {
+            List<object> tiposDocentes = variablesGlobales.DocentesSede(sede, _contexto.Conexion);
+
+            return Json(tiposDocentes);
+        }
+
+        public JsonResult ListarDocentesSedeInfoCompleta(string sede)
+        {
+            List<object> tiposDocentes = variablesGlobales.DocentesSedeInfoCompleta(sede, _contexto.Conexion);
+
+            return Json(tiposDocentes);
+        }
+
+        public JsonResult ListarDocentesSedeGrupo(string sede, string grupo)
+        {
+            List<string> tiposDocentes = variablesGlobales.DocentesSedeGrupo(sede, grupo, _contexto.Conexion);
+
+            return Json(tiposDocentes);
+        }
+
+        public JsonResult ListarDocentesSedeGrupoInfoCompleta(string sede, string grupo)
+        {
+            List<object> tiposDocentes = variablesGlobales.DocentesSedeGrupoInfoCompleta(sede, grupo, _contexto.Conexion);
+
+            return Json(tiposDocentes);
+        }
+
         public IActionResult CargarCsv()
         {
-            
+            //var gruposSede = variablesGlobales.GruposGradoSede("Central", _contexto.Conexion);
             // En el segundo controlador
             var identificacion = TempData["identificacion"];
             ViewBag.idetificacionUs = identificacion;

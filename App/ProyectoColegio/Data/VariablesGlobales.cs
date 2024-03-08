@@ -15,213 +15,265 @@ namespace ProyectoColegio.Data
             set { infoGlobal = value; }
         }
 
-        public List<string> Sedes(string conexion)
+        public List<object> Sedes(string conexion)
         {
-            List<string> sedes = new List<string>();
+            List<string> sede = new List<string>();
+            List<object> sedes = new List<object>();
             
             Dictionary<string, Type> atributosSede = new Dictionary<string, Type>
-            {
+            {                
+                { "IdSede", typeof(string) },
                 { "Sede", typeof(string) },
             };
 
-            List<Object> resultados = ManejoBaseDatos.ConsultarProcedimientoDinamico("ObtenerSedes", atributosSede, conexion);
+            List<Object> resultados = ManejoBaseDatos.ConsultarProcedimientoDinamico("ObtenerSedes", atributosSede, conexion);            
             
-            foreach (var item in resultados)
-            {
-                sedes.Add(Convert.ToString(item));
+            foreach (List<Object> item in resultados)
+            {                               
+                sede.Add(Convert.ToString(item[0]));
+                sede.Add(Convert.ToString(item[1]));
+                sedes.Add(sede);
+                sede = new List<string>();
             }
 
             return sedes;
 
         }
         
-        public List<string> TiposSangre(string conexion)
+        public List<object> TiposSangre(string conexion)
         {
-            List<string> tpsSangre = new List<string>();
+            List<string> tpSangre = new List<string>();
+            List<object> tpsSangre = new List<object>();
             
             Dictionary<string, Type> atributosTpSangre = new Dictionary<string, Type>
             {
+                { "IdTipoSangre", typeof(string) },
                 { "TipoSangre", typeof(string) },
             };
 
             var resultados = ManejoBaseDatos.ConsultarProcedimientoDinamico("ObtenerTipoSangre", atributosTpSangre, conexion);
             
-            foreach (var item in resultados)
+            foreach (List<Object> item in resultados)
             {
-                tpsSangre.Add(item.ToString());
+                tpSangre.Add(Convert.ToString(item[0]));
+                tpSangre.Add(Convert.ToString(item[1]));
+                tpsSangre.Add(tpSangre);
+                tpSangre = new List<string>();
             }
 
             return tpsSangre;
 
         }
         
-        public List<string> TiposDocumento(string conexion)
+        public List<object> TiposDocumento(string conexion)
         {
-            List<string> tpsDocumento = new List<string>();
+            List<string> tpDocumento = new List<string>();
+            List<object> tpsDocumento = new List<object>();
             
             Dictionary<string, Type> atributosTpDocumento = new Dictionary<string, Type>
             {
+                { "idTipoDocumento", typeof(string) },
                 { "TipoDocumento", typeof(string) },
             };
 
             var resultados = ManejoBaseDatos.ConsultarProcedimientoDinamico("ObtenerTipoDocumento", atributosTpDocumento, conexion);
             
-            foreach (var item in resultados)
+            foreach (List<object> item in resultados)
             {
-                tpsDocumento.Add(item.ToString());
+                tpDocumento.Add(Convert.ToString(item[0]));
+                tpDocumento.Add(Convert.ToString(item[1]));
+                tpsDocumento.Add(tpDocumento);
+                tpDocumento = new List<string>();
             }
 
             return tpsDocumento;
 
         }
         
-        public List<string> Discapacidades(string conexion)
+        public List<object> Discapacidades(string conexion)
         {
-            List<string> tpsDiscapacidades = new List<string>();
+            List<string> tpDiscapacidades = new List<string>();
+            List<object> tpsDiscapacidades = new List<object>();
             
             Dictionary<string, Type> atributosDiscapacidad = new Dictionary<string, Type>
             {
+                { "IdDiscapacidad", typeof(string) },
                 { "Discapacidad", typeof(string) },
             };
 
             var resultados = ManejoBaseDatos.ConsultarProcedimientoDinamico("obtenerDiscapacidad", atributosDiscapacidad, conexion);
             
-            foreach (var item in resultados)
+            foreach (List<object> item in resultados)
             {
-                tpsDiscapacidades.Add(item.ToString());
+                tpDiscapacidades.Add(Convert.ToString(item[0]));
+                tpDiscapacidades.Add(Convert.ToString(item[1]));
+                tpsDiscapacidades.Add(tpDiscapacidades);
+                tpDiscapacidades = new List<string>();
             }
 
             return tpsDiscapacidades;
 
         }
         
-        public List<string> Sisbens(string conexion)
+        public List<object> Sisbens(string conexion)
         {
-            List<string> tpsSisbens = new List<string>();
+            List<string> tpSisbens = new List<string>();
+            List<object> tpsSisbens = new List<object>();
             
             Dictionary<string, Type> atributosSisbens = new Dictionary<string, Type>
             {
+                { "IdSisben", typeof(string) },
                 { "Siben", typeof(string) },
             };
 
             var resultados = ManejoBaseDatos.ConsultarProcedimientoDinamico("obtenerSisben", atributosSisbens, conexion);
             
-            foreach (var item in resultados)
+            foreach (List<object> item in resultados)
             {
-                tpsSisbens.Add(item.ToString());
+                tpSisbens.Add(Convert.ToString(item[0]));
+                tpSisbens.Add(Convert.ToString(item[1]));
+                tpsSisbens.Add(tpSisbens);
+                tpSisbens= new List<string>();
             }
 
             return tpsSisbens;
 
         }
         
-        public List<string> Generos(string conexion)
+        public List<object> Generos(string conexion)
         {
-            List<string> tpsGeneros = new List<string>();
+            List<string> tpGeneros = new List<string>();
+            List<object> tpsGeneros = new List<object>();
             
             Dictionary<string, Type> atributosGeneros = new Dictionary<string, Type>
             {
+                { "IdGenero", typeof(string) },
                 { "Genero", typeof(string) },
             };
 
             var resultados = ManejoBaseDatos.ConsultarProcedimientoDinamico("obtenerGenero", atributosGeneros, conexion);
             
-            foreach (var item in resultados)
+            foreach (List<object> item in resultados)
             {
-                tpsGeneros.Add(item.ToString());
+                tpGeneros.Add(Convert.ToString(item[0]));
+                tpGeneros.Add(Convert.ToString(item[1]));
+                tpsGeneros.Add(tpGeneros);
+                tpGeneros= new List<string>();
             }
 
             return tpsGeneros;
 
         }
         
-        public List<string> EPSs(string conexion)
+        public List<object> EPSs(string conexion)
         {
-            List<string> tpsEPSs = new List<string>();
+            List<string> tpEPSs = new List<string>();
+            List<object> tpsEPSs = new List<object>();
             
             Dictionary<string, Type> atributosEPSs = new Dictionary<string, Type>
             {
+                { "IdEPS", typeof(string) },
                 { "EPS", typeof(string) },
             };
 
             var resultados = ManejoBaseDatos.ConsultarProcedimientoDinamico("obtenerEPS", atributosEPSs, conexion);
             
-            foreach (var item in resultados)
+            foreach (List<object> item in resultados)
             {
-                tpsEPSs.Add(item.ToString());
+                tpEPSs.Add(Convert.ToString(item[0]));
+                tpEPSs.Add(Convert.ToString(item[1]));
+                tpsEPSs.Add(tpEPSs);
+                tpEPSs= new List<string>();
             }
 
             return tpsEPSs;
 
         }
         
-        public List<string> Estratos(string conexion)
+        public List<object> Estratos(string conexion)
         {
-            List<string> tpsEstratos = new List<string>();
+            List<string> tpEstratos = new List<string>();
+            List<object> tpsEstratos = new List<object>();
             
             Dictionary<string, Type> atributosEstratos = new Dictionary<string, Type>
             {
+                { "IdEstrato", typeof(string) },
                 { "Estrato", typeof(string) },
             };
 
             var resultados = ManejoBaseDatos.ConsultarProcedimientoDinamico("obtenerEstrato", atributosEstratos, conexion);
             
-            foreach (var item in resultados)
+            foreach (List<object> item in resultados)
             {
-                tpsEstratos.Add(item.ToString());
+                tpEstratos.Add(Convert.ToString(item[0]));
+                tpEstratos.Add(Convert.ToString(item[1]));
+                tpsEstratos.Add(tpEstratos);
+                tpEstratos= new List<string>();
             }
 
             return tpsEstratos;
 
         }
         
-        public List<string> Asignaturas(string conexion)
+        public List<object> Asignaturas(string conexion)
         {
-            List<string> tpsAsignaturas = new List<string>();
+            List<string> tpAsignaturas = new List<string>();
+            List<object> tpsAsignaturas = new List<object>();
             
             Dictionary<string, Type> atributosAsignatura = new Dictionary<string, Type>
             {
+                { "IdAsignatura", typeof(string) },
                 { "Asignatura", typeof(string) },
             };
 
             var resultados = ManejoBaseDatos.ConsultarProcedimientoDinamico("obtenerAsignaturas", atributosAsignatura, conexion);
             
-            foreach (var item in resultados)
+            foreach (List<object> item in resultados)
             {
-                tpsAsignaturas.Add(item.ToString());
+                tpAsignaturas.Add(Convert.ToString(item[0]));
+                tpAsignaturas.Add(Convert.ToString(item[1]));
+                tpsAsignaturas.Add(tpAsignaturas);
+                tpAsignaturas= new List<string>();
             }
 
             return tpsAsignaturas;
 
         }
         
-        public List<string> Docentes(string conexion)
+        public List<object> Docentes(string conexion)
         {
-            List<string> tpsDocentes = new List<string>();
+            List<string> tpDocentes = new List<string>();
+            List<object> tpsDocentes = new List<object>();
             
             Dictionary<string, Type> atributosDocente = new Dictionary<string, Type>
             {
+                { "IdDocente", typeof(string) },
                 { "Docente", typeof(string) },
             };
 
             var resultados = ManejoBaseDatos.ConsultarProcedimientoDinamico("obtenerDocentes", atributosDocente, conexion);
             
-            foreach (var item in resultados)
+            foreach (List<object> item in resultados)
             {
-                tpsDocentes.Add(item.ToString());
+                tpDocentes.Add(Convert.ToString(item[0]));
+                tpDocentes.Add(Convert.ToString(item[1]));
+                tpsDocentes.Add(tpDocentes);
+                tpDocentes= new List<string>(); 
             }
 
             return tpsDocentes;
 
         }
 
-        public List<string> DocentesSede (string Sede, string conexion)
+        public List<object> DocentesSede (string Sede, string conexion)
         {
-            List<string> DocentesSd = new List<string>();
+            List<string> DocenteSd = new List<string>();
+            List<object> DocentesSd = new List<object>();
 
             Dictionary<string, Type> atributos = new Dictionary<string, Type>
             {
                 // Definir aqui atributos y tipos esperados
+                { "IdDocente", typeof(string) },
                 { "Docentes", typeof(string) },
                 // ...
             };
@@ -236,9 +288,12 @@ namespace ProyectoColegio.Data
             // Llamar al método
             List<Object> resultados = ManejoBaseDatos.EjecutarProcedimientoConParametroYConsulta(nombreProcedimiento, nombreParametro, Sede, numeroAtributos, conexion);
 
-            foreach (var item in resultados)
+            foreach (List<Object> item in resultados)
             {
-                DocentesSd.Add(item.ToString());
+                DocenteSd.Add(Convert.ToString(item[0]));
+                DocenteSd.Add(Convert.ToString(item[1]));
+                DocentesSd.Add(DocenteSd);
+                DocenteSd = new List<string>();
             }
 
             return DocentesSd;
@@ -252,6 +307,7 @@ namespace ProyectoColegio.Data
             Dictionary<string, Type> atributos = new Dictionary<string, Type>
             {
                 // Definir aqui atributos y tipos esperados                
+                { "IdDocente", typeof(string) },
                 { "Docente", typeof(string) },
                 { "Identificacion", typeof(string) },
                 { "TipoSangre", typeof(string) },
@@ -345,23 +401,53 @@ namespace ProyectoColegio.Data
         }
 
 
-        public List<string> GruposGrado(string conexion)
+        public List<object> GruposGrado(string conexion)
         {
-            List<string> tpsGruposGrado = new List<string>();
+            List<string> tpGruposGrado = new List<string>();
+            List<object> tpsGruposGrado = new List<object>();
             
             Dictionary<string, Type> atributosGrupo = new Dictionary<string, Type>
             {
+                { "IdGradoGrupo", typeof(string) },
                 { "Grupo", typeof(string) },
             };
 
             var resultados = ManejoBaseDatos.ConsultarProcedimientoDinamico("obtenerGruposGrado", atributosGrupo, conexion);
             
-            foreach (var item in resultados)
+            foreach (List<object> item in resultados)
             {
-                tpsGruposGrado.Add(item.ToString());
+                tpGruposGrado.Add(Convert.ToString(item[0]));
+                tpGruposGrado.Add(Convert.ToString(item[1]));
+                tpsGruposGrado.Add(tpGruposGrado);
+                tpGruposGrado = new List<string>();
             }
 
             return tpsGruposGrado;
+
+        }
+        
+        public List<object> Grados(string conexion)
+        {
+            List<string> tpGrado = new List<string>();
+            List<object> tpsGrados = new List<object>();
+            
+            Dictionary<string, Type> atributosGrupo = new Dictionary<string, Type>
+            {
+                { "IdGrado", typeof(string) },
+                { "Grado", typeof(string) },
+            };
+
+            var resultados = ManejoBaseDatos.ConsultarProcedimientoDinamico("obtenerGrados", atributosGrupo, conexion);
+            
+            foreach (List<object> item in resultados)
+            {
+                tpGrado.Add(Convert.ToString(item[0]));
+                tpGrado.Add(Convert.ToString(item[1]));
+                tpsGrados.Add(tpGrado);
+                tpGrado = new List<string>();
+            }
+
+            return tpsGrados;
 
         }
 
@@ -374,7 +460,7 @@ namespace ProyectoColegio.Data
                  { "sedeGradoGrupo", sede },
             };
 
-            int grupoAtributosEsperadosGruposSede = 1;
+            int grupoAtributosEsperadosGruposSede = 2; // numero de id y nombre grupo
 
             var resultados = ManejoBaseDatos.EjecutarProcedimientoConMultiParametroYConsulta("obtenerGruposGradoSede", parametros, grupoAtributosEsperadosGruposSede, conexion);
 
@@ -386,6 +472,30 @@ namespace ProyectoColegio.Data
             }
 
             return gruposSede;
+
+        }
+        
+        public List<object> GradoSede(string sede, string conexion)
+        {
+            List<object> gradosSede = new List<object>();
+
+            Dictionary<string, object> parametros = new Dictionary<string, object>
+            {
+                 { "sedeGradoGrupo", sede },
+            };
+
+            int grupoAtributosEsperadosGruposSede = 2; // numero de id y nombre grupo
+
+            var resultados = ManejoBaseDatos.EjecutarProcedimientoConMultiParametroYConsulta("obtenerGradosXSede", parametros, grupoAtributosEsperadosGruposSede, conexion);
+
+            List<object> lista = new List<object>();
+
+            foreach (var item in resultados)
+            {
+                gradosSede.Add(item);
+            }
+
+            return gradosSede;
 
         }
 
