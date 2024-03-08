@@ -89,7 +89,8 @@ DELIMITER $$
 DROP PROCEDURE IF EXISTS `obtenerDocentes` $$
 CREATE PROCEDURE `obtenerDocentes`() 
 BEGIN
-    SELECT (CONCAT(COALESCE(Usuario.primerNombreUsuario, ''), ' ', COALESCE(Usuario.segundoNombreUsuario, ''), 
+    SELECT  Docente.idDocente as IdDocente,
+			(CONCAT(COALESCE(Usuario.primerNombreUsuario, ''), ' ', COALESCE(Usuario.segundoNombreUsuario, ''), 
             COALESCE(Usuario.primerApellidoUsuario, ''), ' ', COALESCE(Usuario.segundoApellidoUsuario, ''))) AS Docente
     FROM Docente 
     INNER JOIN Usuario ON Docente.fkidentificacion = Usuario.identificacion;
@@ -137,7 +138,8 @@ create procedure `ObtenerDocenteSede`(
 	sedeRef varchar(400)
 ) 
 begin
-    SELECT CONCAT(COALESCE(u.primerNombreUsuario, ''), ' ', COALESCE(u.segundoNombreUsuario, ''), 
+    SELECT  d.idDocente as IdDocente,
+			CONCAT(COALESCE(u.primerNombreUsuario, ''), ' ', COALESCE(u.segundoNombreUsuario, ''), 
 				  COALESCE(u.primerApellidoUsuario, ''), ' ', COALESCE(u.segundoApellidoUsuario, '')) COLLATE utf8mb4_unicode_ci as Docentes
 	From Sede as s
     inner join Docente as d on d.fkidSede = s.idSede 
@@ -156,7 +158,8 @@ begin
 	declare nomGrado varchar(400);
     set nomGrado = (select g.nombreGrado from Grados as g
 				   inner join GradoGrupo as gg on gg.fkidGrado = g.idGrado and gg.grupoGrado = nomGrupo);
-    SELECT CONCAT(COALESCE(u.primerNombreUsuario, ''), ' ', COALESCE(u.segundoNombreUsuario, ''), 
+    SELECT  d.idDocente as IdDocente,
+			CONCAT(COALESCE(u.primerNombreUsuario, ''), ' ', COALESCE(u.segundoNombreUsuario, ''), 
 				  COALESCE(u.primerApellidoUsuario, ''), ' ', COALESCE(u.segundoApellidoUsuario, '')) COLLATE utf8mb4_unicode_ci as Docentes
 	From Sede as s
     inner join Docente as d on d.fkidSede = s.idSede 
@@ -173,7 +176,8 @@ create procedure `ObtenerInfoDocenteSede`(
 	sedeRef varchar(400)
 ) 
 begin
-    SELECT CONCAT(COALESCE(u.primerNombreUsuario, ''), ' ', COALESCE(u.segundoNombreUsuario, ''), 
+    SELECT d.idDocente as IdDocente,
+		   CONCAT(COALESCE(u.primerNombreUsuario, ''), ' ', COALESCE(u.segundoNombreUsuario, ''), 
 		   COALESCE(u.primerApellidoUsuario, ''), ' ', COALESCE(u.segundoApellidoUsuario, '')) 
 		   COLLATE utf8mb4_unicode_ci as Docente,
 		   u.identificacion as Identificacion, COALESCE((select ObtenerNombreTipoSangre(fkidTipoSangre)), "Sin Definir") as TipoSangre, 
@@ -201,7 +205,8 @@ begin
     set nomGrado = (select g.nombreGrado from Grados as g
 				   inner join GradoGrupo as gg on gg.fkidGrado = g.idGrado and gg.grupoGrado = nomGrupo);
                    
-    SELECT CONCAT(COALESCE(u.primerNombreUsuario, ''), ' ', COALESCE(u.segundoNombreUsuario, ''), 
+    SELECT d.idDocente as IdDocente,
+		   CONCAT(COALESCE(u.primerNombreUsuario, ''), ' ', COALESCE(u.segundoNombreUsuario, ''), 
 		   COALESCE(u.primerApellidoUsuario, ''), ' ', COALESCE(u.segundoApellidoUsuario, '')) 
 		   COLLATE utf8mb4_unicode_ci as Docente,
 		   u.identificacion as Identificacion, COALESCE((select ObtenerNombreTipoSangre(fkidTipoSangre)), "Sin Definir") as TipoSangre, 
