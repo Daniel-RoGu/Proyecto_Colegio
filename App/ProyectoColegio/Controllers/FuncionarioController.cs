@@ -128,11 +128,34 @@ namespace ProyectoColegio.Controllers
             return Json(tiposAsignaturas);
         }
          
-        public JsonResult ListarDocentes()
+        public JsonResult ListarDocentesSedeInfoCompleta(string sede)
         {
-            List<object> tiposDocentes = variablesGlobales.Docentes(_contexto.Conexion);
+            List<DocenteInfo> listaDocentes = new List<DocenteInfo>();
+            DocenteInfo docente = new DocenteInfo();
+            List<object> tiposDocentes = variablesGlobales.DocentesSedeInfoCompleta(sede, _contexto.Conexion);
 
-            return Json(tiposDocentes);
+            foreach (List<string> item in tiposDocentes)
+            {
+                docente.IdDocente = Convert.ToString(item[0]);
+                docente.nombreDocente = Convert.ToString(item[1]);
+                docente.Identificacion = Convert.ToString(item[2]);
+                docente.TipoSangre = Convert.ToString(item[3]);
+                docente.Genero = Convert.ToString(item[4]);
+                docente.TelefonoFijo = Convert.ToString(item[5]);
+                docente.Direccion = Convert.ToString(item[6]);
+                docente.TelefonoCelular = Convert.ToString(item[7]);
+                docente.Correo = Convert.ToString(item[8]);
+                docente.Sede = Convert.ToString(item[9]);
+                docente.HorasTrabajo = Convert.ToString(item[10]);
+                docente.Discapacidad = Convert.ToString(item[11]);
+                docente.Sisben = Convert.ToString(item[12]);
+                docente.Estrato = Convert.ToString(item[13]);
+                docente.EPS = Convert.ToString(item[14]);
+                listaDocentes.Add(docente);
+                docente = new DocenteInfo();
+            }
+
+            return Json(listaDocentes);
         }
 
         public JsonResult ListarDocentesSede(string sede)
@@ -142,9 +165,9 @@ namespace ProyectoColegio.Controllers
             return Json(tiposDocentes);
         }
 
-        public JsonResult ListarDocentesSedeInfoCompleta(string sede)
+        public JsonResult ListarDocentes()
         {
-            List<object> tiposDocentes = variablesGlobales.DocentesSedeInfoCompleta(sede, _contexto.Conexion);
+            List<object> tiposDocentes = variablesGlobales.Docentes(_contexto.Conexion);
 
             return Json(tiposDocentes);
         }
