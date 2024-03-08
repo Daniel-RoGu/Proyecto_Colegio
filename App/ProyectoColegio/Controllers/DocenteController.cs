@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ProyectoColegio.Data;
 using ProyectoColegio.Models;
+using System.Web.Helpers;
 
 namespace ProyectoColegio.Controllers
 {
@@ -18,6 +19,33 @@ namespace ProyectoColegio.Controllers
         }
 
         //[HttpPost]
+        public IActionResult Index() { 
+
+            return View();
+        
+        
+        }
+
+        //public JsonResult ListarDocentes() {
+
+        //    List<string> docentes = new List<string>();
+            
+
+        //    Dictionary<string, Type> atributosDocentes = new Dictionary<string, Type>
+        //    {
+        //        { "Docente", typeof(string) },
+        //    };
+
+        //    var resultados = ManejoBaseDatos.ConsultarProcedimientoDinamico("obtenerDocentes", atributosDocentes, _contexto.Conexion);
+
+        //    foreach (var item in resultados)
+        //    {
+        //        docentes.Add(item.ToString());
+        //    }
+            
+        //    return Json(docentes);  
+        //}        
+
         public IActionResult Principal()
         {
             //trae los datos del usuario logeado
@@ -25,17 +53,17 @@ namespace ProyectoColegio.Controllers
             ViewBag.idetificacionUs = identificacion;
             var rol = TempData["rol"];
             ViewBag.rol = rol;
-
-            //ViewBag.ListaEstudiante = consultasGlobales.mostrarCsv(_contexto.Conexion, null, null);
+            var habilitarCargueNotaFinal = TempData["habilitarCargueNotaFinal"];
+            ViewBag.HabilitacionNotaFinal = habilitarCargueNotaFinal;
 
             var sede = TempData["sede"];
             var grupo = TempData["grupo"];
-            
+
             if (sede != null && grupo != null)
             {
                 ViewBag.ListaEstudianteGrupo = consultasGlobales.mostrarCsv(_contexto.Conexion, Convert.ToString(sede), Convert.ToString(grupo));
-                Console.WriteLine(grupo);
-            }            
+                ViewBag.GrupoSeleccionado = grupo;
+            }
 
             //muestra info de asignaturas y grupos por grado desde bd
             ViewBag.Asignaturas = variablesGlobales.Asignaturas(_contexto.Conexion);
@@ -48,6 +76,16 @@ namespace ProyectoColegio.Controllers
         public IActionResult Principal(string Grupo)
         {
             return RedirectToAction("Principal", "Docente");
+        }
+
+        public IActionResult controlHabilitacionCargueNotaPeriodo(bool habilitarCargueNotaFinal)
+        {
+            if (habilitarCargueNotaFinal!=null)
+            {
+                TempData["habilitarCargueNotaFinal"] = habilitarCargueNotaFinal;
+            }
+
+            return RedirectToAction("Inicio", "Login");
         }
 
         [HttpPost]
@@ -129,7 +167,6 @@ namespace ProyectoColegio.Controllers
             //llamar metodo de registro en bd
 
         }
-
 
     }
 }
