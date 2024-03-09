@@ -26,25 +26,13 @@ namespace ProyectoColegio.Controllers
         
         }
 
-        //public JsonResult ListarDocentes() {
 
-        //    List<string> docentes = new List<string>();
-            
+        public string GuardarDocente(DocenteInfo docente) {
 
-        //    Dictionary<string, Type> atributosDocentes = new Dictionary<string, Type>
-        //    {
-        //        { "Docente", typeof(string) },
-        //    };
 
-        //    var resultados = ManejoBaseDatos.ConsultarProcedimientoDinamico("obtenerDocentes", atributosDocentes, _contexto.Conexion);
-
-        //    foreach (var item in resultados)
-        //    {
-        //        docentes.Add(item.ToString());
-        //    }
-            
-        //    return Json(docentes);  
-        //}        
+            return "";  
+        
+        }       
 
         public IActionResult Principal()
         {

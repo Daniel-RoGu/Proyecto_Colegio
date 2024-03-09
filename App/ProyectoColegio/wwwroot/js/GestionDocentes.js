@@ -266,7 +266,7 @@ function activarEscuchaSelectGeneral(idEtiqueta) {
 
 function obtenerlistadocentes() {
     fetchGet('Funcionario/ListarDocentesSedeInfoCompleta/?sede=CENTRAL', function (data) {
-        console.log(data);  
+
         generatableProfesores(data);  
 
     })
@@ -380,3 +380,22 @@ function generarTablaCargueInventario(
     return contenedor;
 }
 
+
+//function guardardocente() {
+//    let frm = new FormData();
+//    let docuemnto = document.getElementById('').value;
+//    frm.append('docuemto', docuemnto);  
+//    fetchPostText('', frm, function (res) {
+
+//        if (res === '1') {
+
+//            console.log('dato guardado correctamentre')
+
+//        } else {
+
+//            console.log('error')
+//        }
+
+//    })
+
+//}
