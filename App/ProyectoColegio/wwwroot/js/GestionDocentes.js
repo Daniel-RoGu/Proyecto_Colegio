@@ -6,13 +6,7 @@ window.onload = async function () {
     //Funciones
     listargradosTodos("");
 
-    listarTiposDeSangre("");
-    ListarTiposDeDocumento("");
-    ListarDiscapacidades("");
-    ListarSisben("");
-    ListarGeneros("");
-    ListarEPS("");
-    ListarEstratos("");
+
 
     //Listas por agregrar
 
@@ -166,6 +160,7 @@ function ListarEPS(valor) {
             }));
 
             selectdate("selecttipoeps", newArray, valor);
+
         }
 
     })
@@ -380,3 +375,84 @@ function generarTablaCargueInventario(
     return contenedor;
 }
 
+
+function AbrirModalAgregarDocente() {
+    listarTiposDeSangre("");
+    ListarTiposDeDocumento("");
+    ListarDiscapacidades("");
+    ListarSisben("");
+    ListarGeneros("");
+    ListarEPS("");
+    ListarEstratos("");
+}
+
+
+function guardarDocentes() {
+
+    let frm = new FormData();
+    let PrimerNombre = document.getElementById("Primernombredocente").value;
+    let SegundoNombre = document.getElementById("Segundonombredocente").value;
+    let PrimerApellido = document.getElementById("primerapellido").value;
+    let SegundoApellido = document.getElementById("segundopellido").value;
+    let Documento = document.getElementById("documentoDocente").value;
+    let TipoDocumento = document.getElementById("selecttipodocumento").value;
+    let FechaNacimiento = document.getElementById("fechanacimiento").value;
+    let Edad = document.getElementById("edad").value;
+    let TipoSangre = document.getElementById("selecttiposangre").value;
+    let Celular = document.getElementById("celulardocente").value;
+    let TelefonoFijo = document.getElementById("telefonofijo").value;
+    let Correo = document.getElementById("correo").value;
+    let TipoDiscapacidad = document.getElementById("selecttipodiscapacidad").value;
+    let Direccion = document.getElementById("direccion").value;
+    let TipoSisben = document.getElementById("selecttiposisben").value;
+    let Genero = document.getElementById("selecttipogenero").value;
+    let TipoEps = document.getElementById("selecttipoeps").value;
+    let Estrato = document.getElementById("selecttipoestrato").value;
+    let HorasTrabajo = document.getElementById("horasTrabajo").value;
+    let Sede = document.getElementById("selectsededocente").value;
+
+
+    frm.append('titulo', 1);
+    frm.append('primeroNombre', PrimerNombre);
+    frm.append('segundoNombre', SegundoNombre);
+    frm.append('primerApellido', PrimerApellido);
+    frm.append('segundoApellido', SegundoApellido);
+    frm.append('documento', Documento);
+    frm.append('tipoDocumento', TipoDocumento);
+    frm.append('fechaNacimiento', FechaNacimiento);
+    frm.append('edad', Edad);
+    frm.append('tipoSangre', TipoSangre);
+    frm.append('celular', Celular);
+    frm.append('telefonoFijo', TelefonoFijo);
+    frm.append('correo', Correo);
+    frm.append('tipoDiscapacidad', TipoDiscapacidad);
+    frm.append('direccion', Direccion);
+    frm.append('tipoSisben', TipoSisben);
+    frm.append('genero', Genero);
+    frm.append('tipoEps', TipoEps);
+    frm.append('estrato', Estrato);
+    frm.append('horasTrabajo', HorasTrabajo);
+    frm.append('sede', Sede);
+
+
+
+    fetchPostText('Docente/guardarDocentes', frm, function (res) {
+        console.log(res)
+        borrarValores('form-docente')
+
+    })
+
+
+
+
+
+
+
+
+    function borrarValores(clase) {
+        let elementos = document.querySelectorAll('.' + clase);
+        elementos.forEach(function (elemento) {
+            elemento.value = ''; 
+        });
+    }
+}
