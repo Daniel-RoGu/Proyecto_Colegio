@@ -6,13 +6,7 @@ window.onload = async function () {
     //Funciones
     listargradosTodos("");
 
-    listarTiposDeSangre("");
-    ListarTiposDeDocumento("");
-    ListarDiscapacidades("");
-    ListarSisben("");
-    ListarGeneros("");
-    ListarEPS("");
-    ListarEstratos("");
+
 
     //Listas por agregrar
 
@@ -166,6 +160,7 @@ function ListarEPS(valor) {
             }));
 
             selectdate("selecttipoeps", newArray, valor);
+
         }
 
     })
@@ -286,8 +281,8 @@ function generatableProfesores(data) {
 
             { valor: "Datos Personales", size: "25" },
             { valor: "Datos de Contacto", size: "25" },
-            { valor: "Información Laboral", size: "20" },
-            { valor: "Información Adicional", size: "20" },
+            { valor: "InformaciÃ³n Laboral", size: "20" },
+            { valor: "InformaciÃ³n Adicional", size: "20" },
             { valor: "Opciones", size: "10" },
         ],
 
@@ -299,9 +294,9 @@ function generatableProfesores(data) {
                 { titulo: "Genero", valor: "genero" },
             ],
             [
-                { titulo: "Número de teléfono", valor: "telefonoFijo" },
-                { titulo: "Dirección", valor: "direccion" },
-                { titulo: "Teléfono", valor: "telefonoCelular" },
+                { titulo: "NÃºmero de telÃ©fono", valor: "telefonoFijo" },
+                { titulo: "DirecciÃ³n", valor: "direccion" },
+                { titulo: "TelÃ©fono", valor: "telefonoCelular" },
                 { titulo: "Correo", valor: "correo" },
             ],
             [
@@ -319,7 +314,7 @@ function generatableProfesores(data) {
     )
 
     document.getElementById("tableprofesores").innerHTML = tabla;
-    console.log("NúmeroññññNúmero");
+    console.log("NÃºmeroÃ±Ã±Ã±Ã±NÃºmero");
 
 }
 
@@ -369,7 +364,7 @@ function generarTablaCargueInventario(
             contenedor += "</td>";
         }
 
-        // Botones de acción para cada fila
+        // Botones de acciÃ³n para cada fila
         contenedor += "<td><div class='colums__options'>";
         contenedor += `<a href="#" class="form-control form-control-sm bg-primary text-white" data-toggle="modal" data-target="#Asignargrado">Asignar Grado</a>`;
         contenedor += "</div></td>";
@@ -382,23 +377,3 @@ function generarTablaCargueInventario(
     return contenedor;
 }
 
-
-
-//function guardardocente() {
-//    let frm = new FormData();
-//    let docuemnto = document.getElementById('').value;
-//    frm.append('docuemto', docuemnto);  
-//    fetchPostText('', frm, function (res) {
-
-//        if (res === '1') {
-
-//            console.log('dato guardado correctamentre')
-
-//        } else {
-
-//            console.log('error')
-//        }
-
-//    })
-
-//}

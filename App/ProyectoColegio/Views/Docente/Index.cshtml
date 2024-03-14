@@ -3,7 +3,7 @@
 
     <div class="form-group form-group-sm my-auto py-0 col-auto">
         <div class="my-1 mx-2">
-            <input type="submit" class="form-control form-control-sm bg-primary text-white" value="Agregar docentes" data-toggle="modal" data-target="#AgregarFamiliar">
+            <input type="submit" class="form-control form-control-sm bg-primary text-white" value="Agregar docentes" onclick="AbrirModalAgregarDocente()" data-toggle="modal" data-target="#AgregarFamiliar">
         </div>
     </div>
 </nav>
@@ -132,31 +132,31 @@
                         <div class="col-3">
                             <div class="form-group form-group-sm my-0">
                                 <label for="" class="laber-form my-0 py-0">Nombre </label>
-                                <input type="text" class="form-control form-control-sm" value="" placeholder="Nombre completo">
+                                <input type="text" class="form-control form-control-sm form-docente" value="" placeholder="Nombre completo" id="Primernombredocente">
                             </div>
                         </div>
                         <div class="col-3">
                             <div class="form-group form-group-sm ">
                                 <label for="" class="laber-form my-0 py-0">Segundo Nombre </label>
-                                <input type="text" class="form-control form-control-sm" value="" placeholder="Segundo Nombre">
+                                <input type="text" class="form-control form-control-sm form-docente" value="" placeholder="Segundo Nombre" id="Segundonombredocente">
                             </div>
                         </div>
                         <div class="col-3">
                             <div class="form-group form-group-sm ">
                                 <label for="" class="laber-form my-0 py-0">Primer apellido </label>
-                                <input type="text" class="form-control form-control-sm" value="" placeholder="Primer apellido">
+                                <input type="text" class="form-control form-control-sm form-docente" value="" placeholder="Primer apellido" id="primerapellido">
                             </div>
                         </div>
                         <div class="col-3">
                             <div class="form-group form-group-sm ">
                                 <label for="" class="laber-form my-0 py-0">Segundo apellido </label>
-                                <input type="text" class="form-control form-control-sm" value="" placeholder="Segundo apellido">
+                                <input type="text" class="form-control form-control-sm form-docente" value="" placeholder="Segundo apellido" id="segundopellido">
                             </div>
                         </div>
                         <div class="col-3">
                             <div class="form-group form-group-sm ">
                                 <label for="" class="laber-form my-0 py-0">Documento</label>
-                                <input type="text" class="form-control form-control-sm" value="" placeholder="Documento">
+                                <input type="text" class="form-control form-control-sm form-docente" value="" placeholder="Documento" id="documentoDocente">
                             </div>
                         </div>
                         <div class="col-3">
@@ -170,13 +170,13 @@
                         <div class="col-3">
                             <div class="form-group form-group-sm ">
                                 <label for="" class="laber-form my-0 py-0">Fecha nacimiento</label>
-                                <input type="date" class="form-control form-control-sm" value="" placeholder="Direccion">
+                                <input type="date" class="form-control form-control-sm form-docente" value="" placeholder="Direccion" id="fechanacimiento">
                             </div>
                         </div>
                         <div class="col-3">
                             <div class="form-group form-group-sm ">
                                 <label for="" class="laber-form my-0 py-0">Edad</label>
-                                <input type="text" class="form-control form-control-sm" value="" placeholder="Edad">
+                                <input type="text" class="form-control form-control-sm form-docente" value="" placeholder="Edad" id="edad">
                             </div>
                         </div>
                         <div class="col-3">
@@ -191,19 +191,19 @@
                         <div class="col-3">
                             <div class="form-group form-group-sm">
                                 <label for="" class="laber-form my-0 py-0">Celular</label>
-                                <input type="text" class="form-control form-control-sm" value="" placeholder="Celular">
+                                <input type="text" class="form-control form-control-sm form-docente" value="" placeholder="Celular" id="celulardocente">
                             </div>
                         </div>
                         <div class="col-3">
                             <div class="form-group form-group-sm ">
                                 <label for="" class="laber-form my-0 py-0">Telefono fijo</label>
-                                <input type="text" class="form-control form-control-sm" value="" placeholder="Telefono fijo">
+                                <input type="text" class="form-control form-control-sm form-docente" value="" placeholder="Telefono fijo" id="telefonofijo">
                             </div>
                         </div>
                         <div class="col-3">
                             <div class="form-group form-group-sm">
                                 <label for="" class="laber-form my-0 py-0">Correo</label>
-                                <input type="text" class="form-control form-control-sm" value="" placeholder="Correo">
+                                <input type="text" class="form-control form-control-sm form-docente" value="" placeholder="Correo" id="correo">
                             </div>
                         </div>
                         <div class="col-3">
@@ -217,12 +217,12 @@
                         <div class="col-3">
                             <div class="form-group form-group-sm ">
                                 <label for="" class="laber-form my-0 py-0">Direccion</label>
-                                <input type="text" class="form-control form-control-sm" value="" placeholder="Direccion">
+                                <input type="text" class="form-control form-control-sm form-docente" value="" placeholder="Direccion" id="direccion">
                             </div>
                         </div>
 
                         <div class="col-3">
-                            <div class="form-group form-group-sm" >
+                            <div class="form-group form-group-sm">
                                 <label for="" class="my-0 py-0">Sisben</label>
                                 <select class="form-control form-control-sm bg-white m-0 p-0 border myselect" id="selecttiposisben" data-live-search="true" data-style="btn-white">
                                     <option value="">Todos</option>
@@ -258,7 +258,7 @@
                         <div class="col-3">
                             <div class="form-group form-group-sm ">
                                 <label for="" class="laber-form my-0 py-0">Horas de trabajo</label>
-                                <input type="text" class="form-control form-control-sm" value="" placeholder="Horas de trabajo">
+                                <input type="text" class="form-control form-control-sm form-docente" value="" placeholder="Horas de trabajo" id="horasTrabajo">
                             </div>
                         </div>
 
@@ -274,11 +274,13 @@
 
                     </div>
                 </div>
+                   
+              
             </div>
             <div class="modal-footer border-0 py-1">
                 <div class="form-group d-flex">
                     <input type="submit" class="form-control form-control-sm bg-secondary text-white" value="Cancelar" data-dismiss="modal" readonly>
-                    <input type="submit" class="form-control  form-control-sm bg-primary text-white" value="Guardar" readonly>
+                    <input type="submit" class="form-control  form-control-sm bg-primary text-white" value="Guardar" readonly onclick="guardarDocentes()">
                 </div>
             </div>
         </div>
