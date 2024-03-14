@@ -1,3 +1,4 @@
+/*-------orden de ejecucion de scripts ---------- Script Nº1*/
 use bdColegio;
 
 /*--------------------------Validar Registro TipoSangre-------------------------*/
@@ -101,6 +102,17 @@ begin
     SELECT COUNT(*) > 0 AS existe_valor
 	FROM Estudiante as est
 	WHERE est.Usuario_identificacion = identificacionUs;
+END$$
+
+/*--------------------------Validar existe Familiar Estudiante-------------------------*/
+
+DELIMITER $$
+DROP PROCEDURE IF EXISTS `existeFamiliarEstudiante` $$
+create procedure `existeFamiliarEstudiante`(identificacionFamiliar long) 
+begin
+    SELECT COUNT(*) > 0 AS existe_valor
+	FROM Familiar as f
+	WHERE f.identificacionFamiliar = identificacionFamiliar;
 END$$
 
 /*--------------------------Validar existencia Sede-------------------------*/
@@ -272,3 +284,25 @@ begin
 			   inner join Grados as g on gg.fkidGrado = g.idGrado
                where gg.idGradoGrupo = agg.fkidGradoGrupo) = dg.fkidGrado;
 END$$
+
+
+/*--------------------------Validar existencia Docente Horario-------------------------*/
+
+DELIMITER $$
+DROP PROCEDURE IF EXISTS `existeDocenteHorario` $$
+create procedure `existeDocenteHorario`(nombreDocente varchar(400), nomAsignatura varchar(400)) 
+begin
+    SELECT COUNT(*) > 0 AS existe_valor
+	FROM horarioAsignatura as hA
+	WHERE fkidAsignatura = (select a.idAsignatura from Docente as d
+							inner join DocenteAsignatura as da on da.fkidDocente = d.idDocente
+                            inner join Asignatura as a on da.fkidAsignatura = a.idAsignatura and a.nombreAsignatura = nomAsignatura
+                            where d.idDocente = (SELECT d.idDocente FROM docente AS d
+												 INNER JOIN usuario AS u ON CONCAT(COALESCE(u.primerNombreUsuario, ''), ' ', 
+																				   COALESCE(u.segundoNombreUsuario, ''), 
+																				   COALESCE(u.primerApellidoUsuario, ''), ' ', 
+                                                                                   COALESCE(u.segundoApellidoUsuario, '')) 
+                                                                                   COLLATE utf8mb4_unicode_ci = nombreDocente
+												 WHERE d.fkidentificacion = u.identificacion));  
+END$$
+

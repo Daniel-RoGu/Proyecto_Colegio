@@ -319,9 +319,11 @@ function generatableProfesores(data) {
     )
 
     document.getElementById("tableprofesores").innerHTML = tabla;
-
+    console.log("NúmeroññññNúmero");
 
 }
+
+
 
 function generarTablaCargueInventario(
     data,
@@ -379,6 +381,7 @@ function generarTablaCargueInventario(
 
     return contenedor;
 }
+
 
 
 //function guardardocente() {

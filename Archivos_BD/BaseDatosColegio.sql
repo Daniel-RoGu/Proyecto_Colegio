@@ -403,7 +403,7 @@ CREATE TABLE IF NOT EXISTS `Horario` (
   `horaInicio` VARCHAR(400) NOT NULL,
   `horaFin` VARCHAR(400) NOT NULL,
   `diaHorario` VARCHAR(400) NOT NULL,
-  `fechaHorario` VARCHAR(400) NOT NULL,
+  `fechaHorario` VARCHAR(400) NULL,
   `estadoHorario` VARCHAR(400) NOT NULL,
   PRIMARY KEY (`idHorario`));
 
@@ -419,6 +419,7 @@ CREATE TABLE IF NOT EXISTS `PeriodoAcademico` (
   `fechaInicio` VARCHAR(400) NOT NULL,
   `fechaFin` VARCHAR(400) NOT NULL,
   `estadoPeriodo` VARCHAR(400) NOT NULL,
+  `añoElectivo` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`idPeriodoAcademico`));
 
 ALTER TABLE PeriodoAcademico AUTO_INCREMENT = 414100;
@@ -553,13 +554,33 @@ ALTER TABLE Observaciones AUTO_INCREMENT = 500200;
 -- -----------------------------------------------------
 -- Table `Asistencia`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `Asistencia` ;
+/*DROP TABLE IF EXISTS `Asistencia` ;
 
 CREATE TABLE IF NOT EXISTS `Asistencia` (
   `idAsistencia` INT NOT NULL AUTO_INCREMENT,
   `nFallas` VARCHAR(400) NOT NULL,
   `estadoAsistencia` VARCHAR(400) NOT NULL,
-  PRIMARY KEY (`idAsistencia`));
+  PRIMARY KEY (`idAsistencia`));*/
+
+DROP TABLE IF EXISTS `Asistencia` ;
+
+CREATE TABLE IF NOT EXISTS `Asistencia` (
+  `idAsistencia` INT NOT NULL,
+  `nFallas` VARCHAR(45) NOT NULL,
+  `estadoAsistencia` VARCHAR(45) NOT NULL,
+  `fkidAsignatura` INT NOT NULL,
+  `fkidPeriodoAcademico` INT NOT NULL,
+  PRIMARY KEY (`idAsistencia`),
+  CONSTRAINT `fk_Asistencia_Asignatura1`
+    FOREIGN KEY (`fkidAsignatura`)
+    REFERENCES `Asignatura` (`idAsignatura`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Asistencia_PeriodoAcademico1`
+    FOREIGN KEY (`fkidPeriodoAcademico`)
+    REFERENCES `PeriodoAcademico` (`idPeriodoAcademico`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION);
 
 ALTER TABLE Asistencia AUTO_INCREMENT = 580200;
 
@@ -718,11 +739,15 @@ CREATE TABLE IF NOT EXISTS `Familiar` (
   `parentescoFamiliar` VARCHAR(400) NOT NULL,
   `responsabilidadEconomicaEstudiante` VARCHAR(400) NOT NULL,
   `estadoAcudiente` VARCHAR(400) NOT NULL,
-  `Genero_idGenero` INT NOT NULL,
+  `esDezplazado` VARCHAR(400) NULL,
+  `fechaNacimiento` VARCHAR(400) NULL,
+  `nivelEscolaridad` VARCHAR(400) NULL,
+  `ubicacion` VARCHAR(400) NULL,
+  `fkidGenero` INT NOT NULL,
   `Estudiante_idEstudiante` INT NOT NULL,
   PRIMARY KEY (`identificacionFamiliar`),
   CONSTRAINT `fk_Acudiente_Genero1`
-    FOREIGN KEY (`Genero_idGenero`)
+    FOREIGN KEY (`fkidGenero`)
     REFERENCES `Genero` (`idGenero`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
@@ -781,9 +806,9 @@ CREATE TABLE IF NOT EXISTS `horarioAsignatura` (
 ALTER TABLE horarioAsignatura AUTO_INCREMENT = 1260300;
 
 -- -----------------------------------------------------
--- Table `horarioAsistencia`
+-- Table `horarioAsistencia`  --necesaria solo si se van a controlar las asistencias del año electivo
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `horarioAsistencia` ;
+/*DROP TABLE IF EXISTS `horarioAsistencia` ;
 
 CREATE TABLE IF NOT EXISTS `horarioAsistencia` (
   `idhorarioAsistencia` INT NOT NULL AUTO_INCREMENT,
@@ -802,7 +827,7 @@ CREATE TABLE IF NOT EXISTS `horarioAsistencia` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
 
-ALTER TABLE horarioAsistencia AUTO_INCREMENT = 1360300;
+ALTER TABLE horarioAsistencia AUTO_INCREMENT = 1360300;*/
 
 -- -----------------------------------------------------
 -- Table `asignaturaGradoGrupo`

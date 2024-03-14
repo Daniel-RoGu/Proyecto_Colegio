@@ -1,0 +1,466 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>formatoHojaMatricula</title>
+</head>
+<body>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+
+        .fechaUsuario {
+            text-align: right;
+            padding: 0px 10px;
+        }
+
+
+        .cabezera {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+        }
+
+        .infoInstitucion {
+            margin: 15px 0;
+            font-size: .8rem;
+            text-align: center;
+        }
+
+        .img {
+            height: 70px;
+            width: 70px;
+            margin: auto;
+            background-size: cover;
+            background-position: center;
+        }
+
+        figure {
+            margin: 10px 30px;
+        }
+
+
+        .campoImagen {
+            width: 100px;
+            height: 130px;
+            border: 1px solid black;
+        }
+    </style>
+    <section class="section">
+
+        <section class="cabezera">
+            <div class="logoInstitucion">
+                <figure class="container_img">
+                    <img class="img" src="data:image/png;base64,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" />
+                </figure>
+            </div>
+
+            <div class="infoInstitucion ">
+                <p>DEPARTAMENTO DEL CAQUETÁ</p>
+                <p>MUNICIPIO DE PUERTO RICO</p>
+                <h3>INSTITUCION EDUCATIVA RURAL LA AGUILILLA</h3>
+                <p>CON ESPECIALIDAD EN AGROECOLOGIA</p>
+                <p>DANE 283592003378</p>
+                <p>Creada según Decreto 002027 del 15 de diciembre de 2011</p>
+                <p>Resolución de aprobación 00352 del 24 de Abril de 2012</p>
+
+
+            </div>
+
+            <div class="bandera ">
+                <div class="campoImagen">
+                </div>
+
+            </div>
+        </section>
+        <style>
+
+            .table__datos {
+                width: 100%;
+                border-collapse: collapse;
+                border: 1px solid black;
+            }
+
+                .table__datos td {
+                    border: 1px solid black;
+                }
+        </style>
+
+        <section style="margin: 15px 0;">
+            <table class="table__datos">
+
+
+                <tbody>
+                    <tr>
+                        <td colspan="9">APELLIDOS Y NOMBRES</td>
+
+
+                    </tr>
+                    <tr>
+                        <td colspan="6">DOCUMENTO DE IDENTIDAD :</td>
+
+                        <td colspan="4">LUGAR EXPEDICION : </td>
+
+
+
+
+
+                    </tr>
+                    <tr>
+                        <td colspan="6">FECHA DE NACIMIENTO</td>
+
+
+                        <td colspan="4">LUGAR NACIMIENTO: </td>
+
+
+
+
+                    </tr>
+                    <tr>
+                        <td colspan="5">TIPO DE SANGRE</td>
+
+
+                        <td colspan="2">Eps</td>
+                        <td colspan="3">Sisbem</td>
+
+
+
+                    </tr>
+                    <tr>
+                        <td colspan="4">DIRECCION</td>
+                        <td colspan="3">Barrio</td>
+                        <td colspan="3">TELEFONO</td>
+
+
+
+
+                    </tr>
+
+                </tbody>
+            </table>
+
+        </section>
+        <style>
+            .table__datosProfe {
+                border: 1px solid #202020;
+                border-collapse: collapse;
+                width: 100%;
+            }
+
+                .table__datosProfe td {
+                    border: 1px solid #b2b2b2;
+                }
+        </style>
+        <section style="margin: 10px 0;">
+            <table class="table__datosProfe" style="margin: 10px 0;">
+
+
+                <tbody>
+                    <tr>
+
+                        <td colspan="5">NOMBRE DEL PADRE :</td>
+                        <td colspan="5">N° CEDULA :</td>
+
+
+                    </tr>
+                    <tr>
+                        <td colspan="5">OCUPACION U OFICIO:</td>
+
+                        <td colspan="5">TELEFONO : </td>
+
+
+
+
+
+                    </tr>
+                    <tr>
+                        <td colspan="5">FECHA DE NACIMIENTO PADRE DE FAMILIA :</td>
+
+
+                        <td colspan="5">NIVEL DE ESCOLARIDAD : </td>
+
+
+
+
+                    </tr>
+                    <tr>
+                        <td colspan="5">DESPLAZADO (A)</td>
+
+
+                        <td colspan="5">Ubicacion</td>
+
+
+
+
+                    </tr>
+
+
+                </tbody>
+            </table>
+            <table class="table__datosProfe">
+
+
+                <tbody>
+                    <tr>
+
+                        <td colspan="5">NOMBRE DEL MADRE :</td>
+                        <td colspan="5">N° CEDULA :</td>
+
+
+                    </tr>
+                    <tr>
+                        <td colspan="5">OCUPACION U OFICIO:</td>
+
+                        <td colspan="5">TELEFONO : </td>
+
+
+
+
+
+                    </tr>
+                    <tr>
+                        <td colspan="5">FECHA DE NACIMIENTO MADRE DE FAMILIA :</td>
+
+
+                        <td colspan="5">NIVEL DE ESCOLARIDAD : </td>
+
+
+
+
+                    </tr>
+                    <tr>
+                        <td colspan="5">DESPLAZADO (A)</td>
+
+
+                        <td colspan="5">Ubicacion</td>
+
+
+
+
+                    </tr>
+
+
+                </tbody>
+            </table>
+
+
+        </section>
+
+        <style>
+            .tableNotas {
+                width: 100%;
+                border-collapse: collapse;
+            }
+
+                .tableNotas th, td {
+                    border: 1px solid black;
+                }
+        </style>
+        <section>
+            <table class="tableNotas">
+                <thead>
+                    <tr>
+                        <th rowspan="2">GRADO</th>
+
+                        <th colspan="3">PERIODO</th>
+
+
+                        <th rowspan="2">FIRMA PADRE DE FAMILIA</th>
+                        <th rowspan="2">FIRMA ALUMNO</th>
+                        <th rowspan="2">AÑO ESCOLAR</th>
+                    </tr>
+                    <tr>
+
+
+
+
+                        <th>DIA</th>
+                        <th>MES</th>
+                        <th>AÑO</th>
+
+
+
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- 30 filas -->
+                    <!-- Puedes usar un bucle para generar estas filas dinámicamente -->
+                    <!-- Aquí incluyo solo algunas filas como ejemplo -->
+                    <!-- Cambia el contenido de las celdas según tus necesidades -->
+                    <tr>
+                        <td rowspan="">PREESCOLAR</td>
+
+
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+
+                        <td>PRIMERO</td>
+
+
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+
+                        <td>SEGUNDO</td>
+
+
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+
+                        <td>TERCERO</td>
+
+
+
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+
+                    </tr>
+
+                    <!-- Continuar con más filas -->
+                </tbody>
+            </table>
+        </section>
+        <section>
+            <div style="display: flex; flex-direction: row;">
+                <p style="font-weight: 700; font-size: 12px; margin: 5px 0;">PERMISO PARA LA SALIDA</p>
+                <p style="font-size: 12px; margin: 5px 10px;">ExTERNA</p>
+
+            </div>
+            <div style="display: flex; flex-direction: row;">
+                <p style="font-weight: 700; font-size: 12px; margin: 5px 0;">OBSERVACIONES</p>
+                <p style="font-size: 12px; margin: 5px 10px;">Niguno</p>
+
+            </div>
+            <div style="display: flex; flex-direction: row; margin: 2px 0;">
+                <p style="font-weight: 700; font-size: 10px; margin: 5px 0;">NOTA:</p>
+                <p style="font-size: 10px; margin: 5px 10px;">EL PADRE DE FAMILIA Y ESTUDIANTE, CONOCEN Y ACEPTAN EL MANUAL DE CONVIVENCIA QUE RIGE EN ESTA INSTITUCION.</p>
+
+            </div>
+        </section>
+        <style>
+            .retiro__table {
+                width: 100%;
+                border-collapse: collapse;
+            }
+
+                .retiro__table th, td {
+                    border: 1px solid black;
+                }
+
+                .retiro__table td {
+                    padding: 12px 0;
+                }
+        </style>
+        <section style="text-align: center;">
+            <p>RETIRO DE ESTUDIANTES</p>
+            <table border="1" class="retiro__table">
+                <thead>
+                    <tr>
+                        <th style="width: 30%;">FECHA</th>
+                        <th style="width: 30%;"></th>
+                        <th style="width: 30%;">FIRMA</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <style>
+            .firma {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-evenly;
+                margin-top: 70px;
+                text-align: center;
+                font-size: 11px;
+            }
+
+            .lineas {
+                width: 150px;
+                border-bottom: 0.6px solid black;
+            }
+        </style>
+        <section class="firma">
+            <div>
+                <hr class="lineas">
+                <h3>RECTOR(A)</h3>
+            </div>
+
+            <div>
+                <hr class="lineas">
+                <h3>FIRMA P.FLIA</h3>
+            </div>
+            <div>
+                <hr class="lineas">
+                <h3>FIRMA ALUMNO</h3>
+            </div>
+
+            <div>
+                <hr class="lineas">
+                <h3>SECRETARIO</h3>
+            </div>
+        </section>
+
+
+        <style>
+            .footer {
+                text-align: center;
+                margin-top: 15px;
+                padding: 10px 0;
+                border-top: 1px solid black;
+            }
+        </style>
+        <section class="footer">
+            <p>"FORMAMOS PARA LA VIDA, FUNDAMENTADOS EN EL DESARROLLO DE LOS VALORES HUMANOS"</p>
+            <p>EMAIL: celaaguililla_pue@hotmail.com.</p>
+
+
+        </section>
+    </section>
+
+</body>
+</html>

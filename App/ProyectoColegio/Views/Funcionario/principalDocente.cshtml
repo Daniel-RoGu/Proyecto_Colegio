@@ -9,6 +9,13 @@
 
 <h2>Gestion Docente</h2>
 
+<div class="form-group form-group-sm">
+    <label for="" class="my-0 py-0">Selecionar sede</label>
+    <select class="form-control form-control-sm bg-white m-0 p-0 border myselect" id="sedeGestionDocente" data-live-search="true" data-style="btn-white">
+        <option value="">Todos</option>
+    </select>
+</div>
+
 @using (Html.BeginForm("principalDocente", "Funcionario", FormMethod.Post))
 {
     <div class="contenedor-filtro-sede">
@@ -33,7 +40,7 @@
                     }
                     
                 }
-            </select>
+            </select>            
         </div>
     </div>
     if (grupos!=null)
@@ -158,3 +165,4 @@
     </table>
 
 
+<script src="/js/GestionFuncionario.js"></script>

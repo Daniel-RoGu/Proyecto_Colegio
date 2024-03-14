@@ -76,6 +76,7 @@ call registrarAsignatura('Probabilisticos');
 call registrarTipoNota('Definitiva');
 call registrarSede('Central');
 call registrarFamiliar(1117568978,"Alguien Roberto", "Doctor", null, "312654987", "Padre", "Completa", "MASCULINO", 1118377419);
+call registrarFamiliar(1117568978,"Alguien Roberto", "Doctor", null, "312654987", "Padre", "Completa", "MASCULINO", 1118377419);
 call obtenerFamiliaresEstudiante("1118377419");
 select ObtenerIdEstudiante("1118377419");
 

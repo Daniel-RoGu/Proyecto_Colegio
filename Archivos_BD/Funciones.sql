@@ -1,3 +1,4 @@
+/*-------orden de ejecucion de scripts ---------- Script Nº2*/
 use bdColegio;
 
 /*------buscar id de tipoDocumento------*/
@@ -325,6 +326,21 @@ END;
 //
 DELIMITER ;
 
+/*------buscar id del Grado del grupo-----*/
+DELIMITER //
+CREATE FUNCTION ObtenerIdGradoDelGrupo(nomGrupo Varchar(400))
+RETURNS INT 
+READS SQL DATA
+BEGIN
+    DECLARE resultado INT;
+    SET resultado = (SELECT g.idGrado FROM GradoGrupo as gg
+				     inner join Grados as g on gg.fkidGrado = g.idGrado
+                     WHERE gg.grupoGrado = nomGrupo LIMIT 1);
+    RETURN resultado;
+END;
+//
+DELIMITER ;
+
 /*------buscar id de GradoGrupo-----*/
 DELIMITER //
 CREATE FUNCTION ObtenerIdGradoGrupo(nomGradoGrupo Varchar(400))
@@ -359,6 +375,19 @@ READS SQL DATA
 BEGIN
     DECLARE resultado int;
     SET resultado = (SELECT Asignatura.idAsignatura FROM Asignatura WHERE Asignatura.nombreAsignatura = nomAsignatura LIMIT 1);
+    RETURN resultado;
+END;
+//
+DELIMITER ;
+
+/*------buscar id de Horario por rango horario-----*/
+DELIMITER //
+CREATE FUNCTION ObtenerIdHorario(horaInicioRef varchar(400), horaFinRef varchar(400))
+RETURNS INT 
+READS SQL DATA
+BEGIN
+    DECLARE resultado INT;
+    SET resultado = (SELECT h.idHorario FROM Horario as h WHERE h.horaInicio = horaInicioRef and h.horaFin = horaFinRef LIMIT 1);
     RETURN resultado;
 END;
 //

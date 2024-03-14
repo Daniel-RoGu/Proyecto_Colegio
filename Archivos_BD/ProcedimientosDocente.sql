@@ -1,3 +1,4 @@
+/*-------orden de ejecucion de scripts ---------- Script Nº6*/
 use bdColegio;
 
 /*--------------------------Registrar Docente-------------------------*/
