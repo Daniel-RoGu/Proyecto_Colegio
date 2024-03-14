@@ -405,3 +405,16 @@ begin
 	WHERE g.nombreGrado = nomGrado);
     RETURN resultado;
 END$$
+
+/*------buscar id de Existe Grado retorno-----*/
+DELIMITER $$
+CREATE FUNCTION FunexisteFamiliarEstudiante(identificacionFamiliar long)
+RETURNS int
+READS SQL DATA 
+begin	
+	DECLARE resultado int;
+    SET resultado = (SELECT COUNT(*) > 0 AS existe_valor
+	FROM Familiar as f
+	WHERE f.identificacionFamiliar = identificacionFamiliar);
+    RETURN resultado;
+END$$

@@ -399,8 +399,7 @@ namespace ProyectoColegio.Controllers
 
         [HttpPost]
         public IActionResult CargarCsv(IFormFile file)
-        {
-
+        {            
             var tempFilePath = "";
 
             if (file != null && file.Length > 0)
@@ -624,7 +623,48 @@ namespace ProyectoColegio.Controllers
 
         public string GuardarFamiliarEstudiante(Familiar familiar) 
         {
-            return "hola";
+            string retorno = "";
+
+            if (familiar.parentescoFamiliar == "Madre" || familiar.parentescoFamiliar == "Tia" || familiar.parentescoFamiliar == "Abuela" || familiar.parentescoFamiliar == "Hermana")
+            {
+                familiar.genero = "Femenino";
+            }
+            else
+            {
+                familiar.genero = "Masculino";
+            }
+
+            try
+            {
+
+                Dictionary<string, object> parametros = new Dictionary<string, object>
+                {
+                    { "identificacionFamiliarEs", familiar.identificacionFamiliar },
+                    { "nombreFamiliarEs", familiar.nombresFamiliar },
+                    { "ocupacionFamiliarEs", familiar.ocupacionFamiliar },
+                    { "correoFamiliarEs", null },
+                    { "celularFamiliarEs", familiar.celularFamiliar },
+                    { "parentescoFamiliarEs", familiar.parentescoFamiliar },
+                    { "responsabilidadEconomicaFamiliarEs", familiar.responsabilidadEconomicaEstudiante },
+                    { "esAcudiente", familiar.estadoAcudiente },
+                    { "esdesplazado", familiar.desplazado },
+                    { "fechaNacimientoAcudiente", familiar.fechaNacimiento },
+                    { "nivelEscolaridadAcudiente", familiar.nivelEscolaridad },
+                    { "ubicacionAcudiente", familiar.ubicacion },
+                    { "generoFamiliarEs", familiar.genero },
+                    { "identificacionEstudianteEs", familiar.identificacionEstudiante },
+
+                };
+
+                var resultado = ManejoBaseDatos.EjecutarProcedimientoConMultiParametroYConsulta("registrarFamiliar", parametros, 1, _contexto.Conexion);
+                retorno = Convert.ToString(resultado[0]);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error al ejecutar el script: {ex.Message}");
+            }
+
+            return retorno;
         }
 
         [HttpPost]

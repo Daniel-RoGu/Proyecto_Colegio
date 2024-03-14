@@ -234,12 +234,17 @@ function generarTablaCargueInventario(
 function gestionFamiliarestudiante(documento) {
     document.getElementById("documentoEstudiante").value = documento
     obtenerDatosEstudiante(documento)
-    listarParentescoFamiliaresRegistrados("", documento);
+
     listarFamiliares(documento); 
    
 
 
 
+}
+
+function botoagregarFamliar() {
+    let documento = document.getElementById("documentoEstudiante").value
+    listarParentescoFamiliaresRegistrados("", documento);
 }
 
 
@@ -331,6 +336,11 @@ function guardarFamiliarEstudiante() {
     let estudiante = document.getElementById('documentoEstudiante').value
 
 
+    desplazado = desplazado === true ? 'SI' : 'NO'
+    acudiente = acudiente === true ? 'SI' : 'NO'
+    responsabilidadEconomica = responsabilidadEconomica === true ? 'SI' : 'NO'
+
+
     frm.append('nombresFamiliar', nombreCompleto);
     frm.append('identificacionFamiliar', documento);
     frm.append('fechaNacimiento', fechaNacimiento.toString());
@@ -349,12 +359,47 @@ function guardarFamiliarEstudiante() {
 
     fetchPostText('Funcionario/GuardarFamiliarEstudiante', frm, function (res) {
 
+        if (res !== '1') {
 
+
+        } else {
+            let documento = document.getElementById("documentoEstudiante").value
+            listarFamiliares(documento); 
+            document.getElementById('cancelarFamiliar').click()
+        }
     })
 
 
 }
+function limpiarModalAgregarFamiliar() {
 
+
+    borrarContenidoPorClase("familiarcv")
+    resetSelect('parentezcosEstudiante')
+    resetSelect('escolaridad')
+    
+
+
+}
+
+function borrarContenidoPorClase(clase) {
+
+    var inputs = document.querySelectorAll('.' + clase);
+
+    inputs.forEach(function (input) {
+
+        if (input.type === 'text' || input.type === 'textarea') {
+
+            input.value = '';
+        } else if (input.type === 'checkbox') {
+
+            input.checked = false;
+        } else {
+           
+            input.value = '';
+        }
+    });
+}
 
 function filtrosEstudiantes() {
     let idetificacion = document.getElementById('inputsearch').value.trim();

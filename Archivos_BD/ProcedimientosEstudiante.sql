@@ -95,7 +95,7 @@ create procedure `registrarFamiliar`(
     parentescoFamiliarEs varchar(400),
     responsabilidadEconomicaFamiliarEs varchar(400),
     esAcudiente varchar(400),
-    esdezplazado varchar(400),
+    esdesplazado varchar(400),
     fechaNacimientoAcudiente varchar(400),
     nivelEscolaridadAcudiente varchar(400),
     ubicacionAcudiente varchar(400),
@@ -103,14 +103,14 @@ create procedure `registrarFamiliar`(
     identificacionEstudianteEs long
 ) 
 begin
-	if (select existeFamiliarEstudiante(identificacionFamiliarEs) = 0) then
+	if ((FunexisteFamiliarEstudiante(identificacionFamiliarEs)) = 0) then
 		insert into Familiar (identificacionFamiliar, nombreFamiliar, ocupacionFamiliar, correoFamiliar, celularFamiliar, 
-							   parentescoFamiliar, responsabilidadEconomicaEstudiante, estadoAcudiente, dezplazado, fechaNacimiento,
-							   nivelEscolaridad, ubicacion, Genero_idGenero, Estudiante_idEstudiante)
+							   parentescoFamiliar, responsabilidadEconomicaEstudiante, estadoAcudiente, esDezplazado, fechaNacimiento,
+							   nivelEscolaridad, ubicacion, fkidGenero, Estudiante_idEstudiante)
 					value(identificacionFamiliarEs, nombreFamiliarEs, ocupacionFamiliarEs, correoFamiliarEs, celularFamiliarEs, parentescoFamiliarEs,
-						  responsabilidadEconomicaFamiliarEs, esAcudiente, esdezplazado, fechaNacimientoAcudiente, nivelEscolaridadAcudiente, ubicacionAcudiente,
+						  responsabilidadEconomicaFamiliarEs, esAcudiente, esdesplazado, fechaNacimientoAcudiente, nivelEscolaridadAcudiente, ubicacionAcudiente,
 						  (select ObtenerIdGenero(generoFamiliarEs)), (select ObtenerIdEstudiante(identificacionEstudianteEs)));
-		select 1;
+		select 1 as ValidacionRegistro;
 	end if;
 END$$
 
@@ -189,3 +189,11 @@ begin
 END$$
 
 
+DELIMITER $$
+DROP PROCEDURE IF EXISTS `existeFamiliarEstudiante` $$
+create procedure `existeFamiliarEstudiante`(identificacionFamiliar long) 
+begin
+    SELECT COUNT(*) > 0 AS existe_valor
+	FROM Familiar as f
+	WHERE f.identificacionFamiliar = identificacionFamiliar;
+END$$

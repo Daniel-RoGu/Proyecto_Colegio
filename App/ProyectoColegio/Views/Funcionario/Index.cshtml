@@ -94,7 +94,7 @@
                     </div>
 
                     <div class="detalles__boton">
-                        <a class="form-control form-control-sm bg-primary text-white text__decaoration" data-toggle="modal" data-target="#AgregarFamiliar">
+                        <a class="form-control form-control-sm bg-primary text-white text__decaoration" onclick="botoagregarFamliar()" data-toggle="modal" data-target="#AgregarFamiliar">
                             Agregar Familiar
                         </a>
                     </div>
@@ -121,7 +121,7 @@
         <div class="modal-content">
             <div class="modal-header py-1 border-0">
                 <h5 class="modal-title" id="exampleModalLabel">Agregar familiar</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="limpiarModalAgregarFamiliar()">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -133,25 +133,25 @@
                            
                             <div class="form-group form-group-sm py-0 my-0">
                                 <label for="" class="laber-form">Nombre completo</label>
-                                <input type="text" class="form-control form-control-sm" value="" placeholder="Nombre completo" id="nombreCompleto">
+                                <input type="text" class="form-control form-control-sm familiarcv" value="" placeholder="Nombre completo" id="nombreCompleto">
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="form-group form-group-sm py-0 my-0">
                                 <label for="" class="laber-form">Documento</label>
-                                <input type="text" class="form-control form-control-sm" value="" placeholder="Documento" id="documento">
+                                <input type="text" class="form-control form-control-sm familiarcv" value="" placeholder="Documento" id="documento">
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="form-group form-group-sm py-0 my-0">
                                 <label for="" class="laber-form">Fecha nacimiento</label>
-                                <input type="date" class="form-control form-control-sm" value="" placeholder="" id="fechanacimineto">
+                                <input type="date" class="form-control form-control-sm familiarcv" value="" placeholder="" id="fechanacimineto">
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="form-group form-group-sm py-0 my-0">
                                 <label for="" class="laber-form">Ocupación</label>
-                                <input type="text" class="form-control form-control-sm" value="" placeholder="Ocupación" id="ocupacion">
+                                <input type="text" class="form-control form-control-sm familiarcv" value="" placeholder="Ocupación" id="ocupacion">
                             </div>
                         </div>
                         <div class="col-6">
@@ -167,7 +167,7 @@
                         <div class="col-6">
                             <div class="form-group form-group-sm py-0 my-0">
                                 <label for="" class="laber-form">Numero celular</label>
-                                <input type="text" class="form-control form-control-sm" value="" placeholder="Numero celular" id="numeroceular">
+                                <input type="text" class="form-control form-control-sm familiarcv" value="" placeholder="Numero celular" id="numeroceular">
                             </div>
                         </div>
                         <div class="col-6">
@@ -186,13 +186,13 @@
                         <div class="col-6">
                             <div class="form-group form-group-sm py-0 my-0">
                                 <label for="" class="laber-form">Direccion de Familiar</label>
-                                <input type="text" class="form-control form-control-sm" value="" placeholder="Direccion de familiar" id="direccionfamiliar">
+                                <input type="text" class="form-control form-control-sm familiarcv" value="" placeholder="Direccion de familiar" id="direccionfamiliar">
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="form-group py-0 my-1">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="desplazado">
+                                    <input class="form-check-input familiarcv" type="checkbox" id="desplazado">
                                     <label class="form-check-label" for="gridCheck">
                                         Desplazado
                                     </label>
@@ -203,7 +203,7 @@
                         <div class="col-6">
                             <div class="form-group py-0 my-1">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="acudiente">
+                                    <input class="form-check-input familiarcv" type="checkbox" id="acudiente">
                                     <label class="form-check-label" for="gridCheck">
                                         Acudiente
                                     </label>
@@ -213,7 +213,7 @@
                         <div class="col-6">
                             <div class="form-group py-0 my-1">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="responsabilidadecomica">
+                                    <input class="form-check-input familiarcv" type="checkbox" id="responsabilidadecomica">
                                     <label class="form-check-label" for="gridCheck">
                                         Responsabilidad economica
                                     </label>
@@ -225,7 +225,7 @@
             </div>
             <div class="modal-footer border-0 py-1">
                 <div class="form-group d-flex">
-                    <input type="submit" class="form-control form-control-sm bg-secondary text-white" value="Cancelar" data-dismiss="modal" readonly>
+                    <input type="submit" class="form-control form-control-sm bg-secondary text-white" onclick="limpiarModalAgregarFamiliar()" id="cancelarFamiliar" value="Cancelar" data-dismiss="modal" readonly>
                     <input type="submit" class="form-control  form-control-sm bg-primary text-white" value="Guardar" readonly onclick="guardarFamiliarEstudiante()">
                 </div>
             </div>
@@ -246,81 +246,9 @@
                 </button>
             </div>
             <div class="modal-body">
-                <div class="detalles__estu py-2">
-                    <div class="detalles__text table_colums">
-                        <div class="colums__text">
-                            <span class="text__bold">Codigo estudiante: </span><span class="text__normal">2165465</span><br>
-                            <span class="text__bold">Nombre completo: </span><span class="text__normal">juanito perez nose</span><br>
 
-
-
-
-
-                        </div>
-                    </div>
-
-                    <div class="detalles__boton">
-                        <a class="form-control form-control-sm bg-primary text-white text__decaoration" data-toggle="modal" data-target="#RegistraObservacion">
-                            Registrar
-                        </a>
-                    </div>
-
-                </div>
-
-                <div class="table__container py-1 my-0">
-                    <table class="table table__information table__modals py-0 my-0">
-                        <thead>
-                            <tr>
-                                <th>NR</th>
-                                <th>Observacion</th>
-                                <th>Opciones</th>
-
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <!-- Puedes agregar filas con datos aquí -->
-                            <tr>
-                                <td>1</td>
-                                <td>Observación 1</td>
-                                <td>Opciones 1</td>
-
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Observación 2</td>
-                                <td>Opciones 2</td>
-
-                            </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>Observación 1</td>
-                                <td>Opciones 1</td>
-
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Observación 2</td>
-                                <td>Opciones 2</td>
-
-                            </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>Observación 1</td>
-                                <td>Opciones 1</td>
-
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Observación 2</td>
-                                <td>Opciones 2</td>
-
-                            </tr>
-
-                            <!-- Agrega más filas según sea necesario -->
-                        </tbody>
-                    </table>
-
-                </div>
+               
+         
             </div>
             <div class="modal-footer py-1 border-0">
 
@@ -333,39 +261,7 @@
     </div>
 </div>
 
-<div class="modal fade" id="RegistraObservacion" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered ">
-        <div class="modal-content">
-            <div class="modal-header py-1 border-0">
-                <h5 class="modal-title" id="exampleModalLabel">Registrar Observación</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body my-0">
-                <div class="container">
-                    <div class="form-row">
-                        <div class="col">
-                            <div class="form-group form-group-sm py-0 my-0">
 
-
-                                <textarea name="" id="" rows="10" class="form-control form-control-sm" value="" placeholder="Observacion"></textarea>
-                            </div>
-
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer border-0 py-1">
-                <div class="form-group d-flex">
-                    <input type="submit" class="form-control form-control-sm bg-secondary text-white" value="Cancelar" data-dismiss="modal" readonly>
-                    <input type="submit" class="form-control  form-control-sm bg-primary text-white" value="Guardar" readonly>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 
 
 <script  src="/js/GestionCV.js"></script>
