@@ -3,22 +3,17 @@
     public static class DatosCompartidos
     {
         private static string _miDato;
-<<<<<<< Updated upstream
-=======
         private static string _sedeUsuario;
         private static string _rolUsuario;
         private static string _idEstudiante;
         private static string _rutaPdf;
         private static bool _habilitadorNota;
->>>>>>> Stashed changes
 
         public static string MiDato
         {
             get { return _miDato; }
             set { _miDato = value; }
         }
-<<<<<<< Updated upstream
-=======
 
         public static string IdentificacionEstudiante
         {
@@ -49,7 +44,6 @@
             get { return _habilitadorNota; }
             set { _habilitadorNota = value; }
         }
->>>>>>> Stashed changes
     }
 
 }

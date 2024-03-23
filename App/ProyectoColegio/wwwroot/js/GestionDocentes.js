@@ -2,23 +2,7 @@ window.onload = async function () {
 
     selectorSede("");
     listargradosTodos("");
-<<<<<<< Updated upstream
-
-    listarTiposDeSangre("");
-    ListarTiposDeDocumento("");
-    ListarDiscapacidades("");
-    ListarSisben("");
-    ListarGeneros("");
-    ListarEPS("");
-    ListarEstratos("");
-
-    //Listas por agregrar
-    ListarSedes("");     
-    ListarAsignaturas("");
-    ListarDocentes("");
-=======
     obtenerlistadocentes(); 
->>>>>>> Stashed changes
 
 }
 
@@ -277,14 +261,6 @@ function listargradosTodos(valor) {
 
 
 
-<<<<<<< Updated upstream
-    selectElement.addEventListener("change", function () {
-
-        var selectedValue = selectElement.value;
-        var selectedText = selectElement.options[selectElement.selectedIndex].text;
-
-        if (selectedText === 'TODOS') { listargradosTodos("") } else { listargrados("", selectedText)};  
-=======
 
 
 function obtenerlistadocentes() {
@@ -579,29 +555,11 @@ function activarEscuchaSelectMateria(Nombre) {
         console.log('sede ' + Nombre + ' grado ' + selectedText)
         selectedText !== 'Selecciona una opción' ? listarMateriaporGrado("", Nombre, selectedText) : ''
 
->>>>>>> Stashed changes
 
 
     });
 }
 
-<<<<<<< Updated upstream
-function activarEscuchaSelectGeneral(idEtiqueta) {
-
-    var selectElement = document.getElementById(idEtiqueta);
-
-
-    selectElement.addEventListener("change", function () {
-
-        var selectedValue = selectElement.value;
-        var selectedText = selectElement.options[selectElement.selectedIndex].text;
-
-        if (selectedText === 'TODOS') { listargradosTodos("") } else { listargrados("", selectedText) };
-
-
-    });
-}
-=======
 
 
 
@@ -878,4 +836,3 @@ function PaginationTable(filasPorPagina, table) {
     botones();
 }
 
->>>>>>> Stashed changes

@@ -110,7 +110,7 @@ namespace ProyectoColegio.Data
                 tpsDiscapacidades.Add(tpDiscapacidades);
                 tpDiscapacidades = new List<string>();
             }
-
+            Console.WriteLine(tpsDiscapacidades);
             return tpsDiscapacidades;
 
         }

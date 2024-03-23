@@ -1,3 +1,4 @@
+/*-------orden de ejecucion de scripts ---------- Script Nº1*/
 use bdColegio;
 
 /*--------------------------Validar Registro TipoSangre-------------------------*/
@@ -101,6 +102,17 @@ begin
     SELECT COUNT(*) > 0 AS existe_valor
 	FROM Estudiante as est
 	WHERE est.Usuario_identificacion = identificacionUs;
+END$$
+
+/*--------------------------Validar existe Familiar Estudiante-------------------------*/
+
+DELIMITER $$
+DROP PROCEDURE IF EXISTS `existeFamiliarEstudiante` $$
+create procedure `existeFamiliarEstudiante`(identificacionFamiliar long) 
+begin
+    SELECT COUNT(*) > 0 AS existe_valor
+	FROM Familiar as f
+	WHERE f.identificacionFamiliar = identificacionFamiliar;
 END$$
 
 /*--------------------------Validar existencia Sede-------------------------*/
@@ -272,8 +284,6 @@ begin
 			   inner join Grados as g on gg.fkidGrado = g.idGrado
                where gg.idGradoGrupo = agg.fkidGradoGrupo) = dg.fkidGrado;
 END$$
-<<<<<<< Updated upstream
-=======
 
 
 /*--------------------------Validar existencia Docente-Asignatura-Grado-------------------------*/
@@ -333,4 +343,3 @@ begin
 	WHERE ha.fkidAsignatura = (select ObtenerIdAsignatura(nomAsignatura)) AND ha.fkidHorario = (select ObtenerIdHorario(rangoHorario, diaHorario));  
 END$$
 
->>>>>>> Stashed changes

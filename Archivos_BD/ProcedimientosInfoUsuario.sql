@@ -1,3 +1,4 @@
+/*-------orden de ejecucion de scripts ---------- Script Nº3*/
 use bdColegio;
 
 /*modificador de tabla para usar formato de texto utf8mb4*/
