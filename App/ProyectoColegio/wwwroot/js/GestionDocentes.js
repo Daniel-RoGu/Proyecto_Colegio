@@ -423,6 +423,58 @@ function AgregarDocentes() {
     selectorSedeDocente("");
 }
 
+function camposIncompletos() {
+    let camposSinCompletar = [];
+    let primerNombre = document.getElementById("Primernombredocente").value.trim();
+    let segundoNombre = document.getElementById("Segundonombredocente").value.trim();
+    let primerApellido = document.getElementById("primerapellido").value.trim();
+    let segundoApellido = document.getElementById("segundopellido").value.trim();
+    let documento = document.getElementById("documentoDocente").value.trim();
+    let lugarexpedicion = document.getElementById("lugarexpedicion").value.trim();
+    let tipoDocumento = document.getElementById("selecttipodocumento").value;
+    let fechaNacimiento = document.getElementById("fechanacimiento").value;
+    let edad = document.getElementById("edad").value.trim();
+    let tipoSangre = document.getElementById("selecttiposangre").value;
+    let celular = document.getElementById("celulardocente").value.trim();
+    let telefonoFijo = document.getElementById("telefonofijo").value.trim();
+    let correo = document.getElementById("correo").value.trim();
+    let tipoDiscapacidad = document.getElementById("selecttipodiscapacidad").value;
+    let direccion = document.getElementById("direccion").value.trim();
+    let sisben = document.getElementById("selecttiposisben").value;
+    let genero = document.getElementById("selecttipogenero").value;
+    let eps = document.getElementById("selecttipoeps").value;
+    let estrato = document.getElementById("selecttipoestrato").value;
+    let horasTrabajo = document.getElementById("horasTrabajo").value.trim();
+    let sede = document.getElementById("selectsededocente").value;
+
+
+    if (primerNombre === "") camposSinCompletar.push("Nombre");
+    if (primerApellido === "") camposSinCompletar.push("Primer Apellido");
+    if (documento === "") camposSinCompletar.push("Documento");
+    if (tipoDocumento === "") camposSinCompletar.push("Tipo Documento");
+    if (fechaNacimiento === "") camposSinCompletar.push("Fecha de Nacimiento");
+    if (edad === "") camposSinCompletar.push("Edad");
+    if (celular === "") camposSinCompletar.push("Celular");
+    if (correo === "") camposSinCompletar.push("Correo");
+    if (direccion === "") camposSinCompletar.push("Dirección");
+    if (horasTrabajo === "") camposSinCompletar.push("Horas de Trabajo");
+    if (segundoApellido === "") camposSinCompletar.push("Segundo Apellido");
+    if (lugarexpedicion === "") camposSinCompletar.push("Lugar de Expedición");
+    if (tipoSangre === "") camposSinCompletar.push("Tipo de Sangre");
+    if (telefonoFijo === "") camposSinCompletar.push("Teléfono Fijo");
+    if (tipoDiscapacidad === "") camposSinCompletar.push("Tipo de Discapacidad");
+    if (sisben === "") camposSinCompletar.push("Sisben");
+    if (genero === "") camposSinCompletar.push("Género");
+    if (eps === "") camposSinCompletar.push("EPS");
+    if (estrato === "") camposSinCompletar.push("Estrato");
+    if (sede === "") camposSinCompletar.push("Sede");
+    if(segundoNombre === "") camposSinCompletar.push("Segundo Nombre");
+
+
+
+    return camposSinCompletar;
+}
+
 
 function guardardocentes() {
 
@@ -431,6 +483,7 @@ function guardardocentes() {
     let primerApellido = document.getElementById("primerapellido").value;
     let segundoApellido = document.getElementById("segundopellido").value;
     let documento = document.getElementById("documentoDocente").value;
+    let lugarexpedicion = document.getElementById("lugarexpedicion").value;
     let tipoDocumento = document.getElementById("selecttipodocumento").value;
     let fechaNacimiento = document.getElementById("fechanacimiento").value;
     let edad = document.getElementById("edad").value;
@@ -451,6 +504,15 @@ function guardardocentes() {
     let frm = new FormData();
 
 
+    let camposSincompleta = camposIncompletos();
+
+    if (camposSincompleta.length > 0) {
+
+        return; 
+    }
+
+
+    frm.append('lugarNacimiento', lugarexpedicion)
     frm.append('nombreUsuario', primerNombre);
     frm.append('segundoNombreUsuario', segundoNombre);
     frm.append('apellidoUsuario', primerApellido);
@@ -552,7 +614,7 @@ function activarEscuchaSelectMateria(Nombre) {
         var selectedText = selectElement.value;
 
 
-        console.log('sede ' + Nombre + ' grado ' + selectedText)
+
         selectedText !== 'Selecciona una opción' ? listarMateriaporGrado("", Nombre, selectedText) : ''
 
 

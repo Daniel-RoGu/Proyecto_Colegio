@@ -310,6 +310,25 @@ function agregarHorario() {
 }
 
 
+function validarCamposClase() {
+    let camposSinCompletar = [];
+
+  
+    let dias = document.getElementById("selectdias").value;
+    let horas = document.getElementById("selectRangoHorario").value;
+    let materia = document.getElementById("materiaSelect").value;
+    let profesor = document.getElementById("profesor").value;
+
+   
+    if (dias === "") camposSinCompletar.push("Días");
+    if (horas === "") camposSinCompletar.push("Horas");
+    if (materia === "") camposSinCompletar.push("Materia");
+    if (profesor === "") camposSinCompletar.push("Profesor");
+
+    return camposSinCompletar;
+}
+
+
 
 function guardarHorarioForm() {
 
@@ -321,7 +340,12 @@ function guardarHorarioForm() {
     let materia = document.getElementById("materiaSelect").value;
     let profesor = document.getElementById("profesor").value;
 
+    let formulario = validarCamposClase();
 
+    if (formulario.length > 0) {
+
+        return
+    }
 
     let horarioFormData = new FormData();
 
