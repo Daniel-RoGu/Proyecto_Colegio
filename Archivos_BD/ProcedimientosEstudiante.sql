@@ -1,3 +1,4 @@
+/*-------orden de ejecucion de scripts ---------- Script Nº4*/
 use bdColegio;
 
 /*--------------------------Registrar Estudiante-------------------------*/
@@ -94,16 +95,14 @@ create procedure `registrarFamiliar`(
     parentescoFamiliarEs varchar(400),
     responsabilidadEconomicaFamiliarEs varchar(400),
     esAcudiente varchar(400),
+    esdesplazado varchar(400),
+    fechaNacimientoAcudiente varchar(400),
+    nivelEscolaridadAcudiente varchar(400),
+    ubicacionAcudiente varchar(400),
     generoFamiliarEs varchar(400),
     identificacionEstudianteEs long
 ) 
 begin
-<<<<<<< Updated upstream
-	insert into Familiar (identificacionFamiliar, nombreFamiliar, ocupacionFamiliar, correoFamiliar, celularFamiliar, 
-						   parentescoFamiliar, responsabilidadEconomicaEstudiante, estadoAcudiente, Genero_idGenero, Estudiante_idEstudiante)
-				value(identificacionFamiliarEs, nombreFamiliarEs, ocupacionFamiliarEs, correoFamiliarEs, celularFamiliarEs, parentescoFamiliarEs,
-					  responsabilidadEconomicaFamiliarEs, esAcudiente, (select ObtenerIdGenero(generoFamiliarEs)), (select ObtenerIdEstudiante(identificacionEstudianteEs)));
-=======
 	if ((FunexisteFamiliarEstudiante(identificacionFamiliarEs)) = 0) then
 		insert into Familiar (identificacionFamiliar, nombreFamiliar, ocupacionFamiliar, correoFamiliar, celularFamiliar, 
 							   parentescoFamiliar, responsabilidadEconomicaEstudiante, estadoAcudiente, esDezplazado, fechaNacimiento,
@@ -115,7 +114,6 @@ begin
 	else
 		select 0 as ValidacionRegistro;
 	end if;
->>>>>>> Stashed changes
 END$$
 
 /*--------------------------Registrar Observacion-------------------------*/
@@ -193,3 +191,11 @@ begin
 END$$
 
 
+DELIMITER $$
+DROP PROCEDURE IF EXISTS `existeFamiliarEstudiante` $$
+create procedure `existeFamiliarEstudiante`(identificacionFamiliar long) 
+begin
+    SELECT COUNT(*) > 0 AS existe_valor
+	FROM Familiar as f
+	WHERE f.identificacionFamiliar = identificacionFamiliar;
+END$$

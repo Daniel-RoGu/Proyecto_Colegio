@@ -1,3 +1,4 @@
+/*-------orden de ejecucion de scripts ---------- Script Nº5*/
 use bdColegio;
 
 /*--------------------------Registrar Funcionario-------------------------*/
@@ -457,3 +458,4 @@ begin
     where s.nombreSede = nomSede;
     
 END$$
+

@@ -1,3 +1,4 @@
+/*-------orden de ejecucion de scripts ---------- Script Nº6*/
 use bdColegio;
 
 /*--------------------------Registrar Docente-------------------------*/
@@ -203,7 +204,7 @@ begin
 		   u.identificacion as Identificacion, COALESCE((select ObtenerNombreTipoSangre(fkidTipoSangre)), "Sin Definir") as TipoSangre, 
 		   COALESCE((select ObtenerNombreGenero(fkidGenero)), "Sin Definir") as Genero, COALESCE(u.telefonoFijo, "Sin Definir") as TelefonoFijo, COALESCE(u.direccion, "Sin Definir") as Direccion, 
            COALESCE(u.telefonoCelular, "Sin Definir") as TelefonoCelular, COALESCE(u.correo, "Sin Definir") as Correo, COALESCE((select ObtenerNombreSede(d.fkidSede)), "Sin Definir") as Sede,
-           d.horasLaboralesSemanales as HorasTrabajo, COALESCE((select ObtenerNombreDiscapacidad(u.fkidDiscapacidad)), "Sin Definir") as Discapacidad,
+           COALESCE(d.horasLaboralesSemanales, "Sin Definir") as HorasTrabajo, COALESCE((select ObtenerNombreDiscapacidad(u.fkidDiscapacidad)), "Sin Definir") as Discapacidad,
            COALESCE((select ObtenerNombreSisben(u.fkidSisben)), "Sin Definir") as Sisben, COALESCE((select ObtenerNombreEstrato(u.fkidEstrato)), "Sin Definir") as Estrato,
            COALESCE((select ObtenerNombreEPS(u.fkidEPS)), "Sin Definir") as EPS		   
 	From Sede as s

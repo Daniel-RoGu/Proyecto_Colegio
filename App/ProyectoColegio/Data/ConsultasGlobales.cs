@@ -155,7 +155,7 @@ namespace ProyectoColegio.Data
             {
                 Console.WriteLine(ex.Message);
             }
-           
+            Console.WriteLine(Datos);
             return Datos;
         }
 

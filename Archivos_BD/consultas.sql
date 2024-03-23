@@ -4,7 +4,7 @@ GRANT EXECUTE ON PROCEDURE bdColegio.obtenerCodigoEstudiantes TO 'root'@'localho
 GRANT EXECUTE ON FUNCTION bdColegio.ObtenerCodigoEstudiante TO 'root'@'localhost';
 FLUSH PRIVILEGES;
 
-call registrarTipoSangre("O+");
+call registrarTipoSangre("O +");
 call registrarTipoDocumento("TI");
 call registrarTipoDocumento("CC");
 call registrarDiscapacidad("Limitaciones Motoras");
@@ -76,12 +76,13 @@ call registrarAsignatura('Probabilisticos');
 call registrarTipoNota('Definitiva');
 call registrarSede('Central');
 call registrarFamiliar(1117568978,"Alguien Roberto", "Doctor", null, "312654987", "Padre", "Completa", "MASCULINO", 1118377419);
+call registrarFamiliar(1117568978,"Alguien Roberto", "Doctor", null, "312654987", "Padre", "Si", "No", "No", "1981-12-18", "Bachiller", "Florencia", "MASCULINO", 1118377419);
 call obtenerFamiliaresEstudiante("1118377419");
 select ObtenerIdEstudiante("1118377419");
 
 call registrarFuncionario(12368974, "Alguien", null, "Soy", "Yo", 30, "321654", null, "AlguienSoyYo@Jhu.lalo", "Donde tu quieras", null, "2023-12-15", "O+", "CC", 
 						  "Ninguna", "Ninguno", "Masculino", "CAPRECOM EPS", "4", null, "Alta Aguililla");
-call registrarFuncionario(12987357, "Eva", null, "Sukuy", "Turu", 45, "32165584", null, "Alguien@Tu.lalo", "Donde", null, "1981-12-18", "O+", "CC", 
+call registrarFuncionario(12987357, "Eva", null, "Sukuy", "Turu", 45, "32165584", null, "Alguien@Tu.lalo", "Donde", null, "1981-12-18", "O +", "CC", 
 						  "Ninguna", "Ninguno", "Femenino", "CAPRECOM EPS", "5", null, "Central");
 
 SELECT CAST("12987357" AS SIGNED);

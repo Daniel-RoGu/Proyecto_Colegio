@@ -19,7 +19,12 @@ using DocumentFormat.OpenXml.EMMA;
 using Newtonsoft.Json;
 using Org.BouncyCastle.Asn1.Cms;
 using DocumentFormat.OpenXml.Wordprocessing;
-using Microsoft.Office.Interop.Excel;
+using Microsoft.AspNetCore.Http.Extensions;
+using Rotativa.AspNetCore;
+using DinkToPdf;
+using DinkToPdf.Contracts;
+using System.Linq;
+using static iText.Layout.Borders.Border;
 
 namespace ProyectoColegio.Controllers
 {
@@ -235,11 +240,122 @@ namespace ProyectoColegio.Controllers
             return Json(tiposAsignaturas);
         }
          
-        public JsonResult ListarDocentes()
+        public JsonResult ListarDocentesSedeInfoCompleta(string sede)
         {
-            List<object> tiposDocentes = variablesGlobales.Docentes(_contexto.Conexion);
+            List<DocenteInfo> listaDocentes = new List<DocenteInfo>();
+            DocenteInfo docente = new DocenteInfo();
+            List<object> tiposDocentes = variablesGlobales.DocentesSedeInfoCompleta(sede, _contexto.Conexion);
 
-            return Json(tiposDocentes);
+            foreach (List<string> item in tiposDocentes)
+            {
+                docente.IdDocente = Convert.ToString(item[0]);
+                docente.nombreDocente = Convert.ToString(item[1]);
+                docente.Identificacion = Convert.ToString(item[2]);
+                docente.TipoSangre = Convert.ToString(item[3]);
+                docente.Genero = Convert.ToString(item[4]);
+                docente.TelefonoFijo = Convert.ToString(item[5]);
+                docente.Direccion = Convert.ToString(item[6]);
+                docente.TelefonoCelular = Convert.ToString(item[7]);
+                docente.Correo = Convert.ToString(item[8]);
+                docente.Sede = Convert.ToString(item[9]);
+                docente.HorasTrabajo = Convert.ToString(item[10]);
+                docente.Discapacidad = Convert.ToString(item[11]);
+                docente.Sisben = Convert.ToString(item[12]);
+                docente.Estrato = Convert.ToString(item[13]);
+                docente.EPS = Convert.ToString(item[14]);
+                listaDocentes.Add(docente);
+                docente = new DocenteInfo();
+            }
+
+            return Json(listaDocentes);
+        }
+        
+        public JsonResult ListarEstudiantesSedeGrupo(string sede, string grupo, string identificacion)
+        {
+            List<object> estudiantes = new List<object>();
+            List<Usuario> usuarios = new List<Usuario>();
+            Usuario usuario = new Usuario();
+
+
+            if (sede != "null")
+            {
+                
+                if (grupo != "null")
+                {
+                    estudiantes = consultasGlobales.mostrarCsv(_contexto.Conexion, Convert.ToString(sede), Convert.ToString(grupo));
+                }
+                else
+                {
+                    estudiantes = consultasGlobales.mostrarCsv(_contexto.Conexion, Convert.ToString(sede), null);
+                }
+
+            }
+            else
+            {
+                estudiantes = consultasGlobales.mostrarCsv(_contexto.Conexion, null, null);
+            }
+
+            //organiza los resultados
+            foreach (List<string> item in estudiantes)
+            {
+                usuario = new Usuario();
+                usuario.Identificacion = (Convert.ToInt64(item[0]));
+                usuario.NombreUsuario = Convert.ToString(item[1]) +' ' + Convert.ToString(item[2]) + ' '+ Convert.ToString(item[3]) + ' ' + Convert.ToString(item[4]);
+                usuario.SegundoNombreUsuario = Convert.ToString(item[2]);
+                usuario.ApellidoUsuario = Convert.ToString(item[3]);
+                usuario.SegundoApellidoUsuario = Convert.ToString(item[4]);
+                usuario.Edad = Convert.ToInt16(item[5]);
+                usuario.TelefonoCelular = Convert.ToString(item[6]);
+                usuario.TelefonoFijo = Convert.ToString(item[7]);
+                usuario.Correo = Convert.ToString(item[8]);
+                usuario.Direccion = Convert.ToString(item[9]);
+                usuario.Barrio = Convert.ToString(item[10]);
+                usuario.FechaNacimiento = Convert.ToString(item[11]);
+                usuario.TipoSangre = Convert.ToString(item[12]);
+                usuario.TipoDocumento = Convert.ToString(item[13]);
+                usuario.Discapacidad = Convert.ToString(item[14]);
+                usuario.Sisben = Convert.ToString(item[15]);
+                usuario.Genero = Convert.ToString(item[16]);
+                usuario.EPS = Convert.ToString(item[17]);
+                usuario.Estrato = Convert.ToString(item[18]);
+                usuario.codigoEstudiante = Convert.ToString(item[19]);
+                usuario.Grado = Convert.ToString(item[20]);
+                usuario.Grupo = Convert.ToString(item[21]);
+                usuarios.Add(usuario);
+
+                if (identificacion != "null" && identificacion == item[0])
+                {
+                    usuarios = new List<Usuario>();
+                    usuarios.Add(usuario);
+                    Console.WriteLine(usuario);
+                    return Json(usuarios);
+                }
+            }
+            
+            return Json(usuarios);
+        }
+
+        public JsonResult obtenerInfoEstudiantePrincipalFamiliar (string identificacion)
+        {
+            List<object> estudiantes = new List<object>();
+            List<string> usuarios = new List<string>();
+
+            estudiantes = consultasGlobales.mostrarCsv(_contexto.Conexion, null, null);           
+
+            //organiza los resultados
+            foreach (List<string> item in estudiantes)
+            {
+                usuarios = new List<string>();
+                usuarios.Add(Convert.ToString(item[1]) + ' ' + Convert.ToString(item[2]) + ' ' + Convert.ToString(item[3]) + ' ' + Convert.ToString(item[4]));
+                usuarios.Add(Convert.ToString(item[19]));
+
+                if (identificacion != "null" && identificacion == item[0])
+                {
+                    return Json(usuarios);
+                }
+            }
+
+            return Json(usuarios);
         }
 
         public JsonResult ListarDocentesSede(string sede)
@@ -249,9 +365,9 @@ namespace ProyectoColegio.Controllers
             return Json(tiposDocentes);
         }
 
-        public JsonResult ListarDocentesSedeInfoCompleta(string sede)
+        public JsonResult ListarDocentes()
         {
-            List<object> tiposDocentes = variablesGlobales.DocentesSedeInfoCompleta(sede, _contexto.Conexion);
+            List<object> tiposDocentes = variablesGlobales.Docentes(_contexto.Conexion);
 
             return Json(tiposDocentes);
         }
@@ -371,8 +487,6 @@ namespace ProyectoColegio.Controllers
             return Json(infoDocenteGradoAsignatura);
         }
 
-<<<<<<< Updated upstream
-=======
         public JsonResult ListarTiposFamiliarEstudiante (string identificacion)
         {
             List<string> parentezcos = new List<string> { "Padre", "Madre", "Abuelo", "Abuela", "Tio", "Tia", "Hermano", "Hermana" };
@@ -544,7 +658,6 @@ namespace ProyectoColegio.Controllers
             return retorno;
         }
 
->>>>>>> Stashed changes
         public IActionResult CargarCsv()
         {
             //var gruposSede = variablesGlobales.GruposGradoSede("Central", _contexto.Conexion);
@@ -552,8 +665,8 @@ namespace ProyectoColegio.Controllers
             var identificacion = TempData["identificacion"];
             ViewBag.idetificacionUs = identificacion;
             var rol = TempData["rol"];
-            ViewBag.rol = rol;                      
-             
+            ViewBag.rol = rol;
+
             var sede = TempData["sede"];
             var grupo = TempData["grupo"];
             var identificacionEst = TempData["IdentificacionEst"];
@@ -566,15 +679,12 @@ namespace ProyectoColegio.Controllers
                 //muestra todos los estudiantes de la institucion
                 ViewBag.ListaEstudiante = consultasGlobales.mostrarCsv(_contexto.Conexion, null, null);
             }
-                                                
+
             if (sede != null)
             {
                 //muestra los estudiantes por sede
                 ViewBag.ListaEstudianteGrupo = consultasGlobales.mostrarCsv(_contexto.Conexion, Convert.ToString(sede), null);
-<<<<<<< Updated upstream
-=======
                 //ViewBag.GruposGrado = variablesGlobales.GruposGradoSede(Convert.ToString(sede), _contexto.Conexion);
->>>>>>> Stashed changes
                 ViewBag.SedeSeleccionada = sede;
 
                 if (grupo != null)
@@ -586,15 +696,20 @@ namespace ProyectoColegio.Controllers
 
                 Console.WriteLine(sede);
                 Console.WriteLine(grupo);
-            }       
+            }
 
             return View();
         }
 
+        public IActionResult Index() { 
+        
+        
+         return View();
+        }
+
         [HttpPost]
         public IActionResult CargarCsv(IFormFile file)
-        {
-
+        {            
             var tempFilePath = "";
 
             if (file != null && file.Length > 0)
@@ -813,6 +928,53 @@ namespace ProyectoColegio.Controllers
             ViewBag.RegistroTipoFamiliar = registroTipoFamiliar;
             ViewBag.Identificacion = Convert.ToInt64(identificacion);
             return View();
+        }
+
+
+        public string GuardarFamiliarEstudiante(Familiar familiar) 
+        {
+            string retorno = "";
+
+            if (familiar.parentescoFamiliar == "Madre" || familiar.parentescoFamiliar == "Tia" || familiar.parentescoFamiliar == "Abuela" || familiar.parentescoFamiliar == "Hermana")
+            {
+                familiar.genero = "Femenino";
+            }
+            else
+            {
+                familiar.genero = "Masculino";
+            }
+
+            try
+            {
+
+                Dictionary<string, object> parametros = new Dictionary<string, object>
+                {
+                    { "identificacionFamiliarEs", familiar.identificacionFamiliar },
+                    { "nombreFamiliarEs", familiar.nombresFamiliar },
+                    { "ocupacionFamiliarEs", familiar.ocupacionFamiliar },
+                    { "correoFamiliarEs", null },
+                    { "celularFamiliarEs", familiar.celularFamiliar },
+                    { "parentescoFamiliarEs", familiar.parentescoFamiliar },
+                    { "responsabilidadEconomicaFamiliarEs", familiar.responsabilidadEconomicaEstudiante },
+                    { "esAcudiente", familiar.estadoAcudiente },
+                    { "esdesplazado", familiar.desplazado },
+                    { "fechaNacimientoAcudiente", familiar.fechaNacimiento },
+                    { "nivelEscolaridadAcudiente", familiar.nivelEscolaridad },
+                    { "ubicacionAcudiente", familiar.ubicacion },
+                    { "generoFamiliarEs", familiar.genero },
+                    { "identificacionEstudianteEs", familiar.identificacionEstudiante },
+
+                };
+
+                var resultado = ManejoBaseDatos.EjecutarProcedimientoConMultiParametroYConsulta("registrarFamiliar", parametros, 1, _contexto.Conexion);
+                retorno = Convert.ToString(resultado[0]);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error al ejecutar el script: {ex.Message}");
+            }
+
+            return retorno;
         }
 
         [HttpPost]
@@ -1255,8 +1417,6 @@ namespace ProyectoColegio.Controllers
             return RedirectToAction("GestionAsignaturas", "Funcionario");
         }
 
-<<<<<<< Updated upstream
-=======
         public IActionResult gestionCertificados()
         {
             //var sede = TempData["sedeGestionCertificado"];
@@ -1309,7 +1469,6 @@ namespace ProyectoColegio.Controllers
             DatosCompartidos.IdentificacionEstudiante = idEstudiante;
         }
 
->>>>>>> Stashed changes
         public List<Object> ObtenerCodigoEstudiante(long identificacion)
         {
             /*Dictionary<string, object> parametros = new Dictionary<string, object>
