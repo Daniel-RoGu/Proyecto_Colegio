@@ -575,6 +575,7 @@ namespace ProyectoColegio.Controllers
                         { "horasTrabaja", docente.HorasLabora },
                         { "nomSede", docente.NombreSede }, //para seleccionar
                         { "documento", Convert.ToString(docente.identificacion) },
+                        { "lugarExpedicionDoc", Convert.ToString(docente.lugarNacimiento) },
                         { "nomUsuario", docente.nombreUsuario },
                         { "nom2Usuario", docente.segundoNombreUsuario },
                         { "apellidoUsuario", docente.apellidoUsuario },

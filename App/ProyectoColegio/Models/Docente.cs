@@ -4,6 +4,7 @@
     {
         private String? _estadoDocente { set; get; }
         public int _horasSemanalesLaborable { set; get; }
+        public String? lugarNacimiento { set; get; }
         private String? _nomSede { set; get; }
         public long? identificacion { get; set; }
         public String? nombreUsuario { get; set; }

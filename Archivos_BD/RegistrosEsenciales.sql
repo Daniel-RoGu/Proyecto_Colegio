@@ -8,8 +8,22 @@ call registrarModalidadEducativa("Sin definir");
 call registrarSede('Central');
 call registrarFuncionario(12987357, "Eva", null, "Sukuy", "Turu", 45, "32165584", null, "Alguien@Tu.lalo", "Donde", null, "1981-12-18", "O +", "CC:CEDULA", 
 						  "Ninguna", "Ninguno", "Femenino", "CAPRECOM EPS", "5", null, "Central");
-                          
-                          
+
+/*--------------------------------------------------------REGISTRO GRADOS------------------------------------------------------------*/
+
+call registrarGrado("0");                     
+call registrarGrado("1");                     
+call registrarGrado("2");                     
+call registrarGrado("3");                     
+call registrarGrado("4");                     
+call registrarGrado("5");                     
+call registrarGrado("6");                     
+call registrarGrado("7");                     
+call registrarGrado("8");                     
+call registrarGrado("9");                     
+call registrarGrado("10");                     
+call registrarGrado("11");                     
+
 /*--------------------------------------------------------REGISTRO ASIGNATURAS------------------------------------------------------------*/
 
 /*---------- GRADO 0º ----------*/
@@ -74,11 +88,15 @@ INSERT INTO Asignatura (nombreAsignatura, estadoAsignatura) VALUES ("Artística"
 INSERT INTO Asignatura (nombreAsignatura, estadoAsignatura) VALUES ("Emprendimiento", "Activa", 2); 
 /* Total, horas por grupo - 37*/
 
+call registrarAsignaturaGrado("Español", "1");
+
 /*--------------------------------------------------------REGISTRO DOCENTES------------------------------------------------------------*/
 call registrarDocente(null, "LA AGUILILLA", "1116919521", "EL DONCELLO", "ANGELA", "JIMENA", "LOZANO", "CASTAÑO", null, null, null, null, null, null,
 					  null, null, null, null, null, "Femenino", null, null);
 call registrarDocenteGrado2("ANGELA JIMENA LOZANO CASTAÑO", 0);
 call registrarDocenteGrado2("ANGELA JIMENA LOZANO CASTAÑO", 1);
+
+call registrarDocenteAsignatura("Edector Cumbai Cutui", "Español");
 
 call registrarDocente(null, "LA AGUILILLA", "96360484", "PUERTO RICO", "RENAN", "EIGMER", "LOZANO", "OSPINA", null, null, null, null, null, null,
 					  null, null, null, null, null, "Masculino", null, null);

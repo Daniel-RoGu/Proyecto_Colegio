@@ -246,7 +246,7 @@ CALL RegistrarHorario("Central", "");
 call ObtenerInfoDocentesTodos();
 call ObtenerInfoGradosAsignaturasDocentes(187000);
 call ObtenerGradosAsignaturasDocentes(187000);
-call ObtenerAsignaturasGrado("Central", 207010);
+call ObtenerAsignaturasGrado("Central", "207010");
 call ObtenerInfoFamiliaresEstudiante_Certificados('1118073451');
 call RegistrarHorario("Central", "Español", "1202", 585, "Lunes", "06:00-07:00");
 call RegistrarHorario("Central", "Español", "1202", 585, "Viernes", "06:00-07:00");

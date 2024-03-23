@@ -338,7 +338,7 @@ function generarTablaCargueInventario(
     propiedades,
     propiedadId
 ) {
-    console.log(cabezera)
+
 
     var contenedor = "<table class='table table__information table-sm'>";
     contenedor += "<thead >";
