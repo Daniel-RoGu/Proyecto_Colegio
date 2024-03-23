@@ -18,6 +18,19 @@ namespace ProyectoColegio.Controllers
             _contexto = contexto;
         }
 
+        public JsonResult ListarDocenteAsignaturas(int grado)
+        {
+            var DocentesAsignatura = variablesGlobales.DocenteAsignaturas(DatosCompartidos.SedeUsuario, grado, Convert.ToInt64(DatosCompartidos.MiDato), _contexto.Conexion);
+            List<object> docentes = new List<object>();
+
+            foreach (var item in DocentesAsignatura)
+            {
+                docentes.Add(item);
+            }
+
+            return Json(docentes);
+        }
+
         //[HttpPost]
         public IActionResult Index() { 
 
@@ -76,17 +89,7 @@ namespace ProyectoColegio.Controllers
         public IActionResult Principal(string Grupo)
         {
             return RedirectToAction("Principal", "Docente");
-        }
-
-        public IActionResult controlHabilitacionCargueNotaPeriodo(bool habilitarCargueNotaFinal)
-        {
-            if (habilitarCargueNotaFinal!=null)
-            {
-                TempData["habilitarCargueNotaFinal"] = habilitarCargueNotaFinal;
-            }
-
-            return RedirectToAction("Inicio", "Login");
-        }
+        }        
 
         [HttpPost]
         public IActionResult obtenerGrupoSeleccionado(string Grupos)

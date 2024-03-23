@@ -375,4 +375,146 @@ begin
 	FROM Grados as g
 	WHERE g.nombreGrado = nomGrado);
     RETURN resultado;
+<<<<<<< Updated upstream
+=======
+END$$
+
+/*------buscar existencia Docente Horario-----*/
+DELIMITER $$
+CREATE FUNCTION existeDocenteHorario(idDocenteRef varchar(400), rangoHorario varchar(400), diaHorario varchar(400))
+RETURNS int
+READS SQL DATA 
+begin
+	DECLARE resultado int;
+    SET resultado = (SELECT COUNT(*) > 0 AS existe_valor
+	FROM horarioDocente as hA
+	WHERE hA.fkidDocente = idDocenteRef AND hA.fkidHorario = (select ObtenerIdHorario(rangoHorario, diaHorario)));
+    RETURN resultado;
+END$$
+
+/*--------------------------buscar existencia Grupo Horario-------------------------*/
+DELIMITER $$
+CREATE FUNCTION existeGrupoHorario(nomGrupo varchar(400), rangoHorario varchar(400), diaHorario varchar(400))
+RETURNS int
+READS SQL DATA 
+begin
+	DECLARE resultado int;
+    SET resultado = (SELECT COUNT(*) > 0 AS existe_valor
+	FROM horarioGradoGrupo AS hgg
+	WHERE hgg.fkidGradoGrupo = (select ObtenerIdGradoGrupo(nomGrupo)) AND hgg.fkidHorario = (select ObtenerIdHorario(rangoHorario, diaHorario)));
+    RETURN resultado;
+END$$
+
+/*--------------------------buscar existencia Asignatura Horario-------------------------*/
+DELIMITER $$
+CREATE FUNCTION existeAsignaturaHorario(nomAsignatura varchar(400), rangoHorario varchar(400), diaHorario varchar(400))
+RETURNS int
+READS SQL DATA 
+begin
+	DECLARE resultado int;
+    SET resultado = (SELECT COUNT(*) > 0 AS existe_valor
+	FROM horarioAsignatura AS ha
+	WHERE ha.fkidAsignatura = (select ObtenerIdAsignatura(nomAsignatura)) AND ha.fkidHorario = (select ObtenerIdHorario(rangoHorario, diaHorario)));
+    RETURN resultado;
+END$$
+
+/*--------------------------buscar existencia Horario-------------------------*/
+DELIMITER $$
+CREATE FUNCTION existeHorario(rangoHorario varchar(400), diaHorario varchar(400))
+RETURNS int
+READS SQL DATA 
+begin
+	DECLARE horaInicioClase VARCHAR(400);
+    DECLARE horaFinClase VARCHAR(400);
+	DECLARE resultado int;
+    
+    SET horaInicioClase = LEFT(SUBSTRING_INDEX(rangoHorario, '-', 1), 5); /*En (06:00-07:00) obtiene la primera hora*/
+    SET horaFinClase = RIGHT(SUBSTRING_INDEX(rangoHorario, '-', -1), 5); /*En (06:00-07:00) obtiene la segunda hora*/
+    
+    SET resultado = (SELECT COUNT(*) > 0 AS existe_valor
+	FROM Horario AS h
+	WHERE h.horaInicio = horaInicioClase AND h.horaFin = horaFinClase AND h.diaHorario = diaHorario);
+    RETURN resultado;
+END$$
+
+/*------buscar id de Existe Familiar Estudiante-----*/
+DELIMITER $$
+CREATE FUNCTION FunexisteFamiliarEstudiante(identificacionFamiliar long)
+RETURNS int
+READS SQL DATA 
+begin	
+	DECLARE resultado int;
+    SET resultado = (SELECT COUNT(*) > 0 AS existe_valor
+	FROM Familiar as f
+	WHERE f.identificacionFamiliar = identificacionFamiliar);
+    RETURN resultado;
+END$$
+
+/*------buscar id de Existe Docente Grado y Asignatura-----*/
+DELIMITER $$
+CREATE FUNCTION FunExisteDocenteAsignaturaGrado(idDocenteRef int, nomAsignatura varchar(400), idGradoR int)
+RETURNS int
+READS SQL DATA 
+begin
+	DECLARE resultado int;
+	DECLARE idAsignaturaRef INT;
+    DECLARE idGradoRef INT;
+    
+    SET idAsignaturaRef = (SELECT a.idAsignatura FROM Asignatura as a
+						   WHERE a.nombreAsignatura = nomAsignatura);
+    SET idGradoRef = (SELECT g.idGrado FROM Grados as g 
+				      WHERE g.idGrado = idGradoR);
+	
+    SET resultado = (SELECT COUNT(*) > 0 AS existe_valor
+					FROM Docente AS d
+					INNER JOIN DocenteAsignatura AS da ON da.fkidDocente = d.idDocente AND da.fkidAsignatura = idAsignaturaRef
+					LEFT JOIN DocentesGrado AS dg ON dg.fkidDocente = d.idDocente AND dg.fkidGrado = idGradoRef
+					WHERE d.idDocente = idDocenteRef);
+    
+    RETURN resultado;
+END$$
+
+/*------buscar si Existe Registro Nota Final-----*/
+DELIMITER $$
+CREATE FUNCTION FunexisteNotaFinal()
+RETURNS int
+READS SQL DATA 
+begin	
+	DECLARE resultado int;
+    SET resultado = (SELECT COUNT(*) > 0 AS existe_valor
+	FROM NotaFinal);
+    RETURN resultado;
+END$$
+
+/*------buscar id de Existe Nota Definitiva Periodo-----*/
+DELIMITER $$
+CREATE FUNCTION FunexisteNotaDefinitivaPeriodo(idperiodo long)
+RETURNS int
+READS SQL DATA 
+begin	
+	DECLARE resultado int;
+    SET resultado = (SELECT COUNT(*) > 0 AS existe_valor
+	FROM NotaDefinitivaPeriodo as ndp
+	WHERE ndp.fkidPeriodoAcademico = idperiodo);
+    RETURN resultado;
+END$$
+
+/*------Obtener ID Horario por rango_horario-----*/
+DELIMITER $$
+CREATE FUNCTION ObtenerIdHorario(rangoHorario VARCHAR(400),  diaHorarioClase VARCHAR(400))
+RETURNS int
+READS SQL DATA 
+begin
+	DECLARE resultado int;
+    DECLARE horaInicioClase VARCHAR(400);
+    DECLARE horaFinClase VARCHAR(400);
+    
+    SET horaInicioClase = LEFT(SUBSTRING_INDEX(rangoHorario, '-', 1), 5); /*En (06:00-07:00) obtiene la primera hora*/
+    SET horaFinClase = RIGHT(SUBSTRING_INDEX(rangoHorario, '-', -1), 5); /*En (06:00-07:00) obtiene la segunda hora*/
+    
+    SET resultado = (SELECT h.idHorario FROM Horario as h
+					 WHERE h.horaInicio = horaInicioClase and h.horaFin = horaFinClase and h.diaHorario = diaHorarioClase);
+    
+    RETURN resultado;
+>>>>>>> Stashed changes
 END$$

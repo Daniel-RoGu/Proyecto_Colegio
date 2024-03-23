@@ -265,6 +265,40 @@ namespace ProyectoColegio.Data
 
         }
 
+        public List<object> DocentesTodos(string conexion)
+        {
+            List<object> tpsDocentes = new List<object>();
+
+            Dictionary<string, Type> atributosDocente = new Dictionary<string, Type>
+            {
+                { "IdDocente", typeof(string) },
+                { "Docente", typeof(string) },
+                { "Identificacion", typeof(string) },
+                { "TipoSangre", typeof(string) },
+                { "Genero", typeof(string) },
+                { "TelefonoFijo", typeof(string) },
+                { "Direccion", typeof(string) },
+                { "TelefonoCelular", typeof(string) },
+                { "Correo", typeof(string) },
+                { "Sede", typeof(string) },
+                { "HorasTrabajo", typeof(string) },
+                { "Discapacidad", typeof(string) },
+                { "Sisben", typeof(string) },
+                { "Estrato", typeof(string) },
+                { "EPS", typeof(string) },
+            };
+
+            var resultados = ManejoBaseDatos.ConsultarProcedimientoDinamico("ObtenerInfoDocentesTodos", atributosDocente, conexion);
+
+            foreach (List<object> item in resultados)
+            {
+                tpsDocentes.Add(item);
+            }
+
+            return tpsDocentes;
+
+        }
+
         public List<object> DocentesSede (string Sede, string conexion)
         {
             List<string> DocenteSd = new List<string>();
@@ -288,15 +322,24 @@ namespace ProyectoColegio.Data
             // Llamar al método
             List<Object> resultados = ManejoBaseDatos.EjecutarProcedimientoConParametroYConsulta(nombreProcedimiento, nombreParametro, Sede, numeroAtributos, conexion);
 
-            foreach (List<Object> item in resultados)
+            if (resultados.Count < 3) // cada registro trae dos datos por docente
             {
-                DocenteSd.Add(Convert.ToString(item[0]));
-                DocenteSd.Add(Convert.ToString(item[1]));
-                DocentesSd.Add(DocenteSd);
-                DocenteSd = new List<string>();
+                DocenteSd.Add(Convert.ToString(resultados));
+                return resultados;
             }
+            else
+            {
+                foreach (List<Object> item in resultados)
+                {
+                    DocenteSd.Add(Convert.ToString(item[0]));
+                    DocenteSd.Add(Convert.ToString(item[1]));
+                    DocentesSd.Add(DocenteSd);
+                    DocenteSd = new List<string>();
+                
+                }
 
-            return DocentesSd;
+                return DocentesSd;
+            }
 
         }
 
@@ -355,6 +398,112 @@ namespace ProyectoColegio.Data
 
         }
 
+        public List<object> DocenteSedeInfoParcial(int identificadorRef, string conexion)
+        {
+            List<object> DocentesSd = new List<object>();
+
+            Dictionary<string, Type> atributos = new Dictionary<string, Type>
+            {
+                { "Docente", typeof(string) },
+                { "Identificacion", typeof(string) },
+                { "Sede", typeof(string) },
+                // ...
+            };
+
+            //inecesario la creaccion del diccionario, pero es un ejemplo optimo para identificar el porque del valor
+            int numeroAtributos = atributos.Count;
+
+            // Definir los parámetros necesarios para el procedimiento almacenado
+            string nombreProcedimiento = "ObtenerInfoGradosAsignaturasDocentes";
+            string nombreParametro = "identificadorDocente";
+
+            // Llamar al método
+            var resultados = ManejoBaseDatos.EjecutarProcedimientoConParametroYConsulta(nombreProcedimiento, nombreParametro, identificadorRef, numeroAtributos, conexion);
+            List<string> lista = new List<string>();
+
+            foreach (var item in resultados)
+            {
+
+                if (lista.Count > (numeroAtributos - 1))
+                {
+                    lista = new List<string>();
+
+                }
+                else if (lista.Count == (numeroAtributos - 1))
+                {
+                    DocentesSd.Add(lista);
+                }
+
+                lista.Add(item.ToString());
+            }
+
+            return DocentesSd;
+
+        }
+
+        public List<object> DocenteSedeInfoGradoAsignatura(int identificadorRef, string conexion)
+        {
+            List<object> DocentesSd = new List<object>();
+
+            Dictionary<string, Type> atributos = new Dictionary<string, Type>
+            {
+                { "Asignatura", typeof(string) },
+                { "Grado", typeof(string) },
+                // ...
+            };
+
+            //inecesario la creaccion del diccionario, pero es un ejemplo optimo para identificar el porque del valor
+            int numeroAtributos = atributos.Count;
+
+            // Definir los parámetros necesarios para el procedimiento almacenado
+            string nombreProcedimiento = "ObtenerGradosAsignaturasDocentes";
+            string nombreParametro = "identificadorDocente";
+
+            // Llamar al método
+            var resultados = ManejoBaseDatos.EjecutarProcedimientoConParametroYConsulta(nombreProcedimiento, nombreParametro, identificadorRef, numeroAtributos, conexion);
+            List<string> lista = new List<string>();
+
+            foreach (var item in resultados)
+            {
+
+                if (lista.Count > (numeroAtributos - 1))
+                {
+                    lista = new List<string>();
+
+                }
+                else if (lista.Count == (numeroAtributos - 1))
+                {
+                    DocentesSd.Add(lista);
+                }
+
+                lista.Add(item.ToString());
+            }
+
+            return DocentesSd;
+
+        }
+
+        public List<string> AsignaturasGrado(string sede, int idGrado, string conexion)
+        {
+            var resultados = new List<object>();
+            List<string> docentes = new List<string>();
+
+            Dictionary<string, object> parametros = new Dictionary<string, object>
+                {
+                    { "sedeRef", sede },
+                    { "idGradoRef", idGrado },
+                };
+
+            resultados = ManejoBaseDatos.EjecutarProcedimientoConMultiParametroYConsulta("ObtenerAsignaturasGrado", parametros, 1, conexion);
+
+            foreach (var item in resultados)
+            {
+                docentes.Add(Convert.ToString(item));
+            }
+
+            return docentes;
+        }
+
         public List<string> DocentesSedeGrupo (string Sede,string Grupo, string conexion) 
         {
             var resultados = new List<object>();
@@ -373,6 +522,47 @@ namespace ProyectoColegio.Data
                 docentes.Add(Convert.ToString(item));
             }
 
+            return docentes;
+        }
+
+
+        public List<object> DocentesAsignaturasGrupo(string Sede, int idGradoRef, string nomAsignatura, string conexion)
+        {
+            List<object> docentes = new List<object>();
+
+            Dictionary<string, object> parametros = new Dictionary<string, object>
+                {
+                    { "sedeRef", Sede },
+                    { "idGradoRef", idGradoRef },
+                    { "nomAsignatura", nomAsignatura },
+                };
+
+            var resultados = ManejoBaseDatos.EjecutarProcedimientoConMultiParametroYConsulta("GradosAsignaturasDocentes", parametros, 2, conexion);
+
+            foreach (object item in resultados)
+            {
+                docentes.Add(item);
+            }
+            return docentes;
+        }
+
+        public List<object> DocenteAsignaturas(string Sede, int idGradoRef, long identificacionDocente, string conexion)
+        {
+            List<object> docentes = new List<object>();
+
+            Dictionary<string, object> parametros = new Dictionary<string, object>
+                {
+                    { "sedeRef", Sede },
+                    { "idGradoRef", idGradoRef },
+                    { "identificacionDocente", identificacionDocente },
+                };
+
+            var resultados = ManejoBaseDatos.EjecutarProcedimientoConMultiParametroYConsulta("AsignaturasDelDocente", parametros, 2, conexion);
+
+            foreach (object item in resultados)
+            {
+                docentes.Add(item);
+            }
             return docentes;
         }
 
@@ -451,13 +641,14 @@ namespace ProyectoColegio.Data
 
         }
 
-        public List<object> GruposGradoSede(string sede, string conexion)
+        public List<object> GruposGradoSede(string sede, string grado, string conexion)
         {
             List<object> gruposSede = new List<object>();
 
             Dictionary<string, object> parametros = new Dictionary<string, object>
             {
-                 { "sedeGradoGrupo", sede },
+                 { "sedeRef", sede },
+                 { "gradoRef", grado },
             };
 
             int grupoAtributosEsperadosGruposSede = 2; // numero de id y nombre grupo
@@ -474,7 +665,108 @@ namespace ProyectoColegio.Data
             return gruposSede;
 
         }
-        
+
+        public List<object> GruposDocente(string sede, string grado, long documentoDocente, string conexion)
+        {
+            List<object> gruposSede = new List<object>();
+
+            Dictionary<string, object> parametros = new Dictionary<string, object>
+            {
+                 { "sedeRef", sede },
+                 { "GradoRef", grado },
+                 { "documentoDocente", documentoDocente },
+            };
+
+            int grupoAtributosEsperadosGruposSede = 2; // numero de id y nombre grupo
+
+            var resultados = ManejoBaseDatos.EjecutarProcedimientoConMultiParametroYConsulta("ObtenerDocenteGrupos", parametros, grupoAtributosEsperadosGruposSede, conexion);
+
+            List<object> lista = new List<object>();
+
+            foreach (var item in resultados)
+            {
+                gruposSede.Add(item);
+            }
+
+            return gruposSede;
+
+        }
+
+        public List<object> GradosDocente(string sede, long documentoDocente, string conexion)
+        {
+            List<object> gruposSede = new List<object>();
+
+            Dictionary<string, object> parametros = new Dictionary<string, object>
+            {
+                 { "sedeRef", sede },
+                 { "documentoDocente", documentoDocente },
+            };
+
+            int grupoAtributosEsperadosGruposSede = 2; // numero de id y nombre grupo
+
+            var resultados = ManejoBaseDatos.EjecutarProcedimientoConMultiParametroYConsulta("ObtenerDocenteGrados", parametros, grupoAtributosEsperadosGruposSede, conexion);
+
+            List<object> lista = new List<object>();
+
+            foreach (var item in resultados)
+            {
+                gruposSede.Add(item);
+            }
+
+            return gruposSede;
+
+        }
+
+        public List<object> InfoDetalleHorarioFuncionario(string sede, string grupo, string conexion)
+        {
+            List<object> detalleHorario = new List<object>();
+
+            Dictionary<string, object> parametros = new Dictionary<string, object>
+            {
+                 { "nombreSedeRH", sede },
+                 { "nomGrupo", grupo },
+            };
+
+            int AtributosInfoDetalleHorarioFuncionario = 4; // rangoHorario, diaHorario, nombreDocente y NombreAsignatura
+
+            var resultados = ManejoBaseDatos.EjecutarProcedimientoConMultiParametroYConsulta("MostrarHorario", parametros, AtributosInfoDetalleHorarioFuncionario, conexion);
+
+            List<object> lista = new List<object>();
+
+            foreach (var item in resultados)
+            {
+                detalleHorario.Add(item);
+            }
+
+            return detalleHorario;
+        }
+
+        public List<object> InfoDetalleHorarioFuncionario2(string sede, string grupo, string rango, string dia, string conexion)
+        {
+            List<object> detalleHorario = new List<object>();
+
+            Dictionary<string, object> parametros = new Dictionary<string, object>
+            {
+                 { "nombreSedeRH", sede },
+                 { "nomGrupo", grupo },
+                 { "rangoHorario", rango },
+                 { "dia", dia },
+            };
+
+            int AtributosInfoDetalleHorarioFuncionario = 4; // rangoHorario, diaHorario, nombreDocente y NombreAsignatura
+
+            var resultados = ManejoBaseDatos.EjecutarProcedimientoConMultiParametroYConsulta("MostrarHorarioPorRango", parametros, AtributosInfoDetalleHorarioFuncionario, conexion);
+
+            List<object> lista = new List<object>();
+
+            foreach (var item in resultados)
+            {
+                detalleHorario.Add(item);
+            }
+
+            return detalleHorario;
+        }
+
         public List<object> GradoSede(string sede, string conexion)
         {
             List<object> gradosSede = new List<object>();

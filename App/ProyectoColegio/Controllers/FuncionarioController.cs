@@ -58,18 +58,125 @@ namespace ProyectoColegio.Controllers
             return Json(grupos);
         }
 
-        public JsonResult ListarGruposGradoSede(string sede)
+        public JsonResult ListarGruposGradoSede(string sede, string grado)
         {
-            List<object> grupos = variablesGlobales.GruposGradoSede(sede, _contexto.Conexion);
-
-           return Json(grupos);
+            List<object> grupos = variablesGlobales.GruposGradoSede(sede, grado, _contexto.Conexion);
+            return Json(grupos);
         }
-        
+
+        public JsonResult ListarGruposDocente(string grado)
+        {
+            List<object> grupos = variablesGlobales.GruposDocente(DatosCompartidos.SedeUsuario, grado, Convert.ToInt64(DatosCompartidos.MiDato), _contexto.Conexion);
+            return Json(grupos);
+        }
+
+        public JsonResult ListarGradosDocente()
+        {
+            List<object> grupos = variablesGlobales.GradosDocente(DatosCompartidos.SedeUsuario, Convert.ToInt64(DatosCompartidos.MiDato), _contexto.Conexion);
+            return Json(grupos);
+        }
+
         public JsonResult ListarGradoSede(string sede)
         {
             List<object> grado = variablesGlobales.GradoSede(sede, _contexto.Conexion);
 
            return Json(grado);
+        }
+
+        public JsonResult Jornada(string jornadaSelect)
+        {
+            List<string> rangoHorario = new List<string>();
+
+            if (jornadaSelect != null)
+            {
+                if (jornadaSelect == "AM")
+                {
+                    rangoHorario = new List<string> { "06:00-07:00", "07:00-08:00", "08:00-09:00", "09:00-10:00", "10:00-11:00", "11:00-12:00" };
+                }
+                else if (jornadaSelect == "PM")
+                {
+                    rangoHorario = new List<string> { "12:00-01:00", "01:00-02:00", "02:00-03:00", "03:00-04:00", "04:00-05:00", "05:00-06:00" };
+                }
+               
+                
+            }
+
+            return Json(rangoHorario);
+        }
+
+
+        public List<string> JornadaLista(string jornadaSelect)
+        {
+            List<string> rangoHorario = new List<string>();
+
+            if (jornadaSelect != null)
+            {
+                if (jornadaSelect == "AM")
+                {
+                    rangoHorario = new List<string> { "06:00-07:00", "07:00-08:00", "08:00-09:00", "09:00-10:00", "10:00-11:00", "11:00-12:00" };
+                }
+                else if (jornadaSelect == "PM")
+                {
+                    rangoHorario = new List<string> { "12:00-01:00", "01:00-02:00", "02:00-03:00", "03:00-04:00", "04:00-05:00", "05:00-06:00" };
+                }
+            }
+
+            return rangoHorario;
+        }        
+
+        //https://localhost:7227/Funcionario/horarioDiego/?sede=Central&grupogrado=1202&jornada=AM
+        public JsonResult horarioacademico(string sede, string grupogrado, string jornada) {
+            List<string> rangos= new List<string>();
+            rangos = JornadaLista(jornada);
+            List<string> lisdias = new List<string> { "Lunes", "Martes", "Miercoles", "Jueves", "Viernes" };
+            List<Clase> clases = new List<Clase>();
+
+            foreach (string rango in rangos) {                
+                Clase clase = new Clase();      
+                List<Dia> dias = new List<Dia>();
+
+                foreach (string dia in lisdias) {
+                    
+                    var resultadoBd = variablesGlobales.InfoDetalleHorarioFuncionario2(sede, grupogrado, rango, dia, _contexto.Conexion);
+                    Detalle detalleDia = new Detalle();
+                    Dia diasemana = new Dia();
+
+                    if (resultadoBd != null && resultadoBd.Count > 0)
+                    {
+                        foreach (List<Object> item in resultadoBd)
+                        {
+                            detalleDia.MateriaHorario = "Asignatura: " + Convert.ToString(item[3]);
+                            detalleDia.DocenteHorario = "Docente: " + Convert.ToString(item[2]);
+                            diasemana.diaSemana = dia;
+                            diasemana.detalleH = detalleDia;
+                        }
+
+                    }
+                    else
+                    {
+                        //Detalle detalleDia = new Detalle();
+                        detalleDia.MateriaHorario = "Asigantura: Sin definir";
+                        detalleDia.DocenteHorario = "Docente: Sin definir";
+                        //Dia diasemana = new Dia();
+                        diasemana.diaSemana = dia;
+                        diasemana.detalleH = detalleDia;
+                        
+                    }
+
+                    dias.Add(diasemana);
+                    detalleDia = null;
+                    diasemana = null;
+
+                }
+                clase.rango = rango;
+                clase.dias = dias;
+
+                clases.Add(clase);  
+                    dias = null;
+            }
+
+
+            return Json(clases);  
         }
         
         public JsonResult ListarTiposDeSangre()
@@ -148,6 +255,62 @@ namespace ProyectoColegio.Controllers
 
             return Json(tiposDocentes);
         }
+        
+        public JsonResult ListarDocentesTodos(string identificacion, string sede, string grupo)
+        {
+            List<DocenteInfo> docentes = new List<DocenteInfo>();
+            List<DocenteInfo> docenteSede = new List<DocenteInfo>();
+            List<object> tiposDocentes = new List<object>();
+            
+            if (sede != "null" && sede != null && grupo != "null" && grupo != null) // != "Null" por que se envia ese valor desde el JS para validad que null
+            {
+                tiposDocentes = variablesGlobales.DocentesSedeGrupoInfoCompleta(sede, grupo, _contexto.Conexion);
+            }
+            else
+            {
+                tiposDocentes = variablesGlobales.DocentesTodos(_contexto.Conexion);
+            }
+
+            foreach (List<Object> item in tiposDocentes)
+            {
+                DocenteInfo datos = new DocenteInfo();
+
+                datos.IdDocente = (Convert.ToString(item[0]));
+                datos.nombreDocente = (Convert.ToString(item[1]));
+                datos.Identificacion = (Convert.ToString(item[2]));
+                datos.TipoSangre = (Convert.ToString(item[3]));
+                datos.Genero = (Convert.ToString(item[4]));
+                datos.TelefonoFijo = (Convert.ToString(item[5]));
+                datos.Direccion = (Convert.ToString(item[6]));
+                datos.TelefonoCelular = (Convert.ToString(item[7]));
+                datos.Correo = (Convert.ToString(item[8]));
+                datos.Sede = (Convert.ToString(item[9]));
+                datos.HorasTrabajo = (Convert.ToString(item[10]));
+                datos.Discapacidad = (Convert.ToString(item[11]));
+                datos.Sisben = (Convert.ToString(item[12]));
+                datos.Estrato = (Convert.ToString(item[13]));
+                datos.EPS = (Convert.ToString(item[14]));
+                docentes.Add(datos);
+
+                if(sede != "null" && sede != null && sede == Convert.ToString(item[9]))
+                {
+                    docenteSede.Add(datos);
+                }
+                if (identificacion != "null" && identificacion != null && Convert.ToString(item[2]) == identificacion)
+                {
+                    docentes = new List<DocenteInfo>();
+                    docentes.Add(datos);
+                    return Json(docentes);
+                }
+            }
+
+            if (docenteSede.Count > 0 && (grupo == "null" || grupo == null))
+            {
+                return Json(docenteSede);
+            }
+
+            return Json(docentes);
+        }
 
         public JsonResult ListarDocentesSedeGrupo(string sede, string grupo)
         {
@@ -156,13 +319,232 @@ namespace ProyectoColegio.Controllers
             return Json(tiposDocentes);
         }
 
+        public JsonResult ListarAsignaturasGrupo(string sede, int grado)
+        {
+            List<string> asignaturasGrado = variablesGlobales.AsignaturasGrado(sede, grado, _contexto.Conexion);
+
+            return Json(asignaturasGrado);
+        }
+
+        //https://localhost:7227/Funcionario/ListarDocentesAsignaturasGrupo/?sede=Central&grado=207010&asignatura=Español
+        public JsonResult ListarDocentesAsignaturasGrupo(string sede, int grado, string asignatura)
+        {
+            var DocentesAsignatura = variablesGlobales.DocentesAsignaturasGrupo(sede, grado, asignatura, _contexto.Conexion);
+            List<object> docentes = new List<object>();
+            
+            foreach (var item in DocentesAsignatura)
+            {
+                docentes.Add(item);
+            }
+
+            return Json(docentes);
+        }
+
         public JsonResult ListarDocentesSedeGrupoInfoCompleta(string sede, string grupo)
         {
             List<object> tiposDocentes = variablesGlobales.DocentesSedeGrupoInfoCompleta(sede, grupo, _contexto.Conexion);
 
             return Json(tiposDocentes);
         }
+        
+        public JsonResult ListarDocentesSedeGrupoInfoParcial(int idRef)
+        {
+            List<object> tiposDocentes = variablesGlobales.DocenteSedeInfoParcial(idRef, _contexto.Conexion);
 
+            return Json(tiposDocentes);
+        }
+        
+        public JsonResult ListarDocenteSedeInfoGradoAsignatura(int idRef)
+        {
+            List<object> tiposDocentes = variablesGlobales.DocenteSedeInfoGradoAsignatura(idRef, _contexto.Conexion);
+            List<DocenteGrupoAsignaturas> infoDocenteGradoAsignatura = new List<DocenteGrupoAsignaturas>();
+            DocenteGrupoAsignaturas docenteGradoAsignatura = new DocenteGrupoAsignaturas();
+
+            foreach (List<string> item in tiposDocentes)
+            {
+                docenteGradoAsignatura.Asignatura = Convert.ToString(item[0]);
+                docenteGradoAsignatura.Grado = Convert.ToString(item[1]);
+                infoDocenteGradoAsignatura.Add(docenteGradoAsignatura);
+                docenteGradoAsignatura = new DocenteGrupoAsignaturas();
+            }
+
+            return Json(infoDocenteGradoAsignatura);
+        }
+
+<<<<<<< Updated upstream
+=======
+        public JsonResult ListarTiposFamiliarEstudiante (string identificacion)
+        {
+            List<string> parentezcos = new List<string> { "Padre", "Madre", "Abuelo", "Abuela", "Tio", "Tia", "Hermano", "Hermana" };
+
+            if (!string.IsNullOrEmpty(identificacion))
+            {
+                List<string> registroTipoFamiliar = new List<string>();
+
+                Dictionary<string, object> parametros = new Dictionary<string, object>
+                {
+                    { "identificacionEst", identificacion },
+                };
+
+                List<Object> resultados = ManejoBaseDatos.EjecutarProcedimientoConMultiParametroYConsulta("obtenerFamiliaresEstudiante", parametros, 3, _contexto.Conexion);
+
+                foreach (List<Object> item in resultados)
+                {
+                    registroTipoFamiliar.Add(Convert.ToString(item[1]));
+                }
+                Console.WriteLine(registroTipoFamiliar);
+                List<string> elementosUnicos = parentezcos.Except(registroTipoFamiliar).ToList();
+                registroTipoFamiliar = new List<string>();
+
+                foreach (var item in elementosUnicos)
+                {
+                    registroTipoFamiliar.Add(item);
+                }
+                Console.WriteLine(registroTipoFamiliar);
+                return Json(registroTipoFamiliar);
+            }
+                
+            return Json(parentezcos);                       
+           
+        }
+
+        public JsonResult retornarFamiliaresEstudiante (string identificacion)
+        {
+            if (!string.IsNullOrEmpty(identificacion))
+            {
+                 
+                List<Familiar> familiaresEst = new List<Familiar>();
+
+                Dictionary<string, object> parametros = new Dictionary<string, object>
+            {
+                { "identificacionEst", identificacion },
+            };
+
+                List<Object> resultados = ManejoBaseDatos.EjecutarProcedimientoConMultiParametroYConsulta("obtenerFamiliaresEstudiante", parametros, 3, _contexto.Conexion);
+
+                foreach (List<Object> item in resultados)
+                {
+                    Familiar datos = new Familiar();
+
+                    datos.nombresFamiliar = (Convert.ToString(item[0]));
+                    datos.parentescoFamiliar = (Convert.ToString(item[1]));
+                    datos.estadoAcudiente = (Convert.ToString(item[2]));
+                    familiaresEst.Add(datos);
+
+                }
+
+                return Json(familiaresEst);
+            }
+            else
+            {
+                return Json(null);
+            }
+            
+        }
+
+        public string RegistrarDocenteRetorno(Docente docente)
+        {
+            string retorno = "";
+
+            try
+            {
+
+                if (docente.Usuario.Identificacion == null || consultasValidacionesBD.ExisteDocente(docente.Usuario.Identificacion, _contexto.Conexion) == true)
+                {
+                    retorno = "0";
+                }
+                else
+                {
+
+                    Dictionary<string, object> parametros = new Dictionary<string, object>
+                    {
+                        { "horasTrabaja", docente.HorasLabora },
+                        { "nomSede", docente.NombreSede }, //para seleccionar
+                        { "documento", Convert.ToString(docente.identificacion) },
+                        { "nomUsuario", docente.nombreUsuario },
+                        { "nom2Usuario", docente.segundoNombreUsuario },
+                        { "apellidoUsuario", docente.apellidoUsuario },
+                        { "apellido2Usuario", docente.segundoApellidoUsuario },
+                        { "edad", Convert.ToInt16(docente.edad) },
+                        { "telCelular", docente.telefonoCelular },
+                        { "telFijo", docente.telefonoFijo },
+                        { "correoUss", docente.correo },
+                        { "direccionUss", docente.direccion },
+                        { "barrioUss", docente.barrio },
+                        { "fechaNacimientoUss", docente.fechaNacimiento },
+                        { "tipoSangre", docente.tipoSangre }, //para seleccionar
+                        { "tipoDocumento", docente.tpDocumento }, //para seleccionar
+                        { "nombreDiscapacidad", docente.discapacidad }, //para seleccionar
+                        { "nombreSisben", docente.sisben }, //para seleccionar
+                        { "nombreGenero", docente.genero }, //para seleccionar
+                        { "nombreEps", docente.eps }, //para seleccionar
+                        { "nombreEstrato", docente.estrato }, //para seleccionar
+                     };
+
+                    ManejoBaseDatos.EjecutarProcedimientoMultiParametro("registrarDocente", parametros, _contexto.Conexion);
+                    retorno = "1";
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error al ejecutar el script: {ex.Message}");
+                retorno = "0";
+            }
+
+            return retorno;
+        }
+
+        public string RegistrarDocenteGradoAsignaturaRetorno(int idDocenteRef, int idGradoRef, string asignaturaRef)
+        {
+            string retorno = "";
+            if (idDocenteRef != null && idGradoRef != null && asignaturaRef != null)
+            {
+                Dictionary<string, object> parametros = new Dictionary<string, object>
+                {
+                    { "idDocenteRef", idDocenteRef },
+                    { "idGradoRef", idGradoRef }, //para seleccionar
+                    { "asignaturaRef", asignaturaRef }
+                };
+
+                var resultados = ManejoBaseDatos.EjecutarProcedimientoConMultiParametroYConsulta("RegistrarAsignaturaGrupoDocente", parametros, 1, _contexto.Conexion);
+                
+                foreach (var item in resultados)
+                {
+                    retorno = Convert.ToString(item);
+                }
+            }
+            return retorno;
+        }
+
+        public string RegistrarHorarioRetorno(Horario horario)
+        {
+            string retorno = "";
+
+            if (horario != null)
+            {
+                Dictionary<string, object> parametros = new Dictionary<string, object>
+                {
+                    { "nombreSedeRH", horario.nombreSede },
+                    { "nomAsignatura", horario.nomAsignatura }, 
+                    { "nomGrupo", horario.nomGrupo },
+                    { "identificacionDocente", horario.identificacionDocente },
+                    { "diaHorarioClase", horario.diaHorarioClase },
+                    { "rangoHorario", horario.rangoHorario },
+                };
+
+                int numeroParametrosRetornados = 1; 
+                var resultados = ManejoBaseDatos.EjecutarProcedimientoConMultiParametroYConsulta("RegistrarHorario", parametros, numeroParametrosRetornados, _contexto.Conexion);
+
+                foreach (var item in resultados)
+                {
+                    retorno = Convert.ToString(item);
+                }
+            }
+
+            return retorno;
+        }
+
+>>>>>>> Stashed changes
         public IActionResult CargarCsv()
         {
             //var gruposSede = variablesGlobales.GruposGradoSede("Central", _contexto.Conexion);
@@ -189,6 +571,10 @@ namespace ProyectoColegio.Controllers
             {
                 //muestra los estudiantes por sede
                 ViewBag.ListaEstudianteGrupo = consultasGlobales.mostrarCsv(_contexto.Conexion, Convert.ToString(sede), null);
+<<<<<<< Updated upstream
+=======
+                //ViewBag.GruposGrado = variablesGlobales.GruposGradoSede(Convert.ToString(sede), _contexto.Conexion);
+>>>>>>> Stashed changes
                 ViewBag.SedeSeleccionada = sede;
 
                 if (grupo != null)
@@ -653,7 +1039,7 @@ namespace ProyectoColegio.Controllers
 
             if (sede != null)
             {
-                ViewBag.GruposGrado = variablesGlobales.GruposGradoSede(Convert.ToString(sede), _contexto.Conexion);
+                //ViewBag.GruposGrado = variablesGlobales.GruposGradoSede(Convert.ToString(sede), _contexto.Conexion);
                 listaDocentes = variablesGlobales.DocentesSedeInfoCompleta(Convert.ToString(sede), _contexto.Conexion);
                 
 
@@ -763,24 +1149,7 @@ namespace ProyectoColegio.Controllers
 
         public IActionResult GestionPeriodoAcademico()
         {
-            ViewBag.Asignaturas = variablesGlobales.Asignaturas(_contexto.Conexion);
-            ViewBag.GruposGrado = variablesGlobales.GruposGrado(_contexto.Conexion);
-            ViewBag.Sedes = variablesGlobales.Sedes(_contexto.Conexion);
-
-
-            var sede = TempData["sede"];
-            var grupo = TempData["grupo"];
-
-            if (sede != null)
-            {
-                ViewBag.Docentes = variablesGlobales.DocentesSede(Convert.ToString(sede), _contexto.Conexion);
-
-                if (grupo != null)
-                {
-                    ViewBag.Docentes = variablesGlobales.DocentesSedeGrupo(Convert.ToString(sede), Convert.ToString(grupo), _contexto.Conexion);
-                }
-
-            }            
+           
             
             return View();
         }
@@ -794,6 +1163,16 @@ namespace ProyectoColegio.Controllers
                 TempData["grupo"] = grupo;
             }
             return RedirectToAction("GestionPeriodoAcademico", "Funcionario");
+        }
+
+        public IActionResult controlHabilitacionCargueNotaPeriodo(string habilitarCargueNotaFinal)
+        {
+            if (habilitarCargueNotaFinal != null)
+            {
+                DatosCompartidos.HabilitarNotas = Convert.ToBoolean(habilitarCargueNotaFinal);
+            }
+
+            return RedirectToAction("Index", "Funcionario");
         }
 
         [HttpPost]
@@ -876,6 +1255,61 @@ namespace ProyectoColegio.Controllers
             return RedirectToAction("GestionAsignaturas", "Funcionario");
         }
 
+<<<<<<< Updated upstream
+=======
+        public IActionResult gestionCertificados()
+        {
+            //var sede = TempData["sedeGestionCertificado"];
+            //var grupo = TempData["grupoGestionCertificado"];
+
+            //if (variablesGlobales.Sedes(_contexto.Conexion) != null && variablesGlobales.GruposGrado(_contexto.Conexion) != null)
+            //{
+            //    ViewBag.GruposGrado = variablesGlobales.GruposGrado(_contexto.Conexion);
+            //    ViewBag.Sedes = variablesGlobales.Sedes(_contexto.Conexion);
+
+            //    //muestra todos los estudiantes de la institucion
+            //    ViewBag.ListaEstudiante = consultasGlobales.mostrarCsv(_contexto.Conexion, null, null);
+            //}
+
+            //if (sede != null)
+            //{
+            //    //muestra los estudiantes por sede
+            //    ViewBag.ListaEstudianteGrupo = consultasGlobales.mostrarCsv(_contexto.Conexion, Convert.ToString(sede), null);
+            //    //ViewBag.GruposGrado = variablesGlobales.GruposGradoSede(Convert.ToString(sede), _contexto.Conexion);
+            //    ViewBag.SedeSeleccionada = sede;
+
+            //    if (grupo != null)
+            //    {
+            //        //muestra los estudiantes por grupo de sede
+            //        ViewBag.ListaEstudianteGrupo = consultasGlobales.mostrarCsv(_contexto.Conexion, Convert.ToString(sede), Convert.ToString(grupo));
+            //        ViewBag.GrupoSeleccionado = grupo;
+            //    }
+
+            //    Console.WriteLine(sede);
+            //    Console.WriteLine(grupo);
+            //}
+
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult obtenerEstudiantesGestionCertificados(string Sede, string Grupo)
+        {
+            if (!string.IsNullOrEmpty(Sede))
+            {
+                TempData["grupoGestionCertificado"] = Grupo;
+                TempData["sedeGestionCertificado"] = Sede;
+            }
+
+            return RedirectToAction("gestionCertificados", "Funcionario");
+        }
+
+        public void obtenerIdentificacionEstudiante(string idEstudiante)
+        {
+            DatosCompartidos.IdentificacionEstudiante = idEstudiante;
+        }
+
+>>>>>>> Stashed changes
         public List<Object> ObtenerCodigoEstudiante(long identificacion)
         {
             /*Dictionary<string, object> parametros = new Dictionary<string, object>

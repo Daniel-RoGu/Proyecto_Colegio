@@ -98,10 +98,24 @@ create procedure `registrarFamiliar`(
     identificacionEstudianteEs long
 ) 
 begin
+<<<<<<< Updated upstream
 	insert into Familiar (identificacionFamiliar, nombreFamiliar, ocupacionFamiliar, correoFamiliar, celularFamiliar, 
 						   parentescoFamiliar, responsabilidadEconomicaEstudiante, estadoAcudiente, Genero_idGenero, Estudiante_idEstudiante)
 				value(identificacionFamiliarEs, nombreFamiliarEs, ocupacionFamiliarEs, correoFamiliarEs, celularFamiliarEs, parentescoFamiliarEs,
 					  responsabilidadEconomicaFamiliarEs, esAcudiente, (select ObtenerIdGenero(generoFamiliarEs)), (select ObtenerIdEstudiante(identificacionEstudianteEs)));
+=======
+	if ((FunexisteFamiliarEstudiante(identificacionFamiliarEs)) = 0) then
+		insert into Familiar (identificacionFamiliar, nombreFamiliar, ocupacionFamiliar, correoFamiliar, celularFamiliar, 
+							   parentescoFamiliar, responsabilidadEconomicaEstudiante, estadoAcudiente, esDezplazado, fechaNacimiento,
+							   nivelEscolaridad, ubicacion, fkidGenero, Estudiante_idEstudiante)
+					value(identificacionFamiliarEs, nombreFamiliarEs, ocupacionFamiliarEs, correoFamiliarEs, celularFamiliarEs, parentescoFamiliarEs,
+						  responsabilidadEconomicaFamiliarEs, esAcudiente, esdesplazado, fechaNacimientoAcudiente, nivelEscolaridadAcudiente, ubicacionAcudiente,
+						  (select ObtenerIdGenero(generoFamiliarEs)), (select ObtenerIdEstudiante(identificacionEstudianteEs)));
+		select 1 as ValidacionRegistro;
+	else
+		select 0 as ValidacionRegistro;
+	end if;
+>>>>>>> Stashed changes
 END$$
 
 /*--------------------------Registrar Observacion-------------------------*/

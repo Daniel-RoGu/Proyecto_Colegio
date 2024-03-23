@@ -48,17 +48,25 @@ namespace ProyectoColegio.Controllers
                 TempData["identificacion"] = model.Password;
                 DatosCompartidos.MiDato = model.Password;
                 TempData["rol"] = ObtenerRolUsuario(model.Password);
+                DatosCompartidos.RolUsuario = ObtenerRolUsuario(model.Password);
 
                 if (existe)
                 {
                     //Identificar el rol del usuario y redireccionar
                     if (ObtenerRolUsuario(model.Password) == "Docente")
                     {
+                        DatosCompartidos.SedeUsuario = ObtenerSedeDocente(DatosCompartidos.MiDato);
                         return RedirectToAction("Principal", "Docente");
                     }
                     else if(ObtenerRolUsuario(model.Password) == "Coordinador")
                     {
-                        return RedirectToAction("CargarCsv", "Funcionario");
+                        DatosCompartidos.SedeUsuario = ObtenerSedeCoordinador(DatosCompartidos.MiDato);
+                        return RedirectToAction("Index", "Funcionario");
+                    }
+                    else if (ObtenerRolUsuario(model.Password) == "Estudiante")
+                    {
+                        DatosCompartidos.SedeUsuario = ObtenerSedeEstudiante(DatosCompartidos.MiDato);
+                        return RedirectToAction("Index", "Estudiante");
                     }
                     else
                     {
@@ -101,6 +109,57 @@ namespace ProyectoColegio.Controllers
                 rol = Convert.ToString(obj);
             }
             return rol;
+        }
+
+        public string ObtenerSedeDocente(string identificacion)
+        {
+            string sede = "";
+
+            // Definir los parámetros necesarios para el procedimiento almacenado
+            string nombreProcedimiento = "obtenerSedeDocente";
+            string nombreParametro = "identificacion";
+
+            // Llamar al método
+            List<Object> resultados = ManejoBaseDatos.EjecutarProcedimientoConParametroYConsulta(nombreProcedimiento, nombreParametro, identificacion, 1, _contexto.Conexion);
+            foreach (Object obj in resultados)
+            {
+                sede = Convert.ToString(obj);
+            }
+            return sede;
+        }
+
+        public string ObtenerSedeEstudiante(string identificacion)
+        {
+            string sede = "";
+
+            // Definir los parámetros necesarios para el procedimiento almacenado
+            string nombreProcedimiento = "obtenerSedeEstudiante";
+            string nombreParametro = "identificacion";
+
+            // Llamar al método
+            List<Object> resultados = ManejoBaseDatos.EjecutarProcedimientoConParametroYConsulta(nombreProcedimiento, nombreParametro, Convert.ToInt64(identificacion), 1, _contexto.Conexion);
+            foreach (Object obj in resultados)
+            {
+                sede = Convert.ToString(obj);
+            }
+            return sede;
+        }
+
+        public string ObtenerSedeCoordinador(string identificacion)
+        {
+            string sede = "";
+
+            // Definir los parámetros necesarios para el procedimiento almacenado
+            string nombreProcedimiento = "obtenerSedeFuncionario";
+            string nombreParametro = "identificacion";
+
+            // Llamar al método
+            List<Object> resultados = ManejoBaseDatos.EjecutarProcedimientoConParametroYConsulta(nombreProcedimiento, nombreParametro, Convert.ToInt64(identificacion), 1, _contexto.Conexion);
+            foreach (Object obj in resultados)
+            {
+                sede = Convert.ToString(obj);
+            }
+            return sede;
         }
 
     }

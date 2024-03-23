@@ -1,0 +1,191 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planilla de Notas 2024</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .table__cabezera{
+            width: 100%;
+        }
+        
+        .table__cabezera th {
+            border: none;
+        }
+
+        .table__cabezera p, h1, h2, h3{
+            padding: 0;
+            margin: 0;
+            font-size: 16px;
+        }
+
+        .table__cabezera p{
+            font-weight: 500;
+        }
+
+        .encabezado-central{
+            font-size: 14px;
+        }
+
+        .encabezado-central h3, h4, p{
+            margin: 0 10px;
+        }
+
+        .informacion__Institucion{
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .informacion__Institucion td, th{
+            border: 1px solid black;
+        }
+
+        .contenido-cuerpo-central h4,
+        .contenido-cuerpo-central h5{
+            text-align: center;
+            margin: 5px 0;
+        }
+
+        .contenido-cuerpo-central td,
+        .contenido-cuerpo-central th{
+            font-size: 10;
+        }
+
+        .notas__info{
+            border-collapse: collapse;
+        }
+
+        .notas__info td{
+            border: 1px solid black;
+        }
+
+    </style>
+</head>
+<body>
+    <table>
+        <tr>
+            <td>
+                <table class="table__cabezera">
+                    <thead>
+                        <th style="width: 20%;">  <img width="20px" height="20px" src="../img/gallery_9055136.png" alt=""></th>
+                        <th style="width: 60%;"><section class="encabezado-central">
+                            <p style="height: 40px;"></p>
+                            <h3>Institución Educativa Rural La Aguililla</h3>
+                            <h3>TECNICO EN AGROECOLOGIA</h3>
+                            <p>DANE: 283592003378</p>
+                            <p>Creada según decreto 002027 del 15/12/2011</p>
+                            <p>Res. de Aprob. 00352 del 24/04/2012</p>
+                            <p>NIT: 900.218.599-1</p>
+                            <p style="height: 40px;"></p>
+                            <h4>INFORME ACADEMICO AÑO ESCOLAR 2019</h4>
+                            <p style="height: 20px;"></p>
+                        </section></th>
+                        <th style="width: 20%;">  <img width="20px" height="20px" src="../img/gallery_9055136.png" alt=""></th>
+                    </thead>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="contenido-cuerpo-central">                    
+                    <h5 style="align-items: center; margin-bottom: 20px;">PLANILLA DE NOTAS 2024</h5>
+                    <table class="informacion__Institucion">
+                        <tr>
+                            <th><h5>DOCENTE:</h5></th>
+                            <td colspan="2">Nombre del docente</td>
+                            <th><h5>ASIGNATURA:</h5></th>
+                            <td colspan="2">Nombre de la asignatura</td>
+                        </tr>
+                        <tr>
+                            <th><h5>GRADO:</h5></th>
+                            <td colspan="2">Nombre del grado</td>
+                            <th><h5>PERIODO:</h5></th>
+                            <td colspan="2">Nombre del periodo</td>
+                        </tr>
+                        <tr>
+                            <th><h5>SEDE:</h5></th>
+                            <td colspan="4">Nombre de la sede</td>
+                        </tr>
+                    </table>              
+                </div>
+            </td>
+        </tr>
+        <tr>            
+            <td>                                
+                <div class="contenido-cuerpo-central">
+                    <h5 style="align-items: center; margin-top: 20px; margin-bottom: 20px;">TABLA DE EVALUACION</h5>                    
+                    <table class="notas__info">                        
+                        <thead>
+                            <tr>
+                                <th rowspan="3"><h5>Nº</h5></th>
+                                <th rowspan="3"><h5>APELLIDOS Y NOMBRES</h5></th>
+                                <th rowspan="3"><h5>GRADOS</h5></th>
+                                <th colspan="12"><h5>HETERO-EVALUACIÓN 90%</h5></th>
+                                <th rowspan="3"><h5>DEF.</h5></th>
+                                <th rowspan="3"><h5>AUT.E. 5%</h5></th>
+                                <th rowspan="3"><h5>C.EVA. 10%</h5></th>
+                                <th rowspan="3"><h5>NOTA FINAL</h5></th>
+                                
+                            </tr>
+                            <tr>
+                                <th colspan="12"><h5>ACTIVIDADES (EVALUACIONES, TALLERES, EXPOSICIONES, ETC)</h5></th>
+                            </tr>
+                            <tr>
+                                <th><h5>1</h5></th>
+                                <th><h5>2</h5></th>
+                                <th><h5>3</h5></th>
+                                <th><h5>4</h5></th>
+                                <th><h5>5</h5></th>
+                                <th><h5>6</h5></th>
+                                <th><h5>7</h5></th>
+                                <th><h5>8</h5></th>
+                                <th><h5>9</h5></th>
+                                <th><h5>10</h5></th>
+                                <th><h5>11</h5></th>
+                                <th><h5>DEF.</h5></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- se implementa el ciclo para obtener datos por cada estudiante -->
+                            <tr>
+                                <td>1º</td>
+                                <td>Alguien</td>
+                                <td>5</td>
+                                <td>3.0</td>
+                                <td>3.0</td>
+                                <td>3.0</td>
+                                <td>3.0</td>
+                                <td>3.0</td>
+                                <td>3.0</td>
+                                <td>3.0</td>
+                                <td>3.0</td>
+                                <td>3.0</td>
+                                <td>3.0</td>
+                                <td>3.0</td>
+                                <td>3.0</td>
+                                <td>3.0</td>
+                                <td>3.0</td>
+                                <td>3.0</td>
+                                <td>3.0</td>
+                            </tr>
+                        </tbody>
+                    </table>       
+                </div> 
+            </td>
+        </tr>
+    </table>
+</body>
+</html>
+
+

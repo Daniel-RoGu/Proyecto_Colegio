@@ -87,8 +87,8 @@ create procedure `registrarAsignatura`(
     nomAsignatura varchar(400)
 ) 
 begin
-	insert into Asignatura (nombreAsignatura, estadoAsignatura, horasSemanales)
-				value(nomAsignatura, "Activa", 0);
+	insert into Asignatura (nombreAsignatura, estadoAsignatura)
+				value(nomAsignatura, "Activa");
 END$$
 
 /*--------------------------Registrar Tipo Nota-------------------------*/
@@ -184,11 +184,12 @@ DROP PROCEDURE IF EXISTS `registrarPeriodoAcademico` $$
 create procedure `registrarPeriodoAcademico`(
     nomPeriodo varchar(400),
     inicia varchar(400),
-    termina varchar(400)
+    termina varchar(400),
+    annoElectivo varchar(400)
 ) 
 begin
-	insert into periodoAcademico (periodoAcademico, fechaInicio, fechaFin, estadoPeriodo)
-				value(nomPeriodo, inicia, termina, "Disponible");
+	insert into periodoAcademico (periodoAcademico, fechaInicio, fechaFin, estadoPeriodo, añoElectivo)
+				value(nomPeriodo, inicia, termina, "Disponible", annoElectivo);
 END$$
 
 /*--------------------------Obtener Sedes-------------------------*/
@@ -299,15 +300,16 @@ END$$
 DELIMITER $$
 DROP PROCEDURE IF EXISTS `obtenerGruposGradoSede` $$
 create procedure `obtenerGruposGradoSede`(
-	sedeGradoGrupo varchar(400)
+	sedeRef varchar(400),
+	gradoRef varchar(400)
 ) 
 begin
 	select DISTINCT gg.idGradoGrupo as IdGradoGrupo, gg.grupoGrado as Grupo 
     from Sede as s
     inner join SedeGrados as sg on sg.fkidSede = s.idSede
-    inner join Grados as g on sg.fkidGrado = g.idGrado
+    inner join Grados as g on sg.fkidGrado = g.idGrado and g.nombreGrado = gradoRef
     inner join GradoGrupo as gg on gg.fkidGrado = g.idGrado  
-    where s.nombreSede = sedeGradoGrupo;
+    where s.nombreSede = sedeRef;
 END$$
 
 

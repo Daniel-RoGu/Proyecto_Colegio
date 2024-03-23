@@ -150,13 +150,20 @@ call obtenerSedeDocente("12987852");
 call registrarDocenteGrado("Ana Riquianus Mamus", "1202");
 call registrarDocenteGrado("Edector Cumbai Cutui", "101");
 call registrarDocenteGrado("Jhulius Rommanus Magnus", "1202");
+call registrarDocenteGrado("dfgdfg dfgdfgdfdgfgdfg dfgdfg", "1202");
 call registrarAsignatura("Español");
 call registrarAsignatura("Matemáticas");
 call registrarDocenteAsignatura("Edector Cumbai Cutui", "Español");
+call registrarDocenteAsignatura("dfgdfg dfgdfgdfdgfgdfg dfgdfg", "Español");
 call registrarAsignaturaGradoGrupo("Español", 1202);
 call registrarAsignaturaGradoGrupo("Matemáticas", 1202);
+call registrarAsignaturaGradoGrupo("Inglés", 1202);
 call registrarAsignaturaGradoGrupo("Español", 101);
 call registrarAsignaturaGradoGrupo("Matemáticas", 101);
+call registrarAsignaturaGradoGrupo("Inglés", 101);
+call RegistrarAsignaturaGrupoDocente(187000, 207010, "Matemáticas");
+select FunExisteDocenteAsignaturaGrado(187000, "Inglés", 207010);
+
 call registrarCompetenciasAsignatura("Lectura critica", "Dominar la lectura critica", "El estudiante debe ser bueno en LC", "Español");
 select existeGradoRetorno("12");
 call existeDocenteAsignatura("Edector Cumbai Cutui", "Español");
@@ -231,4 +238,53 @@ WHERE d.fkidentificacion = u.identificacion;
 select g.idGrado from gradogrupo as gg 
 inner join Grados as g on gg.fkidGrado = g.idGrado
 where gg.grupoGrado = "1202";
-					
+
+
+CALL RegistrarHorario("Central", "");
+
+call ObtenerInfoDocentesTodos();
+call ObtenerInfoGradosAsignaturasDocentes(187000);
+call ObtenerGradosAsignaturasDocentes(187000);
+call ObtenerAsignaturasGrado("Central", 207010);
+call ObtenerInfoFamiliaresEstudiante_Certificados('1118073451');
+call RegistrarHorario("Central", "Español", "1202", 585, "Lunes", "06:00-07:00");
+call RegistrarHorario("Central", "Español", "1202", 585, "Viernes", "06:00-07:00");
+call RegistrarHorario("Central", "Matemáticas", "1202", 585, "Lunes", "06:00-07:00");
+call MostrarHorario("Central", "1202");
+call MostrarHorarioPorRango("Central", "1202", "06:00-07:00", "Lunes");
+
+INSERT INTO horarioGradoGrupo (estadoHorarioGG, fkidHorario, fkidGradoGrupo) 
+VALUES ("Asignado", (SELECT ObtenerIdHorario(horaInicioClase, horaFinClase)), grupoSelect);
+
+select existeDocenteHorario((select ObtenerIdDocente(187000)), "06:00-07:00", "Lunes");
+select existeGrupoHorario("1202", "06:00-07:00", "Lunes");
+select existeAsignaturaHorario("Español", "06:00-07:00", "Lunes");
+select existeHorario("06:00-07:00", "Lunes");
+
+SELECT ObtenerIdAsignatura("Español");
+SELECT ObtenerIdHorario("06:00-07:00", "Lunes");
+SELECT ObtenerIdDocente(585);
+select ObtenerIdGradoDelGrupo("1202");
+SELECT ObtenerIdHorario(horaInicioClase, horaFinClase);
+call GradosAsignaturasDocentes("Central", "207010", "Español");
+call AsignaturasDelDocente("Central", "12", 585);
+call ObtenerDocentesAsignatura("Español");
+call ObtenerAsignaturasGrado("Central", "12");
+call ObtenerDocenteGrupos("Central", "12", 585);
+call ObtenerDocenteGrados("Central", 585);
+select ObtenerIdGrado("12");
+call obtenerSedeDocente("585");
+call obtenerSedeEstudiante(1013362165);
+call obtenerSedeFuncionario(12987357);
+
+SELECT distinct (CONCAT(COALESCE(u.primerNombreUsuario, ''), ' ', COALESCE(u.segundoNombreUsuario, ''), 
+								COALESCE(u.primerApellidoUsuario, ''), ' ', COALESCE(u.segundoApellidoUsuario, ''))) AS Docente
+								FROM Sede AS s
+                                INNER JOIN SedeGrados AS sg ON sg.fkidSede = s.idSede
+                                INNER JOIN Grados AS g ON sg.fkidGrado = idGrado
+								INNER JOIN DocentesGrado AS dg ON dg.fkidGrado = g.idGrado
+								INNER JOIN Docente AS d ON dg.fkidDocente = d.idDocente
+								INNER JOIN Usuario AS u On d.fkidentificacion = u.identificacion
+								WHERE s.nombreSede = "Central" AND g.idGrado = "207010";
+                                
+call registrarDocenteAsignatura("werwqer wrewqerqwerqwer wrwqerqw", "Español");

@@ -272,3 +272,65 @@ begin
 			   inner join Grados as g on gg.fkidGrado = g.idGrado
                where gg.idGradoGrupo = agg.fkidGradoGrupo) = dg.fkidGrado;
 END$$
+<<<<<<< Updated upstream
+=======
+
+
+/*--------------------------Validar existencia Docente-Asignatura-Grado-------------------------*/
+
+DELIMITER $$
+DROP PROCEDURE IF EXISTS `existeDocenteAsignaturaGrado` $$
+create procedure `existeDocenteAsignaturaGrado`(idDocenteRef int, nomAsignatura varchar(400), idGradoR int) 
+begin
+	DECLARE idAsignaturaRef INT;
+    DECLARE idGradoRef INT;
+    
+    SET idAsignaturaRef = (SELECT a.idAsignatura FROM Asignatura as a
+						   WHERE a.nombreAsignatura = nomAsignatura);
+    SET idGradoRef = (SELECT g.idGrado FROM Grado as g 
+				      WHERE g.idGrado = idGradoR);
+                      
+    SELECT COUNT(*) > 0 AS existe_valor
+    FROM Docente AS d
+    INNER JOIN DocenteAsignatura AS da ON da.fkidDocente = d.idDocente AND da.fkidAsignatura = idAsignaturaRef
+    LEFT JOIN DocentesGrado AS dg ON dg.fkidDocente = d.idDocente AND dg.fkidGrado = idGradoRef
+    WHERE d.idDocente = idDocenteRef;
+    
+END$$
+
+
+/*--------------------------Validar existencia Docente Horario-------------------------*/
+
+DELIMITER $$
+DROP PROCEDURE IF EXISTS `existeDocenteHorario` $$
+create procedure `existeDocenteHorario`(idDocenteRef varchar(400), rangoHorario varchar(400), diaHorario varchar(400)) 
+begin        
+    SELECT COUNT(*) > 0 AS existe_valor
+	FROM horarioDocente as hA
+	WHERE hA.fkidDocente = idDocenteRef AND hA.fkidHorario = (select ObtenerIdHorario(rangoHorario, diaHorario));  
+END$$
+
+
+/*--------------------------Validar existencia Grupo Horario-------------------------*/
+
+DELIMITER $$
+DROP PROCEDURE IF EXISTS `existeGrupoHorario` $$
+create procedure `existeGrupoHorario`(nomGrupo varchar(400), rangoHorario varchar(400), diaHorario varchar(400)) 
+begin    
+    SELECT COUNT(*) > 0 AS existe_valor
+	FROM horarioGradoGrupo AS hgg
+	WHERE hgg.fkidGradoGrupo = (select ObtenerIdGradoGrupo(nomGrupo)) AND hgg.fkidHorario = (select ObtenerIdHorario(rangoHorario, diaHorario));  
+END$$
+
+/*--------------------------Validar existencia Asignatura Horario-------------------------*/
+
+DELIMITER $$
+DROP PROCEDURE IF EXISTS `existeAsignaturaHorario` $$
+create procedure `existeAsignaturaHorario`(nomAsignatura varchar(400), rangoHorario varchar(400), diaHorario varchar(400)) 
+begin    
+    SELECT COUNT(*) > 0 AS existe_valor
+	FROM horarioAsignatura AS ha
+	WHERE ha.fkidAsignatura = (select ObtenerIdAsignatura(nomAsignatura)) AND ha.fkidHorario = (select ObtenerIdHorario(rangoHorario, diaHorario));  
+END$$
+
+>>>>>>> Stashed changes

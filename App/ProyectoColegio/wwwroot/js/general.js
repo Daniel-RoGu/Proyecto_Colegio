@@ -46,3 +46,24 @@ function fetchPostText(url, frm, callback) {
 }
 
 
+
+function borrarContenidoPorClase(clase) {
+
+    var inputs = document.querySelectorAll('.' + clase);
+
+    inputs.forEach(function (input) {
+
+        if (input.type === 'text' || input.type === 'textarea') {
+
+            input.value = '';
+        } else if (input.type === 'checkbox') {
+
+            input.checked = false;
+        } else {
+
+            input.value = '';
+        }
+    });
+}
+
+
