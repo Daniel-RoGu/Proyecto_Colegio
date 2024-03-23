@@ -127,63 +127,55 @@ namespace ProyectoColegio.Controllers
             }
 
             return rangoHorario;
-        }        
+        }
 
         //https://localhost:7227/Funcionario/horarioDiego/?sede=Central&grupogrado=1202&jornada=AM
-        public JsonResult horarioacademico(string sede, string grupogrado, string jornada) {
-            List<string> rangos= new List<string>();
-            rangos = JornadaLista(jornada);
+        public JsonResult HorarioAcademico(string sede, string grupogrado, string jornada)
+        {
+            List<string> rangos = JornadaLista(jornada);
             List<string> lisdias = new List<string> { "Lunes", "Martes", "Miercoles", "Jueves", "Viernes" };
             List<Clase> clases = new List<Clase>();
 
-            foreach (string rango in rangos) {                
-                Clase clase = new Clase();      
+            foreach (string rango in rangos)
+            {
                 List<Dia> dias = new List<Dia>();
 
-                foreach (string dia in lisdias) {
-                    
+                foreach (string dia in lisdias)
+                {
                     var resultadoBd = variablesGlobales.InfoDetalleHorarioFuncionario2(sede, grupogrado, rango, dia, _contexto.Conexion);
-                    Detalle detalleDia = new Detalle();
-                    Dia diasemana = new Dia();
+                    Dia diasemana = new Dia
+                    {
+                        diaSemana = dia,
+                        detalleH = new Detalle()
+                    };
 
-                    if (resultadoBd != null && resultadoBd.Count > 0)
+                    if (resultadoBd.FirstOrDefault() != null)
                     {
                         foreach (List<Object> item in resultadoBd)
                         {
-                            detalleDia.MateriaHorario = "Asignatura: " + Convert.ToString(item[3]);
-                            detalleDia.DocenteHorario = "Docente: " + Convert.ToString(item[2]);
-                            diasemana.diaSemana = dia;
-                            diasemana.detalleH = detalleDia;
+                            diasemana.detalleH.MateriaHorario = "Asignatura: " + Convert.ToString(item[3]);
+                            diasemana.detalleH.DocenteHorario = "Docente: " + Convert.ToString(item[2]);
                         }
-
                     }
                     else
                     {
-                        //Detalle detalleDia = new Detalle();
-                        detalleDia.MateriaHorario = "Asigantura: Sin definir";
-                        detalleDia.DocenteHorario = "Docente: Sin definir";
-                        //Dia diasemana = new Dia();
-                        diasemana.diaSemana = dia;
-                        diasemana.detalleH = detalleDia;
-                        
+                        diasemana.detalleH.MateriaHorario = "Asignatura: Sin definir";
+                        diasemana.detalleH.DocenteHorario = "Docente: Sin definir";
                     }
 
                     dias.Add(diasemana);
-                    detalleDia = null;
-                    diasemana = null;
-
                 }
-                clase.rango = rango;
-                clase.dias = dias;
 
-                clases.Add(clase);  
-                    dias = null;
+                clases.Add(new Clase
+                {
+                    rango = rango,
+                    dias = dias
+                });
             }
 
-
-            return Json(clases);  
+            return Json(clases);
         }
-        
+
         public JsonResult ListarTiposDeSangre()
         {
             List<object> tiposSangre = variablesGlobales.TiposSangre(_contexto.Conexion);
