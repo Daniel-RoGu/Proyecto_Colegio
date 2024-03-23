@@ -43,6 +43,42 @@
     </section>
    
     <input type="hidden" id="hdfoculto" value="@Url.Content("~/")" />
+    <div class="modal fade" data-backdrop="static" id="errorModal" tabindex="-1" role="dialog" aria-labelledby="errorModalLabel" aria-hidden="true">
+        <div class="modal-dialog  modal-dialog-centered modal-md " role="document">
+            <div class="modal-content rounded-0">
+                <div class="modal-header py-1 my-0 border-0">
+                    <span class="modal-title my-auto" id="errorModalLabel">
+
+                    </span>
+
+                </div>
+                <div class="modal-body my-0 py-1 mx-1">
+                    <div class="w-100 my-0 py-1 d-flex justify-content-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="70" height="70" version="1.1" viewBox="0 0 32 32">
+                            <g transform="scale(2)">
+                                <circle style="fill: #dc3545" cx="8" cy="8" r="7" />
+                                <rect style="fill:#ffffff" width="2" height="10" x="-.98" y="-16.29" transform="rotate(135)" />
+                                <rect style="fill:#ffffff" width="2" height="10" x="-12.29" y="-5.01" transform="rotate(-135)" />
+                            </g>
+                        </svg>
+                    </div>
+                    <div>
+                        <div class="my-0 py-1 text-center"><h5 id="cabecera_error" class="text-danger my-0">Error</h5></div>
+                        <div class="my-0 py-1"><h6 class="text-danger my-0" id="tituloError" style="font-size:14px"></h6></div>
+                        <div id="listado_errorres">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer border-0 py-0 my-0">
+                    <div class="form-group w-100 py-2 px-2 d-flex justify-content-center">
+
+                        <input type="submit" class="btn bg-danger text-white d-inline form-control w-auto" value="Cerrar" readonly data-dismiss="modal" />
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <script src="~/js/jquery.slim.min.js"></script>
     <script src="~/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/popper.min.js"></script>
@@ -125,6 +161,30 @@
             $('#' + id).val('');
             $('#' + id).selectpicker('refresh')
         }
+
+        function mostrarError(cabecera, titulo, listadoErrores) {
+            if (cabecera.trim() !== "" || cabecera !== null && listadoErrores !== null || listadoErrores.length > 0) {
+                $("#listado_errorres").empty();
+                $("#cabecera_error").text(cabecera);
+                $("#tituloError").text(titulo);
+                let campos = "";
+                campos += '<ul class="list-group">';
+                for (let i = 0; i < listadoErrores.length; i++) {
+                    campos += '<li class="list-group-item py-0 border-0"  style="font-size:13px">' + listadoErrores[i] + '</li>';
+
+                }
+                campos += '</ul>';
+                $("#listado_errorres").append(campos);
+                $("#errorModal").modal('show');
+            }
+
+
+
+
+        }
+
+
+
       
     </script>
 </body>

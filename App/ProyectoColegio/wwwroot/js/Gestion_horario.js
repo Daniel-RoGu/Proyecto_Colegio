@@ -340,9 +340,12 @@ function guardarHorarioForm() {
     let materia = document.getElementById("materiaSelect").value;
     let profesor = document.getElementById("profesor").value;
 
-    let formulario = validarCamposClase();
+    let formulario=[]
+    formulario= validarCamposClase();
 
     if (formulario.length > 0) {
+        mostrarError("Error al agregar la Asignatura al horario", "Por favor, complete todos los campos obligatorios indicados a continuación.", formulario);
+        formulario = null; 
 
         return
     }

@@ -373,9 +373,11 @@ function guardarFamiliarEstudiante() {
     let acudiente = document.getElementById("acudiente").checked;
     let responsabilidadEconomica = document.getElementById("responsabilidadecomica").checked;
     let estudiante = document.getElementById('documentoEstudiante').value
-
-    let camposIncompletos = camposSinCompletar();
+    let camposIncompletos = [];
+    camposIncompletos = camposSinCompletar();
     if (camposIncompletos.length > 0) {
+        mostrarError("Error en al agregar Familiar", "Por favor, complete todos los campos obligatorios indicados a continuación.", camposIncompletos);
+        camposIncompletos = null; 
         return;  
     }
 

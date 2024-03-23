@@ -503,11 +503,12 @@ function guardardocentes() {
 
     let frm = new FormData();
 
-
-    let camposSincompleta = camposIncompletos();
+    let camposSincompleta = []; 
+    camposSincompleta = camposIncompletos();
 
     if (camposSincompleta.length > 0) {
-
+        mostrarError("Error en al agregar Docente", "Por favor, complete todos los campos obligatorios indicados a continuación.", camposSincompleta);
+        camposSincompleta = null; 
         return; 
     }
 
