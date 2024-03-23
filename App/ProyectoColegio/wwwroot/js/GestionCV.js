@@ -327,6 +327,36 @@ function GenerarTabla(data, cabezera, propiedades) {
 
 }
 
+function validarCamposFamiliares() {
+    let camposSinCompletar = [];
+
+    let nombreCompleto = document.getElementById("nombreCompleto").value.trim();
+    let documento = document.getElementById("documento").value.trim();
+    let fechaNacimiento = document.getElementById("fechanacimineto").value;
+    let ocupacion = document.getElementById("ocupacion").value.trim();
+    let parentesco = document.getElementById("parentezcosEstudiante").value;
+    let numeroCelular = document.getElementById("numeroceular").value.trim();
+    let nivelEscolaridad = document.getElementById("escolaridad").value;
+    let direccionFamiliar = document.getElementById("direccionfamiliar").value.trim();
+    let desplazado = document.getElementById("desplazado").checked;
+    let acudiente = document.getElementById("acudiente").checked;
+    let responsabilidadEconomica = document.getElementById("responsabilidadecomica").checked;
+
+    if (nombreCompleto === "") camposSinCompletar.push("Nombre Completo");
+    if (documento === "") camposSinCompletar.push("Documento");
+    if (fechaNacimiento === "") camposSinCompletar.push("Fecha de Nacimiento");
+    if (ocupacion === "") camposSinCompletar.push("Ocupación");
+    if (parentesco === "") camposSinCompletar.push("Parentesco");
+    if (numeroCelular === "") camposSinCompletar.push("Número Celular");
+    if (nivelEscolaridad === "") camposSinCompletar.push("Nivel de Escolaridad");
+    if (direccionFamiliar === "") camposSinCompletar.push("Dirección Familiar");
+    if (!desplazado && !acudiente && !responsabilidadEconomica) {
+        camposSinCompletar.push("Seleccione al menos una opción: Desplazado, Acudiente o Responsabilidad Económica");
+    }
+
+    return camposSinCompletar;
+}
+
 
 function guardarFamiliarEstudiante() {
     let frm = new FormData(); 
@@ -344,6 +374,10 @@ function guardarFamiliarEstudiante() {
     let responsabilidadEconomica = document.getElementById("responsabilidadecomica").checked;
     let estudiante = document.getElementById('documentoEstudiante').value
 
+    let camposIncompletos = camposSinCompletar();
+    if (camposIncompletos.length > 0) {
+        return;  
+    }
 
     desplazado = desplazado === true ? 'SI' : 'NO'
     acudiente = acudiente === true ? 'SI' : 'NO'
