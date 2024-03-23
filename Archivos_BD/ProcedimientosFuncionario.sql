@@ -125,8 +125,10 @@ create procedure `registrarGradoGrupo`(
 ) 
 begin
 	call registrarGrado(nomGrado);
-	insert into GradoGrupo (nombreTitular, grupoGrado, estadoGrupoGrado, fkidGrado)
-				value("Por definir", nomGradoGrupo, "Activo", (select ObtenerIdGrado(nomGrado)) );
+    if (existeGrupoRetorno(nomGradoGrupo) = 0) then
+		insert into GradoGrupo (nombreTitular, grupoGrado, estadoGrupoGrado, fkidGrado)
+					value("Por definir", nomGradoGrupo, "Activo", (select ObtenerIdGrado(nomGrado)) );
+    end if;
 END$$
 
 /*--------------------------Registrar Sede Grado-------------------------*/
@@ -163,6 +165,17 @@ create procedure `registrarAsignaturaGradoGrupo`(
 begin
 	insert into AsignaturaGradoGrupo (estadoAsignaturaGG, fkidGradoGrupo, fkidAsignatura)
 				value("Disponible", (select ObtenerIdGradoGrupo(grupoGrado)), (select ObtenerIdAsignatura(nomAsignatura)) );
+END$$
+
+DELIMITER $$
+DROP PROCEDURE IF EXISTS `registrarAsignaturaGrado` $$
+create procedure `registrarAsignaturaGrado`(
+    nomAsignatura varchar(400),
+    gradoRef varchar(400)
+) 
+begin
+	insert into AsignaturaGradoGrupo (estadoAsignaturaGG, fkidGradoGrupo, fkidAsignatura)
+				value("Disponible", (select ObtenerIdGrado(gradoRef)), (select ObtenerIdAsignatura(nomAsignatura)) );
 END$$
 
 /*--------------------------Registrar Competencias Asignaturas-------------------------*/

@@ -393,6 +393,19 @@ begin
     RETURN resultado;
 END$$
 
+/*------buscar id de Existe Grupo retorno-----*/
+DELIMITER $$
+CREATE FUNCTION existeGrupoRetorno(nomGrupo varchar(400))
+RETURNS int
+READS SQL DATA 
+begin
+	DECLARE resultado int;
+    SET resultado = (SELECT COUNT(*) > 0 AS existe_valor
+	FROM GradoGrupo as gg
+	WHERE gg.grupoGrado = nomGrupo);
+    RETURN resultado;
+END$$
+
 /*------buscar existencia Docente Horario-----*/
 DELIMITER $$
 CREATE FUNCTION existeDocenteHorario(idDocenteRef varchar(400), rangoHorario varchar(400), diaHorario varchar(400))

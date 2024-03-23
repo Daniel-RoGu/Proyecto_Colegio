@@ -347,10 +347,8 @@ DELIMITER ;
 /*--------------------------Obtener Asignaturas del Grado-------------------------*/
 DELIMITER $$
 DROP PROCEDURE IF EXISTS `ObtenerAsignaturasGrado` $$
-create procedure `ObtenerAsignaturasGrado`(sedeRef varchar(400), GradoRef varchar(400)) 
+create procedure `ObtenerAsignaturasGrado`(sedeRef varchar(400), idGradoRef int) 
 begin
-    Declare idGradoRef int;
-    set idGradoRef = (select ObtenerIdGrado(GradoRef));
     
     SELECT a.nombreAsignatura as Asignatura		   
 	From Sede as s
