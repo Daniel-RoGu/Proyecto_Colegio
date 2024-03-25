@@ -181,6 +181,44 @@ namespace ProyectoColegio.Data
             return resultados;
         }
 
+        public string organizarValorGradoSimat(string grado)
+        {
+            string retorno = "0";
+
+            if (!string.IsNullOrEmpty(grado))
+            {
+                if (grado != "00" || grado != "000" || grado != "0000")
+                {
+                    retorno = grado.TrimStart('0');
+                }
+
+                return retorno;
+
+            }
+            else
+            {
+                return retorno;
+            }
+
+            
+        }
+
+
+        public string organizarValorGrupoSimat(string grupo)
+        {
+            string retorno = "0";
+
+            if (!string.IsNullOrEmpty(grupo))
+            {
+                return retorno = grupo.TrimStart('0');
+            }
+            else
+            {
+                return retorno;
+            }
+
+        }
+
         //public List<string> buscarEstudiante(string identificacion, string Conexion)
         //{
         //    List<string> GradoGrupoEst = new List<string>();    

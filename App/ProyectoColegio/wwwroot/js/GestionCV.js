@@ -147,9 +147,9 @@ function generatableProfesores(data) {
         [
 
             {
-                valor: "Información General", size: "30" },
-            { valor: "Información Médica", size: "30" },
-            { valor: "Información Socioeconómica", size: "25" },
+                valor: "Informaci\u00f3n General", size: "30" },
+            { valor: "Informaci\u00f3n M\u00e9dica", size: "30" },
+            { valor: "Informaci\u00f3n Socioecon\u00f3mica", size: "25" },
      
             { valor: "Opciones", size: "15" },
         ],
@@ -188,7 +188,7 @@ function generarTablaCargueInventario(
     propiedades,
     propiedadId
 ) {
-
+    console.log(cabezera)
 
     var contenedor = "<table class='table table__information table-sm'>";
     contenedor += "<thead >";
@@ -374,12 +374,15 @@ function guardarFamiliarEstudiante() {
     let responsabilidadEconomica = document.getElementById("responsabilidadecomica").checked;
     let estudiante = document.getElementById('documentoEstudiante').value
     let camposIncompletos = [];
-    camposIncompletos = camposSinCompletar();
+    camposIncompletos = validarCamposFamiliares();
+    console.log(camposIncompletos)
     if (camposIncompletos.length > 0) {
         mostrarError("Error en al agregar Familiar", "Por favor, complete todos los campos obligatorios indicados a continuación.", camposIncompletos);
         camposIncompletos = null; 
         return;  
     }
+
+    /*deme  4 minutos */
 
     desplazado = desplazado === true ? 'SI' : 'NO'
     acudiente = acudiente === true ? 'SI' : 'NO'
@@ -398,9 +401,6 @@ function guardarFamiliarEstudiante() {
     frm.append('estadoAcudiente', acudiente.toString());
     frm.append('responsabilidadEconomicaEstudiante', responsabilidadEconomica.toString());
     frm.append('identificacionEstudiante', estudiante)
-    for (let pair of frm.entries()) {
-        console.log(pair[0] + ': ' + pair[1]);
-    }
 
     fetchPostText('Funcionario/GuardarFamiliarEstudiante', frm, function (res) {
 

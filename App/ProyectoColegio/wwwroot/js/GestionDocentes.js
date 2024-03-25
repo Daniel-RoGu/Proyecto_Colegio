@@ -293,8 +293,8 @@ function generatableProfesores(data) {
 
             { valor: "Datos Personales", size: "25" },
             { valor: "Datos de Contacto", size: "25" },
-            { valor: "Información Laboral", size: "20" },
-            { valor: "Información Adicional", size: "20" },
+            { valor: "Informaci\u00f3n Laboral", size: "20" },
+            { valor: "Informaci\u00f3n Adicional", size: "20" },
             { valor: "Opciones", size: "10" },
         ],
 
@@ -303,12 +303,12 @@ function generatableProfesores(data) {
                 { titulo: "Nombre completo", valor: "nombreDocente" },
                 { titulo: "Documento", valor: "identificacion" },
                 { titulo: "Tipo de sangre", valor: "tipoSangre" },
-                { titulo: "Genero", valor: "genero" },
+                { titulo: "G\u00e9nero", valor: "genero" },
             ],
             [
-                { titulo: "Número de teléfono", valor: "telefonoFijo" },
-                { titulo: "Dirección", valor: "direccion" },
-                { titulo: "Teléfono", valor: "telefonoCelular" },
+                { titulo: "N\u00famero de tel\u00e9fono", valor: "telefonoFijo" }, //encripta el contenido para ser desencriptado en formto de texto utf8 legible
+                { titulo: "Direcci\u00f3n", valor: "direccion" },
+                { titulo: "Tel\u00e9fono", valor: "telefonoCelular" },
                 { titulo: "Correo", valor: "correo" },
             ],
             [

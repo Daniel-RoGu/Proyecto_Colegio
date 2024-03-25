@@ -17,6 +17,7 @@ call registrarRol("ElJefe");
 call registrarRol("Estudiante");
 call registrarRol("Coordinador");
 call registrarRol("Docente");
+call registrarRol("Administrador");
 call registrarPermiso("RegistrarTipoDocumento");
 call registrarRolPermiso("vistaRegistroTipoDocumento", "Views/TipoDocumento", "ElJefe", "RegistrarTipoDocumento"); /*luego se remplaza el nombre de la vista por el http//algo.com*/
 call registrarSisben("Ninguno");
@@ -152,6 +153,11 @@ call registrarDocenteGrado("Ana Riquianus Mamus", "1202");
 call registrarDocenteGrado("Edector Cumbai Cutui", "101");
 call registrarDocenteGrado("Jhulius Rommanus Magnus", "1202");
 call registrarDocenteGrado("dfgdfg dfgdfgdfdgfgdfg dfgdfg", "1202");
+call registrarDocenteGrado("werwqer wrewqerqwerqwer wrwqerqw", "501");
+call registrarDocenteGrado("werwqer wrewqerqwerqwer wrwqerqw", "101");
+call registrarDocenteGrado("werwqer wrewqerqwerqwer wrwqerqw", "201");
+call registrarDocenteGrado("werwqer wrewqerqwerqwer wrwqerqw", "301");
+call registrarDocenteGrado("werwqer wrewqerqwerqwer wrwqerqw", "401");
 call registrarAsignatura("Español");
 call registrarAsignatura("Matemáticas");
 call registrarDocenteAsignatura("Edector Cumbai Cutui", "Español");
@@ -206,7 +212,7 @@ call obtenerEstudiantesSedeGrupo("NIEVES ARRIBA KM. 18", "701");
 call obtenerEstudiantesSede("Central");
 call obtenerEstudiantesSede("EL VATICANO");
 call obtenerEstudiantesSede2("EL VATICANO");
-call obtenerGruposGradoSede("EL VATICANO");
+call obtenerGruposGradoSede("EL VATICANO", "5");
 call obtenerGradosXSede("EL VATICANO");
 call obtenerGruposGradoSede("Central");
 call obtenerGradosXSede("Central");
@@ -268,24 +274,37 @@ SELECT ObtenerIdDocente(585);
 select ObtenerIdGradoDelGrupo("1202");
 SELECT ObtenerIdHorario(horaInicioClase, horaFinClase);
 call GradosAsignaturasDocentes("Central", "207010", "Español");
-call AsignaturasDelDocente("Central", "12", 585);
+call AsignaturasDelDocente("LA AGUILILLA", "6", 96360868);
 call ObtenerDocentesAsignatura("Español");
-call ObtenerAsignaturasGrado("Central", "12");
-call ObtenerDocenteGrupos("Central", "12", 585);
-call ObtenerDocenteGrados("Central", 585);
-select ObtenerIdGrado("12");
+call ObtenerAsignaturasGrado("LA AGUILILLA", 96360868);
+call ObtenerDocenteGrupos("LA AGUILILLA", "0", 1116919521);
+call ObtenerDocenteGrados("LA AGUILILLA", 40730500);
+call ObtenerDocenteGrados("LA AGUILILLA", 1116919521);
+select ObtenerIdGrado("0");
 call obtenerSedeDocente("585");
 call obtenerSedeEstudiante(1013362165);
 call obtenerSedeFuncionario(12987357);
+call obtenerEstudiantesSedeGrupo2("LA AGUILILLA", "601");
 
-SELECT distinct (CONCAT(COALESCE(u.primerNombreUsuario, ''), ' ', COALESCE(u.segundoNombreUsuario, ''), 
-								COALESCE(u.primerApellidoUsuario, ''), ' ', COALESCE(u.segundoApellidoUsuario, ''))) AS Docente
-								FROM Sede AS s
-                                INNER JOIN SedeGrados AS sg ON sg.fkidSede = s.idSede
-                                INNER JOIN Grados AS g ON sg.fkidGrado = idGrado
-								INNER JOIN DocentesGrado AS dg ON dg.fkidGrado = g.idGrado
-								INNER JOIN Docente AS d ON dg.fkidDocente = d.idDocente
-								INNER JOIN Usuario AS u On d.fkidentificacion = u.identificacion
-								WHERE s.nombreSede = "Central" AND g.idGrado = "207010";
+select distinct g.idGrado from Sede as s
+					   inner join SedeGrados as sg on sg.fkidSede = s.idSede
+                       inner join Grados as g on sg.fkidGrado = g.idGrado
+                       where s.nombreSede = "LA AGUILILLA" and g.nombreGrado = "0";
+                       
+SELECT distinct gg.idGradoGrupo as IdentificadorGrupo, gg.grupoGrado as Grupo	
+    From Docente as d 
+    inner join DocentesGrado as dg on dg.fkidDocente = d.idDocente
+    inner join Grados as g on dg.fkidGrado = g.idGrado
+    inner join GradoGrupo as gg on gg.fkidGrado = g.idGrado
+    where d.fkidentificacion = 1116919521 and g.nombreGrado = "0" and g.idGrado = 207000;
                                 
 call registrarDocenteAsignatura("werwqer wrewqerqwerqwer wrwqerqw", "Español");
+select count(*) as RegistroPeriodos from PeriodoAcademico;
+call ObtenerPeriodos();
+
+call registrarDocenteNotasAsistenciasPeriodo("werwqer wrewqerqwerqwer wrwqerqw", "Español", 1117936646, "Primer periodo", 3.5, 5);
+select ObtenerIdAsignatura("Proyecto Pedagógico Productivo");
+
+SELECT Asignatura.idAsignatura FROM Asignatura WHERE Asignatura.nombreAsignatura = "Proyecto Pedagógico Agroecológico" LIMIT 1;
+call registrarDocenteAsignatura("WILLIAM GARCIA MEDINA", "Informática"); 
+call registrarDocenteAsignatura("WILLIAM GARCIA MEDINA", "Edu. Física"); 

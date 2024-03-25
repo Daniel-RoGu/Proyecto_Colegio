@@ -448,7 +448,7 @@ CREATE TABLE IF NOT EXISTS `NotaDefinitivaPeriodo` (
   `idNotas` INT NOT NULL AUTO_INCREMENT,
   `notaGeneral` DOUBLE NOT NULL,
   `estadoNota` VARCHAR(400) NOT NULL,
-  `puestoNota` VARCHAR(400) NOT NULL,
+  `puestoNota` INT NULL,
   `fkidPeriodoAcademico` INT NOT NULL,
   `fkidAsignatura` INT NOT NULL,
   `fkidNotaFinal` INT,
@@ -841,6 +841,7 @@ DROP TABLE IF EXISTS `asignaturaGradoGrupo` ;
 CREATE TABLE IF NOT EXISTS `asignaturaGradoGrupo` (
   `idasignaturaGradoGrupo` INT NOT NULL AUTO_INCREMENT,
   `estadoAsignaturaGG` VARCHAR(400) NOT NULL,
+  `horasSemanales` INT NULL,
   `fkidGradoGrupo` INT NOT NULL,
   `fkidAsignatura` INT NOT NULL,
   PRIMARY KEY (`idasignaturaGradoGrupo`),
@@ -881,3 +882,18 @@ CREATE TABLE IF NOT EXISTS `horarioDocente` (
 
 
 ALTER TABLE horarioDocente AUTO_INCREMENT = 1500300;
+
+-- -----------------------------------------------------
+-- Table `PustosGrupo`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `PuestosGrupo` ;
+
+CREATE TABLE IF NOT EXISTS `PuestosGrupo` (
+  `idPuestosGrupo` INT NOT NULL AUTO_INCREMENT,
+  `idEstudianteGrupo` BIGINT NOT NULL,
+  `posicion` INT NOT NULL,
+  `nota` FLOAT NOT NULL,
+  `estadoPuesto` VARCHAR(400) NOT NULL,
+  PRIMARY KEY (`idPuestosGrupo`));
+
+ALTER TABLE PuestosGrupo AUTO_INCREMENT = 2000300;

@@ -526,6 +526,32 @@ begin
     RETURN resultado;
 END$$
 
+/*------buscar id de Existe Periodo-----*/
+DELIMITER $$
+CREATE FUNCTION FunexistePeriodo(periodoRef varchar(400))
+RETURNS int
+READS SQL DATA 
+begin	
+	DECLARE resultado int;
+    SET resultado = (SELECT COUNT(*) > 0 AS existe_valor
+	FROM PeriodoAcademico as p
+	WHERE p.periodoAcademico = periodoRef);
+    RETURN resultado;
+END$$
+
+/*------buscar id de Existe Puesto Estudiante-----*/
+DELIMITER $$
+CREATE FUNCTION FunexistePuestoEstudiantePeriodo(idEstudiante long)
+RETURNS int
+READS SQL DATA 
+begin	
+	DECLARE resultado int;
+    SET resultado = (SELECT COUNT(*) > 0 AS existe_valor
+	FROM PuestosGrupo as pg
+	WHERE pg.idEstudianteGrupo = idEstudiante);
+    RETURN resultado;
+END$$
+
 /*------Obtener ID Horario por rango_horario-----*/
 DELIMITER $$
 CREATE FUNCTION ObtenerIdHorario(rangoHorario VARCHAR(400),  diaHorarioClase VARCHAR(400))
@@ -542,5 +568,18 @@ begin
     SET resultado = (SELECT h.idHorario FROM Horario as h
 					 WHERE h.horaInicio = horaInicioClase and h.horaFin = horaFinClase and h.diaHorario = diaHorarioClase);
     
+    RETURN resultado;
+END$$
+
+/*------obtener id Periodo-----*/
+DELIMITER $$
+CREATE FUNCTION obtenerIdPeriodo(periodoRef varchar(400))
+RETURNS int
+READS SQL DATA 
+begin	
+	DECLARE resultado int;
+    SET resultado = (select p.idPeriodoAcademico AS idPeriodo
+					 FROM PeriodoAcademico as p
+					 WHERE p.periodoAcademico = periodoRef);
     RETURN resultado;
 END$$

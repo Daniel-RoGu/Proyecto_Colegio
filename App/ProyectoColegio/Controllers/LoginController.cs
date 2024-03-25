@@ -58,7 +58,7 @@ namespace ProyectoColegio.Controllers
                         DatosCompartidos.SedeUsuario = ObtenerSedeDocente(DatosCompartidos.MiDato);
                         return RedirectToAction("Principal", "Docente");
                     }
-                    else if(ObtenerRolUsuario(model.Password) == "Coordinador")
+                    else if(ObtenerRolUsuario(model.Password) == "Coordinador" || ObtenerRolUsuario(model.Password) == "Administrador")
                     {
                         DatosCompartidos.SedeUsuario = ObtenerSedeCoordinador(DatosCompartidos.MiDato);
                         return RedirectToAction("Index", "Funcionario");

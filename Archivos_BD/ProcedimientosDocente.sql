@@ -61,18 +61,13 @@ END$$
 DELIMITER $$
 DROP PROCEDURE IF EXISTS `registrarDocenteGrado2` $$
 create procedure `registrarDocenteGrado2`(
-    nombreDocente varchar(400),
+    idDocente varchar(400),
     gradroRef int
 ) 
 begin
-	declare identificacionDocente long;
     declare identificacionGrupo varchar(400);
-    set identificacionDocente = (SELECT d.idDocente FROM docente AS d
-								 INNER JOIN usuario AS u ON CONCAT(COALESCE(u.primerNombreUsuario, ''), ' ', COALESCE(u.segundoNombreUsuario, ''), 
-																   COALESCE(u.primerApellidoUsuario, ''), ' ', COALESCE(u.segundoApellidoUsuario, '')) COLLATE utf8mb4_unicode_ci = nombreDocente
-								 WHERE d.fkidentificacion = u.identificacion);
 	insert into DocentesGrado (estadoDocenteGrado, fkidDocente, fkidGrado)				
-				value("Activo", identificacionDocente, (select ObtenerIdGrado(gradroRef)));
+				value("Activo", idDocente, (select ObtenerIdGrado(gradroRef)));
 END$$
 
 /*--------------------------Registrar Docente Asignatura-------------------------*/
@@ -80,8 +75,8 @@ DELIMITER $$
 DROP PROCEDURE IF EXISTS `registrarDocenteAsignatura` $$
 create procedure `registrarDocenteAsignatura`(
     nombreDocente varchar(400),
-    asignatura varchar(400),
-    horasSemanalesRef int
+    asignatura varchar(400)
+    /*horasSemanalesRef int*/
 ) 
 begin
 	declare identificacionDocente long;
@@ -89,8 +84,8 @@ begin
 								 INNER JOIN usuario AS u ON CONCAT(COALESCE(u.primerNombreUsuario, ''), ' ', COALESCE(u.segundoNombreUsuario, ''), 
 																   COALESCE(u.primerApellidoUsuario, ''), ' ', COALESCE(u.segundoApellidoUsuario, '')) COLLATE utf8mb4_unicode_ci = nombreDocente
 								 WHERE d.fkidentificacion = u.identificacion);
-	insert into DocenteAsignatura (estadoDocenteAsignatura, horasSemanales, fkidDocente, fkidAsignatura)				
-				value("Asignado", horasSemanalesRef, identificacionDocente, (select ObtenerIdAsignatura(asignatura)) );
+	insert into DocenteAsignatura (estadoDocenteAsignatura, fkidDocente, fkidAsignatura)				
+				value("Asignado", identificacionDocente, (select ObtenerIdAsignatura(asignatura)) );
 END$$
 
 /*--------------------------Obtener Docente-------------------------*/
@@ -122,7 +117,7 @@ DELIMITER $$
 DROP PROCEDURE IF EXISTS `obtenerEstudiantesGrupo` $$
 create procedure `obtenerEstudiantesGrupo`(nomGrupo varchar(400)) 
 begin
-	select Us.identificacion as documento, Us.primerNombreUsuario as nomUsuario, Us.segundoNombreUsuario as nom2Usuario, 
+	select distinct Us.identificacion as documento, Us.primerNombreUsuario as nomUsuario, Us.segundoNombreUsuario as nom2Usuario, 
 		   Us.primerApellidoUsuario as apellidoUsuario, Us.segundoApellidoUsuario as apellido2Usuario, Us.edadUsuario as edad,
 		   Us.telefonoCelular as telCelular, Us.telefonoFijo as telFijo, Us.correo as correoUss, 
            Us.direccion as direccioUss, Us.barrioUbicacionUsuario as barrioUss, Us.fechaNacimiento as fechaNacimientoUss, Us.estadoUsuario as estadoUss, 
@@ -348,8 +343,7 @@ DELIMITER ;
 DELIMITER $$
 DROP PROCEDURE IF EXISTS `ObtenerAsignaturasGrado` $$
 create procedure `ObtenerAsignaturasGrado`(sedeRef varchar(400), idGradoRef int) 
-begin
-    
+begin    
     SELECT a.nombreAsignatura as Asignatura		   
 	From Sede as s
     inner join SedeGrados as sg on sg.fkidSede = s.idSede
@@ -365,17 +359,18 @@ DELIMITER $$
 DROP PROCEDURE IF EXISTS `ObtenerDocenteGrupos` $$
 create procedure `ObtenerDocenteGrupos`(sedeRef varchar(400), GradoRef varchar(400), documentoDocente bigint) 
 begin
-    Declare idGradoRef int;
-    set idGradoRef = (select ObtenerIdGrado(GradoRef));
+	declare idGradoSede int;
+    set idGradoSede = (select distinct g.idGrado from Sede as s
+					   inner join SedeGrados as sg on sg.fkidSede = s.idSede
+                       inner join Grados as g on sg.fkidGrado = g.idGrado
+                       where s.nombreSede = sedeRef and g.nombreGrado = GradoRef);
     
-    SELECT distinct gg.idGradoGrupo as IdentificadorGrupo, gg.grupoGrado as Grupo		   
-	From Sede as s
-    inner join Docente as d on d.fkidSede = s.idSede
-    inner join DocenteAsignatura as da on da.fkidDocente = d.idDocente
-    inner join Asignatura as a on da.fkidAsignatura = a.idAsignatura
-    inner join asignaturaGradoGrupo as agg on agg.fkidAsignatura = a.idAsignatura
-    inner join GradoGrupo as gg on agg.fkidGradoGrupo = gg.idGradoGrupo
-    where s.nombreSede = sedeRef and gg.fkidGrado = idGradoRef and d.fkidentificacion = documentoDocente;
+    SELECT distinct gg.idGradoGrupo as IdentificadorGrupo, gg.grupoGrado as Grupo	
+    From Docente as d 
+    inner join DocentesGrado as dg on dg.fkidDocente = d.idDocente
+    inner join Grados as g on dg.fkidGrado = g.idGrado
+    inner join GradoGrupo as gg on gg.fkidGrado = g.idGrado
+    where d.fkidentificacion = documentoDocente and g.nombreGrado = GradoRef and g.idGrado = idGradoSede;
 
 END$$
 
@@ -384,18 +379,13 @@ DELIMITER $$
 DROP PROCEDURE IF EXISTS `ObtenerDocenteGrados` $$
 create procedure `ObtenerDocenteGrados`(sedeRef varchar(400), documentoDocente bigint) 
 begin
-    
     SELECT distinct g.idGrado as IdentificadorGrado, g.nombreGrado as Grado		   
 	From Sede as s
     inner join Docente as d on d.fkidSede = s.idSede
-    inner join DocenteAsignatura as da on da.fkidDocente = d.idDocente
-    inner join Asignatura as a on da.fkidAsignatura = a.idAsignatura
-    inner join asignaturaGradoGrupo as agg on agg.fkidAsignatura = a.idAsignatura
-    inner join GradoGrupo as gg on agg.fkidGradoGrupo = gg.idGradoGrupo
-    inner join Grados as g
+    inner join DocentesGrado as dg on dg.fkidDocente = d.idDocente
+    inner join Grados as g on dg.fkidGrado = g.idGrado
     inner join SedeGrados as sg on sg.fkidGrado = g.idGrado
-    where s.nombreSede = sedeRef and sg.fkidSede = s.idSede and d.fkidentificacion = documentoDocente;
-
+    where s.nombreSede = sedeRef and d.fkidentificacion = documentoDocente and sg.fkidSede = s.idSede;
 END$$
 
 /*--------------------------Registrar Docente Asignatura y Grupo de Grado-------------------------*/
@@ -429,6 +419,15 @@ begin
 	end if;
 END$$
 
+/*--------------------------Obtener Periodos-------------------------*/
+DELIMITER $$
+DROP PROCEDURE IF EXISTS `ObtenerPeriodos` $$
+create procedure `ObtenerPeriodos`() 
+begin
+    SELECT p.idPeriodoAcademico as IdPeriodo, p.periodoAcademico as Periodo		   
+	From PeriodoAcademico as p;
+END$$
+
 /*--------------------------Registrar Docente Notas e Inasistencia-------------------------*/
 DELIMITER $$
 DROP PROCEDURE IF EXISTS `registrarDocenteNotasAsistenciasPeriodo` $$
@@ -436,24 +435,119 @@ create procedure `registrarDocenteNotasAsistenciasPeriodo`(
     nombreDocente varchar(400),
     asignatura varchar(400),
     idEstudiante int,
-    idPeriodoNota int,
+    PeriodoNota varchar(400),
     nota float,
     nFallas int
 ) 
 begin
 	declare idNotafinal int;
+    declare puestoGeneral int;
+    declare puestoGrupo int;
+    declare idPeriodoNota int;
+    declare periodos int;   
     
-	if ((FunexisteNotaDefinitivaPeriodo(idPeriodoNota)) = 0) then		
-		set idNotafinal = (select nf.idNotaDefinitiva from NotaDefinitiva limit 1);
+	if ((FunexisteNotaDefinitivaPeriodo(idPeriodoNota)) = 0) then	
+		set idPeriodoNota = (select obtenerIdPeriodo(PeriodoNota));
+		/*set periodos = (select count(*) as RegistroPeriodos from PeriodoAcademico);
+		set idNotafinal = (select nf.idNotaDefinitiva from NotaFinal limit 1);*/
         
-		insert into NotaDefinitivaPeriodo (notaGeneral, estadoNota, fkidPeriodoAcademico, fkidAsignatura, fkidNotaFinal) 
-		value (0, "Por definir", idPeriodoNota, (select ObtenerIdAsignatura(asignatura)), idNotafinal);
+		insert into NotaDefinitivaPeriodo (notaGeneral, estadoNota, puestoNota, fkidPeriodoAcademico, fkidAsignatura, fkidNotaFinal) 
+		value (0, "Por definir", 0, idPeriodoNota, (select ObtenerIdAsignatura(asignatura)), null);
         
-		insert into NotasEstudiante (estadoNota, notaDefinitiva, fkidNotaDefinitivaPeriodo, fkidEstudiante) 
-		value ("Cargada", nota, idPeriodoNota, idEstudiante);
-	
+		insert into NotasEstudiante (estadoNota, notaDefinitiva, puestoNota, fkidNotaDefinitivaPeriodo, fkidEstudiante) 
+		value ("Cargada", nota, 0, idPeriodoNota, idEstudiante);        
+		
         update NotaDefinitivaPeriodo set notaGeneral = (select ne.notaDefinitiva from NotasEstudiante as ne where ne.fkidEstudiante = idEstudiante), estadoNota = "Registrada"
-		where NotaDefinitivaPeriodo.fkidPeriodoAcademico = idPeriodoNota and fkidAsignatura = (select ObtenerIdAsignatura(asignatura));
+		where NotaDefinitivaPeriodo.fkidPeriodoAcademico = idPeriodoNota and fkidAsignatura = (select ObtenerIdAsignatura(asignatura));   
+        
+        call PosicionandoEstudiantesGrupo(idEstudiante);
     end if;
 	
 END$$
+
+/*--------------------------Registrar Nota Año Academico-------------------------*/
+DELIMITER $$
+DROP PROCEDURE IF EXISTS `NotaAnnoAcademico` $$
+create procedure `NotaAnnoAcademico`(
+    calificacionAño float
+) 
+begin
+	declare periodos int;
+	set periodos = (select count(*) as RegistroPeriodos from PeriodoAcademico);
+    
+	if (((FunexisteNotaFinal()) = 0) and periodos = 4) then
+		insert into NotaFinal (añoElectivo, calificacionAño, estadoCalificacionAño) 
+        value ((SELECT YEAR(NOW())), calificacionAño, "Finalizada");
+    end if;
+END$$
+
+/*------Registrar Posicionamiento Estudiantes Grupo-----*/
+
+DELIMITER $$
+DROP PROCEDURE IF EXISTS `PosicionandoEstudiantesGrupo` $$
+create procedure `PosicionandoEstudiantesGrupo`(
+    idEstudianteRef bigint
+) 
+begin
+    SET @contador = 0;
+	-- Realizamos la consulta ordenando por la columna de interés
+	SELECT @contador := @contador + 1 AS posicionRef
+	FROM NotasEstudiante as ne
+	WHERE ne.fkidEstudiante <> idEstudianteRef
+	ORDER BY ne.notaDefinitiva;
+        
+	if ((FunexistePuestoEstudiantePeriodo(idEstudianteRef)) = 0) then 
+		insert into PuestosGrupo (idEstudianteGrupo, posicion, nota, estadoPuesto)
+        value (idEstudianteRef, 0, nota, "Activo");
+        
+        update NotasEstudiante set puestoNota = @contador
+        where NotasEstudiante.fkidEstudiante = idEstudianteRef;
+        
+        update NotaDefinitivaPeriodo set puestoNota = @contador
+        where  NotaDefinitivaPeriodo.idNotas= (select ne.fkidNotaDefinitivaPeriodo from NotasEstudiante as ne 
+											   where ne.fkidEstudiante = idEstudianteRef);		
+	else
+		update PuestosGrupo set posicion = @contador;
+        
+        update NotasEstudiante set puestoNota = @contador
+        where NotasEstudiante.fkidEstudiante = idEstudianteRef;
+    end if;    
+END;
+//
+DELIMITER ;
+
+/*--------------------------Obtener Notas y Fallas del Estudiante -------------------------*/
+DELIMITER $$
+DROP PROCEDURE IF EXISTS `ObtenerNotasFallasEstudiante` $$
+create procedure `ObtenerNotasFallasEstudiante`(documentoEstudiante bigint, asignaturaRef varchar(400), periodoRef varchar(400)) 
+begin    
+    
+		SELECT subconsulta1.Identificacion, subconsulta1.Estudiante, subconsulta2.Nota, subconsulta1.Fallas
+		FROM (
+			-- Subconsulta 1
+		SELECT DISTINCT e.Usuario_identificacion as Identificacion,
+						(SELECT (CONCAT(COALESCE(Usuario.primerNombreUsuario, ''), ' ', COALESCE(Usuario.segundoNombreUsuario, ''), 
+						COALESCE(Usuario.primerApellidoUsuario, ''), ' ', COALESCE(Usuario.segundoApellidoUsuario, '')))) as Estudiante,
+						a.nFallas as Fallas
+		From Usuario as u
+		inner join Estudiante as e on e.Usuario_identificacion = u.identificacion
+        inner join AsistenciaEstudiante as ae on ae.fkidEstudiante = e.idEstudiante
+        inner join Asistencia as a on ae.fkidAsistencia = a.idAsistencia
+        inner join Asignatura as asig on a.fkidAsignatura = asig.idAsignatura
+        left join PeriodoAcademico as pa on ae.fkidPeriodoAcademico = pa.idPeriodoAcademico
+        where u.identificacion = documentoEstudiante and asig.nombreAsignatura = asignaturaRef and 	pa.periodoAcademico = periodoRef
+    ) AS subconsulta1
+    INNER JOIN (
+        -- Subconsulta 2
+        SELECT DISTINCT e.Usuario_identificacion as Identificacion, ndp.notaDefinitiva as Nota
+        From Usuario as u
+		inner join Estudiante as e on e.Usuario_identificacion = u.identificacion
+        inner join NotasEstudiante as ne on ne.fkidEstudiante = e.idEstudiante
+        inner join NotaDefinitivaPeriodo as ndp on ne.fkidNotaDefinitivaPeriodo = ndp.idNotas
+        inner join PeriodoAcademico as pa on ndp.fkidPeriodoAcademico = pa.idPeriodoAcademico
+        where u.identificacion = documentoEstudiante and pa.periodoAcademico = periodoRef
+    ) AS subconsulta2 ON subconsulta1.Identificacion = subconsulta2.Identificacion;
+
+END$$
+
+

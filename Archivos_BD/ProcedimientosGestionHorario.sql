@@ -9,14 +9,9 @@ create procedure `registrarPeriodoAcademico`(
     fechaComienza varchar(400),
     fechaTermina varchar(400)
 ) 
-begin
-	if ((FunexisteNotaFinal()) = 0) then
-		insert into NotaFinal (añoElectivo, calificacionAño, estadoCalificacionAño) 
-        value ((SELECT YEAR(NOW())), 0.0, "Finalizada");
-    end if;
-	
-	insert into PeriodoAcademico (periodoAcademico, fechaInicio, fechaFin, estadoPeriodo) 
-    value (nombrePeriodo, fechaComienza, fechaTermina, "Habilitado");
+begin    
+	insert into PeriodoAcademico (periodoAcademico, fechaInicio, fechaFin, estadoPeriodo, añoElectivo) 
+    value (nombrePeriodo, fechaComienza, fechaTermina, "Habilitado", (SELECT YEAR(NOW())));
 END$$
 
 /*--------------------------Registrar horario-------------------------*/

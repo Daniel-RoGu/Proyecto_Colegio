@@ -31,6 +31,71 @@ namespace ProyectoColegio.Controllers
             return Json(docentes);
         }
 
+        public JsonResult ListarEstudiantesSedeGrupo(string grupo, string identificacion)
+        {
+            List<object> estudiantes = new List<object>();
+            List<Usuario> usuarios = new List<Usuario>();
+            Usuario usuario = new Usuario();
+
+
+            if (DatosCompartidos.SedeUsuario != null)
+            {
+
+                if (grupo != "null")
+                {
+                    estudiantes = consultasGlobales.mostrarCsv(_contexto.Conexion, Convert.ToString(DatosCompartidos.SedeUsuario), Convert.ToString(grupo));
+                }
+                else
+                {
+                    estudiantes = consultasGlobales.mostrarCsv(_contexto.Conexion, Convert.ToString(DatosCompartidos.SedeUsuario), null);
+                }
+
+            }
+            else
+            {
+                estudiantes = consultasGlobales.mostrarCsv(_contexto.Conexion, null, null);
+            }
+
+            //organiza los resultados
+            foreach (List<string> item in estudiantes)
+            {
+                usuario = new Usuario();
+                usuario.Identificacion = (Convert.ToInt64(item[0]));
+                usuario.NombreUsuario = Convert.ToString(item[1]) + ' ' + Convert.ToString(item[2]) + ' ' + Convert.ToString(item[3]) + ' ' + Convert.ToString(item[4]);
+                usuario.SegundoNombreUsuario = Convert.ToString(item[2]);
+                usuario.ApellidoUsuario = Convert.ToString(item[3]);
+                usuario.SegundoApellidoUsuario = Convert.ToString(item[4]);
+                usuario.Edad = Convert.ToInt16(item[5]);
+                usuario.TelefonoCelular = Convert.ToString(item[6]);
+                usuario.TelefonoFijo = Convert.ToString(item[7]);
+                usuario.Correo = Convert.ToString(item[8]);
+                usuario.Direccion = Convert.ToString(item[9]);
+                usuario.Barrio = Convert.ToString(item[10]);
+                usuario.FechaNacimiento = Convert.ToString(item[11]);
+                usuario.TipoSangre = Convert.ToString(item[12]);
+                usuario.TipoDocumento = Convert.ToString(item[13]);
+                usuario.Discapacidad = Convert.ToString(item[14]);
+                usuario.Sisben = Convert.ToString(item[15]);
+                usuario.Genero = Convert.ToString(item[16]);
+                usuario.EPS = Convert.ToString(item[17]);
+                usuario.Estrato = Convert.ToString(item[18]);
+                usuario.codigoEstudiante = Convert.ToString(item[19]);
+                usuario.Grado = Convert.ToString(item[20]);
+                usuario.Grupo = Convert.ToString(item[21]);
+                usuarios.Add(usuario);
+
+                if (identificacion != "null" && identificacion == item[0])
+                {
+                    usuarios = new List<Usuario>();
+                    usuarios.Add(usuario);
+                    Console.WriteLine(usuario);
+                    return Json(usuarios);
+                }
+            }
+
+            return Json(usuarios);
+        }
+
         //[HttpPost]
         public IActionResult Index() { 
 
