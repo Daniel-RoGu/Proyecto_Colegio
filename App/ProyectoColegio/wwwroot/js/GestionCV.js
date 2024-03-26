@@ -345,13 +345,13 @@ function validarCamposFamiliares() {
     if (nombreCompleto === "") camposSinCompletar.push("Nombre Completo");
     if (documento === "") camposSinCompletar.push("Documento");
     if (fechaNacimiento === "") camposSinCompletar.push("Fecha de Nacimiento");
-    if (ocupacion === "") camposSinCompletar.push("Ocupación");
+    if (ocupacion === "") camposSinCompletar.push("Ocupaci\u00f3n");
     if (parentesco === "") camposSinCompletar.push("Parentesco");
-    if (numeroCelular === "") camposSinCompletar.push("Número Celular");
+    if (numeroCelular === "") camposSinCompletar.push("N\u00famero Celular");
     if (nivelEscolaridad === "") camposSinCompletar.push("Nivel de Escolaridad");
-    if (direccionFamiliar === "") camposSinCompletar.push("Dirección Familiar");
+    if (direccionFamiliar === "") camposSinCompletar.push("Direcci\u00f3n Familiar");
     if (!desplazado && !acudiente && !responsabilidadEconomica) {
-        camposSinCompletar.push("Seleccione al menos una opción: Desplazado, Acudiente o Responsabilidad Económica");
+        camposSinCompletar.push("Seleccione al menos una opci\u00f3n: Desplazado, Acudiente o Responsabilidad Econ\u00f3mica");
     }
 
     return camposSinCompletar;
@@ -376,7 +376,7 @@ function guardarFamiliarEstudiante() {
     let camposIncompletos = [];
     camposIncompletos = camposSinCompletar();
     if (camposIncompletos.length > 0) {
-        mostrarError("Error en al agregar Familiar", "Por favor, complete todos los campos obligatorios indicados a continuación.", camposIncompletos);
+        mostrarError("Error en al agregar Familiar", "Por favor, complete todos los campos obligatorios indicados a continuaci\u00f3n.", camposIncompletos);
         camposIncompletos = null; 
         return;  
     }

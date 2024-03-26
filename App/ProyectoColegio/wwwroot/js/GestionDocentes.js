@@ -456,19 +456,19 @@ function camposIncompletos() {
     if (edad === "") camposSinCompletar.push("Edad");
     if (celular === "") camposSinCompletar.push("Celular");
     if (correo === "") camposSinCompletar.push("Correo");
-    if (direccion === "") camposSinCompletar.push("Dirección");
+    if (direccion === "") camposSinCompletar.push("Direcci\u00f3n");
     if (horasTrabajo === "") camposSinCompletar.push("Horas de Trabajo");
     if (segundoApellido === "") camposSinCompletar.push("Segundo Apellido");
-    if (lugarexpedicion === "") camposSinCompletar.push("Lugar de Expedición");
+    if (lugarexpedicion === "") camposSinCompletar.push("Lugar de Expedici\u00f3n");
     if (tipoSangre === "") camposSinCompletar.push("Tipo de Sangre");
-    if (telefonoFijo === "") camposSinCompletar.push("Teléfono Fijo");
+    if (telefonoFijo === "") camposSinCompletar.push("Tel\u00e9fono Fijo");
     if (tipoDiscapacidad === "") camposSinCompletar.push("Tipo de Discapacidad");
     if (sisben === "") camposSinCompletar.push("Sisben");
-    if (genero === "") camposSinCompletar.push("Género");
+    if (genero === "") camposSinCompletar.push("G\u00e9nero");
     if (eps === "") camposSinCompletar.push("EPS");
     if (estrato === "") camposSinCompletar.push("Estrato");
     if (sede === "") camposSinCompletar.push("Sede");
-    if(segundoNombre === "") camposSinCompletar.push("Segundo Nombre");
+    if (segundoNombre === "") camposSinCompletar.push("Segundo Nombre");
 
 
 

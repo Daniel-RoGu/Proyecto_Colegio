@@ -344,7 +344,7 @@ function guardarHorarioForm() {
     formulario= validarCamposClase();
 
     if (formulario.length > 0) {
-        mostrarError("Error al agregar la Asignatura al horario", "Por favor, complete todos los campos obligatorios indicados a continuación.", formulario);
+        mostrarError("Error al agregar la Asignatura al horario", "Por favor, complete todos los campos obligatorios indicados a continuaci\u00f3n.", formulario);
         formulario = null; 
 
         return
