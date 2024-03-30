@@ -85,6 +85,12 @@ body{
     margin: 0px 10px; 
 }
 
+.periodossDocente {
+    width: 18%;
+    margin: 0px 2px;
+}
+
+
 .barrapaginacion__container {
     background-color: var(--color-secundary);
     position: fixed;
@@ -190,14 +196,28 @@ body{
 
 
 }
+.table__horario {
+    text-align: center;
+}
 
+    .table__horario td p {
+        font-weight: 600;
+        padding: 0;
+        margin: 0 auto;
+    }
+
+    .table__horario td {
+        margin: 0;
+        padding: 10px;
+    }
 
 
 .table__horario th {
-    background-color: #DAE3F3;
-    padding: 25px;
+    background-color: #2766d3;
+    padding: 20px;
     text-align: center;
     border: none;
+    color:white
 }
 
 
@@ -206,5 +226,17 @@ body{
 }
 
 
+.table--boletin th {
+    margin: 0px;
+    padding: 6px;
+}
 
+.table--boletin td {
+    margin: 0px;
+    padding: 6px;
+}
 
+.text--table--notas {
+    padding:0px;
+    margin: 0px; 
+}

@@ -1,7 +1,7 @@
 window.onload = function () {
 
     selectorSede("")
-    listargradosTodos("");  
+
     listarestudiantes("");
     
 }
@@ -28,25 +28,6 @@ function selectorSede(valor) {
 }
 
 
-function listargradosTodos(valor) {
-
-    fetchGet('Funcionario/ListarGrados', function (data) {
-       
-
-        if (data.length > 0) {
-            const newArray = data.map((item) => ({
-                value: item[1],
-                text: item[1],
-            }));
-
-            selectdatefiltro("selectgrados", newArray, valor);
-        } else {
-            selectdatefiltro("selectgrados", [], valor);
-        }
-
-    })
-
-}
 
 
 function listargrados(valor, Nombre) {
@@ -62,9 +43,10 @@ function listargrados(valor, Nombre) {
                 text: item[1],
             }));
 
-            selectdate("selectgrados", newArray, valor);
+            selectdatefiltro("selectgrados", newArray, valor);
+            activarEscuchaSelectGrados(); 
         } else {
-            selectdate("selectgrados", [], valor);
+            selectdatefiltro("selectgrados", [], valor);
 
         }
 
@@ -94,6 +76,49 @@ function listarParentescoFamiliaresRegistrados(valor, identidicacion) {
 }
 
 
+function listargrupos(valor, Nombre, grado) {
+
+    fetchGet('Funcionario/ListarGruposGradoSede/?sede=' + Nombre + '&grado=' + grado, function (data) {
+
+
+
+
+        if (data.length > 0) {
+            const newArray = data.map((item) => ({
+                value: item[1],
+                text: item[1],
+            }));
+
+            selectdatefiltro("selectgrupos", newArray, valor);
+
+        } else {
+            selectdatefiltro("selectgrupos", [], valor);
+
+        }
+
+    })
+
+}
+
+
+
+
+function activarEscuchaSelectGrados() {
+
+    var selectElement = document.getElementById("selectgrados");
+
+
+    selectElement.addEventListener("change", function () {
+
+        var selectedValue = selectElement.value;
+
+        let sede = document.getElementById('selectsede').value
+
+        if (selectedValue !== "TODOS") { listargrupos("", sede, selectedValue) } else { '' };  
+    });
+}
+
+
 
 function activarEscuchaSelect() {
 
@@ -112,10 +137,12 @@ function activarEscuchaSelect() {
 }
 
 
+
 function listarestudiantes() {
     let sedes = document.getElementById("selectsede").value
     let grados = document.getElementById("selectgrados").value
     let idetificacion = document.getElementById('inputsearch').value.trim()
+    let grupo = document.getElementById('selectgrupos').value
 
 
     if (sedes === 'TODOS') {
@@ -127,7 +154,12 @@ function listarestudiantes() {
 
     }
 
-    fetchGet(`Funcionario/ListarEstudiantesSedeGrupo/?sede=${sedes}&grupo=${grados}&identificacion=${idetificacion}`, function (data) {
+    if (grupo === "TODOS") [
+        grupo = null
+
+    ]
+
+    fetchGet(`Funcionario/ListarEstudiantesSedeGrupo/?sede=${sedes}&grupo=${grupo}&grado=${grados}&identificacion=${idetificacion}`, function (data) {
 
         generatableProfesores(data)
     })
@@ -188,7 +220,7 @@ function generarTablaCargueInventario(
     propiedades,
     propiedadId
 ) {
-    console.log(cabezera)
+
 
     var contenedor = "<table class='table table__information table-sm'>";
     contenedor += "<thead >";
@@ -430,22 +462,24 @@ function limpiarModalAgregarFamiliar() {
 
 
 function filtrosEstudiantes() {
-    let idetificacion = document.getElementById('inputsearch').value.trim();
-    let sedes = document.getElementById('selectsede').value
-    let grados = document.getElementById('selectgrados').value
+    let sedes = document.getElementById("selectsede").value
+    let grados = document.getElementById("selectgrados").value
+    let idetificacion = document.getElementById('inputsearch').value.trim()
+    let grupo = document.getElementById('selectgrupos').value
 
 
     idetificacion = idetificacion.length === 0 ? null : idetificacion;
     sedes = sedes === 'TODOS' ? null : sedes;
     grados = grados === 'TODOS' ? null : grados;
+    grupo = grupo === 'TODOS' ? null : grupo;  
 
 
 
 
-   
 
 
-    fetchGet(`Funcionario/ListarEstudiantesSedeGrupo/?sede=${sedes}&grupo=${grados}&identificacion=${idetificacion}`, function (data) {
+
+    fetchGet(`Funcionario/ListarEstudiantesSedeGrupo/?sede=${sedes}&grupo=${grupo}&grado=${grados}&identificacion=${idetificacion}`, function (data) {
 
         generatableProfesores(data);  
 

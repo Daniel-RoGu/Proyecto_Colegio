@@ -6,7 +6,7 @@ namespace ProyectoColegio.Data
     public class ConsultasGlobales
     {
 
-        public List<Usuario> mostrarInfoSimat(string Conexion, string nomSede, string nomGrupo)
+        public List<Usuario> mostrarInfoSimat(string Conexion, string nomSede, string nomGrupo, string nomGrado)
         {           
             int parametrosEstudiantesGrupo = 0;
             //List<object> resultados = new List<object>();
@@ -44,7 +44,7 @@ namespace ProyectoColegio.Data
             {
                 resultados = ManejoBaseDatos.ConsultarProcedimientoDinamico("mostrarEstudiantes2", atributosEstudiante, Conexion);
             }
-            else if (string.IsNullOrEmpty(nomGrupo))
+            else if (string.IsNullOrEmpty(nomGrado))
             {                 
                 Dictionary<string, object> parametros = new Dictionary<string, object>
                 {
@@ -52,6 +52,16 @@ namespace ProyectoColegio.Data
                 };
 
                 resultados = ManejoBaseDatos.EjecutarProcedimientoConMultiParametroYConsulta("obtenerEstudiantesSede2", parametros, parametrosEstudiantesGrupo, Conexion);                              
+            }
+            else if (string.IsNullOrEmpty(nomGrupo))
+            {
+                Dictionary<string, object> parametros = new Dictionary<string, object>
+                {
+                    { "nomSede", nomSede },
+                    { "nomGrado", nomGrado },
+                };
+
+                resultados = ManejoBaseDatos.EjecutarProcedimientoConMultiParametroYConsulta("obtenerEstudianteSedeGrado", parametros, parametrosEstudiantesGrupo, Conexion); ;                              
             }
             else
             {
@@ -105,14 +115,14 @@ namespace ProyectoColegio.Data
 
         }
 
-        public List<Object> mostrarCsv(string Conexion, string nomSede, string nomGrupo)
+        public List<Object> mostrarCsv(string Conexion, string nomSede, string nomGrupo, string nomGrado)
         {
             List<Estudiante> Estudiantes = new List<Estudiante>();
             List<Object> Datos = new List<Object>();
 
             try
             {
-                foreach (Usuario item in mostrarInfoSimat(Conexion, nomSede,nomGrupo))
+                foreach (Usuario item in mostrarInfoSimat(Conexion, nomSede,nomGrupo, nomGrado))
                 {
                     List<String> Dato = new List<String>();
 
@@ -190,14 +200,16 @@ namespace ProyectoColegio.Data
                 if (grado != "00" || grado != "000" || grado != "0000")
                 {
                     retorno = grado.TrimStart('0');
+                    return retorno;
                 }
-
-                return retorno;
-
+                else
+                {
+                    return retorno;
+                }
             }
             else
             {
-                return retorno;
+                return retorno = "";
             }
 
             

@@ -20,12 +20,44 @@ build_property._RazorSourceGeneratorDebug =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5pc3RyYWRvclxDYXJnZUpTT04uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/Daniel/Desktop/TrabajoColegio/App/ProyectoColegio/Views/Docente/ConvivenciaEstudiantesTitular.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRG9jZW50ZVxDb252aXZlbmNpYUVzdHVkaWFudGVzVGl0dWxhci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Daniel/Desktop/TrabajoColegio/App/ProyectoColegio/Views/Docente/HorarioDocente.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRG9jZW50ZVxIb3JhcmlvRG9jZW50ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/Daniel/Desktop/TrabajoColegio/App/ProyectoColegio/Views/Docente/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRG9jZW50ZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Daniel/Desktop/TrabajoColegio/App/ProyectoColegio/Views/Docente/Principal.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRG9jZW50ZVxQcmluY2lwYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Daniel/Desktop/TrabajoColegio/App/ProyectoColegio/Views/Estudiante/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXN0dWRpYW50ZVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Daniel/Desktop/TrabajoColegio/App/ProyectoColegio/Views/Estudiante/NotasEstudiante.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXN0dWRpYW50ZVxOb3Rhc0VzdHVkaWFudGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Daniel/Desktop/TrabajoColegio/App/ProyectoColegio/Views/Estudiante/NotasEstudianteBachiller.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXN0dWRpYW50ZVxOb3Rhc0VzdHVkaWFudGVCYWNoaWxsZXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Daniel/Desktop/TrabajoColegio/App/ProyectoColegio/Views/Estudiante/NotasEstudianteMediaAcademica.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXN0dWRpYW50ZVxOb3Rhc0VzdHVkaWFudGVNZWRpYUFjYWRlbWljYS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Daniel/Desktop/TrabajoColegio/App/ProyectoColegio/Views/Estudiante/NotasEstudiantePreescolar1.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXN0dWRpYW50ZVxOb3Rhc0VzdHVkaWFudGVQcmVlc2NvbGFyMS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Daniel/Desktop/TrabajoColegio/App/ProyectoColegio/Views/Estudiante/NotasEstudiantePreescolar2.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXN0dWRpYW50ZVxOb3Rhc0VzdHVkaWFudGVQcmVlc2NvbGFyMi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Daniel/Desktop/TrabajoColegio/App/ProyectoColegio/Views/Funcionario/CargarCsv.cshtml]
@@ -86,6 +118,14 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/Daniel/Desktop/TrabajoColegio/App/ProyectoColegio/Views/Login/Inicio.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTG9naW5cSW5pY2lvLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Daniel/Desktop/TrabajoColegio/App/ProyectoColegio/Views/Pdf/formatoBoletinBachiller.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGRmXGZvcm1hdG9Cb2xldGluQmFjaGlsbGVyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Daniel/Desktop/TrabajoColegio/App/ProyectoColegio/Views/Pdf/formatoBoletinMedeiaAcademica.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGRmXGZvcm1hdG9Cb2xldGluTWVkZWlhQWNhZGVtaWNhLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Daniel/Desktop/TrabajoColegio/App/ProyectoColegio/Views/Pdf/formatoBoletinPrimariaBachiller.cshtml]

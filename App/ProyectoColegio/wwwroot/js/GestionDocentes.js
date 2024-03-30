@@ -113,7 +113,7 @@ function selectorSedeDocente(valor) {
 
         if (data.length > 0) {
             const newArray = data.map((item) => ({
-                value: item[0],
+                value: item[1],
                 text: item[1],
             }));
 
@@ -270,9 +270,10 @@ function obtenerlistadocentes() {
     identificacion = identificacion.length > 0 ? identificacion : null;
     sede = sede === 'TODOS' ? null : sede;
     grado = grado === 'TODOS' ? null : grado;
-    console.log(identificacion + '----' + sede +'----'+ grado)
 
-    fetchGet('Funcionario/ListarDocentesTodos/?identificacion=' + identificacion + '&sede=' + sede + '&grupo=' + grado, function (data) {
+    console.log('GRADO : '+grado)
+
+    fetchGet('Funcionario/ListarDocentesTodos/?identificacion=' + identificacion + '&sede=' + sede + '&grado=' + grado, function (data) {
 
         generatableProfesores(data);  
 
@@ -379,6 +380,7 @@ function generarTablaCargueInventario(
         // Botones de acción para cada fila
         contenedor += "<td><div class='colums__options'>";
         contenedor += `<a href="#" class="form-control form-control-sm bg-primary text-white" onclick="asignarDocente(${data[i][propiedadId]})" data-toggle="modal" data-target="#Asignargrado">Asignar Grado</a>`;
+        contenedor += `<a href="#" class="form-control form-control-sm bg-primary text-white" onclick="asignarDocenteTitular(${data[i][propiedadId]})" data-toggle="modal" data-target="#AsignargradoTitular">Titular</a>`;
         contenedor += "</div></td>";
         contenedor += "</tr>";
     }
@@ -429,7 +431,7 @@ function camposIncompletos() {
     let segundoNombre = document.getElementById("Segundonombredocente").value.trim();
     let primerApellido = document.getElementById("primerapellido").value.trim();
     let segundoApellido = document.getElementById("segundopellido").value.trim();
-    let documento = document.getElementById("documentoDocente").value.trim();
+    let documento = document.getElementById("docuementoDocente2").value.trim();
     let lugarexpedicion = document.getElementById("lugarexpedicion").value.trim();
     let tipoDocumento = document.getElementById("selecttipodocumento").value;
     let fechaNacimiento = document.getElementById("fechanacimiento").value;
@@ -482,7 +484,7 @@ function guardardocentes() {
     let segundoNombre = document.getElementById("Segundonombredocente").value;
     let primerApellido = document.getElementById("primerapellido").value;
     let segundoApellido = document.getElementById("segundopellido").value;
-    let documento = document.getElementById("documentoDocente").value;
+    let documento = document.getElementById("docuementoDocente2").value;
     let lugarexpedicion = document.getElementById("lugarexpedicion").value;
     let tipoDocumento = document.getElementById("selecttipodocumento").value;
     let fechaNacimiento = document.getElementById("fechanacimiento").value;
@@ -499,6 +501,7 @@ function guardardocentes() {
     let estrato = document.getElementById("selecttipoestrato").value;
     let horasTrabajo = document.getElementById("horasTrabajo").value;
     let sede = document.getElementById("selectsededocente").value;
+
 
 
     let frm = new FormData();
@@ -571,12 +574,25 @@ function limpiarModalDocentes() {
 
 function asignarDocente(documento) {
 
+  
     document.getElementById('documentoDocente').value = documento;  
 
 
     detallesdocentes(documento);  
     listarmateriasgrados(documento)
 
+
+}
+
+
+function asignarDocenteTitular(documento) {
+
+
+    document.getElementById('documentoDocenteTitular').value = documento;
+
+
+    detallesdocentesTitular(documento);
+    listarmateriasgradosTitular(documento)
 
 }
 
@@ -625,6 +641,51 @@ function activarEscuchaSelectMateria(Nombre) {
 
 
 
+function activarEscuchaSelectGrupo(Nombre) {
+
+    var selectElement = document.getElementById("selectgradotitular");
+
+
+    selectElement.addEventListener("change", function () {
+
+
+        var selectedText = selectElement.value;
+
+
+        selectedText !== 'Selecciona una opción' ? listargruposTitular("", Nombre, selectedText) : ''
+
+
+
+    });
+}
+
+
+function listargruposTitular(valor, Nombre, grado) {
+
+
+    fetchGet('Funcionario/ObtenerGruposSinTitular/?idGradoRef=' + grado, function (data) {
+
+
+
+        if (data.length > 0) {
+            const newArray = data.map((item) => ({
+                value: item[1],
+                text: item[1],
+            }));
+
+            selectdate("selectgrupotitular", newArray, valor);
+        } else {
+            selectdate("selectgrupotitular", [], valor);
+
+        }
+
+    })
+
+}
+
+
+
+
 
 
 function listarGradoporsedeF(valor, Nombre) {
@@ -651,6 +712,30 @@ function listarGradoporsedeF(valor, Nombre) {
 }
 
 
+function listarGradoporsedeFTitular(valor, Nombre) {
+
+
+    fetchGet('Funcionario/ListarGradoSede/?sede=' + Nombre, function (data) {
+
+
+        if (data.length > 0) {
+            const newArray = data.map((item) => ({
+                value: item[0],
+                text: item[1],
+            }));
+
+            selectdate("selectgradotitular", newArray, valor);
+            activarEscuchaSelectGrupo(Nombre)
+        } else {
+            selectdate("selectgradotitular", [], valor);
+
+        }
+
+    })
+
+
+}
+
 
 function asignaragradoMateria() {
 
@@ -665,6 +750,39 @@ function asignaragradoMateria() {
 }
 
 
+function asignaragradoMateriaTitular() {
+
+    let sede = document.getElementById('sedeDocenteTitular').value
+    listarGradoporsedeFTitular("", sede)
+
+
+
+
+
+
+}
+
+
+
+function listarmateriasgradosTitular(docentes) {
+
+    fetchGet('Funcionario/ObtenerDocentesTitularGrupo/?documento=' + docentes, function (data) {
+ 
+        const arregloDeObjetos = data.map(arr => {
+            return {
+                grado: arr[0],
+                asignatura: arr[1]
+            };
+        });
+     
+        let tabla = GenerarTabla(arregloDeObjetos, [{ valor: 'NR', size: "5" }, { valor: "Grado", size: "30" }, { valor: 'Grupo', size: "30" }], ['grado', 'asignatura',]);
+        document.getElementById("GradosTitular").innerHTML = tabla;
+
+
+    })
+
+
+}
 
 
 
@@ -679,6 +797,23 @@ function detallesdocentes(docente) {
                             <span class="text__bold">Nombre completo:  </span><span class="text__normal">${data[0][0]}</span><br>
                             <span class="text__bold">Sede: </span><span class="text__normal"> ${data[0][2]}</span><br>
                              <input type="hidden" id="sedeDocente" value="${data[0][2]}" />`
+
+
+    })
+
+
+}
+
+
+function detallesdocentesTitular(docente) {
+
+    fetchGet('Funcionario/ListarDocentesSedeGrupoInfoParcial/?idRef=' + docente, function (data) {
+
+
+        document.getElementById('detallesDocentesTitular').innerHTML = `<span class="text__bold">Codigo docente:</span><span class="text__normal"> ${data[0][1]}</span><br>
+                            <span class="text__bold">Nombre completo:  </span><span class="text__normal">${data[0][0]}</span><br>
+                            <span class="text__bold">Sede: </span><span class="text__normal"> ${data[0][2]}</span><br>
+                             <input type="hidden" id="sedeDocenteTitular" value="${data[0][2]}" />`
 
 
     })
@@ -773,7 +908,35 @@ function limpiarAsignarMateriaModal() {
 
 
 
+function asignarTitularGrupo() {
+    let documento = document.getElementById('documentoDocenteTitular').value; 
+    let grupo = document.getElementById("selectgrupotitular").value;
+    if (grupo.trim() === "") return
 
+    fetchGetText('Funcionario/actualizarTitularGrupo/?documento=' + documento + '&grupoRef=' + grupo, function (res) {
+
+        if (res === "1") {
+            document.getElementById("cerraagragratitularModal").click();
+
+
+        }
+
+        
+
+    })
+
+
+}
+
+
+function limpirModalAgregarTitular() {
+    let sede = document.getElementById('sedeDocenteTitular').value
+    listarGradoporsedeFTitular("", sede)
+    selectdate("selectgrupotitular", [], '');
+    resetSelect("selectgrupotitular")
+
+
+}
 
 
 

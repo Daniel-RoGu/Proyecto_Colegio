@@ -21,8 +21,16 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "C:\\Users\\Daniel\\Desktop\\TrabajoColegio\\App\\ProyectoColegio\\wwwroot\\js\\BoletinEstudiante.js",
+      "PackagePath": "staticwebassets\\js\\BoletinEstudiante.js"
+    },
+    {
       "Id": "C:\\Users\\Daniel\\Desktop\\TrabajoColegio\\App\\ProyectoColegio\\wwwroot\\js\\Certificados.js",
       "PackagePath": "staticwebassets\\js\\Certificados.js"
+    },
+    {
+      "Id": "C:\\Users\\Daniel\\Desktop\\TrabajoColegio\\App\\ProyectoColegio\\wwwroot\\js\\ConvivenciaEstudiantes.js",
+      "PackagePath": "staticwebassets\\js\\ConvivenciaEstudiantes.js"
     },
     {
       "Id": "C:\\Users\\Daniel\\Desktop\\TrabajoColegio\\App\\ProyectoColegio\\wwwroot\\js\\DocenteUser.js",
@@ -47,6 +55,14 @@
     {
       "Id": "C:\\Users\\Daniel\\Desktop\\TrabajoColegio\\App\\ProyectoColegio\\wwwroot\\js\\Gestion_horario.js",
       "PackagePath": "staticwebassets\\js\\Gestion_horario.js"
+    },
+    {
+      "Id": "C:\\Users\\Daniel\\Desktop\\TrabajoColegio\\App\\ProyectoColegio\\wwwroot\\js\\HoarioDocenteUser.js",
+      "PackagePath": "staticwebassets\\js\\HoarioDocenteUser.js"
+    },
+    {
+      "Id": "C:\\Users\\Daniel\\Desktop\\TrabajoColegio\\App\\ProyectoColegio\\wwwroot\\js\\HorarioEstudiante.js",
+      "PackagePath": "staticwebassets\\js\\HorarioEstudiante.js"
     },
     {
       "Id": "C:\\Users\\Daniel\\Desktop\\TrabajoColegio\\App\\ProyectoColegio\\wwwroot\\js\\TratamientoCsv.js",

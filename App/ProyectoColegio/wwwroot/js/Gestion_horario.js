@@ -172,7 +172,7 @@ function generarTablaHorario(datos) {
     contenedor += "<tbody>";
     let filas = datos.map(function (horario) {
         let columnaDias = horario.dias.map(function (dia) {
-            return "<td>" + dia.detalleH.materiaHorario + "<br>" + dia.detalleH.docenteHorario + "</td>";
+            return "<td><div><p>" + dia.detalleH.materiaHorario + "</p><p>" + dia.detalleH.docenteHorario + "</p></div></td>";
         }).join("");
         return "<tr><td>" + horario.rango + "</td>" + columnaDias + "</tr>";
     });

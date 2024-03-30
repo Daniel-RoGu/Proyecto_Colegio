@@ -1,6 +1,5 @@
 use bdcolegio;
 
-
 call registrarTipoDocumento("CC:CÉDULA DE CIUDADANÍA");
 call registrarTipoSangre("O +");
 call registrarRol("Estudiante");
@@ -75,6 +74,7 @@ INSERT INTO Asignatura (nombreAsignatura, estadoAsignatura) VALUES ("Quimica", "
 INSERT INTO Asignatura (nombreAsignatura, estadoAsignatura) VALUES ("Fisica", "Activa"); 
 INSERT INTO Asignatura (nombreAsignatura, estadoAsignatura) VALUES ("Ciencias Politicas", "Activa"); 
 INSERT INTO Asignatura (nombreAsignatura, estadoAsignatura) VALUES ("Filosofia", "Activa");
+INSERT INTO Asignatura (nombreAsignatura, estadoAsignatura) VALUES ("Convivencia", "Activa");
 
 /*
 	REGISTRO GRADOS SEDE y REGISTRO DOCENTES. se deben ejecutar despues de haber cargado el CSV
@@ -263,8 +263,6 @@ call registrarDocenteGrado2((select ObtenerIdDocente(96360868)), 8);
 call registrarDocenteGrado2((select ObtenerIdDocente(96360868)), 9);  
 call registrarDocenteGrado2((select ObtenerIdDocente(96360868)), 10);  
 call registrarDocenteGrado2((select ObtenerIdDocente(96360868)), 11);
-call registrarDocenteAsignatura("Edector Cumbai Cutui", "Informática"); 
-call registrarDocenteAsignatura("Edector Cumbai Cutui", "Edu. Física"); 
 
 call registrarDocente(null, "LA AGUILILLA", "38557758", "CALI", "ISID", "YOHANA", "PERDOMO", "ISANOA", null, null, null, null, null, null,
 					  null, null, null, null, null, "Femenino", null, null);
@@ -417,6 +415,12 @@ call registrarDocenteGrado2((select ObtenerIdDocente(96351351)), 4);
 call registrarDocenteGrado2((select ObtenerIdDocente(96351351)), 5);  	
 */
 
+
+/* MODIFICAR SI ES NECESARIO
+UPDATE GradoGrupo
+SET fkidGrado = 207000
+WHERE idGradoGrupo = 208100;
+*/
 
 
 

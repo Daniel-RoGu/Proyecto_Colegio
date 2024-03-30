@@ -23,23 +23,28 @@
     </form>
 </nav>
 <div class="navbar navbar-light my-0 py-0 d-flex justify-content-between ">
-    <div class="form-group form-group-sm filtros">
+    <div class="form-group form-group-sm periodoss">
         <label for="" class="my-0 py-0">Buscar estudiante</label>
         <input type="search" class="form-control form-control-sm" value="" placeholder="Nombre estudiante" id="inputsearch">
     </div>
-    <div class="form-group form-group-sm filtros">
+    <div class="form-group form-group-sm periodoss">
         <label for="" class="my-0 py-0">Selecionar sede</label>
         <select class="form-control form-control-sm bg-white m-0 p-0 border myselect" id="selectsede" data-live-search="true" data-style="btn-white">
             <option value="TODOS">TODOS</option>
         </select>
     </div>
-    <div class="form-group form-group-sm filtros">
+    <div class="form-group form-group-sm periodoss">
         <label for="" class="my-0 py-0">Selecionar grado</label>
         <select class="form-control form-control-sm bg-white m-0 p-0 border myselect" id="selectgrados" data-live-search="true" data-style="btn-white">
             <option value="TODOS">TODOS</option>
         </select>
     </div>
-
+    <div class="form-group form-group-sm periodoss">
+        <label for="" class="my-0 py-0">Selecionar grupos</label>
+        <select class="form-control form-control-sm bg-white m-0 p-0 border myselect" id="selectgrupos" data-live-search="true" data-style="btn-white">
+            <option value="TODOS">TODOS</option>
+        </select>
+    </div>
     <div class="form-group mx-2">
         <label for=""> </label>
         <input type="submit" class="form-control form-control-sm bg-primary text-white" onclick="filtrosEstudiantes()" value="Buscar">

@@ -199,3 +199,28 @@ begin
 	FROM Familiar as f
 	WHERE f.identificacionFamiliar = identificacionFamiliar;
 END$$
+
+/*--------------------------Obtener Periodo Habilitado -------------------------*/
+DELIMITER $$
+DROP PROCEDURE IF EXISTS `ObtenerGrupoEstudiante` $$
+create procedure `ObtenerGrupoEstudiante`(identificacionEstudiante long) 
+begin    
+		SELECT DISTINCT gg.grupoGrado as Grupo
+        From Estudiante AS e
+        inner join EstudiantesGradoGrupo as egg on egg.fkidEstudiante = e.idEstudiante
+        inner join GradoGrupo as gg on egg.fkidGradoGrupo = gg.idGradoGrupo
+        WHERE e.Usuario_identificacion = identificacionEstudiante;
+END$$
+
+/*--------------------------Obtener Periodo Habilitado -------------------------*/
+DELIMITER $$
+DROP PROCEDURE IF EXISTS `ObtenerGradoEstudiante` $$
+create procedure `ObtenerGradoEstudiante`(identificacionEstudiante long) 
+begin    
+		SELECT DISTINCT g.nombreGrado as Grado
+        From Estudiante AS e
+        inner join EstudiantesGradoGrupo as egg on egg.fkidEstudiante = e.idEstudiante
+        inner join GradoGrupo as gg on egg.fkidGradoGrupo = gg.idGradoGrupo
+        inner join Grados as g on gg.fkidGrado = g.idGrado
+        WHERE e.Usuario_identificacion = identificacionEstudiante;
+END$$

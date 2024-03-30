@@ -45,6 +45,13 @@ function fetchPostText(url, frm, callback) {
 
 }
 
+function setUrl(url) {
+    var raiz = document.getElementById("hdfoculto").value;
+    var urlAbsoluta = window.location.protocol + "//" +
+        window.location.host + raiz + url;
+    return urlAbsoluta;
+}
+
 
 
 function borrarContenidoPorClase(clase) {

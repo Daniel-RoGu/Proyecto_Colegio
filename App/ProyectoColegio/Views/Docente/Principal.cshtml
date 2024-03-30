@@ -1,30 +1,38 @@
 ﻿
 
 <div class="navbar navbar-light my-0 py-0 d-flex justify-content-between ">
-    <div class="form-group form-group-sm periodoss">
-        <label for="" class="my-0 py-0">Buscar Estudiante</label>
-        <input type="text" class="form-control form-control-sm  " value="" id="inputsearch"  placeholder="Documento Estudiante">
-    </div>
+    
+   
+    <div class="form-group form-group-sm periodossDocente">
+        <label for="" class="my-0 py-0">Selecionar Periodo</label>
+        <select class="form-control form-control-sm bg-white m-0 p-0 border myselect" id="periodoAcademico" data-live-search="true" data-style="btn-white">
+            <option value="" disabled selected>Selecciona una opción</option>
 
-    <div class="form-group form-group-sm periodoss">
+
+        </select>
+    </div>
+    <div class="form-group form-group-sm periodossDocente">
         <label for="" class="my-0 py-0">Selecionar grado</label>
         <select class="form-control form-control-sm bg-white m-0 p-0 border myselect" id="gradoDocente" data-live-search="true" data-style="btn-white">
-            <option value="">Todos</option>
+            <option value="" disabled selected>Selecciona una opción</option>
         </select>
     </div>
-    <div class="form-group form-group-sm periodoss">
+    <div class="form-group form-group-sm periodossDocente">
         <label for="" class="my-0 py-0">Selecionar grupo</label>
         <select class="form-control form-control-sm bg-white m-0 p-0 border myselect" id="GrupoGradoDocente" data-live-search="true" data-style="btn-white">
-            <option value="">Todos</option>
+            <option value="" disabled selected>Selecciona una opción</option>
+        </select>
+    </div>
+    <div class="form-group form-group-sm periodossDocente">
+        <label for="" class="my-0 py-0">Selecionar materia</label>
+        <select class="form-control form-control-sm bg-white m-0 p-0 border myselect" id="idAsignaturasDocente" data-live-search="true" data-style="btn-white">
+            <option value="" disabled selected>Selecciona una opción</option>
         </select>
     </div>
 
-    <div class="form-group form-group-sm periodoss">
-        <label for="" class="my-0 py-0">Selecionar materia</label>
-        <select class="form-control form-control-sm bg-white m-0 p-0 border myselect" id="idAsignaturasDocente" data-live-search="true" data-style="btn-white">
-            <option value="">Todos</option>
-        </select>
-    </div>
+ 
+   
+   
 
     <div class="form-group mx-2">
         <label for=""> </label>
@@ -90,7 +98,7 @@
             <div class="modal-footer border-0 py-1">
                 <div class="form-group d-flex">
                     <input type="submit" class="form-control form-control-sm bg-secondary text-white" id="cerraModalNotas" onclick="limpiarNotasModal()" value="Cancelar" data-dismiss="modal" readonly>
-                    <input type="submit" class="form-control  form-control-sm bg-primary text-white" value="Guardar" readonly>
+                    <input type="submit" class="form-control  form-control-sm bg-primary text-white" onclick="guardarEstudiante()" value="Guardar" readonly>
                 </div>
             </div>
         </div>

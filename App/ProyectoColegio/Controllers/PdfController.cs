@@ -18,18 +18,32 @@ namespace ProyectoColegio.Controllers
             _converter = converter;
         }
 
+        public string NotasMateria(string asignatura, string grado, string grupo, string periodo) {
+            
+            string retorno = "1";
+
+            DatosCompartidos.Asignatura = asignatura;
+            DatosCompartidos.Grado = grado;
+            DatosCompartidos.Grupo = grupo;
+            DatosCompartidos.Periodo = periodo;            
+
+            return retorno;
+        }
+
         public IActionResult Index(string RutaPdf)
         {
-            //ActualizarRutaPdf(RutaPdf);
             DatosCompartidos.RutaPDF = RutaPdf;
             return View();
         }
 
         //vista del formato plantilla notas
-        public IActionResult vistaParaPDF() 
-        {
+ 
+        public IActionResult vistaParaPDF()
+        {                     
             return View();
         }
+
+
 
         public IActionResult formatoCarnet()
         {
@@ -67,6 +81,16 @@ namespace ProyectoColegio.Controllers
         }
 
         public IActionResult formatoBoletinPrimariaBachiller() 
+        {
+            return View(); 
+        }
+
+        public IActionResult formatoBoletinBachiller() 
+        {
+            return View(); 
+        }
+        
+        public IActionResult formatoBoletinMedeiaAcademica() 
         {
             return View(); 
         }
@@ -174,8 +198,7 @@ namespace ProyectoColegio.Controllers
         public void ActualizarRutaPdf(string RutaPdf)
         {
             DatosCompartidos.RutaPDF = RutaPdf;
-        }
-
+        }        
 
     }      
 

@@ -168,7 +168,6 @@ call registrarAsignaturaGradoGrupo("Inglés", 1202);
 call registrarAsignaturaGradoGrupo("Español", 101);
 call registrarAsignaturaGradoGrupo("Matemáticas", 101);
 call registrarAsignaturaGradoGrupo("Inglés", 101);
-call RegistrarAsignaturaGrupoDocente(187000, 207010, "Matemáticas");
 select FunExisteDocenteAsignaturaGrado(187000, "Inglés", 207010);
 
 call registrarCompetenciasAsignatura("Lectura critica", "Dominar la lectura critica", "El estudiante debe ser bueno en LC", "Español");
@@ -207,7 +206,6 @@ call obtenerEstudiantesGrupo("701");
 call obtenerEstudiantesGrupo("901");
 call obtenerEstudiantesSedeGrupo("Central", "1202");
 call obtenerEstudiantesSedeGrupo("EL VATICANO", "101");
-call obtenerEstudiantesSedeGrupo2("EL VATICANO", "101");
 call obtenerEstudiantesSedeGrupo("NIEVES ARRIBA KM. 18", "701");
 call obtenerEstudiantesSede("Central");
 call obtenerEstudiantesSede("EL VATICANO");
@@ -273,10 +271,10 @@ SELECT ObtenerIdHorario("06:00-07:00", "Lunes");
 SELECT ObtenerIdDocente(585);
 select ObtenerIdGradoDelGrupo("1202");
 SELECT ObtenerIdHorario(horaInicioClase, horaFinClase);
-call GradosAsignaturasDocentes("Central", "207010", "Español");
+call AsignaturasDelDocente("LA AGUILILLA", 207006, 96360868);
 call AsignaturasDelDocente("LA AGUILILLA", "6", 96360868);
 call ObtenerDocentesAsignatura("Español");
-call ObtenerAsignaturasGrado("LA AGUILILLA", 96360868);
+call ObtenerAsignaturasGrado("LA AGUILILLA", 207006);
 call ObtenerDocenteGrupos("LA AGUILILLA", "0", 1116919521);
 call ObtenerDocenteGrados("LA AGUILILLA", 40730500);
 call ObtenerDocenteGrados("LA AGUILILLA", 1116919521);
@@ -286,25 +284,149 @@ call obtenerSedeEstudiante(1013362165);
 call obtenerSedeFuncionario(12987357);
 call obtenerEstudiantesSedeGrupo2("LA AGUILILLA", "601");
 
-select distinct g.idGrado from Sede as s
-					   inner join SedeGrados as sg on sg.fkidSede = s.idSede
-                       inner join Grados as g on sg.fkidGrado = g.idGrado
-                       where s.nombreSede = "LA AGUILILLA" and g.nombreGrado = "0";
-                       
-SELECT distinct gg.idGradoGrupo as IdentificadorGrupo, gg.grupoGrado as Grupo	
-    From Docente as d 
-    inner join DocentesGrado as dg on dg.fkidDocente = d.idDocente
-    inner join Grados as g on dg.fkidGrado = g.idGrado
-    inner join GradoGrupo as gg on gg.fkidGrado = g.idGrado
-    where d.fkidentificacion = 1116919521 and g.nombreGrado = "0" and g.idGrado = 207000;
-                                
-call registrarDocenteAsignatura("werwqer wrewqerqwerqwer wrwqerqw", "Español");
-select count(*) as RegistroPeriodos from PeriodoAcademico;
-call ObtenerPeriodos();
-
 call registrarDocenteNotasAsistenciasPeriodo("werwqer wrewqerqwerqwer wrwqerqw", "Español", 1117936646, "Primer periodo", 3.5, 5);
 select ObtenerIdAsignatura("Proyecto Pedagógico Productivo");
 
 SELECT Asignatura.idAsignatura FROM Asignatura WHERE Asignatura.nombreAsignatura = "Proyecto Pedagógico Agroecológico" LIMIT 1;
 call registrarDocenteAsignatura("WILLIAM GARCIA MEDINA", "Informática"); 
 call registrarDocenteAsignatura("WILLIAM GARCIA MEDINA", "Edu. Física"); 
+call RegistrarAsignaturaGrupoDocente(187008, 207006, "Matemáticas");
+call ObtenerGradosAsignaturasDocentes(187008);
+call ObtenerInfoDocentesSedeGrado("LA AGUILILLA", "5");
+													/*No es codigo es doc*/
+call registrarDocenteNotasAsistenciasPeriodo("Matemáticas", 106602, "Primer Periodo", 3.0, 8);
+call registrarDocenteNotasAsistenciasPeriodo("Matemáticas", 106602, "Segundo Periodo", 3.5, 2);
+call registrarDocenteNotasAsistenciasPeriodo("Matemáticas", 106602, "Tercer Periodo", 3.8, 3);
+call registrarDocenteNotasAsistenciasPeriodo("Matemáticas", 106602, "Cuarto Periodo", 2.0, 1);
+call registrarDocenteNotasAsistenciasPeriodo("Convivencia", 106602, "Primer Periodo", 2.0, 1);
+
+call registrarDocenteNotasAsistenciasPeriodo("Matemáticas", 106623, "Primer Periodo", 3.5, 4);
+call registrarDocenteNotasAsistenciasPeriodo("Matemáticas", 106623, "Segundo Periodo", 3.5, 2);
+call registrarDocenteNotasAsistenciasPeriodo("Matemáticas", 106623, "Tercer Periodo", 3.8, 3);
+call registrarDocenteNotasAsistenciasPeriodo("Matemáticas", 106623, "Cuarto Periodo", 2.0, 1);
+
+call registrarDocenteNotasAsistenciasPeriodo("Matemáticas", 106684, "Primer Periodo", 3.2, 6);
+call registrarDocenteNotasAsistenciasPeriodo("Matemáticas", 106684, "Segundo Periodo", 3.5, 1);
+call registrarDocenteNotasAsistenciasPeriodo("Matemáticas", 106684, "Primer Periodo", 3.8, 3);
+call registrarDocenteNotasAsistenciasPeriodo("Matemáticas", 106684, "Tercer Periodo", 2.2, 4);
+
+call registrarDocenteNotasAsistenciasPeriodo("Informática", 106684, "Primer Periodo", 3.2, 6);
+call registrarDocenteNotasAsistenciasPeriodo("Informática", 106623, "Primer Periodo", 3.2, 6);
+call registrarDocenteNotasAsistenciasPeriodo("Matemáticas", 106688, "Primer Periodo", 4, 6);
+call registrarDocenteNotasAsistenciasPeriodo("Matemáticas", 106688, "Primer Periodo", 4.5, 3);
+select ObtenerIdAsignatura("Matemáticas");
+select obtenerIdPeriodo("Cuarto Periodo");
+select obtenerIdAsistenciaAsignaturaPeriodo("Primer Periodo", "Matemáticas");
+call ObtenerNotasInasistenciasEstudiantesXGrupo(106602, "Matemáticas", "Cuarto Periodo");
+call ObtenerNotasInasistenciasEstudiantesXGrupo(106623, "Matemáticas", "Primer Periodo");
+call ObtenerNotasInasistenciasEstudiantesXGrupo(106684, "Matemáticas", "Primer Periodo");
+
+select obtenerIdNotaEstudianteAsignatura(106688, "Matemáticas", "Primer Periodo");
+select FunexisteNotasEstudianteAsignatura(106688, "Matemáticas", "Primer Periodo");
+
+call ObtenerNotasEstudiantes("Matemáticas", "Primer Periodo");
+drop FUNCTION obtenerNotaEstudiante;
+call ObtenerPeriodoHabilitado();
+call ActualizarEstadoPeriodo(0, "Segundo periodo");
+call ActualizarEstadoPeriodo(0, "Tercer periodo");
+call ActualizarEstadoPeriodo(0, "Cuarto periodo");
+
+select ObtenerIdEstudiante(1117823890);
+drop FUNCTION ObtenerNombreCompletoDocente;
+select PeriodoAcademico.idPeriodoAcademico from PeriodoAcademico where PeriodoAcademico.periodoAcademico = "Segundo periodo";
+select ObtenerIdAsignatura("Informática");
+select obtenerNotaEstudiante(106684);
+select obtenerIdNotasEstudiante(106684);
+
+call ObtenerNotasInasistenciasEstudiantesTodosXGrupo(601, "Matemáticas", "Primer Periodo");
+call ObtenerNotasInasistenciasEstudiantesTodosXGrupo2(601, "Matemáticas", "Segundo Periodo");
+call ObtenerNotasInasistenciasEstudiantesTodosXGrupo2(601, "Matemáticas", "Tercer Periodo");
+call ObtenerNotasInasistenciasEstudiantesTodosXGrupo2(601, "Matemáticas", "Cuarto Periodo");
+call ObtenerEstudiantesTodosXGrupo(601, "Matemáticas", "Primer Periodo");
+
+call GradosGruposAsignaturasDocentes("LA AGUILILLA", "7", "701");
+call GradosAsignaturasDocentes("LA AGUILILLA", "7", "Matemáticas");
+call ObtenerNombreDocente(96360868);
+call AsignaturasDelDocente("LA AGUILILLA", "7", "701");
+        
+call RegistrarHorario("LA AGUILILLA", "Matemáticas", "701", 96360868, "Lunes", "06:00-07:00");       
+call RegistrarHorario("LA AGUILILLA", "Matemáticas", "601", 96360868, "Viernes", "08:00-09:00");       
+call MostrarHorarioPorRangoDocente(96360868, "LA AGUILILLA", "06:00-07:00", "Lunes");
+call MostrarHorarioPorRangoDocente(96360868, "LA AGUILILLA", "08:00-09:00", "Viernes");
+call ObtenerSumaNotasEstudiantes(106684, "Primer Periodo", 601);/*Reconsiderar - usarlo para calcular el promedio de la asignatura*/
+call MostrarHorarioPorRangoEstudiante(1212213246, "LA AGUILILLA", "601", "08:00-09:00", "Viernes");
+call MostrarHorarioPorRangoEstudiante(1117823890, "LA AGUILILLA", "701", "06:00-07:00", "Lunes");
+/*1115948691*/						
+call ObtenerGrupoEstudiante(1115948691);
+call ObtenerGradoEstudiante(1115950341);
+call ObtenerGradoEstudiante(1211713723);
+
+call ObtenerEstudiantesNotasXGrupo("601", "Matemáticas", "Primer Periodo");
+call ObtenerEstudiantesNotasXGrupo2(1115948691, "601", "Primer Periodo");
+call ObtenerEstudiantesNotasXGrupoInfoParcial(1115948691, "601");
+
+select obtenerInasistenciaEstudianteAsignatura(106602, "Matemáticas", "Primer Periodo");
+select obtenerCargaHorariaAsignatura("Matemáticas", "601");
+call ObtenerSumaNotaMateriaPeriodos(106684, "Matemáticas", "601");
+call ObtenerNotasEstudiantesXMateria(1211713225, "Matemáticas", "Primer Periodo");
+call ObtenerNotasEstudiantesXMateria(1211713225, "Matemáticas", "Segundo Periodo");
+call ObtenerNotasEstudiantesXMateria(1211713225, "Matemáticas", "Tercer Periodo");
+call ObtenerNotasEstudiantesXMateria(1211713225, "Matemáticas", "Cuarto Periodo");
+select obtenerPromedioAsignaturaEstudiantePeriodo(106684, "Matemáticas", "601");
+call ObtenerSumaInasistenciasMateriaPeriodos(106623, "Matemáticas", "601");
+call ObtenerNombreEstudiante(1115948691);
+call ObtenerPeriodosTodos();
+
+call ActualizarDocentesTitularGrupo(187000, "701");
+call ActualizarDocentesTitularGrupo(187008, "601");
+call ObtenerDocentesTitularGrupo(187000);
+        
+select obtenerIdNotasEstudiante(106623); 
+select obtenerIdPeriodo("Primer Periodo");
+select ObtenerIdAsignatura("Matemáticas");
+     
+SELECT ObtenerIdEstudiante(1115948691);
+select existeTitularGrupo("701");
+call ObtenerGrupoSinTitular(207007);
+
+/*  call registrarDocenteNotasAsistenciasPeriodo("Convivencia", 106602, "Primer Periodo", 2.0, 1);
+	idEstudiante bigint, periodo varchar(400), nota float, docDocenteRef int, grupoRef varchar(400)*/
+call ActualizarNotaConvivencia(106684, "Primer Periodo", 3.7, 187008, "601");
+
+select ObtenerNombreCompletoDocente(96360868);
+select esTitularGrupo("WILLIAM GARCIA MEDINA", "601");
+
+call ObtenerInfoFamiliaresEstudiante_Certificados(106684);
+
+call obtenerEstudiantesSedeGrupo2("LA AGUILILLA", "201");
+call obtenerEstudianteSedeGrado("LA AGUILILLA", "2");
+
+call ObtenerGrupoSinTitular(187008);
+call ObtenerGrupoDelTitular(96360868);
+
+select g.nombreGrado as Grado, gg.idGradoGrupo as IdentificadorGrupo, gg.grupoGrado as Grupo
+from GradoGrupo as gg
+inner join Grados as g on gg.fkidGrado = g.idGrado
+where gg.nombreTitular = "WILLIAM GARCIA MEDINA";
+
+select d.fkidentificacion from Docente as d where d.idDocente = 187008;
+select ObtenerNombreCompletoDocente(96360868);
+/*(idEstudianteRef bigint, puestoRef int, asignaturaRef varchar(400), periodoRef varchar(400))*/
+call ActualizarPosicionEstudiantes(106602, 2, "Matemáticas", "Primer Periodo");
+
+SELECT ne.idNotaEstudiante 
+FROM NotaDefinitivaPeriodo AS ndp
+INNER JOIN NotasEstudiante AS ne ON ndp.fkidNotaEstudiante = ne.idNotaEstudiante
+WHERE ndp.fkidAsignatura = 213115 AND ndp.fkidPeriodoAcademico = "Primer Periodo"
+AND ne.fkidEstudiante = 106602;
+
+SELECT ndp.idNotas
+FROM Asignatura AS a
+INNER JOIN NotaDefinitivaPeriodo AS ndp ON ndp.fkidAsignatura = a.idAsignatura
+INNER JOIN PeriodoAcademico AS p ON ndp.fkidPeriodoAcademico = p.idPeriodoAcademico
+WHERE  a.idAsignatura = 213115 AND p.idPeriodoAcademico = "Primer Periodo";
+
+SELECT a.nombreAsignatura FROM Asignatura AS a WHERE a.idAsignatura = 213115;
+SELECT p.periodoAcademico FROM PeriodoAcademico AS p WHERE p.periodoAcademico = "Primer Periodo";
+
+

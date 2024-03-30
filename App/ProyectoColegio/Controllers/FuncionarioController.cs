@@ -154,13 +154,14 @@ namespace ProyectoColegio.Controllers
                         foreach (List<Object> item in resultadoBd)
                         {
                             diasemana.detalleH.MateriaHorario = "Asignatura: " + Convert.ToString(item[3]);
-                            diasemana.detalleH.DocenteHorario = "Docente: " + Convert.ToString(item[2]);
+                            diasemana.detalleH.DocenteHorario = "Docente: " + Convert.ToString(item[2]); // "grado: 6  grupo: 601"
                         }
                     }
+                    
                     else
                     {
-                        diasemana.detalleH.MateriaHorario = "Asignatura: Sin definir";
-                        diasemana.detalleH.DocenteHorario = "Docente: Sin definir";
+                        diasemana.detalleH.MateriaHorario = "Asignatura sin definir";
+                        diasemana.detalleH.DocenteHorario = "Docente sin definir";
                     }
 
                     dias.Add(diasemana);
@@ -263,29 +264,33 @@ namespace ProyectoColegio.Controllers
         }
 
         //https://localhost:7227/funcionario/ListarEstudiantesSedeGrupo/?sede=NIEVES%20ARRIBA%20KM.%2018&grupo=201 //para pruebas
-        public JsonResult ListarEstudiantesSedeGrupo(string sede, string grupo, string identificacion)
+        public JsonResult ListarEstudiantesSedeGrupo(string sede, string grupo, string grado,string identificacion)
         {
             List<object> estudiantes = new List<object>();
             List<Usuario> usuarios = new List<Usuario>();
             Usuario usuario = new Usuario();
 
 
-            if (sede != "null")
+            if (sede != "null" && !string.IsNullOrEmpty(sede))
             {
                 
-                if (grupo != "null")
+                if (grado != "null" && !string.IsNullOrEmpty(grado))
                 {
-                    estudiantes = consultasGlobales.mostrarCsv(_contexto.Conexion, Convert.ToString(sede), Convert.ToString(grupo));
+                    estudiantes = consultasGlobales.mostrarCsv(_contexto.Conexion, Convert.ToString(sede), null, Convert.ToString(grado));
+                }
+                else if (grupo != "null" && !string.IsNullOrEmpty(grupo))
+                {
+                    estudiantes = consultasGlobales.mostrarCsv(_contexto.Conexion, Convert.ToString(sede), Convert.ToString(grupo), null);
                 }
                 else
                 {
-                    estudiantes = consultasGlobales.mostrarCsv(_contexto.Conexion, Convert.ToString(sede), null);
+                    estudiantes = consultasGlobales.mostrarCsv(_contexto.Conexion, Convert.ToString(sede), null, null);
                 }
 
             }
             else
             {
-                estudiantes = consultasGlobales.mostrarCsv(_contexto.Conexion, null, null);
+                estudiantes = consultasGlobales.mostrarCsv(_contexto.Conexion, null, null, null);
             }
 
             //organiza los resultados
@@ -333,7 +338,7 @@ namespace ProyectoColegio.Controllers
             List<object> estudiantes = new List<object>();
             List<string> usuarios = new List<string>();
 
-            estudiantes = consultasGlobales.mostrarCsv(_contexto.Conexion, null, null);           
+            estudiantes = consultasGlobales.mostrarCsv(_contexto.Conexion, null, null, null);           
 
             //organiza los resultados
             foreach (List<string> item in estudiantes)
@@ -365,15 +370,15 @@ namespace ProyectoColegio.Controllers
             return Json(tiposDocentes);
         }
         
-        public JsonResult ListarDocentesTodos(string identificacion, string sede, string grupo)
+        public JsonResult ListarDocentesTodos(string identificacion, string sede, string grado)
         {
             List<DocenteInfo> docentes = new List<DocenteInfo>();
             List<DocenteInfo> docenteSede = new List<DocenteInfo>();
             List<object> tiposDocentes = new List<object>();
             
-            if (sede != "null" && sede != null && grupo != "null" && grupo != null) // != "Null" por que se envia ese valor desde el JS para validad que null
+            if (sede != "null" && sede != null && grado != "null" && grado != null) // != "Null" por que se envia ese valor desde el JS para validad que null
             {
-                tiposDocentes = variablesGlobales.DocentesSedeGrupoInfoCompleta(sede, grupo, _contexto.Conexion);
+                tiposDocentes = variablesGlobales.DocentesSedeGrupoInfoCompleta(sede, grado, _contexto.Conexion);
             }
             else
             {
@@ -413,7 +418,7 @@ namespace ProyectoColegio.Controllers
                 }
             }
 
-            if (docenteSede.Count > 0 && (grupo == "null" || grupo == null))
+            if (docenteSede.Count > 0 && (grado == "null" || grado == null))
             {
                 return Json(docenteSede);
             }
@@ -671,20 +676,20 @@ namespace ProyectoColegio.Controllers
                 ViewBag.Sedes = variablesGlobales.Sedes(_contexto.Conexion);
                 ViewBag.IdentificacionEst = identificacionEst;
                 //muestra todos los estudiantes de la institucion
-                ViewBag.ListaEstudiante = consultasGlobales.mostrarCsv(_contexto.Conexion, null, null);
+                ViewBag.ListaEstudiante = consultasGlobales.mostrarCsv(_contexto.Conexion, null, null, null);
             }
 
             if (sede != null)
             {
                 //muestra los estudiantes por sede
-                ViewBag.ListaEstudianteGrupo = consultasGlobales.mostrarCsv(_contexto.Conexion, Convert.ToString(sede), null);
+                ViewBag.ListaEstudianteGrupo = consultasGlobales.mostrarCsv(_contexto.Conexion, Convert.ToString(sede), null, null);
                 //ViewBag.GruposGrado = variablesGlobales.GruposGradoSede(Convert.ToString(sede), _contexto.Conexion);
                 ViewBag.SedeSeleccionada = sede;
 
                 if (grupo != null)
                 {
                     //muestra los estudiantes por grupo de sede
-                    ViewBag.ListaEstudianteGrupo = consultasGlobales.mostrarCsv(_contexto.Conexion, Convert.ToString(sede), Convert.ToString(grupo));
+                    ViewBag.ListaEstudianteGrupo = consultasGlobales.mostrarCsv(_contexto.Conexion, Convert.ToString(sede), Convert.ToString(grupo), null);
                     ViewBag.GrupoSeleccionado = grupo;
                 }
 
@@ -1554,7 +1559,7 @@ namespace ProyectoColegio.Controllers
             //        ViewBag.GrupoSeleccionado = grupo;
             //    }
 
-            //    Console.WriteLine(sede);
+            //    Console.WriteLine("sede: " + temp.algo );
             //    Console.WriteLine(grupo);
             //}
 
@@ -1694,7 +1699,7 @@ namespace ProyectoColegio.Controllers
         {
             string grado = consultasGlobales.organizarValorGradoSimat(nombreGrado);
 
-            if (nombreGrado == "" || consultasValidacionesBD.ExisteGrado(grado, _contexto.Conexion) == true)
+            if (grado == "" || consultasValidacionesBD.ExisteGrado(grado, _contexto.Conexion) == true)
             {
                 return;
             }
@@ -1709,7 +1714,7 @@ namespace ProyectoColegio.Controllers
             string grupo = consultasGlobales.organizarValorGrupoSimat(nombreGradoGrupo);
             string grado = consultasGlobales.organizarValorGradoSimat(nombreGrado);
 
-            if (grupo == "" || consultasValidacionesBD.ExisteGrupoGrado(grupo, _contexto.Conexion) == true)
+            if (grupo == "" || grado == "" || consultasValidacionesBD.ExisteGrupoGrado(grupo, _contexto.Conexion) == true)
             {
                 return;
             }
@@ -1876,6 +1881,75 @@ namespace ProyectoColegio.Controllers
         }
 
 
+        public string actualizarTitularGrupo(int documento, string grupoRef)
+        {
+            string bandera = "";  
+            if (documento != 0 && !string.IsNullOrEmpty(grupoRef))
+            {
+                try
+                {
+
+                    Dictionary<string, object> parametros = new Dictionary<string, object>
+                    {
+                        { "idDocenteRef", documento },
+                        { "grupoRef", grupoRef },
+                    };
+
+                    ManejoBaseDatos.EjecutarProcedimientoMultiParametro("ActualizarDocentesTitularGrupo", parametros, _contexto.Conexion);
+                    bandera = "1";  
+
+
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Error al ejecutar el script: {ex.Message}");
+                }
+            }
+
+            return bandera; 
+        }
+
+        public JsonResult ObtenerDocentesTitularGrupo(long documento)
+        {
+            List<object> grupo = new List<object>();
+
+            Dictionary<string, object> parametros = new Dictionary<string, object>
+            {
+                 { "documento", documento },
+            };
+
+            int grupoAtributosEsperadosGrupo = 2;
+
+            var resultados = ManejoBaseDatos.EjecutarProcedimientoConMultiParametroYConsulta("ObtenerDocentesTitularGrupo", parametros, grupoAtributosEsperadosGrupo, _contexto.Conexion);
+
+            foreach (var item in resultados)
+            {
+                grupo.Add(item);
+            }
+
+            return Json(grupo);
+        }
+
+        public JsonResult ObtenerGruposSinTitular(int idGradoRef)
+        {
+            List<Object> grupos = new List<Object>();
+
+            Dictionary<string, object> parametros = new Dictionary<string, object>
+            {
+                 { "idGradoRef", idGradoRef },
+            };
+
+            int grupoAtributosEsperadosGrupo = 2;
+
+            var resultados = ManejoBaseDatos.EjecutarProcedimientoConMultiParametroYConsulta("ObtenerGrupoSinTitular", parametros, grupoAtributosEsperadosGrupo, _contexto.Conexion);
+
+            foreach (var item in resultados)
+            {
+                grupos.Add(item);
+            }
+
+            return Json(grupos);
+        }
     }
 
 }

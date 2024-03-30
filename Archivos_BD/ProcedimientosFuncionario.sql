@@ -141,7 +141,7 @@ begin
 				call registrarAsignaturaGradoGrupo2("DIMENSION_COGNITIVA", nomGradoGrupo, 3);
 				call registrarAsignaturaGradoGrupo2("ETICA Y VALORES", nomGradoGrupo, 3);
 				call registrarAsignaturaGradoGrupo2("DIMENSION_SOCIO_AFECTIVA", nomGradoGrupo, 3);
-				call registrarAsignaturaGradoGrupo2("CONVIVENCIA", nomGradoGrupo, 0);		
+				call registrarAsignaturaGradoGrupo2("CONVIVENCIA", nomGradoGrupo, 0);
         end if;
         if(nomGrado = "1") then
 				call registrarAsignaturaGradoGrupo2("Español", nomGradoGrupo, 5);
@@ -155,7 +155,8 @@ begin
 				call registrarAsignaturaGradoGrupo2("Informática", nomGradoGrupo, 2);
 				call registrarAsignaturaGradoGrupo2("Proyecto Pedagógico Productivo", nomGradoGrupo, 2);
 				call registrarAsignaturaGradoGrupo2("Ecología", nomGradoGrupo, 1);
-				call registrarAsignaturaGradoGrupo2("Artística", nomGradoGrupo, 2);		
+				call registrarAsignaturaGradoGrupo2("Artística", nomGradoGrupo, 2);
+                call registrarAsignaturaGradoGrupo2("Convivencia", nomGradoGrupo, 0);
         end if;
         if(nomGrado = "2") then
 				call registrarAsignaturaGradoGrupo2("Español", nomGradoGrupo, 5);
@@ -169,7 +170,8 @@ begin
 				call registrarAsignaturaGradoGrupo2("Informática", nomGradoGrupo, 2);
 				call registrarAsignaturaGradoGrupo2("Proyecto Pedagógico Productivo", nomGradoGrupo, 2);
 				call registrarAsignaturaGradoGrupo2("Ecología", nomGradoGrupo, 1);
-				call registrarAsignaturaGradoGrupo2("Artística", nomGradoGrupo, 2);		
+				call registrarAsignaturaGradoGrupo2("Artística", nomGradoGrupo, 2);
+                call registrarAsignaturaGradoGrupo2("Convivencia", nomGradoGrupo, 0);
         end if;
         if(nomGrado = "3") then
 				call registrarAsignaturaGradoGrupo2("Español", nomGradoGrupo, 5);
@@ -183,7 +185,8 @@ begin
 				call registrarAsignaturaGradoGrupo2("Informática", nomGradoGrupo, 2);
 				call registrarAsignaturaGradoGrupo2("Proyecto Pedagógico Productivo", nomGradoGrupo, 2);
 				call registrarAsignaturaGradoGrupo2("Ecología", nomGradoGrupo, 1);
-				call registrarAsignaturaGradoGrupo2("Artística", nomGradoGrupo, 2);		
+				call registrarAsignaturaGradoGrupo2("Artística", nomGradoGrupo, 2);
+                call registrarAsignaturaGradoGrupo2("Convivencia", nomGradoGrupo, 0);
         end if;
 		if(nomGrado = "4") then
 				call registrarAsignaturaGradoGrupo2("Español", nomGradoGrupo, 5);
@@ -197,7 +200,8 @@ begin
 				call registrarAsignaturaGradoGrupo2("Informática", nomGradoGrupo, 2);
 				call registrarAsignaturaGradoGrupo2("Proyecto Pedagógico Productivo", nomGradoGrupo, 2);
 				call registrarAsignaturaGradoGrupo2("Ecología", nomGradoGrupo, 1);
-				call registrarAsignaturaGradoGrupo2("Artística", nomGradoGrupo, 2);		
+				call registrarAsignaturaGradoGrupo2("Artística", nomGradoGrupo, 2);
+                call registrarAsignaturaGradoGrupo2("Convivencia", nomGradoGrupo, 0);
         end if;
         if(nomGrado = "5") then
 				call registrarAsignaturaGradoGrupo2("Español", nomGradoGrupo, 5);
@@ -211,7 +215,8 @@ begin
 				call registrarAsignaturaGradoGrupo2("Informática", nomGradoGrupo, 2);
 				call registrarAsignaturaGradoGrupo2("Proyecto Pedagógico Productivo", nomGradoGrupo, 2);
 				call registrarAsignaturaGradoGrupo2("Ecología", nomGradoGrupo, 1);
-				call registrarAsignaturaGradoGrupo2("Artística", nomGradoGrupo, 2);		
+				call registrarAsignaturaGradoGrupo2("Artística", nomGradoGrupo, 2);
+                call registrarAsignaturaGradoGrupo2("Convivencia", nomGradoGrupo, 0);
         end if;
         if(nomGrado = "6") then
 				call registrarAsignaturaGradoGrupo2("Español", nomGradoGrupo, 5);
@@ -226,7 +231,8 @@ begin
 				call registrarAsignaturaGradoGrupo2("Proyecto Pedagógico Productivo", nomGradoGrupo, 2);
 				call registrarAsignaturaGradoGrupo2("Ecología", nomGradoGrupo, 1);
 				call registrarAsignaturaGradoGrupo2("Artística", nomGradoGrupo, 2);
-				call registrarAsignaturaGradoGrupo2("Emprendimiento", nomGradoGrupo, 2);		
+				call registrarAsignaturaGradoGrupo2("Emprendimiento", nomGradoGrupo, 2);
+                call registrarAsignaturaGradoGrupo2("Convivencia", nomGradoGrupo, 0);
         end if;
         if(nomGrado = "7") then
 				call registrarAsignaturaGradoGrupo2("Español", nomGradoGrupo, 5);
@@ -241,7 +247,8 @@ begin
 				call registrarAsignaturaGradoGrupo2("Proyecto Pedagógico Productivo", nomGradoGrupo, 2);
 				call registrarAsignaturaGradoGrupo2("Ecología", nomGradoGrupo, 1);
 				call registrarAsignaturaGradoGrupo2("Artística", nomGradoGrupo, 2);
-				call registrarAsignaturaGradoGrupo2("Emprendimiento", nomGradoGrupo, 2);		
+				call registrarAsignaturaGradoGrupo2("Emprendimiento", nomGradoGrupo, 2);
+                call registrarAsignaturaGradoGrupo2("Convivencia", nomGradoGrupo, 0);
         end if;
         if(nomGrado = "8") then
 				call registrarAsignaturaGradoGrupo2("Español", nomGradoGrupo, 5);
@@ -256,7 +263,8 @@ begin
 				call registrarAsignaturaGradoGrupo2("Proyecto Pedagógico Productivo", nomGradoGrupo, 2);
 				call registrarAsignaturaGradoGrupo2("Ecología", nomGradoGrupo, 1);
 				call registrarAsignaturaGradoGrupo2("Artística", nomGradoGrupo, 2);
-				call registrarAsignaturaGradoGrupo2("Emprendimiento", nomGradoGrupo, 2);		
+				call registrarAsignaturaGradoGrupo2("Emprendimiento", nomGradoGrupo, 2);
+                call registrarAsignaturaGradoGrupo2("Convivencia", nomGradoGrupo, 0);
         end if;
         if(nomGrado = "9") then
 				call registrarAsignaturaGradoGrupo2("Español", nomGradoGrupo, 5);
@@ -271,7 +279,8 @@ begin
 				call registrarAsignaturaGradoGrupo2("Proyecto Pedagógico Productivo", nomGradoGrupo, 2);
 				call registrarAsignaturaGradoGrupo2("Ecología", nomGradoGrupo, 1);
 				call registrarAsignaturaGradoGrupo2("Artística", nomGradoGrupo, 2);
-				call registrarAsignaturaGradoGrupo2("Emprendimiento", nomGradoGrupo, 2);		
+				call registrarAsignaturaGradoGrupo2("Emprendimiento", nomGradoGrupo, 2);
+                call registrarAsignaturaGradoGrupo2("Convivencia", nomGradoGrupo, 0);
         end if;
         if(nomGrado = "10") then
 				call registrarAsignaturaGradoGrupo2("Español", nomGradoGrupo, 4);
@@ -286,7 +295,9 @@ begin
 				call registrarAsignaturaGradoGrupo2("Quimica", nomGradoGrupo, 4);
 				call registrarAsignaturaGradoGrupo2("Fisica", nomGradoGrupo, 3);
 				call registrarAsignaturaGradoGrupo2("Ciencias Politicas", nomGradoGrupo, 2);
-				call registrarAsignaturaGradoGrupo2("Filosofia", nomGradoGrupo, 2);		
+				call registrarAsignaturaGradoGrupo2("Filosofia", nomGradoGrupo, 2);
+				call registrarAsignaturaGradoGrupo2("Trigonometria", nomGradoGrupo, 2);
+                call registrarAsignaturaGradoGrupo2("Convivencia", nomGradoGrupo, 0);
         end if;
         if(nomGrado = "11") then
 				call registrarAsignaturaGradoGrupo2("Español", nomGradoGrupo, 4);
@@ -301,7 +312,9 @@ begin
 				call registrarAsignaturaGradoGrupo2("Quimica", nomGradoGrupo, 4);
 				call registrarAsignaturaGradoGrupo2("Fisica", nomGradoGrupo, 3);
 				call registrarAsignaturaGradoGrupo2("Ciencias Politicas", nomGradoGrupo, 2);
-				call registrarAsignaturaGradoGrupo2("Filosofia", nomGradoGrupo, 2);		
+				call registrarAsignaturaGradoGrupo2("Filosofia", nomGradoGrupo, 2);
+                call registrarAsignaturaGradoGrupo2("Trigonometria", nomGradoGrupo, 2);
+				call registrarAsignaturaGradoGrupo2("Convivencia", nomGradoGrupo, 0);		
         end if;        
     end if;
 END$$
@@ -518,7 +531,7 @@ begin
 END$$
 
 /*--------------------------Obtener Estudiantes Sede_Grado-------------------------*/
-DELIMITER $$
+/*DELIMITER $$
 DROP PROCEDURE IF EXISTS `obtenerEstudianteSedeGrado` $$
 create procedure `obtenerEstudianteSedeGrado`(
 	nomSede varchar(400),
@@ -537,6 +550,35 @@ begin
     inner join Estudiante as e on egg.fkidEstudiante = e.idEstudiante
     inner join Usuario as Us on e.Usuario_identificacion = Us.identificacion
     where s.nombreSede = nomSede;
+END$$*/
+
+DROP PROCEDURE IF EXISTS `obtenerEstudianteSedeGrado` $$
+create procedure `obtenerEstudianteSedeGrado`(
+	nomSede varchar(400),
+    nomGrado varchar(400)
+) 
+begin
+	select distinct Us.identificacion as documento, Us.primerNombreUsuario as nomUsuario, Us.segundoNombreUsuario as nom2Usuario, 
+		   Us.primerApellidoUsuario as apellidoUsuario, Us.segundoApellidoUsuario as apellido2Usuario, Us.edadUsuario as edad,
+		   Us.telefonoCelular as telCelular, Us.telefonoFijo as telFijo, Us.correo as correoUss, 
+           Us.direccion as direccioUss, Us.barrioUbicacionUsuario as barrioUss, Us.fechaNacimiento as fechaNacimientoUss, Us.estadoUsuario as estadoUss, 
+           COALESCE((select ObtenerNombreTipoSangre(Us.fkidTipoSangre)), 'Sin definir') as tipoSangre,
+           COALESCE((select ObtenerNombreTipoDocumento(Us.fkidTipoDocumento)), 'Sin definir') as tipoDocumento, 
+           COALESCE((select ObtenerNombreDiscapacidad(Us.fkidDiscapacidad)), 'Sin definir') as nombreDiscapacidad, 
+           COALESCE((select ObtenerNombreSisben(Us.fkidSisben)), 'Sin definir') as nombreSisben,
+           COALESCE((select ObtenerNombreGenero(Us.fkidGenero)), 'Sin definir') as nombreGenero, 
+           COALESCE((SELECT ObtenerNombreEPS(Us.fkidEPS)), 'Sin definir') AS nombreEPS, 
+           COALESCE((select ObtenerNombreEstrato(Us.fkidEstrato)), 'Sin definir') as nombreEstrato, g.nombreGrado as Grado, 
+           gg.grupoGrado as Grupo
+    From Usuario as Us
+    inner join Estudiante as e on e.Usuario_identificacion = Us.identificacion
+    inner join estudiantesGradoGrupo as egg on egg.fkidEstudiante = e.idEstudiante 
+    inner join GradoGrupo as gg on egg.fkidGradoGrupo = gg.idGradoGrupo  
+    inner join Grados as g on gg.fkidGrado = g.idGrado 
+    inner join sedeGrados as sg on sg.fkidGrado = g.idGrado 
+    inner join Sede as s on sg.fkidSede = s.idSede
+    inner join matricula as m on m.fkidEstudiante = e.idEstudiante and m.fkidSede = s.idSede
+    where s.nombreSede = nomSede and g.nombreGrado = nomGrado;
 END$$
 
 /*--------------------------Obtener Estudiantes Sede Grupo-------------------------*/
@@ -587,12 +629,12 @@ begin
     From Usuario as Us
     inner join Estudiante as e on e.Usuario_identificacion = Us.identificacion
     inner join estudiantesGradoGrupo as egg on egg.fkidEstudiante = e.idEstudiante 
-    inner join GradoGrupo as gg on gg.grupoGrado = nomGrupo and egg.fkidGradoGrupo = gg.idGradoGrupo  
+    inner join GradoGrupo as gg on egg.fkidGradoGrupo = gg.idGradoGrupo  
     inner join Grados as g on gg.fkidGrado = g.idGrado 
     inner join sedeGrados as sg on sg.fkidGrado = g.idGrado 
     inner join Sede as s on sg.fkidSede = s.idSede
     inner join matricula as m on m.fkidEstudiante = e.idEstudiante and m.fkidSede = s.idSede
-    where s.nombreSede = nomSede;
+    where s.nombreSede = nomSede and gg.grupoGrado = nomGrupo;
     
 END$$
 
