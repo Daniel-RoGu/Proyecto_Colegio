@@ -1,0 +1,116 @@
+﻿@model ProyectoColegio.Models.Familiar
+
+@{
+    ViewData["Title"] = "registrarFamiliar";
+    var identificacion = ViewBag.Identificacion;
+    var registroTipoFamiliar = ViewBag.RegistroTipoFamiliar;
+
+    List<string> parentezcos = new List<string>
+    {
+        "Padre",
+        "Madre",
+        "Abuelo",
+        "Abuela",
+        "Tio",
+        "Tia",
+        "Hermano",
+        "Hermana"
+    };
+}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/css/EstiloRegistrarFamiliar.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Rubik+Glitch+Pop&display=swap"
+          rel="stylesheet">
+    <script src="https://kit.fontawesome.com/f3f65ff77b.js" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="~/js/VistaFamiliar.js" defer></script>
+
+</head>
+<body>
+    
+        @*ESTRUCTURA GENERAL*@
+        @{
+            ViewBag.Title = "Registro de Familiar";
+        }
+
+        <h2>Registro de Familiar</h2>
+
+    @using (Html.BeginForm("registrarFamiliar", "Funcionario", FormMethod.Post))
+        {
+            <div>
+                <input type="text" name="identificacionEst" value="@identificacion" style="display: none;" />
+            </div>
+
+        <div>
+            <label for="nombreCompleto">Nombre Completo:</label>
+            <input type="text" name="nombreCompleto" id="nombreCompleto" required>
+        </div>
+
+        <div>
+            <label for="documento">Documento:</label>
+            <input type="text" name="documento" id="documento" required>
+        </div>
+
+        <div>
+            <label for="ocupacion">Ocupación:</label>
+            <input type="text" name="ocupacion" id="ocupacion">
+        </div>
+
+        <div>
+            <label for="numeroCelular">Número de Celular:</label>
+            <input type="tel" name="numeroCelular" id="numeroCelular" required>
+        </div>
+
+        <div>
+            <label for="correoElectronico">Correo Electronico:</label>
+            <input type="text" name="correoElectronico" id="correoElectronico">
+        </div>
+
+        <div>
+            <label>¿Es Acudiente?</label>
+            <input type="checkbox" name="esAcudiente" id="esAcudiente" checked>
+        </div>
+
+        <div>
+            <label>¿Es Responsable Económico?</label>
+            <input type="checkbox" name="esResponsableEconomico" id="esResponsableEconomico" checked>
+        </div>
+
+        <div>
+            <label for="parentezco">Parentezco:</label>
+            <select name="parentezco" id="parentezco">
+                @if(registroTipoFamiliar != null){
+                    @foreach (var item in parentezcos)
+                    {
+                        // permite comparar si un elemento en este caso object se encuentra dentro de una lista (string para el caso)
+                        if (!Array.Exists(registroTipoFamiliar, new Predicate<string>(elemento => elemento == item)))
+                        {
+                            <option value="@item">@item</option>                            
+                        }                       
+                    }
+                }
+                else
+                {
+                    @foreach (var item in parentezcos)
+                    {
+                        <option value="@item">@item</option>
+                    }
+                }
+            </select>
+        </div>
+
+        <button type="submit">Registrar</button>
+        
+    }
+</body>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

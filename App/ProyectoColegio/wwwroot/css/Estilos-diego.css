@@ -191,3 +191,54 @@ body{
 
 }
 
+<<<<<<< Updated upstream
+=======
+    .table__horario td p {
+        font-weight: 600;
+        padding: 0;
+        margin: 0 auto;
+    }
+
+    .table__horario td {
+        margin: 0;
+        padding: 10px;
+    }
+
+
+.table__horario th {
+    background-color: #2766d3;
+    padding: 20px;
+    text-align: center;
+    border: none;
+    color:white
+}
+
+
+.table__horario th {
+   text-align:center
+}
+
+
+.table--boletin th {
+    margin: 0px;
+    padding: 6px;
+}
+
+.table--boletin td {
+    margin: 0px;
+    padding: 6px;
+}
+
+.text--table--notas {
+    padding:0px;
+    margin: 0px; 
+}
+#previewImg {
+
+    display: block; 
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size:cover; 
+    margin: 0 auto; 
+}
+>>>>>>> Stashed changes

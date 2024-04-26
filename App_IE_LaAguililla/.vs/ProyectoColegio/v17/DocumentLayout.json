@@ -1,0 +1,88 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\Daniel\\Desktop\\App_IE_LaAguililla\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{065ADCD0-CC0F-4DD9-8D6F-03487A097C08}|ProyectoColegio.csproj|c:\\users\\daniel\\desktop\\app_ie_laaguililla\\views\\pdf\\boletinperiodo.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{065ADCD0-CC0F-4DD9-8D6F-03487A097C08}|ProyectoColegio.csproj|solutionrelative:views\\pdf\\boletinperiodo.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{065ADCD0-CC0F-4DD9-8D6F-03487A097C08}|ProyectoColegio.csproj|c:\\users\\daniel\\desktop\\app_ie_laaguililla\\views\\pdf\\formatocertificadoestudio.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{065ADCD0-CC0F-4DD9-8D6F-03487A097C08}|ProyectoColegio.csproj|solutionrelative:views\\pdf\\formatocertificadoestudio.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{065ADCD0-CC0F-4DD9-8D6F-03487A097C08}|ProyectoColegio.csproj|c:\\users\\daniel\\desktop\\app_ie_laaguililla\\views\\pdf\\boletinperiodopreescolar.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{065ADCD0-CC0F-4DD9-8D6F-03487A097C08}|ProyectoColegio.csproj|solutionrelative:views\\pdf\\boletinperiodopreescolar.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{065ADCD0-CC0F-4DD9-8D6F-03487A097C08}|ProyectoColegio.csproj|c:\\users\\daniel\\desktop\\app_ie_laaguililla\\views\\pdf\\formatohojamatricula.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{065ADCD0-CC0F-4DD9-8D6F-03487A097C08}|ProyectoColegio.csproj|solutionrelative:views\\pdf\\formatohojamatricula.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 100,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "BoletinPeriodoPreescolar.cshtml",
+              "DocumentMoniker": "C:\\Users\\Daniel\\Desktop\\App_IE_LaAguililla\\Views\\Pdf\\BoletinPeriodoPreescolar.cshtml",
+              "RelativeDocumentMoniker": "Views\\Pdf\\BoletinPeriodoPreescolar.cshtml",
+              "ToolTip": "C:\\Users\\Daniel\\Desktop\\App_IE_LaAguililla\\Views\\Pdf\\BoletinPeriodoPreescolar.cshtml",
+              "RelativeToolTip": "Views\\Pdf\\BoletinPeriodoPreescolar.cshtml",
+              "ViewState": "AQIAAFoBAAAAAAAAAAAAAHoBAAApAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-04-26T15:25:58.087Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "BoletinPeriodo.cshtml",
+              "DocumentMoniker": "C:\\Users\\Daniel\\Desktop\\App_IE_LaAguililla\\Views\\Pdf\\BoletinPeriodo.cshtml",
+              "RelativeDocumentMoniker": "Views\\Pdf\\BoletinPeriodo.cshtml",
+              "ToolTip": "C:\\Users\\Daniel\\Desktop\\App_IE_LaAguililla\\Views\\Pdf\\BoletinPeriodo.cshtml",
+              "RelativeToolTip": "Views\\Pdf\\BoletinPeriodo.cshtml",
+              "ViewState": "AQIAADUBAAAAAAAAAAAAADoBAAAlAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-04-26T14:51:08.196Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "formatoCertificadoEstudio.cshtml",
+              "DocumentMoniker": "C:\\Users\\Daniel\\Desktop\\App_IE_LaAguililla\\Views\\Pdf\\formatoCertificadoEstudio.cshtml",
+              "RelativeDocumentMoniker": "Views\\Pdf\\formatoCertificadoEstudio.cshtml",
+              "ToolTip": "C:\\Users\\Daniel\\Desktop\\App_IE_LaAguililla\\Views\\Pdf\\formatoCertificadoEstudio.cshtml",
+              "RelativeToolTip": "Views\\Pdf\\formatoCertificadoEstudio.cshtml",
+              "ViewState": "AQIAAEcBAAAAAAAAAAAAAFsBAAAxAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-04-26T14:46:41.237Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "formatoHojaMatricula.cshtml",
+              "DocumentMoniker": "C:\\Users\\Daniel\\Desktop\\App_IE_LaAguililla\\Views\\Pdf\\formatoHojaMatricula.cshtml",
+              "RelativeDocumentMoniker": "Views\\Pdf\\formatoHojaMatricula.cshtml",
+              "ToolTip": "C:\\Users\\Daniel\\Desktop\\App_IE_LaAguililla\\Views\\Pdf\\formatoHojaMatricula.cshtml",
+              "RelativeToolTip": "Views\\Pdf\\formatoHojaMatricula.cshtml",
+              "ViewState": "AQIAAB8CAAAAAAAAAAAAADMCAAAUAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-04-26T14:46:28.427Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -220,7 +220,9 @@ function generarTablaCargueInventario(
 
         contenedor += "<td class='colums__options'>";
         contenedor += `<a href="#" class="form-control form-control-sm bg-primary text-white" onclick="gestionFamiliarestudiante(${data[i][propiedadId]})" data-toggle="modal" data-target="#gestionFamiliar">Gestion familiar</a>
-                            <a href="#" class="form-control form-control-sm bg-primary text-white" data-toggle="modal" data-target="#Registrobservacion">Observaciones </a>`;
+                            <a href="#" class="form-control form-control-sm bg-primary text-white" onclick="generarObservaciones(${data[i][propiedadId]})" data-toggle="modal" data-target="#Registrobservacion">Observaciones </a>
+                             <a href="#" class="form-control form-control-sm bg-primary text-white" data-toggle="modal" data-target="#FotoEstudiantes"  onclick="ModalCargarFile(${data[i][propiedadId]})">Foto</a>`
+                            ;
         contenedor += "</td>";
         contenedor += "</tr>";
     }
@@ -230,6 +232,32 @@ function generarTablaCargueInventario(
 
     return contenedor;
 }
+
+function generarObservaciones(documento) {
+
+    document.getElementById("documentoEstudiante").value = documento; 
+
+}
+
+function generarObservacioneDatosGenerales() {
+    let documento = document.getElementById("documentoEstudiante").value
+    fetchGetText('Funcionario/retornarInfoFamiliaresEstudianteXCertificados/?identificacion=' + documento, function (res) {
+
+        if (res === "1") {
+
+            document.location.href = setUrl('pdf/Index/?RutaPdf=formatoObservacionDatosGenerales');  
+
+        }
+
+
+    })
+
+
+}
+
+
+
+
 
 function gestionFamiliarestudiante(documento) {
     document.getElementById("documentoEstudiante").value = documento
@@ -318,6 +346,39 @@ function GenerarTabla(data, cabezera, propiedades) {
 
 }
 
+<<<<<<< Updated upstream
+=======
+function validarCamposFamiliares() {
+    let camposSinCompletar = [];
+
+    let nombreCompleto = document.getElementById("nombreCompleto").value.trim();
+    let documento = document.getElementById("documento").value.trim();
+    let fechaNacimiento = document.getElementById("fechanacimineto").value;
+    let ocupacion = document.getElementById("ocupacion").value.trim();
+    let parentesco = document.getElementById("parentezcosEstudiante").value;
+    let numeroCelular = document.getElementById("numeroceular").value.trim();
+    let nivelEscolaridad = document.getElementById("escolaridad").value;
+    let direccionFamiliar = document.getElementById("direccionfamiliar").value.trim();
+    let desplazado = document.getElementById("desplazado").checked;
+    let acudiente = document.getElementById("acudiente").checked;
+    let responsabilidadEconomica = document.getElementById("responsabilidadecomica").checked;
+
+    if (nombreCompleto === "") camposSinCompletar.push("Nombre Completo");
+    if (documento === "") camposSinCompletar.push("Documento");
+    if (fechaNacimiento === "") camposSinCompletar.push("Fecha de Nacimiento");
+    if (ocupacion === "") camposSinCompletar.push("Ocupación");
+    if (parentesco === "") camposSinCompletar.push("Parentesco");
+    if (numeroCelular === "") camposSinCompletar.push("Número Celular");
+    if (nivelEscolaridad === "") camposSinCompletar.push("Nivel de Escolaridad");
+    if (direccionFamiliar === "") camposSinCompletar.push("Dirección Familiar");
+    //if (!desplazado && !acudiente && !responsabilidadEconomica) {
+    //    camposSinCompletar.push("Seleccione al menos una opción: Desplazado, Acudiente o Responsabilidad Económica");
+    //}
+
+    return camposSinCompletar;
+}
+
+>>>>>>> Stashed changes
 
 function guardarFamiliarEstudiante() {
     let frm = new FormData(); 
@@ -334,6 +395,16 @@ function guardarFamiliarEstudiante() {
     let acudiente = document.getElementById("acudiente").checked;
     let responsabilidadEconomica = document.getElementById("responsabilidadecomica").checked;
     let estudiante = document.getElementById('documentoEstudiante').value
+<<<<<<< Updated upstream
+=======
+    let camposIncompletos = [];
+    camposIncompletos = validarCamposFamiliares();
+    if (camposIncompletos.length > 0) {
+        mostrarError("Error en al agregar Familiar", "Por favor, complete todos los campos obligatorios indicados a continuación.", camposIncompletos);
+        camposIncompletos = null; 
+        return;  
+    }
+>>>>>>> Stashed changes
 
 
     desplazado = desplazado === true ? 'SI' : 'NO'
@@ -358,6 +429,7 @@ function guardarFamiliarEstudiante() {
     }
 
     fetchPostText('Funcionario/GuardarFamiliarEstudiante', frm, function (res) {
+ 
 
         if (res !== '1') {
 
@@ -413,8 +485,16 @@ function filtrosEstudiantes() {
 
 
 
+<<<<<<< Updated upstream
 
    
+=======
+    document.getElementById("idestudiantes").innerHTML = `  <div class="h-100 w-100  d-flex align-items-center justify-content-center">
+            <div class="spinner-border text-primary" style="width: 5rem; height: 5rem;" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>`
+>>>>>>> Stashed changes
 
 
     fetchGet(`Funcionario/ListarEstudiantesSedeGrupo/?sede=${sedes}&grupo=${grados}&identificacion=${idetificacion}`, function (data) {
@@ -425,6 +505,145 @@ function filtrosEstudiantes() {
     })
 
 }
+
+function ModalCargarFile(documento) {
+    document.getElementById("identificadorEstudiante").value = documento
+
+}
+
+
+
+function cargarFilesFotos() {
+    let documento = document.getElementById("identificadorEstudiante").value;
+    let archivo = document.getElementById("fotos").files[0];
+    let form = new FormData(); 
+
+    if (archivo !== undefined) {
+        var reader = new FileReader();
+        reader.readAsDataURL(archivo);
+        reader.onloadend = function (evt) {
+            if (evt.target.readyState === FileReader.DONE) {
+                let cadenaBase64;
+                cadenaBase64 = evt.target.result.split(",")[1];
+               
+                form.append('DocEstudiante', documento);
+                form.append('ImagenArchivo', cadenaBase64);
+                form.append('nombreImagen', archivo.name);
+                fetchPostText('Funcionario/SubirImagen', form, function (res) {
+
+                    if (res === "1") {
+
+                        document.getElementById("cerraModalImg").click()
+                       
+                    }
+
+
+                })
+
+
+            }
+
+
+
+
+        }
+
+
+    } else {
+        return;  
+    }
+
+}
+
+
+function validarCamposPropietario() {
+    let camposSinCompletar = [];
+
+    let documento = document.getElementById("documentoPropietario").value.trim();
+    let archivo = document.getElementById("Firmas").files[0];
+    let cargo = document.getElementById('Propietario').value;
+
+    if (documento === "") camposSinCompletar.push("Documento");
+    if (!archivo) camposSinCompletar.push("Archivo de Firma");
+    if (cargo === "") camposSinCompletar.push("Cargo del Propietario");
+
+    return camposSinCompletar;
+}
+
+
+
+
+function cargarFilesFirma() {
+    let documento = document.getElementById("documentoPropietario").value;
+    let archivo = document.getElementById("Firmas").files[0];
+    let cargo = document.getElementById('Propietario').value; 
+
+    let camposIncompletos = [];
+    camposIncompletos = validarCamposPropietario();  
+
+    if (camposIncompletos.length > 0) {
+        mostrarError("Error en al agregar la firma", "Por favor, complete todos los campos obligatorios indicados a continuación.", camposIncompletos);
+        camposIncompletos = null;
+        return;
+    }
+
+    let form = new FormData();
+
+    if (archivo !== undefined) {
+        var reader = new FileReader();
+        reader.readAsDataURL(archivo);
+        reader.onloadend = function (evt) {
+            if (evt.target.readyState === FileReader.DONE) {
+                let cadenaBase64;
+                cadenaBase64 = evt.target.result.split(",")[1];
+
+                form.append('DocFuncionario', documento);
+                form.append('ImagenArchivo', cadenaBase64);
+                form.append('nombreImagen', archivo.name);
+                form.append('Propietario', cargo);  
+                fetchPostText('Funcionario/SubirFirma', form, function (res) {
+
+                    if (res === "1") {
+
+                        document.getElementById("cerraModalfirma").click()                    }
+
+
+                })
+
+
+            }
+
+
+
+
+        }
+
+
+    } else {
+        return;
+    }
+
+}
+
+function limpiarModalAdjuntosFirmas() {
+
+    document.getElementById('PreviewFirma').src = "";
+    document.getElementById('Firmas').value = "";
+    document.getElementById('documentoPropietario').value = "";
+    resetSelect('Propietario')
+
+}
+
+
+function limpiarModalAdjuntos() {
+
+    document.getElementById('identificadorEstudiante').value = "";
+    document.getElementById('previewImg').src = "";
+    document.getElementById('fotos').value = "";
+    document.querySelector('.nombre-archivo-foto').textContent = "Seleccione archivo";
+
+}
+
 
 function PaginationTable(filasPorPagina, table) {
     let paginaActual = 1
@@ -542,4 +761,13 @@ function PaginationTable(filasPorPagina, table) {
 
     mostrarPagina(paginaActual);
     botones();
+}
+
+
+
+function formatosObservaciones(formato) {
+
+
+    document.location.href = setUrl('pdf/Index/?RutaPdf=' + formato);
+
 }

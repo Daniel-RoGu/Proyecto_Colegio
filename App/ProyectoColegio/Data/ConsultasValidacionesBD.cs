@@ -14,7 +14,7 @@ namespace ProyectoColegio.Data
 
             // Llamar al método
             List<Object> resultados = ManejoBaseDatos.EjecutarProcedimientoConParametroYConsulta(nombreProcedimiento, nombreParametro, identificacion, 1, conexion);
-            foreach (Object obj in resultados)
+            foreach (string obj in resultados)
             {
                 existe = Convert.ToBoolean(Convert.ToInt16(obj));
             }
@@ -32,7 +32,7 @@ namespace ProyectoColegio.Data
 
             // Llamar al método
             List<Object> resultados = ManejoBaseDatos.EjecutarProcedimientoConParametroYConsulta(nombreProcedimiento, nombreParametro, nombreEps, 1, conexion);
-            foreach (Object obj in resultados)
+            foreach (string obj in resultados)
             {
                 existe = Convert.ToBoolean(Convert.ToInt16(obj));
             }
@@ -50,7 +50,7 @@ namespace ProyectoColegio.Data
 
             // Llamar al método
             List<Object> resultados = ManejoBaseDatos.EjecutarProcedimientoConParametroYConsulta(nombreProcedimiento, nombreParametro, nombreTpSangre, 1, conexion);
-            foreach (Object obj in resultados)
+            foreach(string obj in resultados)
             {
                 existe = Convert.ToBoolean(Convert.ToInt16(obj));
             }
@@ -68,7 +68,7 @@ namespace ProyectoColegio.Data
 
             // Llamar al método
             List<Object> resultados = ManejoBaseDatos.EjecutarProcedimientoConParametroYConsulta(nombreProcedimiento, nombreParametro, nombreTpDocumento, 1, conexion);
-            foreach (Object obj in resultados)
+            foreach (string obj in resultados)
             {
                 existe = Convert.ToBoolean(Convert.ToInt16(obj));
             }
@@ -86,7 +86,7 @@ namespace ProyectoColegio.Data
 
             // Llamar al método
             List<Object> resultados = ManejoBaseDatos.EjecutarProcedimientoConParametroYConsulta(nombreProcedimiento, nombreParametro, nombreDiscapacidad, 1, conexion);
-            foreach (Object obj in resultados)
+            foreach (string obj in resultados)
             {
                 existe = Convert.ToBoolean(Convert.ToInt16(obj));
             }
@@ -104,7 +104,7 @@ namespace ProyectoColegio.Data
 
             // Llamar al método
             List<Object> resultados = ManejoBaseDatos.EjecutarProcedimientoConParametroYConsulta(nombreProcedimiento, nombreParametro, nombreGenero, 1, conexion);
-            foreach (Object obj in resultados)
+            foreach (string obj in resultados)
             {
                 existe = Convert.ToBoolean(Convert.ToInt16(obj));
             }
@@ -122,7 +122,7 @@ namespace ProyectoColegio.Data
 
             // Llamar al método
             List<Object> resultados = ManejoBaseDatos.EjecutarProcedimientoConParametroYConsulta(nombreProcedimiento, nombreParametro, nombreSisben, 1, conexion);
-            foreach (Object obj in resultados)
+            foreach (string obj in resultados)
             {
                 existe = Convert.ToBoolean(Convert.ToInt16(obj));
             }
@@ -140,7 +140,7 @@ namespace ProyectoColegio.Data
 
             // Llamar al método
             List<Object> resultados = ManejoBaseDatos.EjecutarProcedimientoConParametroYConsulta(nombreProcedimiento, nombreParametro, nombreSede, 1, conexion);
-            foreach (Object obj in resultados)
+            foreach (string obj in resultados)
             {
                 existe = Convert.ToBoolean(Convert.ToInt16(obj));
             }
@@ -158,7 +158,7 @@ namespace ProyectoColegio.Data
 
             // Llamar al método
             List<Object> resultados = ManejoBaseDatos.EjecutarProcedimientoConParametroYConsulta(nombreProcedimiento, nombreParametro, nombreGrado, 1, conexion);
-            foreach (Object obj in resultados)
+            foreach (string obj in resultados)
             {
                 existe = Convert.ToBoolean(Convert.ToInt16(obj));
             }
@@ -176,7 +176,7 @@ namespace ProyectoColegio.Data
 
             // Llamar al método
             List<Object> resultados = ManejoBaseDatos.EjecutarProcedimientoConParametroYConsulta(nombreProcedimiento, nombreParametro, nombreGradoGrupo, 1, conexion);
-            foreach (Object obj in resultados)
+            foreach (string obj in resultados)
             {
                 existe = Convert.ToBoolean(Convert.ToInt16(obj));
             }
@@ -196,9 +196,9 @@ namespace ProyectoColegio.Data
 
             List<Object> resultados = ManejoBaseDatos.EjecutarProcedimientoConMultiParametroYConsulta("existeSedeGrado", parametros, 1, conexion);
             
-            foreach (Object obj in resultados)
+            foreach (List<Object> obj in resultados)
             {
-                existe = Convert.ToBoolean(Convert.ToInt16(obj));
+                existe = Convert.ToBoolean(Convert.ToInt16(obj[0]));
             }
             return existe;
         }
@@ -216,9 +216,9 @@ namespace ProyectoColegio.Data
 
             List<Object> resultados = ManejoBaseDatos.EjecutarProcedimientoConMultiParametroYConsulta("existeEstudianteGrupoGrado", parametros, 1, conexion);
 
-            foreach (Object obj in resultados)
+            foreach (List<Object> obj in resultados)
             {
-                existe = Convert.ToBoolean(Convert.ToInt16(obj));
+                existe = Convert.ToBoolean(Convert.ToInt16(obj[0]));
             }
             return existe;
         }
@@ -237,9 +237,9 @@ namespace ProyectoColegio.Data
 
             List<Object> resultados = ManejoBaseDatos.EjecutarProcedimientoConMultiParametroYConsulta("existeMatricula", parametros, 1, conexion);
 
-            foreach (Object obj in resultados)
+            foreach (List<Object> obj in resultados)
             {
-                existe = Convert.ToBoolean(Convert.ToInt16(obj));
+                existe = Convert.ToBoolean(Convert.ToInt16(obj[0]));
             }
             return existe;
         }
@@ -256,9 +256,9 @@ namespace ProyectoColegio.Data
 
             List<Object> resultados = ManejoBaseDatos.EjecutarProcedimientoConMultiParametroYConsulta("existeModalidad", parametros, 1, conexion);
 
-            foreach (Object obj in resultados)
+            foreach (List<Object> obj in resultados)
             {
-                existe = Convert.ToBoolean(Convert.ToInt16(obj));
+                existe = Convert.ToBoolean(Convert.ToInt16(obj[0]));
             }
             return existe;
         }
@@ -274,9 +274,9 @@ namespace ProyectoColegio.Data
 
             List<Object> resultados = ManejoBaseDatos.EjecutarProcedimientoConMultiParametroYConsulta("existeDocente", parametros, 1, conexion);
 
-            foreach (Object obj in resultados)
+            foreach (List<Object> obj in resultados)
             {
-                existe = Convert.ToBoolean(Convert.ToInt16(obj));
+                existe = Convert.ToBoolean(Convert.ToInt16(obj[0]));
             }
             return existe;
         }
@@ -293,9 +293,9 @@ namespace ProyectoColegio.Data
 
             List<Object> resultados = ManejoBaseDatos.EjecutarProcedimientoConMultiParametroYConsulta("existeDocenteGrado", parametros, 1, conexion);
 
-            foreach (Object obj in resultados)
+            foreach (List<Object> obj in resultados)
             {
-                existe = Convert.ToBoolean(Convert.ToInt16(obj));
+                existe = Convert.ToBoolean(Convert.ToInt16(obj[0]));
             }
             return existe;
         }
@@ -312,9 +312,9 @@ namespace ProyectoColegio.Data
 
             List<Object> resultados = ManejoBaseDatos.EjecutarProcedimientoConMultiParametroYConsulta("existeDocenteAsignatura", parametros, 1, conexion);
 
-            foreach (Object obj in resultados)
+            foreach (List<Object> obj in resultados)
             {
-                existe = Convert.ToBoolean(Convert.ToInt16(obj));
+                existe = Convert.ToBoolean(Convert.ToInt16(obj[0]));
             }
             return existe;
         }
@@ -331,9 +331,9 @@ namespace ProyectoColegio.Data
 
             List<Object> resultados = ManejoBaseDatos.EjecutarProcedimientoConMultiParametroYConsulta("existeAsignaturaGradoGrupo", parametros, 1, conexion);
 
-            foreach (Object obj in resultados)
+            foreach (List<Object> obj in resultados)
             {
-                existe = Convert.ToBoolean(Convert.ToInt16(obj));
+                existe = Convert.ToBoolean(Convert.ToInt16(obj[0]));
             }
             return existe;
         }
@@ -351,9 +351,9 @@ namespace ProyectoColegio.Data
 
             List<Object> resultados = ManejoBaseDatos.EjecutarProcedimientoConMultiParametroYConsulta("existeDocenteAsignaturaGrupo", parametros, 1, conexion);
 
-            foreach (Object obj in resultados)
+            foreach (List<Object> obj in resultados)
             {
-                existe = Convert.ToBoolean(Convert.ToInt16(obj));
+                existe = Convert.ToBoolean(Convert.ToInt16(obj[0]));
             }
             return existe;
         }
@@ -370,9 +370,9 @@ namespace ProyectoColegio.Data
 
             List<Object> resultados = ManejoBaseDatos.EjecutarProcedimientoConMultiParametroYConsulta("existeCompetencia", parametros, 1, conexion);
 
-            foreach (Object obj in resultados)
+            foreach (List<Object> obj in resultados)
             {
-                existe = Convert.ToBoolean(Convert.ToInt16(obj));
+                existe = Convert.ToBoolean(Convert.ToInt16(obj[0]));
             }
             return existe;
         }

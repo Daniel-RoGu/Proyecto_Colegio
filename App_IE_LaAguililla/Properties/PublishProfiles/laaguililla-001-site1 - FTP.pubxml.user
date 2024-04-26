@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Este archivo se usa en el proceso de publicación y empaquetado del proyecto web. Para personalizar el comportamiento de este proceso,
+edite el archivo MSBuild. Visite https://go.microsoft.com/fwlink/?LinkID=208121 para obtener más información. 
+-->
+<Project>
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <EncryptedPassword />
+    <_PublishTargetUrl>ftp://win5112.site4now.net:21/ielaaguililla</_PublishTargetUrl>
+    <History>False|2024-04-13T15:36:08.3648530Z;</History>
+    <LastFailureDetails />
+  </PropertyGroup>
+  <ItemGroup>
+    <DestinationConnectionStrings Include="MyConexionSQL">
+      <Value>Server=MYSQL5049.site4now.net%3bDatabase=db_aa74fb_bdcoleg%3bUid=aa74fb_bdcoleg%3bPwd=Aguicol_10%3bCharset=utf8mb4%3bMax Pool Size=10000%3b</Value>
+    </DestinationConnectionStrings>
+  </ItemGroup>
+</Project>

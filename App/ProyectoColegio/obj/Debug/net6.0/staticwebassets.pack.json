@@ -21,6 +21,33 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+<<<<<<< Updated upstream
+=======
+      "Id": "C:\\Users\\Daniel\\Desktop\\TrabajoColegio\\App\\ProyectoColegio\\wwwroot\\js\\BoletinBachiller.js",
+      "PackagePath": "staticwebassets\\js\\BoletinBachiller.js"
+    },
+    {
+      "Id": "C:\\Users\\Daniel\\Desktop\\TrabajoColegio\\App\\ProyectoColegio\\wwwroot\\js\\BoletinDimenciones.js",
+      "PackagePath": "staticwebassets\\js\\BoletinDimenciones.js"
+    },
+    {
+      "Id": "C:\\Users\\Daniel\\Desktop\\TrabajoColegio\\App\\ProyectoColegio\\wwwroot\\js\\BoletinEstudiante.js",
+      "PackagePath": "staticwebassets\\js\\BoletinEstudiante.js"
+    },
+    {
+      "Id": "C:\\Users\\Daniel\\Desktop\\TrabajoColegio\\App\\ProyectoColegio\\wwwroot\\js\\Certificados.js",
+      "PackagePath": "staticwebassets\\js\\Certificados.js"
+    },
+    {
+      "Id": "C:\\Users\\Daniel\\Desktop\\TrabajoColegio\\App\\ProyectoColegio\\wwwroot\\js\\ConvivenciaEstudiantes.js",
+      "PackagePath": "staticwebassets\\js\\ConvivenciaEstudiantes.js"
+    },
+    {
+      "Id": "C:\\Users\\Daniel\\Desktop\\TrabajoColegio\\App\\ProyectoColegio\\wwwroot\\js\\DocenteUser.js",
+      "PackagePath": "staticwebassets\\js\\DocenteUser.js"
+    },
+    {
+>>>>>>> Stashed changes
       "Id": "C:\\Users\\Daniel\\Desktop\\TrabajoColegio\\App\\ProyectoColegio\\wwwroot\\js\\FlujoDeDatos.js",
       "PackagePath": "staticwebassets\\js\\FlujoDeDatos.js"
     },
@@ -37,6 +64,25 @@
       "PackagePath": "staticwebassets\\js\\GestionFuncionario.js"
     },
     {
+<<<<<<< Updated upstream
+=======
+      "Id": "C:\\Users\\Daniel\\Desktop\\TrabajoColegio\\App\\ProyectoColegio\\wwwroot\\js\\Gestion_horario.js",
+      "PackagePath": "staticwebassets\\js\\Gestion_horario.js"
+    },
+    {
+      "Id": "C:\\Users\\Daniel\\Desktop\\TrabajoColegio\\App\\ProyectoColegio\\wwwroot\\js\\HoarioDocenteUser.js",
+      "PackagePath": "staticwebassets\\js\\HoarioDocenteUser.js"
+    },
+    {
+      "Id": "C:\\Users\\Daniel\\Desktop\\TrabajoColegio\\App\\ProyectoColegio\\wwwroot\\js\\HorarioEstudiante.js",
+      "PackagePath": "staticwebassets\\js\\HorarioEstudiante.js"
+    },
+    {
+      "Id": "C:\\Users\\Daniel\\Desktop\\TrabajoColegio\\App\\ProyectoColegio\\wwwroot\\js\\Test.js",
+      "PackagePath": "staticwebassets\\js\\Test.js"
+    },
+    {
+>>>>>>> Stashed changes
       "Id": "C:\\Users\\Daniel\\Desktop\\TrabajoColegio\\App\\ProyectoColegio\\wwwroot\\js\\TratamientoCsv.js",
       "PackagePath": "staticwebassets\\js\\TratamientoCsv.js"
     },
@@ -63,6 +109,10 @@
     {
       "Id": "C:\\Users\\Daniel\\Desktop\\TrabajoColegio\\App\\ProyectoColegio\\wwwroot\\js\\bootstrap.min.js",
       "PackagePath": "staticwebassets\\js\\bootstrap.min.js"
+    },
+    {
+      "Id": "C:\\Users\\Daniel\\Desktop\\TrabajoColegio\\App\\ProyectoColegio\\wwwroot\\js\\controlPeriodo.js",
+      "PackagePath": "staticwebassets\\js\\controlPeriodo.js"
     },
     {
       "Id": "C:\\Users\\Daniel\\Desktop\\TrabajoColegio\\App\\ProyectoColegio\\wwwroot\\js\\general.js",

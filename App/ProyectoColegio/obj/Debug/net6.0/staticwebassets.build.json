@@ -1,6 +1,10 @@
 {
   "Version": 1,
+<<<<<<< Updated upstream
   "Hash": "iiCIKZRTqzZpyE2lUbQvhKil6H5l36QzZTb2ReFp2cY=",
+=======
+  "Hash": "MdxEP4712Adm1aBRP1tHPf9H+u1PaA3Q45aGJKGOaSs=",
+>>>>>>> Stashed changes
   "Source": "ProyectoColegio",
   "BasePath": "_content/ProyectoColegio",
   "Mode": "Default",
@@ -102,6 +106,60 @@
       "OriginalItemSpec": "wwwroot\\favicon.ico"
     },
     {
+<<<<<<< Updated upstream
+=======
+      "Identity": "C:\\Users\\Daniel\\Desktop\\TrabajoColegio\\App\\ProyectoColegio\\wwwroot\\js\\BoletinBachiller.js",
+      "SourceId": "ProyectoColegio",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Daniel\\Desktop\\TrabajoColegio\\App\\ProyectoColegio\\wwwroot\\",
+      "BasePath": "_content/ProyectoColegio",
+      "RelativePath": "js/BoletinBachiller.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\BoletinBachiller.js"
+    },
+    {
+      "Identity": "C:\\Users\\Daniel\\Desktop\\TrabajoColegio\\App\\ProyectoColegio\\wwwroot\\js\\BoletinDimenciones.js",
+      "SourceId": "ProyectoColegio",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Daniel\\Desktop\\TrabajoColegio\\App\\ProyectoColegio\\wwwroot\\",
+      "BasePath": "_content/ProyectoColegio",
+      "RelativePath": "js/BoletinDimenciones.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\BoletinDimenciones.js"
+    },
+    {
+      "Identity": "C:\\Users\\Daniel\\Desktop\\TrabajoColegio\\App\\ProyectoColegio\\wwwroot\\js\\BoletinEstudiante.js",
+      "SourceId": "ProyectoColegio",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Daniel\\Desktop\\TrabajoColegio\\App\\ProyectoColegio\\wwwroot\\",
+      "BasePath": "_content/ProyectoColegio",
+      "RelativePath": "js/BoletinEstudiante.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\BoletinEstudiante.js"
+    },
+    {
+>>>>>>> Stashed changes
       "Identity": "C:\\Users\\Daniel\\Desktop\\TrabajoColegio\\App\\ProyectoColegio\\wwwroot\\js\\bootstrap.bundle.min.js",
       "SourceId": "ProyectoColegio",
       "SourceType": "Discovered",
@@ -170,6 +228,77 @@
       "OriginalItemSpec": "wwwroot\\js\\bootstrap-select.min.js.map"
     },
     {
+<<<<<<< Updated upstream
+=======
+      "Identity": "C:\\Users\\Daniel\\Desktop\\TrabajoColegio\\App\\ProyectoColegio\\wwwroot\\js\\Certificados.js",
+      "SourceId": "ProyectoColegio",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Daniel\\Desktop\\TrabajoColegio\\App\\ProyectoColegio\\wwwroot\\",
+      "BasePath": "_content/ProyectoColegio",
+      "RelativePath": "js/Certificados.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\Certificados.js"
+    },
+    {
+      "Identity": "C:\\Users\\Daniel\\Desktop\\TrabajoColegio\\App\\ProyectoColegio\\wwwroot\\js\\controlPeriodo.js",
+      "SourceId": "ProyectoColegio",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Daniel\\Desktop\\TrabajoColegio\\App\\ProyectoColegio\\wwwroot\\",
+      "BasePath": "_content/ProyectoColegio",
+      "RelativePath": "js/controlPeriodo.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\controlPeriodo.js"
+    },
+    {
+      "Identity": "C:\\Users\\Daniel\\Desktop\\TrabajoColegio\\App\\ProyectoColegio\\wwwroot\\js\\ConvivenciaEstudiantes.js",
+      "SourceId": "ProyectoColegio",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Daniel\\Desktop\\TrabajoColegio\\App\\ProyectoColegio\\wwwroot\\",
+      "BasePath": "_content/ProyectoColegio",
+      "RelativePath": "js/ConvivenciaEstudiantes.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\ConvivenciaEstudiantes.js"
+    },
+    {
+      "Identity": "C:\\Users\\Daniel\\Desktop\\TrabajoColegio\\App\\ProyectoColegio\\wwwroot\\js\\DocenteUser.js",
+      "SourceId": "ProyectoColegio",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Daniel\\Desktop\\TrabajoColegio\\App\\ProyectoColegio\\wwwroot\\",
+      "BasePath": "_content/ProyectoColegio",
+      "RelativePath": "js/DocenteUser.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\DocenteUser.js"
+    },
+    {
+>>>>>>> Stashed changes
       "Identity": "C:\\Users\\Daniel\\Desktop\\TrabajoColegio\\App\\ProyectoColegio\\wwwroot\\js\\FlujoDeDatos.js",
       "SourceId": "ProyectoColegio",
       "SourceType": "Discovered",
@@ -304,6 +433,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\site.js"
+    },
+    {
+      "Identity": "C:\\Users\\Daniel\\Desktop\\TrabajoColegio\\App\\ProyectoColegio\\wwwroot\\js\\Test.js",
+      "SourceId": "ProyectoColegio",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Daniel\\Desktop\\TrabajoColegio\\App\\ProyectoColegio\\wwwroot\\",
+      "BasePath": "_content/ProyectoColegio",
+      "RelativePath": "js/Test.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\Test.js"
     },
     {
       "Identity": "C:\\Users\\Daniel\\Desktop\\TrabajoColegio\\App\\ProyectoColegio\\wwwroot\\js\\TratamientoCsv.js",

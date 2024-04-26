@@ -2,6 +2,13 @@
 using ProyectoColegio.Data;
 using ProyectoColegio.Models;
 using System.Web.Helpers;
+<<<<<<< Updated upstream
+=======
+using static IronPython.Modules._ast;
+using static iText.Layout.Borders.Border;
+using System.Linq;
+using static IronPython.Modules.PythonIterTools;
+>>>>>>> Stashed changes
 
 namespace ProyectoColegio.Controllers
 {
@@ -124,7 +131,276 @@ namespace ProyectoColegio.Controllers
         {
             if (asignatura != null)
             {
+<<<<<<< Updated upstream
                 TempData["Asignatura"] = asignatura;
+=======
+                if (Convert.ToString(item[2]) != "Sin registro")
+                {
+                    string dato = Convert.ToString(item[2]);
+                    decimal numero = decimal.Parse(dato, CultureInfo.InvariantCulture);
+                    count++;
+                    EstudianteEvaluado estudiante = new EstudianteEvaluado();
+                    estudiante.Numero = count;
+                    estudiante.Identificador = Convert.ToInt32(item[1]);
+                    estudiante.Nota = Convert.ToSingle(numero);
+                    estudiantesEvaluados.Add(estudiante);
+                }
+            }
+
+            // Ordenar la lista de estudiantes por la nota de mayor a menor
+            estudiantesEvaluados = estudiantesEvaluados.OrderByDescending(e => e.Nota).ToList();
+            count = 0;
+
+            foreach (EstudianteEvaluado item in estudiantesEvaluados)
+            {                  
+                    count++;
+                    EstudianteEvaluado estudiante = new EstudianteEvaluado();
+                    estudiante.Numero = count;
+                    estudiante.Identificador = item.Identificador;
+                    estudiante.Nota = item.Nota;
+                    estudiantesOrdenados.Add(estudiante);
+            }
+
+            return Json(estudiantesOrdenados);
+        }
+
+        public List<EstudianteEvaluado> GestionNotasAsistenciaRetorno(string grupoRef, string asignaturaRef, string periodoRef)
+        {
+            List<object> estudiantes = ObtenerRegistroNotasEstudiantes(grupoRef, asignaturaRef, periodoRef);
+            List<EstudianteEvaluado> estudiantesEvaluados = new List<EstudianteEvaluado>();
+            List<EstudianteEvaluado> estudiantesOrdenados = new List<EstudianteEvaluado>();
+            int count = 0;
+
+            foreach (List<object> item in estudiantes)
+            {
+                if (Convert.ToString(item[2]) != "Sin registro")
+                {
+                    string dato = Convert.ToString(item[2]);
+                    decimal numero = decimal.Parse(dato, CultureInfo.InvariantCulture);
+                    count++;
+                    EstudianteEvaluado estudiante = new EstudianteEvaluado();
+                    estudiante.Numero = count;
+                    estudiante.Identificador = Convert.ToInt32(item[1]);
+                    estudiante.Nota = Convert.ToSingle(numero);
+                    estudiantesEvaluados.Add(estudiante);
+                }
+            }
+
+            // Ordenar la lista de estudiantes por la nota de mayor a menor
+            estudiantesEvaluados = estudiantesEvaluados.OrderByDescending(e => e.Nota).ToList();
+            count = 0;
+
+            foreach (EstudianteEvaluado item in estudiantesEvaluados)
+            {
+                count++;
+                EstudianteEvaluado estudiante = new EstudianteEvaluado();
+                estudiante.Numero = count;
+                estudiante.Identificador = item.Identificador;
+                estudiante.Nota = item.Nota;
+                estudiantesOrdenados.Add(estudiante);
+            }
+
+            return estudiantesOrdenados;
+        }
+
+        public string registrarNotaAsistenciaEstudiante( string grupo, string asignatura, int idEstudiante, string periodoNota, string nota, int Fallas)
+        {
+            int retorno = 0;
+            
+            if (!string.IsNullOrEmpty(asignatura) && idEstudiante != 0 && !string.IsNullOrEmpty(periodoNota))
+            {                
+
+                try
+                {
+
+                    Dictionary<string, object> parametros = new Dictionary<string, object>
+                    {
+                        { "asignatura", asignatura },
+                        { "docEstudiante", idEstudiante },
+                        { "PeriodoNota", periodoNota },
+                        { "nota", nota },
+                        { "nFallasRef", Fallas },
+                    };
+
+                    ManejoBaseDatos.EjecutarProcedimientoMultiParametro("registrarDocenteNotasAsistenciasPeriodo", parametros, _contexto.Conexion);
+                    retorno = 1;
+
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Error al ejecutar el script: {ex.Message}");
+                }
+
+                foreach (EstudianteEvaluado item in GestionNotasAsistenciaRetorno(grupo, asignatura, periodoNota))
+                {
+                    int nuevoPuesto = Convert.ToInt16(item.Numero);
+                    long identificadorEstudiante = Convert.ToInt32(item.Identificador);
+                    actualizarPuestoEstudiante(identificadorEstudiante, nuevoPuesto, periodoNota, grupo);
+                }
+
+            }           
+
+            return "" + retorno;
+        }
+
+        public List<Object> ObtenerRegistroNotasEstudiantes(string grupoRef, string asignaturaRef, string periodoRef)
+        {
+            List<object> estudiantes = new List<object>();
+            object estudiante = new object();
+
+            Dictionary<string, object> parametros = new Dictionary<string, object>
+            {
+                 { "grupoRef", grupoRef },
+                 { "asignaturaRef", asignaturaRef },
+                 { "periodoRef", periodoRef },                 
+            };
+
+            int grupoAtributosEsperadosDocente = 8;
+
+            var resultados = ManejoBaseDatos.EjecutarProcedimientoConMultiParametroYConsulta("ObtenerEstudiantesNotasXGrupo", parametros, grupoAtributosEsperadosDocente, _contexto.Conexion);
+
+            List<object> lista = new List<object>();
+
+            foreach (var item in resultados)
+            {
+                estudiante = item;
+                estudiantes.Add(estudiante);
+                estudiante = new List<object>();
+            }
+         
+
+            return estudiantes;
+        }
+
+        public void actualizarPuestoEstudiante(long idEstudianteRef , int puestoRef, string periodoNota, string grupoRef)
+        {
+            List<object> GrupoPuestos = ObtenerRegistroPuestosXgrupo(periodoNota, grupoRef);
+            List<EstudianteGrupoPuesto> EstudiantesGrupo = new List<EstudianteGrupoPuesto>();            
+            List<EstudianteGrupoPuesto> EstudiantesGrupoActualizado = new List<EstudianteGrupoPuesto>();                                
+
+            if (idEstudianteRef != 0 && puestoRef != 0)
+            {
+                
+                try
+                {
+
+                    Dictionary<string, object> parametros = new Dictionary<string, object>
+                    {
+                        { "idEstudianteRef", idEstudianteRef },
+                        { "puestoRef", puestoRef },
+                        { "periodoRef", periodoNota },
+                        { "grupoRef", grupoRef },
+                    };
+
+                    ManejoBaseDatos.EjecutarProcedimientoMultiParametro("ActualizarPosicionEstudiantes2", parametros, _contexto.Conexion);
+
+                    if (GrupoPuestos.Count > 0)
+                    {
+                        foreach (List<object> item in GrupoPuestos)
+                        {
+                            EstudianteGrupoPuesto EstudianteGrupo = new EstudianteGrupoPuesto();
+                            string notaRef = "0";
+                            EstudianteGrupo.Numero = 0;
+                            EstudianteGrupo.Identificador = Convert.ToInt32(item[0]);
+                            notaRef = Convert.ToString(item[1]);
+                            EstudianteGrupo.Nota = Convert.ToSingle(notaRef);
+                            EstudianteGrupo.Periodo = Convert.ToString(item[2]);
+                            EstudianteGrupo.Grupo = Convert.ToString(item[3]);
+                            EstudiantesGrupo.Add(EstudianteGrupo);
+                        }
+
+                        EstudiantesGrupo = EstudiantesGrupo.OrderByDescending(e => e.Nota).ToList();
+                        int count = 0;
+
+                        foreach (EstudianteGrupoPuesto item in EstudiantesGrupo)
+                        {
+                            count++;
+                            EstudianteGrupoPuesto estudiante = new EstudianteGrupoPuesto();
+                            estudiante.Numero = count;
+                            estudiante.Identificador = item.Identificador;
+                            estudiante.Nota = item.Nota;
+                            estudiante.Periodo = item.Periodo;
+                            estudiante.Grupo = item.Grupo;                                                      
+                            EstudiantesGrupoActualizado.Add(estudiante);                           
+                        }
+
+                        foreach (EstudianteGrupoPuesto item in EstudiantesGrupoActualizado)
+                        {
+                            Dictionary<string, object> parametros2 = new Dictionary<string, object>
+                            {
+                                { "idEstudianteRef", item.Identificador },
+                                { "puestoRef", item.Numero },
+                                { "periodoRef", item.Periodo },
+                                { "grupoRef", item.Grupo },
+                            };
+
+                            ManejoBaseDatos.EjecutarProcedimientoMultiParametro("ActualizarPosicionEstudiantes2", parametros2, _contexto.Conexion);
+                        }
+
+                    }
+
+                    //ManejoBaseDatos.EjecutarProcedimientoMultiParametro("ActualizarPosicionEstudiantes", parametros, _contexto.Conexion); //para actualizar posiciones por materia
+                    
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Error al ejecutar el script: {ex.Message}");
+                }
+            }
+        }
+
+        public List<Object> ObtenerRegistroPuestosXgrupo(string periodoRef, string grupoRef)
+        {
+            List<object> estudiantes = new List<object>();
+            object estudiante = new object();
+
+            Dictionary<string, object> parametros = new Dictionary<string, object>
+            {
+                 { "periodoRef", periodoRef },
+                 { "grupoRef", grupoRef },
+            };
+
+            int grupoAtributosEsperadosEstudiante = 4;
+
+            var resultados = ManejoBaseDatos.EjecutarProcedimientoConMultiParametroYConsulta("ObtenerPosicionEstudiantesGrupo", parametros, grupoAtributosEsperadosEstudiante, _contexto.Conexion);
+
+            foreach (var item in resultados)
+            {
+                estudiante = item;
+                estudiantes.Add(estudiante);
+                estudiante = new List<object>();
+            }
+
+
+            return estudiantes;
+        }
+
+        public string actualizarConvivencia(int idEstudiante, string periodo, float nota, string grupoRef)
+        {
+            string retorno = "0";
+
+            if (idEstudiante != 0 && nota != 0 && !string.IsNullOrEmpty(periodo) && !string.IsNullOrEmpty(grupoRef))
+            {
+                try
+                {
+                    Dictionary<string, object> parametros = new Dictionary<string, object>
+                    {
+                        { "idEstudiante", idEstudiante },
+                        { "periodo", periodo },
+                        { "nota", nota },
+                        { "docDocente", Convert.ToInt32(DatosCompartidos.MiDato) },
+                        { "grupoRef", grupoRef },
+                    };
+
+                    ManejoBaseDatos.EjecutarProcedimientoMultiParametro("ActualizarNotaConvivencia", parametros, _contexto.Conexion);
+                    retorno = "1";
+
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Error al ejecutar el script: {ex.Message}");
+                }
+>>>>>>> Stashed changes
                 
                 if (nota != null)
                 {
@@ -157,4 +433,23 @@ namespace ProyectoColegio.Controllers
         }
 
     }
+<<<<<<< Updated upstream
+=======
+
+    public class EstudianteEvaluado
+    {
+        public int Numero { get; set; }
+        public long Identificador { get; set; }
+        public float Nota { get; set; }
+    }
+    
+    public class EstudianteGrupoPuesto
+    {
+        public int Numero { get; set; }
+        public long Identificador { get; set; }
+        public float Nota { get; set; }
+        public string Periodo { get; set; }
+        public string Grupo { get; set; }
+    }
+>>>>>>> Stashed changes
 }

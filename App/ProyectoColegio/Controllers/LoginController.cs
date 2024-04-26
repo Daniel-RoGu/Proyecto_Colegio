@@ -38,9 +38,10 @@ namespace ProyectoColegio.Controllers
 
                 List<Object> resultados = ManejoBaseDatos.EjecutarProcedimientoConMultiParametroYConsulta("existeUsuarioLogin", parametros, 1, _contexto.Conexion);
 
-                foreach (Object obj in resultados)
+                foreach (List<object> obj in resultados)
                 {
-                    existe = Convert.ToBoolean(Convert.ToInt16(obj));
+                    int valor = Convert.ToInt16(obj[0]);
+                    existe = Convert.ToBoolean(valor);
                 }
 
                 rotacionInfoUsuario(existe, model.Password);
@@ -103,5 +104,155 @@ namespace ProyectoColegio.Controllers
             return rol;
         }
 
+<<<<<<< Updated upstream
+=======
+        public string ObtenerSedeDocente(string identificacion)
+        {
+            string sede = "";
+
+            // Definir los parámetros necesarios para el procedimiento almacenado
+            string nombreProcedimiento = "obtenerSedeDocente";
+            string nombreParametro = "identificacion";
+
+            // Llamar al método
+            List<Object> resultados = ManejoBaseDatos.EjecutarProcedimientoConParametroYConsulta(nombreProcedimiento, nombreParametro, identificacion, 1, _contexto.Conexion);
+            foreach (Object obj in resultados)
+            {
+                sede = Convert.ToString(obj);
+            }
+            return sede;
+        }
+
+        public string ObtenerSedeEstudiante(string identificacion)
+        {
+            string sede = "";
+
+            // Definir los parámetros necesarios para el procedimiento almacenado
+            string nombreProcedimiento = "obtenerSedeEstudiante";
+            string nombreParametro = "identificacion";
+
+            // Llamar al método
+            List<Object> resultados = ManejoBaseDatos.EjecutarProcedimientoConParametroYConsulta(nombreProcedimiento, nombreParametro, Convert.ToInt64(identificacion), 1, _contexto.Conexion);
+            foreach (Object obj in resultados)
+            {
+                sede = Convert.ToString(obj);
+            }
+            return sede;
+        }
+
+        public string ObtenerSedeCoordinador(string identificacion)
+        {
+            string sede = "";
+
+            // Definir los parámetros necesarios para el procedimiento almacenado
+            string nombreProcedimiento = "obtenerSedeFuncionario";
+            string nombreParametro = "identificacion";
+
+            // Llamar al método
+            List<Object> resultados = ManejoBaseDatos.EjecutarProcedimientoConParametroYConsulta(nombreProcedimiento, nombreParametro, Convert.ToInt64(identificacion), 1, _contexto.Conexion);
+            foreach (Object obj in resultados)
+            {
+                sede = Convert.ToString(obj);
+            }
+            return sede;
+        }
+
+        public string ObtenerNombreDocente(string identificacion)
+        {
+            string nombre = "";
+
+            // Definir los parámetros necesarios para el procedimiento almacenado
+            string nombreProcedimiento = "ObtenerNombreDocente";
+            string nombreParametro = "documento";
+
+            // Llamar al método
+            List<Object> resultados = ManejoBaseDatos.EjecutarProcedimientoConParametroYConsulta(nombreProcedimiento, nombreParametro, Convert.ToInt64(identificacion), 1, _contexto.Conexion);
+            foreach (Object obj in resultados)
+            {
+                nombre = Convert.ToString(obj);
+            }
+            return nombre;
+        }
+        
+        public string ObtenerNombreEstudiante(string identificacion)
+        {
+            string nombre = "";
+
+            // Definir los parámetros necesarios para el procedimiento almacenado
+            string nombreProcedimiento = "ObtenerNombreEstudiante";
+            string nombreParametro = "documento";
+
+            // Llamar al método
+            List<Object> resultados = ManejoBaseDatos.EjecutarProcedimientoConParametroYConsulta(nombreProcedimiento, nombreParametro, Convert.ToInt64(identificacion), 1, _contexto.Conexion);
+            foreach (Object obj in resultados)
+            {
+                nombre = Convert.ToString(obj);
+            }
+            return nombre;
+        }
+
+        public string ObtenerGrupoEstudiante(long identificacion)
+        {
+            string grupo = "";
+
+            // Definir los parámetros necesarios para el procedimiento almacenado
+            string nombreProcedimiento = "ObtenerGrupoEstudiante";
+            string nombreParametro = "identificacionEstudiante";
+
+            // Llamar al método
+            List<Object> resultados = ManejoBaseDatos.EjecutarProcedimientoConParametroYConsulta(nombreProcedimiento, nombreParametro, Convert.ToInt64(identificacion), 1, _contexto.Conexion);
+            foreach (Object obj in resultados)
+            {
+                grupo = Convert.ToString(obj);
+            }
+            return grupo;
+        }
+        
+        public string ObtenerGradoEstudiante(long identificacion)
+        {
+            string grado = "";
+
+            // Definir los parámetros necesarios para el procedimiento almacenado
+            string nombreProcedimiento = "ObtenerGradoEstudiante";
+            string nombreParametro = "identificacionEstudiante";
+
+            // Llamar al método
+            List<Object> resultados = ManejoBaseDatos.EjecutarProcedimientoConParametroYConsulta(nombreProcedimiento, nombreParametro, Convert.ToInt64(identificacion), 1, _contexto.Conexion);
+            foreach (Object obj in resultados)
+            {
+                grado = Convert.ToString(obj);
+            }
+            return grado;
+        }
+
+        [HttpPost]
+        public IActionResult VaciarDatosCompartidos()
+        {
+            DatosCompartidos.MiDato = "";
+            DatosCompartidos.SedeUsuario = "";
+            DatosCompartidos.NombreUsuario = "";
+            DatosCompartidos.RolUsuario = "";
+            DatosCompartidos.IdentificacionEstudiante = "";
+            DatosCompartidos.RutaPDF = "";
+            DatosCompartidos.ListaEstudiantesXGrupo = new List<string>();
+            DatosCompartidos.Asignatura = "";
+            DatosCompartidos.Grado = "";
+            DatosCompartidos.Grupo = "";
+            DatosCompartidos.Periodo = "";
+            DatosCompartidos.PuestoPeriodo = "";
+            DatosCompartidos.DatosNotas = new EstudianteBoletin();
+            DatosCompartidos.FirmaRector = "";
+            DatosCompartidos.FirmaSecretario = "";
+            DatosCompartidos.FirmaTitular = "";
+            DatosCompartidos.FirmaRestauranteEscolar = "";
+            DatosCompartidos.FirmaResidenciaEscolar = "";
+            DatosCompartidos.FirmaCafeteria = "";
+            DatosCompartidos.Foto = "";
+            DatosCompartidos.Familiares = new List<Familiar>();
+            DatosCompartidos.EstudianteCertificados = new Usuario();
+
+            return RedirectToAction("Inicio", "Login");
+        }
+>>>>>>> Stashed changes
     }
 }

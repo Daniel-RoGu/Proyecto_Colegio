@@ -1,0 +1,21 @@
+correo: celaaguililla_pue@hotmail.com      //Correo Vinculado
+
+Login Name: LAAGUILILLA  //Usuario
+pass: Aguicol_10	 //Contraseña
+
+
+InfoCuentaHosting
+enlace al Hosting:https://member5.myasp.net/account/account_screen
+Hosting ID de la cuenta:laaguililla-001
+pass Hosting ID:Aguicol_10
+Primer portal carpeta raíz Nombre:IElaAguililla
+
+InfoBD:
+nameBase de Datos:bdColegio
+pass:Aguicol_10
+ID de inicio de sesión: aa74fb_bdcoleg
+
+
+Guias:
+https://www.myasp.net/support/kb/a36/connect-to-mysql-with-mysql-workbench.aspx?KBSearchID=12009
+https://www.myasp.net/support/kb/a23/how-to-create-a-mysql-backup-with-mysql-workbench.aspx

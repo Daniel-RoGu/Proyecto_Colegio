@@ -1,0 +1,68 @@
+﻿@*@model List<Estudiante>  *@
+@*@model IEnumerable<ProyectoColegio.Models.Estudiante>*@
+
+@{
+    ViewData["Title"] = "Lista de Usuarios";
+    var Model = ViewBag.ListaEstudiante;
+}
+
+
+<body>
+    <h1>Lista de Usuarios</h1>
+    <table border="1">
+        <tr>
+            <th>Documento</th>
+            <th>Primer Nombre</th>
+            <th>Segundo Nombre</th>
+            <th>Primer Apellido</th>
+            <th>Segundo Apellido</th>
+            <th>Edad</th>
+            <th>Telefono Celular</th>
+            <th>Telefono Fijo</th>
+            <th>Correo Usuario</th>
+            <th>Direccion Usuario</th>
+            <th>Barrio Usuario</th>
+            <th>Fecha Nacimiento</th>
+            <th>Tipo Sangre</th>
+            <th>Tipo Documento</th>
+            <th>Discapacidad</th>
+            <th>Sisben</th>
+            <th>Genero</th>
+            <th>EPS</th>
+            <th>Estrato</th>
+            <th>Codigo Estudiante</th>
+            <th>Opciones</th>
+        </tr>
+
+        @foreach (var usuario in Model)
+        {
+            <tr>
+                <td>@usuario.Identificacion</td>
+                <td>@usuario.Usuario.NombreUsuario</td>
+                <td>@usuario.Usuario.SegundoNombreUsuario</td>
+                <td>@usuario.Usuario.ApellidoUsuario</td>
+                <td>@usuario.Usuario.SegundoApellidoUsuario</td>
+                <td>@usuario.Usuario.Edad</td>
+                <td>@usuario.Usuario.TelefonoCelular</td>
+                <td>@usuario.Usuario.TelefonoFijo</td>
+                <td>@usuario.Usuario.Correo</td>
+                <td>@usuario.Usuario.Direccion</td>
+                <td>@usuario.Usuario.Barrio</td>
+                <td>@usuario.Usuario.FechaNacimiento</td>
+                <td>@usuario.Usuario.TipoSangre</td>
+                <td>@usuario.Usuario.TipoDocumento</td>
+                <td>@usuario.Usuario.Discapacidad</td>
+                <td>@usuario.Usuario.Sisben</td>
+                <td>@usuario.Usuario.Genero</td>
+                <td>@usuario.Usuario.EPS</td>
+                <td>@usuario.Usuario.Estrato</td>
+                <td>@usuario.CodigoEstudiante</td>
+                <td>
+                    @Html.ActionLink("registrarFamiliar", "registrarFamiliar", new {identificacion=usuario.Identificacion}, new {@class = "btn btn-success"})
+                    @Html.ActionLink("registrarObservacion", "registrarObservacion", new {identificacionEst=usuario.Identificacion}, new {@class = "btn btn-warning"})
+                    @*<button class="btn btn-warning" onclick="window.location.href='/Funcionario/registrarObservacion'">Registrar Observacion</button>*@
+                </td>
+            </tr>
+        }
+    </table>
+</body>

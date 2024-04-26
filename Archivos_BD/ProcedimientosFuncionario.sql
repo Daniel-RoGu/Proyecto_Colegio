@@ -125,8 +125,214 @@ create procedure `registrarGradoGrupo`(
 ) 
 begin
 	call registrarGrado(nomGrado);
+<<<<<<< Updated upstream
 	insert into GradoGrupo (nombreTitular, grupoGrado, estadoGrupoGrado, fkidGrado)
 				value("Por definir", nomGradoGrupo, "Activo", (select ObtenerIdGrado(nomGrado)) );
+=======
+    if (existeGrupoRetorno(nomGradoGrupo) = 0) then
+		insert into GradoGrupo (nombreTitular, grupoGrado, estadoGrupoGrado, fkidGrado)
+					value("Por definir", nomGradoGrupo, "Activo", (select ObtenerIdGrado(nomGrado)) );
+		IF (nomGrado = "0") THEN        
+			CALL registrarAsignaturaGradoGrupo2("ACTIVIDADRECTORA_ARTE", nomGradoGrupo, 4);
+			CALL registrarAsignaturaGradoGrupo2("ACTIVIDADRECTORA_JUEGO", nomGradoGrupo, 4);
+			CALL registrarAsignaturaGradoGrupo2("ACTIVIDADRECTORA_MEDIO_AMBIENTE", nomGradoGrupo, 4);
+			CALL registrarAsignaturaGradoGrupo2("ACTIVIDADRECTORA_LITERATURA", nomGradoGrupo, 5);
+						
+			CALL registrarAsignaturaGradoGrupo2("DIMENSION_CORPORAL", nomGradoGrupo, 2);
+			CALL registrarAsignaturaGradoGrupo2("DIMENSION_COMUNICATIVA", nomGradoGrupo, 3);
+			CALL registrarAsignaturaGradoGrupo2("DIMENSION_ESTETICA", nomGradoGrupo, 3);
+			CALL registrarAsignaturaGradoGrupo2("DIMENSION_ESPIRITUAL", nomGradoGrupo, 3);
+			CALL registrarAsignaturaGradoGrupo2("DIMENSION_COGNITIVA", nomGradoGrupo, 3);
+			CALL registrarAsignaturaGradoGrupo2("ETICA Y VALORES", nomGradoGrupo, 3);
+			CALL registrarAsignaturaGradoGrupo2("DIMENSION_SOCIO_AFECTIVA", nomGradoGrupo, 3);
+			CALL registrarAsignaturaGradoGrupo2("CONVIVENCIA", nomGradoGrupo, 0);
+		END IF;
+
+		IF (nomGrado = "1") THEN
+			CALL registrarAsignaturaGradoGrupo2("ESPAÑOL", nomGradoGrupo, 5);
+			CALL registrarAsignaturaGradoGrupo2("INGLES", nomGradoGrupo, 1);
+			CALL registrarAsignaturaGradoGrupo2("MATEMATICAS", nomGradoGrupo, 5);
+			CALL registrarAsignaturaGradoGrupo2("CIENCIAS NATURALES", nomGradoGrupo, 4);
+			CALL registrarAsignaturaGradoGrupo2("CIENCIAS SOCIALES", nomGradoGrupo, 4);
+			CALL registrarAsignaturaGradoGrupo2("RELIGIÓN", nomGradoGrupo, 1);
+			CALL registrarAsignaturaGradoGrupo2("ÉTICA Y VALORES", nomGradoGrupo, 1);
+			CALL registrarAsignaturaGradoGrupo2("EDU. FÍSICA", nomGradoGrupo, 2);
+			CALL registrarAsignaturaGradoGrupo2("INFORMÁTICA", nomGradoGrupo, 2);
+			CALL registrarAsignaturaGradoGrupo2("PROYECTO PEDAGÓGICO PRODUCTIVO", nomGradoGrupo, 2);
+			CALL registrarAsignaturaGradoGrupo2("ECOLOGÍA", nomGradoGrupo, 1);
+			CALL registrarAsignaturaGradoGrupo2("ARTÍSTICA", nomGradoGrupo, 2);
+			CALL registrarAsignaturaGradoGrupo2("CONVIVENCIA", nomGradoGrupo, 0);
+		END IF;
+
+		IF (nomGrado = "2") THEN
+			CALL registrarAsignaturaGradoGrupo2("ESPAÑOL", nomGradoGrupo, 5);
+			CALL registrarAsignaturaGradoGrupo2("INGLES", nomGradoGrupo, 1);
+			CALL registrarAsignaturaGradoGrupo2("MATEMATICAS", nomGradoGrupo, 5);
+			CALL registrarAsignaturaGradoGrupo2("CIENCIAS NATURALES", nomGradoGrupo, 4);
+			CALL registrarAsignaturaGradoGrupo2("CIENCIAS SOCIALES", nomGradoGrupo, 4);
+			CALL registrarAsignaturaGradoGrupo2("RELIGIÓN", nomGradoGrupo, 1);
+			CALL registrarAsignaturaGradoGrupo2("ÉTICA Y VALORES", nomGradoGrupo, 1);
+			CALL registrarAsignaturaGradoGrupo2("EDU. FÍSICA", nomGradoGrupo, 2);
+			CALL registrarAsignaturaGradoGrupo2("INFORMÁTICA", nomGradoGrupo, 2);
+			CALL registrarAsignaturaGradoGrupo2("PROYECTO PEDAGÓGICO PRODUCTIVO", nomGradoGrupo, 2);
+			CALL registrarAsignaturaGradoGrupo2("ECOLOGÍA", nomGradoGrupo, 1);
+			CALL registrarAsignaturaGradoGrupo2("ARTÍSTICA", nomGradoGrupo, 2);
+			CALL registrarAsignaturaGradoGrupo2("CONVIVENCIA", nomGradoGrupo, 0);
+		END IF;
+
+		IF (nomGrado = "3") THEN
+			CALL registrarAsignaturaGradoGrupo2("ESPAÑOL", nomGradoGrupo, 5);
+			CALL registrarAsignaturaGradoGrupo2("INGLES", nomGradoGrupo, 1);
+			CALL registrarAsignaturaGradoGrupo2("MATEMATICAS", nomGradoGrupo, 5);
+			CALL registrarAsignaturaGradoGrupo2("CIENCIAS NATURALES", nomGradoGrupo, 4);
+			CALL registrarAsignaturaGradoGrupo2("CIENCIAS SOCIALES", nomGradoGrupo, 4);
+			CALL registrarAsignaturaGradoGrupo2("RELIGIÓN", nomGradoGrupo, 1);
+			CALL registrarAsignaturaGradoGrupo2("ÉTICA Y VALORES", nomGradoGrupo, 1);
+			CALL registrarAsignaturaGradoGrupo2("EDU. FÍSICA", nomGradoGrupo, 2);
+			CALL registrarAsignaturaGradoGrupo2("INFORMÁTICA", nomGradoGrupo, 2);
+			CALL registrarAsignaturaGradoGrupo2("PROYECTO PEDAGÓGICO PRODUCTIVO", nomGradoGrupo, 2);
+			CALL registrarAsignaturaGradoGrupo2("ECOLOGÍA", nomGradoGrupo, 1);
+			CALL registrarAsignaturaGradoGrupo2("ARTÍSTICA", nomGradoGrupo, 2);
+			CALL registrarAsignaturaGradoGrupo2("CONVIVENCIA", nomGradoGrupo, 0);
+		END IF;
+
+		IF (nomGrado = "4") THEN
+			CALL registrarAsignaturaGradoGrupo2("ESPAÑOL", nomGradoGrupo, 5);
+			CALL registrarAsignaturaGradoGrupo2("INGLES", nomGradoGrupo, 1);
+			CALL registrarAsignaturaGradoGrupo2("MATEMATICAS", nomGradoGrupo, 5);
+			CALL registrarAsignaturaGradoGrupo2("CIENCIAS NATURALES", nomGradoGrupo, 4);
+			CALL registrarAsignaturaGradoGrupo2("CIENCIAS SOCIALES", nomGradoGrupo, 4);
+			CALL registrarAsignaturaGradoGrupo2("RELIGIÓN", nomGradoGrupo, 1);
+			CALL registrarAsignaturaGradoGrupo2("ÉTICA Y VALORES", nomGradoGrupo, 1);
+			CALL registrarAsignaturaGradoGrupo2("EDU. FÍSICA", nomGradoGrupo, 2);
+			CALL registrarAsignaturaGradoGrupo2("INFORMÁTICA", nomGradoGrupo, 2);
+			CALL registrarAsignaturaGradoGrupo2("PROYECTO PEDAGÓGICO PRODUCTIVO", nomGradoGrupo, 2);
+			CALL registrarAsignaturaGradoGrupo2("ECOLOGÍA", nomGradoGrupo, 1);
+			CALL registrarAsignaturaGradoGrupo2("ARTÍSTICA", nomGradoGrupo, 2);
+			CALL registrarAsignaturaGradoGrupo2("CONVIVENCIA", nomGradoGrupo, 0);
+		END IF;
+
+		IF (nomGrado = "5") THEN
+			CALL registrarAsignaturaGradoGrupo2("ESPAÑOL", nomGradoGrupo, 5);
+			CALL registrarAsignaturaGradoGrupo2("INGLES", nomGradoGrupo, 1);
+			CALL registrarAsignaturaGradoGrupo2("MATEMATICAS", nomGradoGrupo, 5);
+			CALL registrarAsignaturaGradoGrupo2("CIENCIAS NATURALES", nomGradoGrupo, 4);
+			CALL registrarAsignaturaGradoGrupo2("CIENCIAS SOCIALES", nomGradoGrupo, 4);
+			CALL registrarAsignaturaGradoGrupo2("RELIGIÓN", nomGradoGrupo, 1);
+			CALL registrarAsignaturaGradoGrupo2("ÉTICA Y VALORES", nomGradoGrupo, 1);
+			CALL registrarAsignaturaGradoGrupo2("EDU. FÍSICA", nomGradoGrupo, 2);
+			CALL registrarAsignaturaGradoGrupo2("INFORMÁTICA", nomGradoGrupo, 2);
+			CALL registrarAsignaturaGradoGrupo2("PROYECTO PEDAGÓGICO PRODUCTIVO", nomGradoGrupo, 2);
+			CALL registrarAsignaturaGradoGrupo2("ECOLOGÍA", nomGradoGrupo, 1);
+			CALL registrarAsignaturaGradoGrupo2("ARTÍSTICA", nomGradoGrupo, 2);
+			CALL registrarAsignaturaGradoGrupo2("CONVIVENCIA", nomGradoGrupo, 0);
+		END IF;
+
+		IF (nomGrado = "6") THEN
+			CALL registrarAsignaturaGradoGrupo2("ESPAÑOL", nomGradoGrupo, 5);
+			CALL registrarAsignaturaGradoGrupo2("INGLES", nomGradoGrupo, 3);
+			CALL registrarAsignaturaGradoGrupo2("MATEMATICAS", nomGradoGrupo, 5);
+			CALL registrarAsignaturaGradoGrupo2("CIENCIAS NATURALES", nomGradoGrupo, 4);
+			CALL registrarAsignaturaGradoGrupo2("CIENCIAS SOCIALES", nomGradoGrupo, 5);
+			CALL registrarAsignaturaGradoGrupo2("RELIGIÓN", nomGradoGrupo, 1);
+			CALL registrarAsignaturaGradoGrupo2("ÉTICA Y VALORES", nomGradoGrupo, 1);
+			CALL registrarAsignaturaGradoGrupo2("EDU. FÍSICA", nomGradoGrupo, 2);
+			CALL registrarAsignaturaGradoGrupo2("INFORMÁTICA", nomGradoGrupo, 2);
+			CALL registrarAsignaturaGradoGrupo2("PROYECTO PEDAGÓGICO PRODUCTIVO", nomGradoGrupo, 2);
+			CALL registrarAsignaturaGradoGrupo2("ECOLOGÍA", nomGradoGrupo, 1);
+			CALL registrarAsignaturaGradoGrupo2("ARTÍSTICA", nomGradoGrupo, 2);
+			CALL registrarAsignaturaGradoGrupo2("EMPRENDIMIENTO", nomGradoGrupo, 2);
+			CALL registrarAsignaturaGradoGrupo2("CONVIVENCIA", nomGradoGrupo, 0);
+		END IF;
+
+		IF (nomGrado = "7") THEN
+			CALL registrarAsignaturaGradoGrupo2("ESPAÑOL", nomGradoGrupo, 5);
+			CALL registrarAsignaturaGradoGrupo2("INGLES", nomGradoGrupo, 3);
+			CALL registrarAsignaturaGradoGrupo2("MATEMATICAS", nomGradoGrupo, 5);
+			CALL registrarAsignaturaGradoGrupo2("CIENCIAS NATURALES", nomGradoGrupo, 4);
+			CALL registrarAsignaturaGradoGrupo2("CIENCIAS SOCIALES", nomGradoGrupo, 5);
+			CALL registrarAsignaturaGradoGrupo2("RELIGIÓN", nomGradoGrupo, 1);
+			CALL registrarAsignaturaGradoGrupo2("ÉTICA Y VALORES", nomGradoGrupo, 1);
+			CALL registrarAsignaturaGradoGrupo2("EDU. FÍSICA", nomGradoGrupo, 2);
+			CALL registrarAsignaturaGradoGrupo2("INFORMÁTICA", nomGradoGrupo, 2);
+			CALL registrarAsignaturaGradoGrupo2("PROYECTO PEDAGÓGICO PRODUCTIVO", nomGradoGrupo, 2);
+			CALL registrarAsignaturaGradoGrupo2("ECOLOGÍA", nomGradoGrupo, 1);
+			CALL registrarAsignaturaGradoGrupo2("ARTÍSTICA", nomGradoGrupo, 2);
+			CALL registrarAsignaturaGradoGrupo2("EMPRENDIMIENTO", nomGradoGrupo, 2);
+			CALL registrarAsignaturaGradoGrupo2("CONVIVENCIA", nomGradoGrupo, 0);
+		END IF;
+
+		IF (nomGrado = "8") THEN
+			CALL registrarAsignaturaGradoGrupo2("ESPAÑOL", nomGradoGrupo, 5);
+			CALL registrarAsignaturaGradoGrupo2("INGLES", nomGradoGrupo, 3);
+			CALL registrarAsignaturaGradoGrupo2("MATEMATICAS", nomGradoGrupo, 5);
+			CALL registrarAsignaturaGradoGrupo2("CIENCIAS NATURALES", nomGradoGrupo, 4);
+			CALL registrarAsignaturaGradoGrupo2("CIENCIAS SOCIALES", nomGradoGrupo, 5);
+			CALL registrarAsignaturaGradoGrupo2("RELIGIÓN", nomGradoGrupo, 1);
+			CALL registrarAsignaturaGradoGrupo2("ÉTICA Y VALORES", nomGradoGrupo, 1);
+			CALL registrarAsignaturaGradoGrupo2("EDU. FÍSICA", nomGradoGrupo, 2);
+			CALL registrarAsignaturaGradoGrupo2("INFORMÁTICA", nomGradoGrupo, 2);
+			CALL registrarAsignaturaGradoGrupo2("PROYECTO PEDAGÓGICO PRODUCTIVO", nomGradoGrupo, 2);
+			CALL registrarAsignaturaGradoGrupo2("ECOLOGÍA", nomGradoGrupo, 1);
+			CALL registrarAsignaturaGradoGrupo2("ARTÍSTICA", nomGradoGrupo, 2);
+			CALL registrarAsignaturaGradoGrupo2("EMPRENDIMIENTO", nomGradoGrupo, 2);
+			CALL registrarAsignaturaGradoGrupo2("CONVIVENCIA", nomGradoGrupo, 0);
+		END IF;
+
+		IF (nomGrado = "9") THEN
+			CALL registrarAsignaturaGradoGrupo2("ESPAÑOL", nomGradoGrupo, 5);
+			CALL registrarAsignaturaGradoGrupo2("INGLES", nomGradoGrupo, 3);
+			CALL registrarAsignaturaGradoGrupo2("MATEMATICAS", nomGradoGrupo, 5);
+			CALL registrarAsignaturaGradoGrupo2("CIENCIAS NATURALES", nomGradoGrupo, 4);
+			CALL registrarAsignaturaGradoGrupo2("CIENCIAS SOCIALES", nomGradoGrupo, 5);
+			CALL registrarAsignaturaGradoGrupo2("RELIGIÓN", nomGradoGrupo, 1);
+			CALL registrarAsignaturaGradoGrupo2("ÉTICA Y VALORES", nomGradoGrupo, 1);
+			CALL registrarAsignaturaGradoGrupo2("EDU. FÍSICA", nomGradoGrupo, 2);
+			CALL registrarAsignaturaGradoGrupo2("INFORMÁTICA", nomGradoGrupo, 2);
+			CALL registrarAsignaturaGradoGrupo2("PROYECTO PEDAGÓGICO PRODUCTIVO", nomGradoGrupo, 2);
+			CALL registrarAsignaturaGradoGrupo2("ECOLOGÍA", nomGradoGrupo, 1);
+			CALL registrarAsignaturaGradoGrupo2("ARTÍSTICA", nomGradoGrupo, 2);
+			CALL registrarAsignaturaGradoGrupo2("EMPRENDIMIENTO", nomGradoGrupo, 2);
+			CALL registrarAsignaturaGradoGrupo2("CONVIVENCIA", nomGradoGrupo, 0);
+		END IF;
+
+		IF (nomGrado = "10") THEN
+			CALL registrarAsignaturaGradoGrupo2("ESPAÑOL", nomGradoGrupo, 4);
+			CALL registrarAsignaturaGradoGrupo2("INGLES", nomGradoGrupo, 2);
+			CALL registrarAsignaturaGradoGrupo2("ÉTICA Y VALORES", nomGradoGrupo, 1);
+			CALL registrarAsignaturaGradoGrupo2("EDU. FÍSICA", nomGradoGrupo, 2);
+			CALL registrarAsignaturaGradoGrupo2("INFORMÁTICA", nomGradoGrupo, 2);
+			CALL registrarAsignaturaGradoGrupo2("PROYECTO PEDAGÓGICO PRODUCTIVO", nomGradoGrupo, 7);
+			CALL registrarAsignaturaGradoGrupo2("ECOLOGÍA", nomGradoGrupo, 1);
+			CALL registrarAsignaturaGradoGrupo2("ARTÍSTICA", nomGradoGrupo, 2);
+			CALL registrarAsignaturaGradoGrupo2("EMPRENDIMIENTO", nomGradoGrupo, 2);
+			CALL registrarAsignaturaGradoGrupo2("QUIMICA", nomGradoGrupo, 4);
+			CALL registrarAsignaturaGradoGrupo2("FISICA", nomGradoGrupo, 3);
+			CALL registrarAsignaturaGradoGrupo2("CIENCIAS POLITICAS", nomGradoGrupo, 2);
+			CALL registrarAsignaturaGradoGrupo2("FILOSOFIA", nomGradoGrupo, 2);
+			CALL registrarAsignaturaGradoGrupo2("TRIGONOMETRIA", nomGradoGrupo, 2);
+			CALL registrarAsignaturaGradoGrupo2("CONVIVENCIA", nomGradoGrupo, 0);
+		END IF;
+
+		IF (nomGrado = "11") THEN
+			CALL registrarAsignaturaGradoGrupo2("ESPAÑOL", nomGradoGrupo, 4);
+			CALL registrarAsignaturaGradoGrupo2("INGLES", nomGradoGrupo, 2);
+			CALL registrarAsignaturaGradoGrupo2("ÉTICA Y VALORES", nomGradoGrupo, 1);
+			CALL registrarAsignaturaGradoGrupo2("EDU. FÍSICA", nomGradoGrupo, 2);
+			CALL registrarAsignaturaGradoGrupo2("INFORMÁTICA", nomGradoGrupo, 2);
+			CALL registrarAsignaturaGradoGrupo2("PROYECTO PEDAGÓGICO PRODUCTIVO", nomGradoGrupo, 7);
+			CALL registrarAsignaturaGradoGrupo2("ECOLOGÍA", nomGradoGrupo, 1);
+			CALL registrarAsignaturaGradoGrupo2("ARTÍSTICA", nomGradoGrupo, 2);
+			CALL registrarAsignaturaGradoGrupo2("EMPRENDIMIENTO", nomGradoGrupo, 2);
+			CALL registrarAsignaturaGradoGrupo2("QUIMICA", nomGradoGrupo, 4);
+			CALL registrarAsignaturaGradoGrupo2("FISICA", nomGradoGrupo, 3);
+			CALL registrarAsignaturaGradoGrupo2("CIENCIAS POLITICAS", nomGradoGrupo, 2);
+			CALL registrarAsignaturaGradoGrupo2("FILOSOFIA", nomGradoGrupo, 2);
+			CALL registrarAsignaturaGradoGrupo2("TRIGONOMETRIA", nomGradoGrupo, 2);
+			CALL registrarAsignaturaGradoGrupo2("CONVIVENCIA", nomGradoGrupo, 0);
+		END IF;
+    end if;
+>>>>>>> Stashed changes
 END$$
 
 /*--------------------------Registrar Sede Grado-------------------------*/
@@ -191,6 +397,47 @@ begin
 	insert into periodoAcademico (periodoAcademico, fechaInicio, fechaFin, estadoPeriodo)
 				value(nomPeriodo, inicia, termina, "Disponible");
 END$$
+
+/*--------------------------Obtener Periodo-------------------------*/
+DELIMITER $$
+DROP PROCEDURE IF EXISTS `ObtenerPeriodosAcademico` $$
+create procedure `ObtenerPeriodosAcademico`(
+) 
+begin
+	select p.idPeriodoAcademico as IdPeriodo, p.periodoAcademico as Periodo, p.fechaInicio as Comienza, p.fechaFin as Termina,
+		   p.estadoPeriodo as Estado
+	from PeriodoAcademico as p;
+END$$
+
+/*--------------------------Obtener Periodo-------------------------*/
+DELIMITER $$
+DROP PROCEDURE IF EXISTS actualizarPeriodosAcademico $$
+CREATE PROCEDURE actualizarPeriodosAcademico(
+  idPeriodoRef INT,
+  estadoPeriodoRef VARCHAR(400)
+) 
+BEGIN
+  IF estadoPeriodoRef = 'Habilitado' THEN
+    
+    UPDATE PeriodoAcademico
+    SET estadoPeriodo = "Desabilitado"
+    WHERE idPeriodoAcademico != idPeriodoRef;
+    
+    UPDATE PeriodoAcademico
+	SET estadoPeriodo = "Habilitado"
+	WHERE idPeriodoAcademico = idPeriodoRef;
+    
+    select 1;
+  ELSE IF estadoPeriodoRef = 'Desabilitado' then		
+		UPDATE PeriodoAcademico
+		SET estadoPeriodo = "Desabilitado"
+		WHERE idPeriodoAcademico = idPeriodoRef;
+    END IF;
+	
+	select 1;
+  END IF;
+END$$
+DELIMITER ;
 
 /*--------------------------Obtener Sedes-------------------------*/
 DELIMITER $$
@@ -455,5 +702,115 @@ begin
     inner join Grados as g on gg.fkidGrado = g.idGrado
     where s.nombreSede = nomSede;
     
+END$$
+
+/*--------------------------Registrar Imagen-------------------------*/
+DELIMITER $$
+DROP PROCEDURE IF EXISTS `registrarImagen` $$
+create procedure `registrarImagen`(
+ IN nombreImagen VARCHAR(400),
+ IN datosImagen BLOB
+) 
+begin
+	insert Imagenes (propietarioImagen, imagen) values (nombreImagen, datosImagen);
+END$$
+
+DELIMITER $$
+DROP PROCEDURE IF EXISTS `registrarImagen2` $$
+create procedure `registrarImagen2`(
+ IN propietarioIdRef LONG,
+ IN nombreImagen VARCHAR(400),
+ IN datosImagen LONGTEXT, 
+ IN tipoPropietarioRef VARCHAR(400) 
+) 
+begin
+	insert Imagenes (propietarioId, propietarioImagen, datos_imagen, tipoPropietario) values (propietarioIdRef, nombreImagen, datosImagen, tipoPropietarioRef);
+END$$
+
+DELIMITER $$
+DROP PROCEDURE IF EXISTS `registrarFoto` $$
+create procedure `registrarFoto`(
+ IN propietarioIdRef BIGINT,
+ IN nombreImagenRef VARCHAR(400),
+ IN datosImagenRef LONGTEXT
+) 
+begin
+	declare idFotoUp int;
+	if((select FunexisteFotoEstudiante(propietarioIdRef)) > 0) then
+		set idFotoUp = (select f.idFoto from Fotos as f where f.propietarioId = propietarioIdRef);
+		update Fotos set nombreFoto = nombreImagenRef, datos_Foto = datosImagenRef
+        where idFoto = idFotoUp;
+	else 
+		insert Fotos (propietarioId, nombreFoto, datos_Foto) values (propietarioIdRef, nombreImagenRef, datosImagenRef);
+    end if;
+	
+END$$
+
+/*--------------------------Obtener Imagen-------------------------*/
+DELIMITER $$
+DROP PROCEDURE IF EXISTS `obtenerImagen` $$
+create procedure `obtenerImagen`(
+ IN nombreImagenRef VARCHAR(400)
+) 
+begin
+	Select i.propietarioImagen as NombreImagen, i.imagen as ContenidoImagen
+    From Imagenes as i
+    Where i.propietarioImagen = nombreImagenRef;
+END$$
+
+DELIMITER $$
+DROP PROCEDURE IF EXISTS `obtenerImagen2` $$ /*FIRMAS*/
+create procedure `obtenerImagen2`(
+ IN nombreArchivoRef VARCHAR(400)
+) 
+begin
+	Select i.propietarioId as DocumentoPropietario, i.propietarioImagen as NombreImagen, i.datos_imagen as ContenidoImagen, i.tipoPropietario as Propietario
+    From Imagenes as i
+    Where i.propietarioImagen = nombreArchivoRef
+    order by i.propietarioId desc limit 1;
+END$$
+
+DELIMITER $$
+DROP PROCEDURE IF EXISTS `obtenerFirmaTitular` $$ /*FIRMA TITULAR*/
+create procedure `obtenerFirmaTitular`(
+ IN DocDueñoRef long
+) 
+begin
+	Select i.propietarioId as DocumentoPropietario, i.propietarioImagen as NombreImagen, i.datos_imagen as ContenidoImagen, i.tipoPropietario as Propietario
+    From Imagenes as i
+    Where i.propietarioId = DocDueñoRef
+    order by i.propietarioId desc limit 1;
+END$$
+
+DELIMITER $$
+DROP PROCEDURE IF EXISTS `obtenerFoto` $$
+create procedure `obtenerFoto`(
+ IN propietarioIdRef VARCHAR(400)
+) 
+begin
+	Select f.propietarioId as IdPropietario, f.nombreFoto as NombreImagen, f.datos_Foto as ContenidoImagen
+    From Fotos as f
+    Where f.propietarioId = propietarioIdRef;
+END$$
+
+/*--------------------------Obtener Imagen-------------------------*/
+DELIMITER $$
+DROP PROCEDURE IF EXISTS `obtenerTutilarGrupoxGrupo` $$
+create procedure `obtenerTutilarGrupoxGrupo`(
+ IN nomGrupo VARCHAR(400)
+) 
+begin
+	/*select ObtenerNombreCompletoDocente(identificacionDocente long)*/
+	Declare nombreTitular Varchar(400);
+    set nombreTitular = (Select gg.nombreTitular as NombreTitular
+						 From GradoGrupo as gg
+						 Where gg.grupoGrado = nomGrupo);
+	Select d.fkIdentificacion as IdentificacionDocente, (select ObtenerNombreCompletoDocente(d.fkIdentificacion)) as Docente
+    From Docente as d
+    Inner join Usuario as u on d.fkIdentificacion = u.identificacion
+    Where (CONCAT(COALESCE(u.primerNombreUsuario, ''), CASE WHEN u.segundoNombreUsuario IS NOT NULL THEN ' ' ELSE '' END, 
+				  COALESCE(u.segundoNombreUsuario, ''), ' ', COALESCE(u.primerApellidoUsuario, ''), ' ', 
+				  COALESCE(u.segundoApellidoUsuario, '')
+		   )) COLLATE utf8mb4_unicode_ci = nombreTitular;
 END$$
 

@@ -10,36 +10,63 @@ namespace ProyectoColegio.Data
     {
 
         //Permite llamar procedimientos que reciben un solo dato como parametro, registra en bd
+        //public static void EjecutarProcedimientoAlmacenado(string nombreProcedimiento, string parametroNombre, object parametroValor, string cadenaConexion)
+        //{
+        //    int tamanoPool = 100;
+        //    GestorConexion gestorConexion = new GestorConexion(cadenaConexion, tamanoPool);
+
+        //    try
+        //    {
+        //        using (MySqlConnection conexion = gestorConexion.ObtenerConexion())
+        //        {
+        //            //conexion.Open();
+        //            using (MySqlCommand comando = new MySqlCommand(nombreProcedimiento, conexion))
+        //            {
+        //                comando.CommandType = CommandType.StoredProcedure;
+
+        //                if (parametroNombre != null)
+        //                {
+        //                    comando.Parameters.AddWithValue(parametroNombre, parametroValor);
+        //                }
+
+        //                comando.ExecuteNonQuery();
+        //            }
+        //            //conexion.Close();
+
+        //            // Cerrar conexiones inactivas después de cierto tiempo
+        //            TimeSpan tiempoMaximoInactividad = TimeSpan.FromSeconds(1);
+        //            gestorConexion.CerrarConexionesInactivas(tiempoMaximoInactividad);
+
+        //            Console.WriteLine("Conexiones cerradas después de cierto tiempo de inactividad");
+        //        }
+
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Console.WriteLine($"Error al ejecutar el procedimiento almacenado: {ex.Message}");
+        //    }
+        //}
+
         public static void EjecutarProcedimientoAlmacenado(string nombreProcedimiento, string parametroNombre, object parametroValor, string cadenaConexion)
         {
-            int tamanoPool = 100;
-            GestorConexion gestorConexion = new GestorConexion(cadenaConexion, tamanoPool);
-
             try
             {
-                using (MySqlConnection conexion = gestorConexion.ObtenerConexion())
+                using (MySqlConnection conexion = new MySqlConnection(cadenaConexion))
+                using (MySqlCommand comando = new MySqlCommand(nombreProcedimiento, conexion))
                 {
-                    //conexion.Open();
-                    using (MySqlCommand comando = new MySqlCommand(nombreProcedimiento, conexion))
+                    conexion.Open();
+
+                    comando.CommandType = CommandType.StoredProcedure;
+
+                    if (parametroNombre != null)
                     {
-                        comando.CommandType = CommandType.StoredProcedure;
-
-                        if (parametroNombre != null)
-                        {
-                            comando.Parameters.AddWithValue(parametroNombre, parametroValor);
-                        }
-
-                        comando.ExecuteNonQuery();
+                        comando.Parameters.AddWithValue(parametroNombre, parametroValor);
                     }
-                    //conexion.Close();
 
-                    // Cerrar conexiones inactivas después de cierto tiempo
-                    TimeSpan tiempoMaximoInactividad = TimeSpan.FromSeconds(1);
-                    gestorConexion.CerrarConexionesInactivas(tiempoMaximoInactividad);
-
-                    Console.WriteLine("Conexiones cerradas después de cierto tiempo de inactividad");
+                    comando.ExecuteNonQuery();
                 }
-                
+
+                Console.WriteLine("Procedimiento almacenado ejecutado correctamente");
             }
             catch (Exception ex)
             {
@@ -47,42 +74,73 @@ namespace ProyectoColegio.Data
             }
         }
 
-        
+
+
         //Permite llamar procedimientos que reciben multiples datos como parametro, envia informacion a base de datos
+        //public static void EjecutarProcedimientoMultiParametro(string nombreProcedimiento, Dictionary<string, object> parametros, string cadenaConexion)
+        //{
+        //    int tamanoPool = 100;
+        //    GestorConexion gestorConexion = new GestorConexion(cadenaConexion, tamanoPool);
+
+        //    try
+        //    {
+        //        using (MySqlConnection conexion = gestorConexion.ObtenerConexion())
+        //        {
+        //            //ReiniciarConexion(cadenaConexion);
+        //            //conexion.Open();
+
+        //            using (MySqlCommand comando = new MySqlCommand(nombreProcedimiento, conexion))
+        //            {
+        //                comando.CommandType = CommandType.StoredProcedure;
+
+        //                if (parametros != null)
+        //                {
+        //                    foreach (var parametro in parametros)
+        //                    {
+        //                        comando.Parameters.AddWithValue(parametro.Key, parametro.Value);
+        //                    }
+        //                }
+
+        //                comando.ExecuteNonQuery();
+        //            }
+        //            //conexion.Close();
+
+        //            TimeSpan tiempoMaximoInactividad = TimeSpan.FromSeconds(1);
+        //            gestorConexion.CerrarConexionesInactivas(tiempoMaximoInactividad);
+
+        //            Console.WriteLine("Conexiones cerradas después de cierto tiempo de inactividad");
+        //        }
+
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Console.WriteLine($"Error al ejecutar el procedimiento almacenado: {ex.Message}");
+        //    }
+        //}
+
         public static void EjecutarProcedimientoMultiParametro(string nombreProcedimiento, Dictionary<string, object> parametros, string cadenaConexion)
         {
-            int tamanoPool = 100;
-            GestorConexion gestorConexion = new GestorConexion(cadenaConexion, tamanoPool);
-
             try
             {
-                using (MySqlConnection conexion = gestorConexion.ObtenerConexion())
+                using (MySqlConnection conexion = new MySqlConnection(cadenaConexion))
+                using (MySqlCommand comando = new MySqlCommand(nombreProcedimiento, conexion))
                 {
-                    //ReiniciarConexion(cadenaConexion);
-                    //conexion.Open();
+                    conexion.Open();
 
-                    using (MySqlCommand comando = new MySqlCommand(nombreProcedimiento, conexion))
+                    comando.CommandType = CommandType.StoredProcedure;
+
+                    if (parametros != null)
                     {
-                        comando.CommandType = CommandType.StoredProcedure;
-
-                        if (parametros != null)
+                        foreach (var parametro in parametros)
                         {
-                            foreach (var parametro in parametros)
-                            {
-                                comando.Parameters.AddWithValue(parametro.Key, parametro.Value);
-                            }
+                            comando.Parameters.AddWithValue(parametro.Key, parametro.Value);
                         }
-
-                        comando.ExecuteNonQuery();
                     }
-                    //conexion.Close();
 
-                    TimeSpan tiempoMaximoInactividad = TimeSpan.FromSeconds(1);
-                    gestorConexion.CerrarConexionesInactivas(tiempoMaximoInactividad);
-
-                    Console.WriteLine("Conexiones cerradas después de cierto tiempo de inactividad");
+                    comando.ExecuteNonQuery();
                 }
-                
+
+                Console.WriteLine("Procedimiento almacenado ejecutado correctamente");
             }
             catch (Exception ex)
             {
@@ -90,23 +148,95 @@ namespace ProyectoColegio.Data
             }
         }
 
-        
+
+
         //Permite enviar una consulta a base de datos que retorna multiples resultados, usando parametros vacios
-        public static List<Object> ConsultarProcedimientoDinamico(string nombreProcedimiento, Dictionary<string, Type> atributos, string cadenaConexion)
+        //public static List<Object> ConsultarProcedimientoDinamico(string nombreProcedimiento, Dictionary<string, Type> atributos, string cadenaConexion)
+        //{
+        //    //List<T> listaObjetos = new List<T>();
+        //    List<Object> listaObjetos = new List<Object>();
+        //    List<Object> listaDatosRetornoUnico = new List<object>();
+
+        //    int tamanoPool = 100;
+        //    GestorConexion gestorConexion = new GestorConexion(cadenaConexion, tamanoPool);
+
+
+        //    try
+        //    {
+        //        using (MySqlConnection conexion = gestorConexion.ObtenerConexion())
+        //        {
+        //            //conexion.Open();
+        //            MySqlCommand comando = new MySqlCommand(nombreProcedimiento, conexion);
+        //            comando.CommandType = CommandType.StoredProcedure;
+
+        //            using (MySqlDataReader lector = comando.ExecuteReader())
+        //            {
+        //                while (lector.Read())
+        //                {
+        //                    //T objeto = new T();
+
+        //                    List<Object> listaDatos = new List<object>();
+
+
+        //                    foreach (var atributo in atributos)
+        //                    {
+        //                        string nombreColumna = atributo.Key;
+        //                        Dato dato = new Dato();
+        //                        GestionDato gestionDato = new GestionDato();
+
+        //                        // Verificar si la columna existe en el resultado del lector
+        //                        if (lector.HasColumn(nombreColumna))
+        //                        {
+        //                            object valor = lector[nombreColumna];
+
+        //                            // Asignar directamente el valor al atributo correspondiente del objeto
+        //                            //typeof(T).GetProperty(nombreColumna)?.SetValue(objeto, valor != DBNull.Value ? Convert.ChangeType(valor, atributo.Value) : "Sin_Registro");
+        //                            dato.Nombre = nombreColumna;
+        //                            dato.Valor = valor != DBNull.Value ? Convert.ChangeType(valor, atributo.Value) : "Sin_Registro";
+        //                        }
+
+        //                        listaDatos.Add(dato.Valor);
+        //                        listaDatosRetornoUnico.AddRange(listaDatos);
+
+        //                    }
+
+        //                    listaObjetos.Add(listaDatos);
+        //                }
+        //            }
+        //            //conexion.Close();
+
+        //            // Cerrar conexiones inactivas después de cierto tiempo
+        //            TimeSpan tiempoMaximoInactividad = TimeSpan.FromSeconds(1);
+        //            gestorConexion.CerrarConexionesInactivas(tiempoMaximoInactividad);
+
+        //            Console.WriteLine("Conexiones cerradas después de cierto tiempo de inactividad");
+
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Console.WriteLine($"Error al ejecutar el procedimiento almacenado: {ex.Message}");
+        //    }
+
+        //    if (atributos.Count == 1)
+        //    {
+        //        return listaDatosRetornoUnico;
+        //    }
+
+        //    return listaObjetos;
+        //}
+
+        public static List<object> ConsultarProcedimientoDinamico(string nombreProcedimiento, Dictionary<string, Type> atributos, string cadenaConexion)
         {
-            //List<T> listaObjetos = new List<T>();
-            List<Object> listaObjetos = new List<Object>();
-            List<Object> listaDatosRetornoUnico = new List<object>();
-
-            int tamanoPool = 100;
-            GestorConexion gestorConexion = new GestorConexion(cadenaConexion, tamanoPool);
-
+            List<object> listaObjetos = new List<object>();
+            List<object> listaDatosRetornoUnico = new List<object>();
 
             try
             {
-                using (MySqlConnection conexion = gestorConexion.ObtenerConexion())
+                using (MySqlConnection conexion = new MySqlConnection(cadenaConexion))
                 {
-                    //conexion.Open();
+                    conexion.Open();
+
                     MySqlCommand comando = new MySqlCommand(nombreProcedimiento, conexion);
                     comando.CommandType = CommandType.StoredProcedure;
 
@@ -114,45 +244,34 @@ namespace ProyectoColegio.Data
                     {
                         while (lector.Read())
                         {
-                            //T objeto = new T();
-
-                            List<Object> listaDatos = new List<object>();
-                            
+                            List<object> listaDatos = new List<object>();
 
                             foreach (var atributo in atributos)
                             {
                                 string nombreColumna = atributo.Key;
-                                Dato dato = new Dato();
-                                GestionDato gestionDato = new GestionDato();
 
                                 // Verificar si la columna existe en el resultado del lector
                                 if (lector.HasColumn(nombreColumna))
                                 {
                                     object valor = lector[nombreColumna];
 
-                                    // Asignar directamente el valor al atributo correspondiente del objeto
-                                    //typeof(T).GetProperty(nombreColumna)?.SetValue(objeto, valor != DBNull.Value ? Convert.ChangeType(valor, atributo.Value) : "Sin_Registro");
-                                    dato.Nombre = nombreColumna;
-                                    dato.Valor = valor != DBNull.Value ? Convert.ChangeType(valor, atributo.Value) : "Sin_Registro";
+                                    // Convertir el valor al tipo especificado en los atributos
+                                    object valorConvertido = valor != DBNull.Value ? Convert.ChangeType(valor, atributo.Value) : "Sin_Registro";
+                                    listaDatos.Add(valorConvertido);
                                 }
-                              
-                                listaDatos.Add(dato.Valor);
-                                listaDatosRetornoUnico.AddRange(listaDatos);
-                                
+                                else
+                                {
+                                    // Si la columna no existe, agregar un valor por defecto
+                                    listaDatos.Add("Sin_Registro");
+                                }
                             }
 
                             listaObjetos.Add(listaDatos);
                         }
                     }
-                    //conexion.Close();
-
-                    // Cerrar conexiones inactivas después de cierto tiempo
-                    TimeSpan tiempoMaximoInactividad = TimeSpan.FromSeconds(1);
-                    gestorConexion.CerrarConexionesInactivas(tiempoMaximoInactividad);
-
-                    Console.WriteLine("Conexiones cerradas después de cierto tiempo de inactividad");
-
                 }
+
+                Console.WriteLine("Procedimiento almacenado ejecutado correctamente");
             }
             catch (Exception ex)
             {
@@ -167,38 +286,75 @@ namespace ProyectoColegio.Data
             return listaObjetos;
         }
 
-       
-        public static List<Object> EjecutarProcedimientoConParametroYConsulta(string nombreProcedimiento, string nombreParametro, object valorParametro, int numeroAtributos, string cadenaConexion)
-        {
-            List<Object> listaObjetos = new List<Object>();
 
-            int tamanoPool = 100;
-            GestorConexion gestorConexion = new GestorConexion(cadenaConexion, tamanoPool);
+
+        //public static List<Object> EjecutarProcedimientoConParametroYConsulta(string nombreProcedimiento, string nombreParametro, object valorParametro, int numeroAtributos, string cadenaConexion)
+        //{
+        //    List<Object> listaObjetos = new List<Object>();
+
+        //    int tamanoPool = 100;
+        //    GestorConexion gestorConexion = new GestorConexion(cadenaConexion, tamanoPool);
+
+        //    try
+        //    {
+        //        //MySqlConnection conexion = new MySqlConnection(cadenaConexion);
+        //        MySqlConnection conexion = gestorConexion.ObtenerConexion();
+        //        //conexion.Open();
+        //        //String sql = "call obtenerCodigoEstudiantes(@identificacionUs)";
+        //        string sqlConsulta = $"CALL bdColegio.{nombreProcedimiento}(@{nombreParametro})";
+        //        MySqlCommand conexionCommand = new MySqlCommand(sqlConsulta, conexion);
+        //        conexionCommand.Parameters.AddWithValue($"@{nombreParametro}", valorParametro);
+        //        MySqlDataReader mySqlDataReader = conexionCommand.ExecuteReader();
+
+        //        while (mySqlDataReader.Read())
+        //        {
+        //            for (int i = 0; i < numeroAtributos; i++)
+        //            {
+        //                listaObjetos.Add(mySqlDataReader.GetString(i));
+        //            }                  
+        //        }
+        //        //conexion.Close();                
+        //        // Cerrar conexiones inactivas después de cierto tiempo
+        //        TimeSpan tiempoMaximoInactividad = TimeSpan.FromSeconds(1);
+        //        gestorConexion.CerrarConexionesInactivas(tiempoMaximoInactividad);
+
+        //        Console.WriteLine("Conexiones cerradas después de cierto tiempo de inactividad");
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Console.WriteLine($"Error al ejecutar el procedimiento almacenado: {ex.Message}");
+        //    }
+
+        //    return listaObjetos;
+        //}
+
+        public static List<object> EjecutarProcedimientoConParametroYConsulta(string nombreProcedimiento, string nombreParametro, object valorParametro, int numeroAtributos, string cadenaConexion)
+        {
+            List<object> listaObjetos = new List<object>();
 
             try
             {
-                //MySqlConnection conexion = new MySqlConnection(cadenaConexion);
-                MySqlConnection conexion = gestorConexion.ObtenerConexion();
-                //conexion.Open();
-                //String sql = "call obtenerCodigoEstudiantes(@identificacionUs)";
-                string sqlConsulta = $"CALL bdColegio.{nombreProcedimiento}(@{nombreParametro})";
-                MySqlCommand conexionCommand = new MySqlCommand(sqlConsulta, conexion);
-                conexionCommand.Parameters.AddWithValue($"@{nombreParametro}", valorParametro);
-                MySqlDataReader mySqlDataReader = conexionCommand.ExecuteReader();
-
-                while (mySqlDataReader.Read())
+                using (MySqlConnection conexion = new MySqlConnection(cadenaConexion))
                 {
-                    for (int i = 0; i < numeroAtributos; i++)
-                    {
-                        listaObjetos.Add(mySqlDataReader.GetString(i));
-                    }                  
-                }
-                //conexion.Close();                
-                // Cerrar conexiones inactivas después de cierto tiempo
-                TimeSpan tiempoMaximoInactividad = TimeSpan.FromSeconds(1);
-                gestorConexion.CerrarConexionesInactivas(tiempoMaximoInactividad);
+                    conexion.Open();
 
-                Console.WriteLine("Conexiones cerradas después de cierto tiempo de inactividad");
+                    string sqlConsulta = $"CALL bdColegio.{nombreProcedimiento}(@{nombreParametro})";
+                    MySqlCommand comando = new MySqlCommand(sqlConsulta, conexion);
+                    comando.Parameters.AddWithValue($"@{nombreParametro}", valorParametro);
+
+                    using (MySqlDataReader reader = comando.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            for (int i = 0; i < numeroAtributos; i++)
+                            {
+                                listaObjetos.Add(reader.GetString(i));
+                            }
+                        }
+                    }
+
+                    Console.WriteLine("Procedimiento almacenado ejecutado correctamente");
+                }
             }
             catch (Exception ex)
             {
@@ -207,48 +363,96 @@ namespace ProyectoColegio.Data
 
             return listaObjetos;
         }
-               
-        
-        public static List<Object> EjecutarProcedimientoConMultiParametroYConsulta(string nombreProcedimiento, Dictionary<string, object> parametros, int numeroAtributos, string cadenaConexion)
+
+
+        //public static List<Object> EjecutarProcedimientoConMultiParametroYConsulta(string nombreProcedimiento, Dictionary<string, object> parametros, int numeroAtributos, string cadenaConexion)
+        //{
+        //    List<Object> listaObjetos = new List<Object>();
+        //    List<Object> listaIndividual = new List<Object>();
+        //    int tamanoPool = 100;
+        //    GestorConexion gestorConexion = new GestorConexion(cadenaConexion, tamanoPool);
+
+        //    try
+        //    {
+        //        //MySqlConnection conexion = new MySqlConnection(cadenaConexion);
+        //        MySqlConnection conexion = gestorConexion.ObtenerConexion();
+        //        //conexion.Open();
+
+        //        // Construye la consulta con los parámetros
+        //        string sqlConsulta = $"CALL bdColegio.{nombreProcedimiento}(";
+
+        //        foreach (var parametro in parametros)
+        //        {
+        //            sqlConsulta += $"@{parametro.Key}, ";
+        //        }
+
+        //        sqlConsulta = sqlConsulta.TrimEnd(' ', ',') + ")";
+
+        //        MySqlCommand conexionCommand = new MySqlCommand(sqlConsulta, conexion);
+
+        //        // Agrega los parámetros al comando
+        //        foreach (var parametro in parametros)
+        //        {
+        //            conexionCommand.Parameters.AddWithValue($"@{parametro.Key}", parametro.Value);
+        //        }
+
+        //        MySqlDataReader mySqlDataReader = conexionCommand.ExecuteReader();
+
+        //        while (mySqlDataReader.Read())
+        //        {
+
+        //            List<Object> listaDatos = new List<Object>();
+
+        //            for (int i = 0; i < numeroAtributos; i++)
+        //            {
+        //                listaDatos.Add(mySqlDataReader.GetString(i));
+        //                listaIndividual.Add(mySqlDataReader.GetString(i));
+        //                }
+
+
+        //            listaObjetos.Add(listaDatos);
+
+        //            //if (numeroAtributos == 1)
+        //            //{
+        //            //    //return listaObjetos = listaDatos;
+
+        //            //}
+        //        }
+
+        //        if (numeroAtributos == 1)
+        //        {
+        //            listaObjetos = listaIndividual;
+
+        //        }
+        //        //conexion.Close();
+        //        TimeSpan tiempoMaximoInactividad = TimeSpan.FromSeconds(1);
+        //        gestorConexion.CerrarConexionesInactivas(tiempoMaximoInactividad);
+
+        //        Console.WriteLine("Conexiones cerradas después de cierto tiempo de inactividad");
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Console.WriteLine($"Error al ejecutar el procedimiento almacenado: {ex.Message}");
+        //    }
+        //    return listaObjetos;
+        //}
+
+        public static List<object> EjecutarProcedimientoConMultiParametroYConsulta(string nombreProcedimiento, Dictionary<string, object> parametros, int numeroAtributos, string cadenaConexion)
         {
-            List<Object> listaObjetos = new List<Object>();
-            List<Object> listaIndividual = new List<Object>();
-            int tamanoPool = 100;
-            GestorConexion gestorConexion = new GestorConexion(cadenaConexion, tamanoPool);
+            List<object> listaObjetos = new List<object>();
 
             try
             {
-                //MySqlConnection conexion = new MySqlConnection(cadenaConexion);
-                MySqlConnection conexion = gestorConexion.ObtenerConexion();
-                //conexion.Open();
-
-                // Construye la consulta con los parámetros
-                string sqlConsulta = $"CALL bdColegio.{nombreProcedimiento}(";
-
-                foreach (var parametro in parametros)
+                using (MySqlConnection conexion = new MySqlConnection(cadenaConexion))
                 {
-                    sqlConsulta += $"@{parametro.Key}, ";
-                }
+                    conexion.Open();
 
-                sqlConsulta = sqlConsulta.TrimEnd(' ', ',') + ")";
+                    // Construye la consulta con los parámetros
+                    string sqlConsulta = $"CALL bdColegio.{nombreProcedimiento}(";
 
-                MySqlCommand conexionCommand = new MySqlCommand(sqlConsulta, conexion);
-
-                // Agrega los parámetros al comando
-                foreach (var parametro in parametros)
-                {
-                    conexionCommand.Parameters.AddWithValue($"@{parametro.Key}", parametro.Value);
-                }
-
-                MySqlDataReader mySqlDataReader = conexionCommand.ExecuteReader();
-
-                while (mySqlDataReader.Read())
-                {
-
-                    List<Object> listaDatos = new List<Object>();
-                        
-                    for (int i = 0; i < numeroAtributos; i++)
+                    foreach (var parametro in parametros)
                     {
+<<<<<<< Updated upstream
                         listaDatos.Add(mySqlDataReader.GetString(i));
                         listaIndividual.Add(mySqlDataReader.GetString(i));
                     }
@@ -261,23 +465,44 @@ namespace ProyectoColegio.Data
                     //    //return listaObjetos = listaDatos;
                         
                     //}
+=======
+                        sqlConsulta += $"@{parametro.Key}, ";
+                    }
+
+                    sqlConsulta = sqlConsulta.TrimEnd(' ', ',') + ")";
+
+                    MySqlCommand comando = new MySqlCommand(sqlConsulta, conexion);
+
+                    // Agrega los parámetros al comando
+                    foreach (var parametro in parametros)
+                    {
+                        comando.Parameters.AddWithValue($"@{parametro.Key}", parametro.Value);
+                    }
+
+                    using (MySqlDataReader reader = comando.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            List<object> listaDatos = new List<object>();
+
+                            for (int i = 0; i < numeroAtributos; i++)
+                            {
+                                listaDatos.Add(reader.GetString(i));
+                            }
+
+                            listaObjetos.Add(listaDatos);
+                        }
+                    }
+>>>>>>> Stashed changes
                 }
 
-                if (numeroAtributos == 1)
-                {
-                    listaObjetos = listaIndividual;
-
-                }
-                //conexion.Close();
-                TimeSpan tiempoMaximoInactividad = TimeSpan.FromSeconds(1);
-                gestorConexion.CerrarConexionesInactivas(tiempoMaximoInactividad);
-
-                Console.WriteLine("Conexiones cerradas después de cierto tiempo de inactividad");
+                Console.WriteLine("Procedimiento almacenado ejecutado correctamente");
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"Error al ejecutar el procedimiento almacenado: {ex.Message}");
             }
+
             return listaObjetos;
         }
 

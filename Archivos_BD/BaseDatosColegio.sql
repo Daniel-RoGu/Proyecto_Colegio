@@ -852,3 +852,83 @@ CREATE TABLE IF NOT EXISTS `asignaturaGradoGrupo` (
     ON UPDATE NO ACTION);
 
 ALTER TABLE asignaturaGradoGrupo AUTO_INCREMENT = 1460300;
+<<<<<<< Updated upstream
+=======
+
+-- -----------------------------------------------------
+-- Table `horarioDocente`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `horarioDocente` ;
+
+CREATE TABLE IF NOT EXISTS `horarioDocente` (
+  `idHorarioDocente` INT NOT NULL AUTO_INCREMENT,
+  `estadoHorarioDocente` VARCHAR(400) NOT NULL,
+  `fkidHorario` INT NOT NULL,
+  `fkidDocente` INT NOT NULL,
+  PRIMARY KEY (`idHorarioDocente`),
+  CONSTRAINT `fk_HorarioDocente_Horario1`
+    FOREIGN KEY (`fkidHorario`)
+    REFERENCES `Horario` (`idHorario`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_HorarioDocente_Docente1`
+    FOREIGN KEY (`fkidDocente`)
+    REFERENCES `Docente` (`idDocente`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION);
+
+
+ALTER TABLE horarioDocente AUTO_INCREMENT = 1500300;
+
+-- -----------------------------------------------------
+-- Table `PustosGrupo`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `PuestosGrupo` ;
+
+CREATE TABLE IF NOT EXISTS `PuestosGrupo` (
+  `idPuestosGrupo` INT NOT NULL AUTO_INCREMENT,
+  `idEstudianteGrupo` BIGINT NOT NULL,
+  `posicion` INT NOT NULL,
+  `nota` FLOAT NOT NULL,
+  `notaGeneralAnno` FLOAT NOT NULL,
+  `grupoPuesto` VARCHAR(400) NOT NULL,
+  `periodoPuesto` VARCHAR(400) NOT NULL,
+  `estadoPuesto` VARCHAR(400) NOT NULL,
+  PRIMARY KEY (`idPuestosGrupo`));
+
+ALTER TABLE PuestosGrupo AUTO_INCREMENT = 2000300;
+
+-- -----------------------------------------------------
+-- Table `Imagenes`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `Imagenes` ;
+
+CREATE TABLE IF NOT EXISTS `Imagenes` (
+    `idImagen` INT PRIMARY KEY AUTO_INCREMENT,
+    `propietarioId` BIGINT,
+    `propietarioImagen` VARCHAR(400),
+    `datos_imagen` LONGTEXT,
+    `tipoPropietario` VARCHAR(400)
+    /*`docPropietarioImagen` BIGINT,*/
+    /*`nombreImagen` VARCHAR(400),*/
+    /*`tipoImagen` VARCHAR(400),*/
+    /*`tamanoImagen` INT,*/
+    /*`imagen` BLOB*/
+);
+
+ALTER TABLE Imagenes AUTO_INCREMENT = 2050300;
+
+-- -----------------------------------------------------
+-- Table `Imagenes`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `Fotos` ;
+
+CREATE TABLE IF NOT EXISTS `Fotos` (
+    `idFoto` INT PRIMARY KEY AUTO_INCREMENT,
+    `propietarioId` BIGINT,
+    `nombreFoto` VARCHAR(400),
+    `datos_Foto` LONGTEXT
+);
+
+ALTER TABLE Fotos AUTO_INCREMENT = 2100300;
+>>>>>>> Stashed changes

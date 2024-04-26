@@ -4,6 +4,12 @@ using Rotativa.AspNetCore;
 using DinkToPdf;
 using DinkToPdf.Contracts;
 using ProyectoColegio.Data;
+using System.Text;
+using ProyectoColegio.Models;
+using System.Net.Http;
+using System.Threading.Tasks;
+using DinkToPdf;
+using DinkToPdf.Contracts;
 
 namespace ProyectoColegio.Controllers
 {
@@ -51,13 +57,72 @@ namespace ProyectoColegio.Controllers
             return View(); 
         }
 
+<<<<<<< Updated upstream
         public IActionResult formatoBoletinPrimariaBachiller() 
         {
             return View(); 
         }
 
+=======
+        public IActionResult formatoObservacionTipo1() 
+        {
+            return View(); 
+        }
+        
+        public IActionResult formatoObservacionTipo2() 
+        {
+            return View(); 
+        }
+        
+        public IActionResult formatoObservacionTipo3() 
+        {
+            return View(); 
+        }
+
+        public IActionResult Boletin() { return View(); }
+
+
+        
+        public IActionResult formatoPazYSalvo1() 
+        {
+            return View(); 
+        }
+        
+        public IActionResult formatoPazYSalvo2() 
+        {
+            return View(); 
+        }
+        
+        public IActionResult formatoPazYSalvo3() 
+        {
+            return View(); 
+        }
+        
+        public IActionResult formatoPreescolarBoletin1() 
+        {
+            return View(); 
+        }
+        
+        public IActionResult formatoPreescolarBoletin2() 
+        {
+            return View(); 
+        }
+        
+        public IActionResult formatoPreescolarBoletin3() 
+        {
+            return View(); 
+        }
+        
+        public IActionResult formatoPreescolarCertificadoGrado() 
+        {
+            return View(); 
+        }
+
+
+>>>>>>> Stashed changes
         public IActionResult MostrarPDFenPagina()
         {
+     
             //sirbe para obtener la ruta de la vista que se quiere imprimir
             string pagina_actual = HttpContext.Request.Path;
             string url_pagina = HttpContext.Request.GetEncodedUrl();
@@ -77,7 +142,8 @@ namespace ProyectoColegio.Controllers
                 {
                     new ObjectSettings()
                     {
-                        Page = url_pagina
+                        Page = url_pagina,
+                        WebSettings ={ LoadImages = true, EnableJavascript=true }
                     }
                 }
             };
@@ -108,7 +174,8 @@ namespace ProyectoColegio.Controllers
                 {
                     new ObjectSettings()
                     {
-                        Page = url_pagina
+                        Page = url_pagina,
+                        WebSettings ={ LoadImages = true, EnableJavascript=true }
                     }
                 }
             };
@@ -119,13 +186,17 @@ namespace ProyectoColegio.Controllers
 
             return File(archivoPdf, "application/pdf", nombrePdf);
         }
-        
+
         public void ActualizarRutaPdf(string RutaPdf)
         {
             DatosCompartidos.RutaPDF = RutaPdf;
         }
 
+<<<<<<< Updated upstream
+=======
+    }
 
-    }      
+}         
+>>>>>>> Stashed changes
 
-}
+

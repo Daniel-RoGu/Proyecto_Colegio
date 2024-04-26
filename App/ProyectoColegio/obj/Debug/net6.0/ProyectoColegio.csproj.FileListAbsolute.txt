@@ -3086,3 +3086,11 @@ C:\Users\Daniel\Desktop\TrabajoColegio\App\ProyectoColegio\bin\Debug\net6.0\Libr
 C:\Users\Daniel\Desktop\TrabajoColegio\App\ProyectoColegio\bin\Debug\net6.0\LibreriaPDF\libwkhtmltox.dylib
 C:\Users\Daniel\Desktop\TrabajoColegio\App\ProyectoColegio\bin\Debug\net6.0\LibreriaPDF\libwkhtmltox.so
 C:\Users\Daniel\Desktop\TrabajoColegio\App\ProyectoColegio\bin\Debug\net6.0\DinkToPdf.dll
+C:\Users\Daniel\Desktop\TrabajoColegio\App\ProyectoColegio\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.dll
+C:\Users\Daniel\Desktop\TrabajoColegio\App\ProyectoColegio\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+C:\Users\Daniel\Desktop\TrabajoColegio\App\ProyectoColegio\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Design.dll
+C:\Users\Daniel\Desktop\TrabajoColegio\App\ProyectoColegio\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Relational.dll
+C:\Users\Daniel\Desktop\TrabajoColegio\App\ProyectoColegio\bin\Debug\net6.0\Microsoft.Extensions.Caching.Memory.dll
+C:\Users\Daniel\Desktop\TrabajoColegio\App\ProyectoColegio\bin\Debug\net6.0\Microsoft.Extensions.DependencyInjection.dll
+C:\Users\Daniel\Desktop\TrabajoColegio\App\ProyectoColegio\bin\Debug\net6.0\MySqlConnector.dll
+C:\Users\Daniel\Desktop\TrabajoColegio\App\ProyectoColegio\bin\Debug\net6.0\Pomelo.EntityFrameworkCore.MySql.dll
